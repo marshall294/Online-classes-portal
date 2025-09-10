@@ -1,0 +1,246 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>MathCloud Tutorial Portal</title>
+  <style>
+    :root{
+      --bg:#0f1724; /* deep slate */
+      --card:#0b1220;
+      --accent:#6ee7b7;
+      --glass: rgba(255,255,255,0.04);
+      --text:#e6eef8;
+      --muted:#9fb0c8;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial;color:var(--text);background:linear-gradient(180deg,#071028 0%, #081224 50%, #06101a 100%);min-height:100vh;display:flex;align-items:center;justify-content:center;padding:32px}.container{width:100%;max-width:1100px}
+header{display:flex;align-items:center;gap:16px;margin-bottom:28px}
+.logo{width:64px;height:64px;border-radius:12px;background:linear-gradient(135deg,#09304a,#2b8fb7);display:flex;align-items:center;justify-content:center;font-weight:700;color:white;font-size:20px;box-shadow:0 8px 30px rgba(15,40,60,0.6)}
+h1{font-size:20px;margin:0}
+p.lead{margin:0;color:var(--muted)}
+
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px}
+
+/* 3D button card */
+.student-card{position:relative;padding:28px;border-radius:18px;background:linear-gradient(180deg,var(--card),#07131e);box-shadow: 0 10px 30px rgba(2,8,23,0.6), inset 0 1px 0 rgba(255,255,255,0.02);cursor:pointer;overflow:visible;transform-style:preserve-3d;transition:transform .22s cubic-bezier(.2,.9,.3,1), box-shadow .22s}
+.student-card:focus{outline:3px solid rgba(110,231,183,0.12)}
+.student-card:hover{transform:translateY(-8px) rotateX(2deg);box-shadow:0 18px 40px rgba(2,8,23,0.75)}
+
+/* 3D button visual */
+.btn-3d{display:inline-block;padding:14px 20px;border-radius:12px;background:linear-gradient(180deg,var(--accent),#26c48f);color:#042226;font-weight:700;letter-spacing:.3px;box-shadow:0 10px 0 rgba(0,0,0,0.18), 0 24px 40px rgba(2,8,23,0.45);transform:translateZ(30px);transition:transform .12s ease, box-shadow .12s ease}
+.btn-3d:active{transform:translateZ(8px) translateY(6px);box-shadow:0 4px 0 rgba(0,0,0,0.22)}
+
+.student-name{font-size:18px;margin:0 0 8px}
+.student-meta{color:var(--muted);font-size:13px}
+
+/* subtle floating badge */
+.badge{position:absolute;right:18px;top:18px;padding:6px 10px;border-radius:999px;background:var(--glass);backdrop-filter:blur(6px);font-size:12px;color:var(--muted)}
+
+/* student detail pages */
+.page{position:fixed;inset:0;background:linear-gradient(180deg,rgba(3,9,18,0.96),rgba(2,6,12,0.98));padding:36px;display:none;flex-direction:column;z-index:60}
+.page.active{display:flex}
+.page .card{max-width:900px;margin:auto;background:linear-gradient(180deg,#07162833,#08122622);border-radius:16px;padding:22px}
+.back{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:10px;background:rgba(255,255,255,0.03);cursor:pointer;color:var(--muted);width:max-content}
+
+/* responsive */
+@media (max-width:520px){header{flex-direction:column;align-items:flex-start}.logo{width:56px;height:56px}}
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="logo">MC</div>
+      <div>
+        <h1>MathCloud Tutorial Portal</h1>
+        <p class="lead">Click a student to visit their page — 3D buttons for fun interaction.</p>
+      </div>
+    </header><main>
+  <section class="grid" id="students">
+    <!-- student card template -->
+    <article class="student-card" tabindex="0" data-student="khalifa">
+      <div class="badge">Year 9</div>
+      <h2 class="student-name">Khalifa</h2>
+      <p class="student-meta">Math: Algebra · Progress: 72%</p>
+      <div style="height:16px"></div>
+      <div class="btn-3d" role="button" aria-pressed="false">Open Khalifa</div>
+    </article>
+
+    <article class="student-card" tabindex="0" data-student="olive">
+      <div class="badge">Year 8</div>
+      <h2 class="student-name">Olive</h2>
+      <p class="student-meta">Math: Geometry · Progress: 59%</p>
+      <div style="height:16px"></div>
+      <div class="btn-3d" role="button" aria-pressed="false">Open Olive</div>
+    </article>
+
+    <article class="student-card" tabindex="0" data-student="david">
+      <div class="badge">Year 10</div>
+      <h2 class="student-name">David</h2>
+      <p class="student-meta">Math: Trigonometry · Progress: 86%</p>
+      <div style="height:16px"></div>
+      <div class="btn-3d" role="button" aria-pressed="false">Open David</div>
+    </article>
+
+    <article class="student-card" tabindex="0" data-student="student4">
+      <div class="badge">Year 7</div>
+      <h2 class="student-name">Student4</h2>
+      <p class="student-meta">Math: Numbers · Progress: 34%</p>
+      <div style="height:16px"></div>
+      <div class="btn-3d" role="button" aria-pressed="false">Open Student4</div>
+    </article>
+  </section>
+</main>
+
+</div>  
+<!-- Student detail pages (single-page app style) -->  
+<section id="page-khalifa" class="page" aria-hidden="true">
+  <div class="card">
+    <div class="back" data-close>
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden>
+        <path d="M15 18l-6-6 6-6" 
+              stroke="currentColor" 
+              stroke-width="2" 
+              stroke-linecap="round" 
+              stroke-linejoin="round"/>
+      </svg> 
+      Back
+    </div>
+
+    <h2>Khalifa — Profile</h2>
+    <p><strong>Class:</strong> Year 9</p>
+    <p><strong>Subjects Offered:</strong> Math, English</p>
+
+    <!-- Performance summary -->
+    <div class="subject">
+      <button class="toggle">Math — 85%</button>
+      <div class="topics" style="display:none;">
+        <p>Lesson 1: 60%</p>
+        <p>Lesson 2: 75%</p>
+        <p>Lesson 3: 90%</p>
+      </div>
+    </div>
+
+    <div class="subject">
+      <button class="toggle">English — 79%</button>
+      <div class="topics" style="display:none;">
+        <p>Lesson 1: 65%</p>
+        <p>Lesson 2: 80%</p>
+        <p>Lesson 3: 92%</p>
+      </div>
+    </div>
+
+    <!-- Extra notes -->
+    <p><strong>Notes:</strong> Khalifa is working on linear equations — provide extra worked examples on substitution and elimination.</p>
+
+    <!-- View full page -->
+    <a href="khalifa.html" class="btn">View Student Page</a>
+  </div>
+</section>
+
+<script>
+  // toggle subject details
+  document.querySelectorAll('#page-khalifa .toggle').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const topics = btn.nextElementSibling;
+      topics.style.display = topics.style.display === 'none' ? 'block' : 'none';
+    });
+  });
+</script>
+
+<style>
+  .subject { margin: 10px 0; }
+  .toggle {
+    width: 100%;
+    text-align: left;
+    padding: 8px;
+    font-weight: bold;
+    border: none;
+    background: #f2f2f2;
+    cursor: pointer;
+    border-radius: 6px;
+  }
+  .topics {
+    padding: 8px 15px;
+    background: #fafafa;
+    border-left: 3px solid #007bff;
+    margin-top: 5px;
+    border-radius: 6px;
+  }
+  .btn {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 10px 15px;
+    background: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+  }
+  .btn:hover { background: #0056b3; }
+</style>
+  </section>  <section id="page-olive" class="page" aria-hidden="true">
+    <div class="card">
+      <div class="back" data-close><svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden><path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Back</div>
+      <h2>Olive — Profile</h2>
+      <p>Subjects: Geometry, Mensuration</p>
+      <p>Notes: Olive benefits from visual diagrams — attach interactive geometry exercises.</p>
+    </div>
+  </section>  <section id="page-david" class="page" aria-hidden="true">
+    <div class="card">
+      <div class="back" data-close><svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden><path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Back</div>
+      <h2>David — Profile</h2>
+      <p>Subjects: Trigonometry, Coordinate Geometry</p>
+      <p>Notes: David is ahead on theory; set challenging problem-solving tasks and past paper questions.</p>
+    </div>
+  </section>  <section id="page-student4" class="page" aria-hidden="true">
+    <div class="card">
+      <div class="back" data-close><svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden><path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Back</div>
+      <h2>Student4 — Profile</h2>
+      <p>Subjects: Numbers, Basic Operations</p>
+      <p>Notes: Student4 needs foundational practice—start with place value and simple operations.</p>
+    </div>
+  </section>  <script>
+    // Delegate click/keyboard on student cards
+    document.getElementById('students').addEventListener('click', e => {
+      const card = e.target.closest('.student-card');
+      if(!card) return;
+      openStudent(card.dataset.student);
+      // animate the 3D button press if clicked directly on the button
+      const btn = card.querySelector('.btn-3d');
+      if(e.target===btn){
+        btn.style.transform = 'translateZ(8px) translateY(6px)';
+        setTimeout(()=> btn.style.transform='translateZ(30px)', 140);
+      }
+    });
+
+    // keyboard accessibility: Enter opens the student
+    document.getElementById('students').addEventListener('keydown', e => {
+      if(e.key === 'Enter' || e.key === ' '){
+        const card = e.target.closest('.student-card');
+        if(!card) return;
+        e.preventDefault();
+        openStudent(card.dataset.student);
+      }
+    });
+
+    function openStudent(id){
+      // hide other pages
+      document.querySelectorAll('.page').forEach(p=>{p.classList.remove('active');p.setAttribute('aria-hidden','true')});
+      const page = document.getElementById('page-' + id);
+      if(!page) return console.warn('student page not found', id);
+      page.classList.add('active');
+      page.setAttribute('aria-hidden','false');
+    }
+
+    // close handlers
+    document.querySelectorAll('[data-close]').forEach(btn=>btn.addEventListener('click', ()=>{
+      btn.closest('.page').classList.remove('active');
+      btn.closest('.page').setAttribute('aria-hidden','true');
+    }));
+
+    // close with Escape
+    document.addEventListener('keydown', e => { if(e.key==='Escape') document.querySelectorAll('.page.active').forEach(p=>{p.classList.remove('active');p.setAttribute('aria-hidden','true')}) });
+  </script></body>
+</html>
