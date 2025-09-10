@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Khalifa — MathCloud Tutorial</title>
+  <style>
+    body{margin:0;font-family:Inter,ui-sans-serif,system-ui;background:#0f1724;color:#f8f9fa;min-height:100vh;}
+    header{position:fixed;top:0;left:0;right:0;background:#081225;display:flex;align-items:center;justify-content:center;gap:12px;padding:14px 20px;z-index:1000;box-shadow:0 2px 8px rgba(0,0,0,0.4)}
+    header img{width:40px;height:40px;border-radius:50%;border:2px solid #6ee7b7}
+    header h1{margin:0;font-size:18px;color:#6ee7b7}
+    nav{display:flex;gap:14px;position:absolute;right:20px;}
+    nav a{color:#f8f9fa;text-decoration:none;font-size:14px;padding:6px 10px;border-radius:6px;transition:.2s}
+    nav a:hover{background:rgba(255,255,255,0.1)}
+    main{padding:120px 20px 60px;max-width:1000px;margin:auto}
+    section{margin-bottom:40px}
+    h2{font-size:20px;margin:0 0 16px;color:#6ee7b7;cursor:pointer}
+    .lessons{display:none;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+    .lesson-card{background:linear-gradient(180deg,#122033,#0a1624);border-radius:12px;padding:18px;box-shadow:0 6px 18px rgba(0,0,0,0.4);cursor:pointer;transition:transform .2s}
+    .lesson-card:hover{transform:translateY(-6px)}
+    .lesson-card a{color:#e2e8f0;text-decoration:none;font-weight:500}
+    .open .lessons{display:grid}
+    .greeting{background:#122033;padding:20px;border-radius:12px;margin-bottom:30px;text-align:center}
+    .whatsapp-box{background:#122033;padding:20px;border-radius:12px;margin-top:40px}
+    .whatsapp-box input,.whatsapp-box textarea{width:100%;padding:10px;margin:6px 0;border-radius:6px;border:1px solid #334155;background:#0a1624;color:#f8f9fa}
+    .whatsapp-box button{background:#25d366;color:#fff;padding:10px 16px;border:none;border-radius:6px;cursor:pointer;font-weight:600}
+    .whatsapp-box button:hover{background:#1ebc57}
+    /* Fixed Blinking 3D Button */
+    .live-class-btn {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: linear-gradient(145deg,#ff6b6b,#ff4757);
+      color: #fff;
+      font-weight: bold;
+      font-size: 16px;
+      padding: 14px 22px;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      box-shadow: 0 6px #b33939, 0 8px 16px rgba(0,0,0,0.4);
+      animation: blink 1.2s infinite;
+      text-decoration: none;
+      display: inline-block;
+      transition: transform .2s, box-shadow .2s;
+      z-index: 2000;
+    }
+    .live-class-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px #962d2d, 0 10px 20px rgba(0,0,0,0.5);
+    }
+    @keyframes blink {
+      0%, 50%, 100% {opacity: 1;}
+      25%, 75% {opacity: 0.6;}
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="logo.png" alt="MathCloud Logo">
+    <h1>Student4 — MathCloud Tutorial</h1>
+    <nav>
+     
+    </nav>
+  </header>
+
+  <main>
+    <!-- Greeting Section -->
+<div class="greeting">
+  <p id="greetMsg">Hello Student4! Welcome to MathCloud Tutorial.</p>
+</div>
+
+<script>
+  function updateGreeting(){
+    const now = new Date();
+    const options = {
+      weekday:'long',
+      year:'numeric',
+      month:'long',
+      day:'numeric',
+      hour:'2-digit',
+      minute:'2-digit'
+    };
+    const dateStr = now.toLocaleDateString('en-US', options);
+    document.getElementById('greetMsg').innerText =
+      `Hello, Student4! Welcome to your lesson. Today is ${dateStr}.`;
+  }
+  updateGreeting(); // run once on page load
+</script>
+
+    <!-- Lessons -->
+    <section id="math">
+      <h2 onclick="toggleSection(this)">Math</h2>
+      <div class="lessons">
+        <div class="lesson-card"><a href="#">Ratio & Proportion</a></div>
+        <div class="lesson-card"><a href="#">Algebra</a></div>
+        <div class="lesson-card"><a href="#">Geometry</a></div>
+        <div class="lesson-card"><a href="#">Statistics</a></div>
+      </div>
+    </section>
+
+    <section id="science">
+      <h2 onclick="toggleSection(this)">Science</h2>
+      <div class="lessons">
+        <div class="lesson-card"><a href="#">Lesson 1</a></div>
+        <div class="lesson-card"><a href="#">Lesson 2</a></div>
+        <div class="lesson-card"><a href="#">Lesson 3</a></div>
+        <div class="lesson-card"><a href="#">Lesson 4</a></div>
+      </div>
+    </section>
+
+    <section id="english">
+      <h2 onclick="toggleSection(this)">English</h2>
+      <div class="lessons">
+        <div class="lesson-card"><a href="eng-lesson1.html">Lesson 1</a></div>
+        <div class="lesson-card"><a href="#">Lesson 2</a></div>
+        <div class="lesson-card"><a href="#">Lesson 3</a></div>
+        <div class="lesson-card"><a href="#">Lesson 4</a></div>
+      </div>
+    </section>
+
+    <section id="physics">
+      <h2 onclick="toggleSection(this)">Physics</h2>
+      <div class="lessons">
+        <div class="lesson-card"><a href="#">Lesson 1</a></div>
+        <div class="lesson-card"><a href="#">Lesson 2</a></div>
+        <div class="lesson-card"><a href="#">Lesson 3</a></div>
+        <div class="lesson-card"><a href="#">Lesson 4</a></div>
+      </div>
+    </section>
+
+    <!-- WhatsApp Help -->
+    <div class="whatsapp-box">
+      <h3>Any questions? Chat with Marshall on WhatsApp</h3>
+      <input type="text" id="wName" placeholder="Your Name">
+      <input type="text" id="wSubject" placeholder="Subject">
+      <input type="text" id="wClass" placeholder="Class">
+      <textarea id="wQuestion" placeholder="Type your question here..."></textarea>
+      <button onclick="sendToWhatsApp()">Send to WhatsApp</button>
+    </div>
+  </main>
+<!-- Fixed Blinking 3D Join Live Class Button -->
+  <a href="https://meet.google.com/ymk-sfao-xzf" target="_blank" class="live-class-btn">📡 Join Live Class</a>
+
+  <script>
+    function toggleSection(el){
+      const section = el.parentElement;
+      section.classList.toggle('open');
+    }
+
+    function updateGreeting(){
+      const name = document.getElementById('studentName').value || "Student";
+      const now = new Date();
+      const options = {weekday:'long',year:'numeric',month:'long',day:'numeric',hour:'2-digit',minute:'2-digit'};
+      const dateStr = now.toLocaleDateString('en-US', options);
+      document.getElementById('greetMsg').innerText =
+        `Hello, ${name}! Welcome to your lesson. Today is ${dateStr}.`;
+    }
+
+    function sendToWhatsApp(){
+      const name = document.getElementById('wName').value;
+      const subject = document.getElementById('wSubject').value;
+      const cls = document.getElementById('wClass').value;
+      const question = document.getElementById('wQuestion').value;
+
+      const msg = `Name: ${name}%0aSubject: ${subject}%0aClass: ${cls}%0aQuestion: ${question}`;
+      const url = `https://wa.me/2348102341648?text=${msg}`;
+      window.open(url, '_blank');
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MathCloud Tutorial - Year 8 IGCSE Science Lesson 1: Respiration</title>
+  <style>
+    body { font-family: "Poppins", sans-serif; margin:0; padding:0; background:#f9fbfd; color:#222; }
+    header { background:#004080; color:#fff; text-align:center; padding:20px; }
+    header h1 { margin:0; font-size:2em; }
+    header h2 { margin:5px 0 0; font-weight:400; }
+    .container { max-width:1000px; margin:auto; padding:20px; }
+    section { background:#fff; padding:20px; margin-bottom:20px; border-radius:12px; box-shadow:0 3px 8px rgba(0,0,0,0.08);}
+    section h3 { margin-top:0; color:#004080; }
+    .example { background:#e8f3ff; padding:10px; border-left:5px solid #004080; margin:10px 0; border-radius:6px;}
+    .diagram { background:#f1f1f1; padding:10px; text-align:center; font-style:italic; margin:10px 0; border-radius:6px;}
+    .quiz-question { margin:15px 0; }
+    .quiz-question button { margin-top:5px; padding:8px 14px; border:none; border-radius:6px; background:#004080; color:#fff; cursor:pointer; }
+    .feedback { margin-top:8px; font-weight:bold; }
+    .correct { color:green; }
+    .wrong { color:red; }
+    input[type="text"] { padding:6px; border:1px solid #ccc; border-radius:6px; margin-top:5px; }
+    button.assessment-btn { background:#28a745; margin-top:10px; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>MathCloud Tutorial</h1>
+    <h2>Year 8 IGCSE Science — Lesson 1: Respiration</h2>
+    <p>Teacher: Marshall Jacob</p>
+  </header>
+
+  <div class="container">
+
+    <!-- 1. Introduction -->
+    <section>
+      <h3>What is Respiration?</h3>
+      <p>
+        Respiration is a <b>chemical process</b> that takes place in the cells of all living organisms. 
+        It releases <b>energy</b> from food (mainly glucose) to power life processes such as movement, growth, repair, 
+        and keeping warm. <br><br>
+        ⚡ Without respiration, cells would not be able to survive.
+      </p>
+      <div class="diagram">[Diagram: Respiration as energy release → Movement, Growth, Repair, Warmth]</div>
+      <div class="example"><b>Example:</b> When you run, your leg muscles contract repeatedly. This requires large amounts of energy, released by respiration in muscle cells.</div>
+      <div class="quiz-question">
+        <p><b>Quick Check:</b> Where does respiration occur in living organisms?</p>
+        <button onclick="checkAnswer(this,'cells')">In the cells</button>
+        <button onclick="checkAnswer(this,'lungs')">In the lungs</button>
+        <div class="feedback"></div>
+      </div>
+    </section>
+
+    <!-- 2. Aerobic respiration -->
+    <section>
+      <h3>Aerobic Respiration</h3>
+      <p>
+        Aerobic respiration uses <b>oxygen</b>. It is the most efficient form of respiration and releases a large amount of energy.
+      </p>
+      <p><b>Word Equation:</b><br>
+        Glucose + Oxygen → Carbon dioxide + Water + Energy
+      </p>
+      <p><b>Balanced Symbol Equation:</b><br>
+        C<sub>6</sub>H<sub>12</sub>O<sub>6</sub> + 6O<sub>2</sub> → 6CO<sub>2</sub> + 6H<sub>2</sub>O + Energy
+      </p>
+      <div class="diagram">[Diagram: Glucose + Oxygen entering mitochondria → Energy + CO₂ + H₂O]</div>
+      <div class="quiz-question">
+        <p><b>Quick Check:</b> Which organelle in the cell carries out aerobic respiration?</p>
+        <button onclick="checkAnswer(this,'mitochondria')">Mitochondria</button>
+        <button onclick="checkAnswer(this,'nucleus')">Nucleus</button>
+        <div class="feedback"></div>
+      </div>
+    </section>
+
+    <!-- 3. Anaerobic -->
+    <section>
+      <h3>Anaerobic Respiration</h3>
+      <p>
+        Anaerobic respiration takes place when oxygen is <b>not available</b>. 
+        It is less efficient and releases less energy per glucose molecule.  
+        In animals, it produces <b>lactic acid</b>, which can cause muscle fatigue.
+      </p>
+      <p><b>Equation:</b> Glucose → Lactic acid + Energy</p>
+      <div class="example">Sprinters often rely on anaerobic respiration during short bursts of high activity because oxygen supply cannot keep up with demand.</div>
+      <div class="quiz-question">
+        <p><b>Quick Check:</b> What is the main waste product of anaerobic respiration in animals?</p>
+        <button onclick="checkAnswer(this,'lactic acid')">Lactic acid</button>
+        <button onclick="checkAnswer(this,'carbon dioxide')">Carbon dioxide</button>
+        <div class="feedback"></div>
+      </div>
+    </section>
+
+    <!-- 4. Breathing vs Respiration -->
+    <section>
+      <h3>Breathing vs Respiration</h3>
+      <p>
+        ⚠️ <b>Breathing</b> is a <i>mechanical process</i> of inhaling oxygen and exhaling carbon dioxide using the lungs.  
+        ✅ <b>Respiration</b> is a <i>chemical process</i> that happens in cells to release energy.
+      </p>
+      <div class="quiz-question">
+        <p><b>Quick Check:</b> Which of the two is a cellular chemical process?</p>
+        <button onclick="checkAnswer(this,'respiration')">Respiration</button>
+        <button onclick="checkAnswer(this,'breathing')">Breathing</button>
+        <div class="feedback"></div>
+      </div>
+    </section>
+
+    <!-- 5. Energy Uses -->
+    <section>
+      <h3>Why Do We Need Energy?</h3>
+      <ul>
+        <li>Muscle contraction (movement)</li>
+        <li>Maintaining body temperature (warmth)</li>
+        <li>Active transport of substances across membranes</li>
+        <li>Cell division and repair</li>
+        <li>Protein synthesis</li>
+      </ul>
+      <div class="quiz-question">
+        <p><b>Quick Check:</b> Give one process in the human body that requires energy.</p>
+        <button onclick="checkAnswer(this,'movement')">Movement</button>
+        <button onclick="checkAnswer(this,'sleeping')">Sleeping</button>
+        <div class="feedback"></div>
+      </div>
+    </section>
+
+<!-- Final 20-Question Assessment (MCQ with Instant Feedback) -->
+<section style="font-family: Arial, sans-serif; margin:20px; padding:20px; border:1px solid #ccc; border-radius:10px;">
+  <h3 style="text-align:center; margin-bottom:20px;">Final Assessment — 20 IGCSE Standard Questions</h3>
+  <ol id="assessment" style="list-style-type:decimal; padding-left:20px;">
+
+    <li style="margin-bottom:15px;">
+      Define respiration.<br>
+      <label><input type="radio" name="q1" value="correct"> Chemical process of releasing energy from glucose</label><br>
+      <label><input type="radio" name="q1" value="wrong"> Breathing in and out of oxygen</label><br>
+      <label><input type="radio" name="q1" value="wrong"> Conversion of food into protein</label>
+    </li>
+
+    <li style="margin-bottom:15px;">
+      State the word equation for aerobic respiration.<br>
+      <label><input type="radio" name="q2" value="correct"> Glucose + oxygen → carbon dioxide + water + energy</label><br>
+      <label><input type="radio" name="q2" value="wrong"> Glucose → lactic acid + energy</label><br>
+      <label><input type="radio" name="q2" value="wrong"> Carbon dioxide + water → glucose + oxygen</label>
+    </li>
+
+    <li style="margin-bottom:15px;">
+      Where in the cell does respiration occur?<br>
+      <label><input type="radio" name="q3" value="correct"> Mitochondria</label><br>
+      <label><input type="radio" name="q3" value="wrong"> Ribosome</label><br>
+      <label><input type="radio" name="q3" value="wrong"> Nucleus</label>
+    </li>
+
+    <li style="margin-bottom:15px;">
+      What waste gas is released in aerobic respiration?<br>
+      <label><input type="radio" name="q4" value="correct"> Carbon dioxide</label><br>
+      <label><input type="radio" name="q4" value="wrong"> Oxygen</label><br>
+      <label><input type="radio" name="q4" value="wrong"> Nitrogen</label>
+    </li>
+
+    <li style="margin-bottom:15px;">
+      What liquid waste is released in aerobic respiration?<br>
+      <label><input type="radio" name="q5" value="correct"> Water</label><br>
+      <label><input type="radio" name="q5" value="wrong"> Urea</label><br>
+      <label><input type="radio" name="q5" value="wrong"> Alcohol</label>
+    </li>
+
+    <li style="margin-bottom:15px;">
+      Balanced symbol equation for aerobic respiration?<br>
+      <label><input type="radio" name="q6" value="correct"> C6H12O6 + 6O2 → 6CO2 + 6H2O</label><br>
+      <label><input type="radio" name="q6" value="wrong"> Glucose → lactic acid + energy</label><br>
+      <label><input type="radio" name="q6" value="wrong"> H2O + CO2 → C6H12O6 + O2</label>
+    </li>
+
+    <li style="margin-bottom:15px;">
+      Define anaerobic respiration.<br>
+      <label><input type="radio" name="q7" value="correct"> Respiration without oxygen</label><br>
+      <label><input type="radio" name="q7" value="wrong"> Respiration using only carbon dioxide</label><br>
+      <label><input type="radio" name="q7" value="wrong"> Respiration in mitochondria only</label>
+    </li>
+
+    <li style="margin-bottom:15px;">
+      Write the equation for anaerobic respiration in animals.<br>
+      <label><input type="radio" name="q8" value="correct"> Glucose → lactic acid + energy</label><br>
+      <label><input type="radio" name="q8" value="wrong"> Glucose + oxygen → carbon dioxide + water</label><br>
+      <label><input type="radio" name="q8" value="wrong"> Carbon dioxide + water → glucose + oxygen</label>
+    </li>
+
+    <li style="margin-bottom:15px;">
+      What by-product causes muscle fatigue?<br>
+      <label><input type="radio" name="q9" value="correct"> Lactic acid</label><br>
+      <label><input type="radio" name="q9" value="wrong"> Carbon dioxide</label><br>
+      <label><input type="radio" name="q9" value="wrong"> Water</label>
+    </li>
+
+    <li style="margin-bottom:15px;">
+      Compare energy release: aerobic vs anaerobic.<br>
+      <label><input type="radio" name="q10" value="correct"> Aerobic releases more energy</label><br>
+      <label><input type="radio" name="q10" value="wrong"> Anaerobic releases more energy</label><br>
+      <label><input type="radio" name="q10" value="wrong"> Both release equal energy</label>
+    </li>
+
+    <li style="margin-bottom:15px;">
+      Difference between breathing and respiration.<br>
+      <label><input type="radio" name="q11" value="correct"> Breathing is physical; respiration is chemical</label><br>
+      <label><input type="radio" name="q11" value="wrong"> Both are physical</label><br>
+      <label><input type="radio" name="q11" value="wrong"> Both are chemical</label>
+    </li>
+
+    <li style="margin-bottom:15px;">
+      Name 3 life processes that need energy.<br>
+      <label><input type="radio" name="q12" value="correct"> Movement, growth, repair</label><br>
+      <label><input type="radio" name="q12" value="wrong"> Digestion, breathing, sleeping</label><br>
+      <label><input type="radio" name="q12" value="wrong"> Drinking, excretion, balance</label>
+    </li>
+
+    <li style="margin-bottom:15px;">
+      Why does breathing rate increase during exercise?<br>
+      <label><input type="radio" name="q13" value="correct"> To supply more oxygen to muscles</label><br>
+      <label><input type="radio" name="q13" value="wrong"> To remove carbon dioxide from skin</label><br>
+      <label><input type="radio" name="q13" value="wrong"> To stop lactic acid forming</label>
+    </li>
+
+    <li style="margin-bottom:15px;">
+      Why does heart rate increase during exercise?<br>
+      <label><input type="radio" name="q14" value="correct"> To transport oxygen and glucose faster</label><br>
+      <label><input type="radio" name="q14" value="wrong"> To increase body temperature</label><br>
+      <label><input type="radio" name="q14" value="wrong"> To prevent dehydration</label>
+    </li>
+
+    <li style="margin-bottom:15px;">
+      What is oxygen debt?<br>
+      <label><input type="radio" name="q15" value="correct"> Extra oxygen needed to remove lactic acid after exercise</label><br>
+      <label><input type="radio" name="q15" value="wrong"> Oxygen shortage in the lungs</label><br>
+      <label><input type="radio" name="q15" value="wrong"> Storing oxygen in blood cells</label>
+    </li>
+
+    <li style="margin-bottom:15px;">
+      What enzyme speeds up respiration reactions?<br>
+      <label><input type="radio" name="q16" value="correct"> Enzymes</label><br>
+      <label><input type="radio" name="q16" value="wrong"> Hormones</label><br>
+      <label><input type="radio" name="q16" value="wrong"> Vitamins</label>
+    </li>
+
+    <li style="margin-bottom:15px;">
+      Explain why plants also respire at night.<br>
+      <label><input type="radio" name="q17" value="correct"> No photosynthesis, need energy release</label><br>
+      <label><input type="radio" name="q17" value="wrong"> To absorb more sunlight</label><br>
+      <label><input type="radio" name="q17" value="wrong"> To release chlorophyll</label>
+    </li>
+
+    <li style="margin-bottom:15px;">
+      Which two gases are exchanged in respiration?<br>
+      <label><input type="radio" name="q18" value="correct"> Oxygen and carbon dioxide</label><br>
+      <label><input type="radio" name="q18" value="wrong"> Nitrogen and oxygen</label><br>
+      <label><input type="radio" name="q18" value="wrong"> Carbon dioxide and hydrogen</label>
+    </li>
+
+    <li style="margin-bottom:15px;">
+      Explain why respiration is exothermic.<br>
+      <label><input type="radio" name="q19" value="correct"> It releases energy as heat</label><br>
+      <label><input type="radio" name="q19" value="wrong"> It absorbs heat</label><br>
+      <label><input type="radio" name="q19" value="wrong"> It stores light energy</label>
+    </li>
+
+    <li style="margin-bottom:15px;">
+      Design an experiment to show carbon dioxide is produced in respiration.<br>
+      <label><input type="radio" name="q20" value="correct"> Use limewater turning milky</label><br>
+      <label><input type="radio" name="q20" value="wrong"> Use iodine turning blue-black</label><br>
+      <label><input type="radio" name="q20" value="wrong"> Use Benedict’s solution</label>
+    </li>
+
+  </ol>
+
+  <button onclick="checkAssessment()" 
+          style="display:block; margin:20px auto; padding:10px 20px; border:none; background:#007BFF; color:white; font-size:16px; border-radius:5px; cursor:pointer;">
+    Check My Answers
+  </button>
+
+  <div id="assessment-feedback" style="margin-top:20px; font-weight:bold; text-align:center;"></div>
+</section>
+
+<script>
+function checkAssessment() {
+  let questions = document.querySelectorAll('#assessment li');
+  let score = 0;
+
+  questions.forEach((q) => {
+    let selected = q.querySelector('input[type="radio"]:checked');
+    let labels = q.querySelectorAll('label');
+
+    // Reset
+    labels.forEach(label => {
+      label.style.background = '';
+      label.style.display = 'block';
+      label.style.padding = '2px 4px';
+      label.style.borderRadius = '4px';
+    });
+
+    if (selected) {
+      if (selected.value === "correct") {
+        score++;
+        selected.parentElement.style.background = '#d4edda'; // green
+      } else {
+        selected.parentElement.style.background = '#f8d7da'; // red
+        let correct = q.querySelector('input[value="correct"]');
+        correct.parentElement.style.background = '#d4edda'; // show correct
+      }
+    } else {
+      // Unanswered → highlight correct one
+      let correct = q.querySelector('input[value="correct"]');
+      correct.parentElement.style.background = '#d4edda';
+    }
+  });
+
+  document.getElementById('assessment-feedback').innerHTML = 
+    "You scored " + score + " out of " + questions.length;
+}
+</script>
+
+  </div>
+
+  <script>
+    function checkAnswer(btn, correct) {
+      const feedback = btn.parentElement.querySelector('.feedback');
+      if (btn.textContent.trim().toLowerCase() === correct.toLowerCase()) {
+        feedback.textContent = "✅ Correct!";
+        feedback.className = "feedback correct";
+      } else {
+        feedback.textContent = "❌ Try again.";
+        feedback.className = "feedback wrong";
+      }
+    }
+
+  </script>
+</body>
+</html>

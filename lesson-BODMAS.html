@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MathCloud Tutorial — Order of Operations (BODMAS)</title>
+  <style>
+    body { font-family: "Poppins", sans-serif; margin:0; padding:0; background:#f9fafb; color:#111827; line-height:1.6; }
+    header { text-align:center; padding:20px; background:#1e3a8a; color:white; }
+    header img { width:90px; height:90px; border-radius:50%; border:3px solid white; display:block; margin:0 auto 10px; }
+    header h1 { margin:0; font-size:28px; }
+    .greeting { text-align:center; margin:20px auto; padding:10px; }
+    .greeting input { padding:8px; font-size:16px; margin:10px 0; border:1px solid #ccc; border-radius:5px; }
+    #greetMsg { font-size:18px; font-weight:500; margin-top:10px; }
+    main { padding:20px; max-width:900px; margin:auto; }
+    h2 { color:#1e3a8a; margin-top:20px; }
+    h3 { color:#2563eb; margin-top:15px; }
+    .example, .assessment { background:#f1f5f9; padding:12px 16px; border-radius:8px; margin:12px 0; }
+    footer { text-align:center; padding:20px; background:#f1f5f9; margin-top:30px; font-size:15px; }
+    .wa-btn { background:#25D366; color:white; padding:12px 20px; border:none; border-radius:25px; font-size:16px; cursor:pointer; }
+    .wa-btn:hover { background:#128C7E; }
+  </style>
+  <!-- MathJax for rendering math -->
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <img src="logo.png" alt="MathCloud Logo">
+    <h1>MathCloud Tutorial</h1>
+  </header>
+
+  <!-- Greeting Section -->
+  <div class="greeting">
+    <label><strong>Enter your name:</strong></label><br>
+    <input type="text" id="studentName" placeholder="Your name here" oninput="updateGreeting()">
+    <p id="greetMsg">Hello Student! Welcome to MathCloud Tutorial.</p>
+  </div>
+
+  <!-- Lesson Content -->
+  <main>
+    <h2>Order of Operations (BODMAS)</h2>
+    <p>
+      In mathematics, when more than one operation appears in a calculation, we must follow the
+      correct <strong>order of operations</strong>. To help remember the order, we use the rule called <strong>BODMAS</strong>.
+    </p>
+    <ul>
+      <li><strong>B</strong> → Brackets</li>
+      <li><strong>O</strong> → Orders (Powers, Indices, Roots)</li>
+      <li><strong>D</strong> → Division</li>
+      <li><strong>M</strong> → Multiplication</li>
+      <li><strong>A</strong> → Addition</li>
+      <li><strong>S</strong> → Subtraction</li>
+    </ul>
+
+    <h3>Step-by-Step Explanation</h3>
+    <p>When solving any expression:</p>
+    <ol>
+      <li>Solve inside <strong>Brackets</strong> first.</li>
+      <li>Then calculate <strong>Orders</strong> (powers, indices, roots).</li>
+      <li>Next, do <strong>Division</strong> and <strong>Multiplication</strong> (from left to right).</li>
+      <li>Finally, do <strong>Addition</strong> and <strong>Subtraction</strong> (from left to right).</li>
+    </ol>
+
+    <h3>Worked Examples</h3>
+    <div class="example">
+      <p><strong>Example 1:</strong> \( 3 + 5 \times 2 \)</p>
+      <p>Step 1: Multiplication first → \( 5 \times 2 = 10 \)</p>
+      <p>Step 2: Add → \( 3 + 10 = 13 \)</p>
+      <p><strong>Answer: 13</strong></p>
+    </div>
+
+    <div class="example">
+      <p><strong>Example 2:</strong> \( (6 + 4) \times 3 \)</p>
+      <p>Step 1: Brackets first → \( 6 + 4 = 10 \)</p>
+      <p>Step 2: Multiply → \( 10 \times 3 = 30 \)</p>
+      <p><strong>Answer: 30</strong></p>
+    </div>
+
+    <div class="example">
+      <p><strong>Example 3:</strong> \( 20 \div (2^2 + 2) \)</p>
+      <p>Step 1: Brackets → \( 2^2 + 2 = 4 + 2 = 6 \)</p>
+      <p>Step 2: Divide → \( 20 \div 6 = 3.\overline{3} \)</p>
+      <p><strong>Answer: \( 3.\overline{3} \)</strong></p>
+    </div>
+
+    <div class="example">
+      <p><strong>Example 4:</strong> \( 12 - 2 \times (3 + 1)^2 \)</p>
+      <p>Step 1: Brackets → \( 3 + 1 = 4 \)</p>
+      <p>Step 2: Orders → \( 4^2 = 16 \)</p>
+      <p>Step 3: Multiplication → \( 2 \times 16 = 32 \)</p>
+      <p>Step 4: Subtraction → \( 12 - 32 = -20 \)</p>
+      <p><strong>Answer: -20</strong></p>
+    </div>
+
+    <h3>Assessment Questions</h3>
+    <ol class="assessment">
+      <li>\( 8 + \frac{6}{2} \)</li>
+      <li>\( (7 + 5) \times 2 \)</li>
+      <li>\( 10 - 2^3 \)</li>
+      <li>\( 4 + \frac{18}{(3 \times 2)} \)</li>
+      <li>\( (20 - 5) \times (2 + 3) \)</li>
+      <li>\( \frac{36}{3} + 2^2 \)</li>
+      <li>\( 50 - (6 + 4) \times 3 \)</li>
+      <li>\( \frac{2^3 + 2^2}{2} \)</li>
+      <li>\( \frac{100}{(5 \times 2)} + 8 \)</li>
+      <li>\( \frac{(15 - 3)}{(2 + 1)} \)</li>
+      <li>\( 8 \times (6 - 4)^2 \)</li>
+      <li>\( \frac{12}{3} + \frac{18}{6} \)</li>
+      <li>\( 5^2 - \frac{10}{2} \)</li>
+      <li>\( \frac{(25 - 5)}{2^2} \)</li>
+      <li>\( (3 + 7) \times (5 - 2)^2 \)</li>
+    </ol>
+  </main>
+
+  <!-- WhatsApp Support -->
+  <footer>
+    <p><strong>Any questions?</strong></p>
+    <p>Chat with Marshall on WhatsApp</p>
+    <button class="wa-btn" onclick="openWhatsApp()">💬 Ask a Question</button>
+  </footer>
+
+  <script>
+    function updateGreeting() {
+      const name = document.getElementById("studentName").value.trim();
+      const greetMsg = document.getElementById("greetMsg");
+      const now = new Date();
+      const options = { weekday:"long", year:"numeric", month:"long", day:"numeric", hour:"2-digit", minute:"2-digit" };
+      const formatted = now.toLocaleDateString("en-GB", options);
+      if (name) {
+        greetMsg.textContent = `Hello ${name}! Welcome to MathCloud Tutorial. Today is ${formatted}.`;
+      } else {
+        greetMsg.textContent = "Hello Student! Welcome to MathCloud Tutorial.";
+      }
+    }
+
+    function openWhatsApp() {
+      const name = document.getElementById("studentName").value.trim() || "Student";
+      const subject = "Math — BODMAS";
+      const studentClass = "Year 8";
+      const message = `Hello Marshall,%0AMy name is ${name}.%0ASubject: ${subject}%0AClass: ${studentClass}%0AMy Question: `;
+      const url = `https://wa.me/2348102341648?text=${message}`;
+      window.open(url, "_blank");
+    }
+  </script>
+
+</body>
+</html>

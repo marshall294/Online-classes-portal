@@ -1,0 +1,441 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Mathcloud Tutorial — Grade 5 English Week 1 | Marshall Jacob</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --accent:#2b6cb0; /* blue */
+      --muted:#6b7280;
+      --bg:#f7fafc;
+      --card:#ffffff;
+      --glass: rgba(255,255,255,0.7);
+      font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;background:linear-gradient(180deg,#f0f7ff 0%,var(--bg) 60%);color:#0f172a;line-height:1.45}
+    header{background:transparent;padding:20px 18px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+    .brand{display:flex;align-items:center;gap:12px}
+    .logo{width:56px;height:56px;border-radius:10px;background:linear-gradient(135deg,var(--accent),#7dd3fc);display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:18px}
+    nav{display:flex;gap:10px;align-items:center}
+    nav a{color:var(--accent);text-decoration:none;font-weight:600}
+    .container{max-width:1100px;margin:18px auto;padding:18px}.hero{display:grid;grid-template-columns:1fr;gap:18px;align-items:center;padding:18px;border-radius:14px;background:linear-gradient(180deg, rgba(255,255,255,0.9), var(--glass));box-shadow:0 8px 30px rgba(2,6,23,0.06)}
+.hero h1{margin:0;font-size:28px}
+.meta{color:var(--muted);font-size:14px}
+.grid{display:grid;grid-template-columns:1fr 360px;gap:18px;margin-top:18px}
+
+/* left column cards */
+.card{background:var(--card);padding:18px;border-radius:12px;box-shadow:0 6px 18px rgba(11,15,30,0.04)}
+.section-title{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.section-title h2{margin:0;font-size:18px}
+.lesson p{margin:8px 0}
+.rule{padding:10px;background:#f1f5f9;border-radius:8px;margin:8px 0}
+.examples{display:grid;gap:8px}
+.example{padding:10px;border-radius:8px;background:linear-gradient(90deg,#fff,#fbfdff);border:1px solid #eef2ff}
+
+/* right column */
+.sticky{position:sticky;top:20px}
+.listen-btn{display:inline-flex;gap:8px;align-items:center;background:var(--accent);color:white;padding:8px 12px;border-radius:8px;border:none}
+
+.accordion{border-radius:10px;overflow:hidden}
+.accordion .item{border-bottom:1px solid #eef2ff;padding:12px}
+.accordion .item:last-child{border-bottom:none}
+.accordion button{width:100%;text-align:left;background:none;border:none;padding:0;font-size:16px;display:flex;justify-content:space-between;align-items:center}
+
+/* Word Map tool */
+.wordmap{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.wordcard{padding:12px;border-radius:8px;background:#fff;border:1px solid #eef2ff}
+
+/* Assessment */
+.q-row{margin:10px 0}
+input[type=text], select, textarea{width:100%;padding:10px;border-radius:8px;border:1px solid #e6edf3}
+button.cta{background:var(--accent);color:white;padding:10px 14px;border-radius:8px;border:none;font-weight:700}
+
+footer{text-align:center;color:var(--muted);margin:36px 0}
+
+/* responsive */
+@media (max-width:900px){.grid{grid-template-columns:1fr}.logo{width:48px;height:48px}.hero h1{font-size:20px}.wordmap{grid-template-columns:1fr}}
+
+  </style>
+</head>
+<body>
+  <header class="container">
+    <div class="brand">
+      <div class="logo">MC</div>
+      <div>
+        <div style="font-weight:800">Mathcloud Tutorial</div>
+        <div style="font-size:12px;color:var(--muted)">Marshall Jacob — Grade 5 English (Week 1)</div>
+      </div>
+    </div>
+    <nav>
+      <a href="#spelling">Spelling</a>
+      <a href="#reading">Reading</a>
+      <a href="#vocab">Vocabulary</a>
+      <a href="#examples">Examples</a>
+      <a href="#assessment">Assessment</a>
+    </nav>
+  </header>  <main class="container">
+    <section class="hero card">
+      <div style="display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap">
+        <div>
+          <h1>Week 1 — Spelling & Reading Foundations</h1>
+          <div class="meta">This self-teaching page explains rules step-by-step, shows worked examples and gives a 20-question assessment. Use the Read-Aloud button to hear sentences.</div>
+        </div>
+        <div style="display:flex;gap:8px;align-items:center">
+          <button class="listen-btn" id="readAllBtn" title="Read the lesson aloud">🔊 Read Aloud</button>
+          <button class="cta" id="printBtn">Print / Save PDF</button>
+        </div>
+      </div><div class="grid">
+    <div>
+<!-- Spelling -->
+<article id="spelling" class="card lesson">
+  <div class="section-title">
+    <h2>Spelling: Plurals & Rules</h2>
+    <div class="meta">Easy rules + exceptions</div>
+  </div>
+
+  <p>
+    When we want to talk about more than one thing, we usually add something to the end of a word. These are called **plural nouns**. Let's learn the rules for spelling them correctly. 👇
+  </p>
+
+  <p><strong>📘 Rule A — Most nouns:</strong> Just add <code>-s</code> to make them plural.</p>
+  <p><em>Example: book → books</em></p>
+  <ul>
+    <li>dog → dogs</li>
+    <li>car → cars</li>
+    <li>tree → trees</li>
+    <li>apple → apples</li>
+    <li>pencil → pencils</li>
+    <li>hat → hats</li>
+  </ul>
+
+  <div class="rule">
+    <strong>📕 Rule B — Words ending in s, ss, sh, ch, x, or z:</strong> Add <code>-es</code>.
+  </div>
+  <p><em>These words need an extra "e" to sound right when you say them.</em></p>
+  <p><em>Example: box → boxes</em></p>
+  <ul>
+    <li>bus → buses</li>
+    <li>glass → glasses</li>
+    <li>brush → brushes</li>
+    <li>match → matches</li>
+    <li>fox → foxes</li>
+    <li>quiz → quizzes</li>
+    <li>church → churches</li>
+  </ul>
+
+  <div class="rule">
+    <strong>📗 Rule C — Words ending in a consonant + y:</strong> Change the <code>y</code> to <code>i</code> and add <code>-es</code>.
+  </div>
+  <p><em>If the word ends in a vowel + y (like "toy"), just add <code>-s</code>.</em></p>
+  <p><em>Example: city → cities</em></p>
+  <ul>
+    <li>puppy → puppies</li>
+    <li>party → parties</li>
+    <li>story → stories</li>
+    <li>berry → berries</li>
+    <li>baby → babies</li>
+    <li>lady → ladies</li>
+    <li>toy → toys (vowel + y)</li>
+    <li>key → keys (vowel + y)</li>
+    <li>monkey → monkeys (vowel + y)</li>
+  </ul>
+
+  <div class="rule">
+    <strong>📙 Rule D — Irregular plurals:</strong> These words don’t follow any rule. You just have to **memorize** them.
+  </div>
+  <p><em>Example: child → children</em></p>
+  <ul>
+    <li>mouse → mice</li>
+    <li>man → men</li>
+    <li>woman → women</li>
+    <li>foot → feet</li>
+    <li>tooth → teeth</li>
+    <li>goose → geese</li>
+    <li>person → people</li>
+    <li>sheep → sheep (same in singular and plural)</li>
+    <li>deer → deer (same in singular and plural)</li>
+  </ul>
+
+  <div style="margin-top:12px" class="examples">
+    <div class="example">
+      <strong>🔍 Mixed Examples</strong><br>
+      cat → cats • fox → foxes • baby → babies • toy → toys • child → children<br>
+      dog → dogs • brush → brushes • story → stories • mouse → mice • key → keys<br>
+      pencil → pencils • quiz → quizzes • city → cities • man → men • berry → berries
+    </div>
+
+    <div class="example">
+      <strong>💡 Teacher Tip</strong><br>
+      Say the word aloud. If the ending sounds like /s/ or /z/, add <code>-s</code>. If it sounds like /iz/ (like “buzzes” or “wishes”), add <code>-es</code>.<br>
+      👂 Listening to how the word sounds can help you spell it right!
+    </div>
+  </div>
+</article>
+
+        <hr style="margin:14px 0;border:none;border-top:1px dashed #eef2ff">
+        <h3>Practice (instant feedback)</h3>
+        <div style="display:grid;gap:8px">
+          <div><label>1. baby → <input type="text" id="p1" placeholder="type answer"></label></div>
+          <div><label>2. brush → <input type="text" id="p2" placeholder="type answer"></label></div>
+          <div><label>3. fox → <input type="text" id="p3" placeholder="type answer"></label></div>
+          <div style="display:flex;gap:8px"><button class="cta" onclick="checkPractice()">Check answers</button><div id="practiceFeedback" style="align-self:center;color:var(--muted)"></div></div>
+        </div>
+      </article>
+
+<!-- Reading -->
+<article id="reading" class="card lesson" style="margin-top:18px">
+  <div class="section-title">
+    <h2>Reading Fluency — Punctuation</h2>
+    <div class="meta">How punctuation affects reading</div>
+  </div>
+
+  <p>
+    Punctuation marks are not just for writing — they help us **read with the right voice, tone, and pause**.
+    Learning how to read punctuation makes your reading **more fluent, expressive, and easy to understand**.
+  </p>
+
+  <p><strong>📍 Full stop (.)</strong> — Take a complete pause. It shows the end of a sentence.<br>
+     <strong>📍 Comma (,)</strong> — Take a short pause. It separates ideas, lists, or adds extra information.<br>
+     <strong>📍 Question mark (?)</strong> — Use a rising tone. It shows a question or curiosity.<br>
+     <strong>📍 Exclamation mark (!)</strong> — Use a strong voice. It shows excitement, surprise, or warning.</p>
+
+  <div class="rule">
+    <strong>🗣️ Reading aloud tips:</strong><br>
+    ✔️ Look at the punctuation before reading.<br>
+    ✔️ Breathe at commas; pause longer at full stops.<br>
+    ✔️ Raise your voice slightly at question marks.<br>
+    ✔️ Use emotion or energy for exclamation marks!
+  </div>
+
+  <h3 style="margin-top:12px">Examples to Read Aloud</h3>
+  <div class="examples">
+    <div class="example">"Where are you going?" she asked.</div>
+    <div class="example">The dog barked, and the children ran outside.</div>
+    <div class="example">Stop! You must wait until the light changes.</div>
+    <div class="example">I brought apples, bananas, oranges, and grapes.</div>
+    <div class="example">“What time does the movie start?” he asked.</div>
+    <div class="example">Wow! That was the best game I’ve ever seen!</div>
+    <div class="example">It was raining, so we stayed inside and played board games.</div>
+    <div class="example">Can you help me carry this box?</div>
+    <div class="example">Look out! There’s a bee near your head!</div>
+    <div class="example">She smiled, nodded, and quietly left the room.</div>
+  </div>
+</article>
+
+        <h3 style="margin-top:12px">Mini practice — Insert punctuation</h3>
+        <div class="q-row">I like apples bananas and grapes <br><small>Insert commas where needed</small><br><input type="text" id="punct1" placeholder=", between items"></div>
+        <div style="display:flex;gap:8px"><button class="cta" onclick="checkPunct()">Check</button><div id="punctFeedback" style="align-self:center;color:var(--muted)"></div></div>
+      </article>
+
+      <!-- Vocabulary -->
+      <article id="vocab" class="card lesson" style="margin-top:18px">
+        <div class="section-title"><h2>Vocabulary — Word Maps</h2><div class="meta">Learn words deeply</div></div>
+        <p>A <strong>Word Map</strong> helps you remember a word by connecting meaning, synonyms, antonyms and an example sentence.</p>
+        <div class="rule">Practice this for 8–10 new words per week.</div>
+
+        <div style="margin-top:12px" class="wordmap">
+          <div class="wordcard">
+            <label><strong>Word</strong><br><input type="text" id="wmWord" placeholder="e.g., happy"></label>
+          </div>
+          <div class="wordcard">
+            <label><strong>Meaning</strong><br><input type="text" id="wmMeaning" placeholder="short definition"></label>
+          </div>
+          <div class="wordcard">
+            <label><strong>Synonym</strong><br><input type="text" id="wmSyn" placeholder="e.g., joyful"></label>
+          </div>
+          <div class="wordcard">
+            <label><strong>Antonym</strong><br><input type="text" id="wmAnt" placeholder="e.g., sad"></label>
+          </div>
+        </div>
+        <div style="margin-top:10px;display:flex;gap:8px"><button class="cta" onclick="buildMap()">Build Word Map</button><button class="cta" style="background:#10b981" onclick="clearMap()">Clear</button></div>
+        <div id="wordMapView" style="margin-top:12px"></div>
+
+        <h3 style="margin-top:12px">Worked Example</h3>
+        <div class="example"><strong>Word:</strong> Bright<br><strong>Meaning:</strong> full of light or clever<br><strong>Synonym:</strong> clever, shining<br><strong>Antonym:</strong> dim, dull<br><strong>Sentence:</strong> The bright lamp helped her read at night.</div>
+      </article>
+
+      <!-- Examples section -->
+      <article id="examples" class="card lesson" style="margin-top:18px">
+        <div class="section-title"><h2>More Worked Examples</h2><div class="meta">Step-by-step</div></div>
+        <div class="example"><strong>1. Plural of "lady"</strong><br>lady ends with consonant+y → change y→i add -es → ladies</div>
+        <div class="example"><strong>2. Plural of "brush"</strong><br>brush ends with sh → add -es → brushes</div>
+        <div class="example"><strong>3. Read aloud:</strong><br>"Can you help me?" he asked politely. (rising tone at question)</div>
+      </article>
+    </div>
+
+    <aside class="card sticky">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+        <div><strong>Quick Links</strong><div style="font-size:12px;color:var(--muted)">Jump to sections</div></div>
+        <div style="font-size:12px;color:var(--muted)">Marshall Jacob</div>
+      </div>
+
+      <div class="accordion">
+        <div class="item"><button onclick="toggleItem(event,'tip1')">How to use Read-Aloud ▾</button><div id="tip1" style="display:none;margin-top:8px;color:var(--muted)">Press Read Aloud to hear the current visible lesson (uses your device speech). For best result, use Chrome or modern browser.</div></div>
+        <div class="item"><button onclick="toggleItem(event,'tip2')">Printable PDF ▾</button><div id="tip2" style="display:none;margin-top:8px;color:var(--muted)">Press Print to save page as PDF or print for offline learning.</div></div>
+        <div class="item"><button onclick="toggleItem(event,'tip3')">Assessment ▾</button><div id="tip3" style="display:none;margin-top:8px;color:var(--muted)">Scroll to Assessment to take the 20-question test. Answers are auto-scored and a certificate summary shows.</div></div>
+      </div>
+
+      <hr style="margin:12px 0;border:none;border-top:1px solid #eef2ff">
+      <div>
+        <strong>Did you know?</strong>
+        <p style="color:var(--muted);font-size:13px">Reading aloud for 10 minutes daily improves fluency and helps spelling memory.</p>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<!-- Assessment -->
+<section id="assessment" class="card" style="margin-top:18px">
+  <div class="section-title"><h2>Assessment — 20 Questions</h2><div class="meta">Auto-grade with feedback</div></div>
+
+  <form id="quiz" onsubmit="event.preventDefault();gradeQuiz()">
+    <h3>Section A — Spelling plurals (10)</h3>
+    <ol>
+      <li>cat → <input type="text" name="q1"></li>
+      <li>box → <input type="text" name="q2"></li>
+      <li>lady → <input type="text" name="q3"></li>
+      <li>toy → <input type="text" name="q4"></li>
+      <li>wolf → <input type="text" name="q5"></li>
+      <li>bus → <input type="text" name="q6"></li>
+      <li>city → <input type="text" name="q7"></li>
+      <li>church → <input type="text" name="q8"></li>
+      <li>mouse → <input type="text" name="q9"></li>
+      <li>child → <input type="text" name="q10"></li>
+    </ol>
+
+    <h3>Section B — Reading & punctuation (5)</h3>
+    <ol start="11">
+      <li>Insert punctuation: I like apples bananas and grapes. <br><input type="text" name="q11" placeholder=", between items"></li>
+      <li>What punctuation ends this sentence? "Where are you" <br><input type="text" name="q12" placeholder="? or ."></li>
+      <li>Which sentence uses a comma? (A) She sleeps and eats (B) She sleeps, and eats <br><input type="text" name="q13" placeholder="A or B"></li>
+      <li>Read this as a question: Will you come <br><input type="text" name="q14" placeholder="What mark?"></li>
+      <li>Where do you pause: The cat jumped and ran. <br><input type="text" name="q15" placeholder=", after ?"></li>
+    </ol>
+
+    <h3>Section C — Word Map short (5)</h3>
+    <ol start="16">
+      <li>Bright — Synonym: <input type="text" name="q16"></li>
+      <li>Brave — Antonym: <input type="text" name="q17"></li>
+      <li>Calm — Meaning: <input type="text" name="q18"></li>
+      <li>Quick — Sentence (short): <input type="text" name="q19"></li>
+      <li>Strong — Synonym: <input type="text" name="q20"></li>
+    </ol>
+
+    <div style="display:flex;gap:8px;margin-top:12px"><button class="cta" type="submit">Submit & Grade</button><button type="button" onclick="showAnswers()" class="cta" style="background:#f59e0b">Show model answers</button></div>
+  </form>
+
+  <div id="quizResult" style="margin-top:12px"></div>
+</section>
+
+<footer>
+  <div style="font-weight:700">Marshall Jacob — Mathcloud Tutorial</div>
+  <div style="font-size:13px;color:var(--muted)">Created for Grade 5 Week 1 — Spelling & Reading Foundations</div>
+</footer>
+
+  </main><script>
+  // helper functions
+  function toggleItem(e,id){
+    const el=document.getElementById(id);
+    el.style.display = el.style.display === 'none' ? 'block' : 'none';
+  }
+
+  // Read Aloud uses SpeechSynthesis
+  document.getElementById('readAllBtn').addEventListener('click',()=>{
+    let texts = [];
+    // gather visible main headings and paragraphs for concise read
+    const sections = document.querySelectorAll('.lesson');
+    sections.forEach(s=>{
+      const h = s.querySelector('h2');
+      const ps = s.querySelectorAll('p, .example');
+      if(h) texts.push(h.innerText + '.');
+      ps.forEach(p=>texts.push(p.innerText + '.'));
+    });
+    speakText(texts.join(' '));
+  });
+
+  function speakText(txt){
+    if(!('speechSynthesis' in window)){
+      alert('Your browser does not support speech synthesis. Use Chrome or Edge.');return;
+    }
+    window.speechSynthesis.cancel();
+    const u = new SpeechSynthesisUtterance(txt);
+    u.rate = 0.95; u.pitch = 1; u.volume = 1;
+    window.speechSynthesis.speak(u);
+  }
+
+  // Print button
+  document.getElementById('printBtn').addEventListener('click',()=>window.print());
+
+  // Practice check
+  function checkPractice(){
+    const answers = ['babies','brushes','foxes'];
+    const u1 = (document.getElementById('p1').value||'').trim().toLowerCase();
+    const u2 = (document.getElementById('p2').value||'').trim().toLowerCase();
+    const u3 = (document.getElementById('p3').value||'').trim().toLowerCase();
+    let score=0; if(u1===answers[0])score++; if(u2===answers[1])score++; if(u3===answers[2])score++;
+    document.getElementById('practiceFeedback').innerText = `You got ${score}/3 correct.`;
+  }
+
+  // punctuation check
+  function checkPunct(){
+    const v = (document.getElementById('punct1').value||'').trim();
+    const ok = v.includes(',') ? 'Nice! You added commas.' : 'Try adding commas between the items.';
+    document.getElementById('punctFeedback').innerText = ok;
+  }
+
+  // Word Map
+  function buildMap(){
+    const w = document.getElementById('wmWord').value.trim();
+    const m = document.getElementById('wmMeaning').value.trim();
+    const s = document.getElementById('wmSyn').value.trim();
+    const a = document.getElementById('wmAnt').value.trim();
+    if(!w){alert('Please type a word.');return}
+    const html = `\n      <div style="padding:12px;border-radius:8px;border:1px solid #e6f0ff;background:linear-gradient(90deg,#fff,#f8fbff)">\n        <div style="font-weight:700">${escapeHtml(w)}</div>\n        <div style="font-size:13px;color:var(--muted)"><strong>Meaning:</strong> ${escapeHtml(m||'—')}<br><strong>Synonym:</strong> ${escapeHtml(s||'—')}<br><strong>Antonym:</strong> ${escapeHtml(a||'—')}</div>\n        <div style="margin-top:8px;font-style:italic">Example: ${escapeHtml(exampleSentence(w))}</div>\n      </div>`;
+    document.getElementById('wordMapView').innerHTML = html;
+  }
+  function clearMap(){document.getElementById('wmWord').value='';document.getElementById('wmMeaning').value='';document.getElementById('wmSyn').value='';document.getElementById('wmAnt').value='';document.getElementById('wordMapView').innerHTML='';}
+  function escapeHtml(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+  function exampleSentence(word){return `The ${word} helped her learn today.`}
+
+  // Quiz grading
+  function gradeQuiz(){
+    const form = document.getElementById('quiz');
+    const data = new FormData(form);
+    const answers = {
+      q1:'cats',q2:'boxes',q3:'ladies',q4:'toys',q5:'wolves',q6:'buses',q7:'cities',q8:'churches',q9:'mice',q10:'children',
+      q11:',',q12:'?',q13:'B',q14:'?',q15:',' ,
+      q16:'bright',q17:'cowardly',q18:'calm',q19:'She ran quickly.',q20:'powerful'
+    };
+    let score=0; let total=20; let details=[];
+    for(let i=1;i<=20;i++){
+      const k='q'+i; let given=(data.get(k)||'').toString().trim().toLowerCase();
+      let correct=(answers[k]||'').toString().toLowerCase();
+      // flexible checks for some
+      if(['q11'].includes(k)){
+        if(given.includes(',')) {score++; details.push(`${i}: correct`)} else details.push(`${i}: try adding commas`);
+      } else if(['q12','q14'].includes(k)){
+        if(given === '?') {score++; details.push(`${i}: correct`)} else details.push(`${i}: expected '?'`);
+      } else if(k==='q13'){
+        if(given==='b' || given==='b)') {score++; details.push(`${i}: correct`)} else details.push(`${i}: choose B`);
+      } else if(k==='q15'){
+        if(given.includes(',')) {score++; details.push(`${i}: correct`)} else details.push(`${i}: add a comma before "and"`);
+      } else if(['q16','q17','q18','q19','q20'].includes(k)){
+        // simple substring checks
+        if(given && (given.includes(correct) || correct.includes(given) || given.split(' ').some(w=>correct.includes(w) || w.includes(correct)))){score++; details.push(`${i}: OK`)} else details.push(`${i}: expected something like ${answers[k]}`);
+      } else {
+        if(given===correct) {score++; details.push(`${i}: correct`)} else details.push(`${i}: expected ${answers[k]}`);
+      }
+    }
+    const pct = Math.round((score/total)*100);
+    document.getElementById('quizResult').innerHTML = `<div style="padding:12px;border-radius:8px;background:#fff;border:1px solid #eef2ff"><strong>Your score: ${score}/${total} (${pct}%)</strong><div style="margin-top:8px;color:var(--muted);font-size:13px">${details.slice(0,6).join('<br>')}<br>... <em>expand above for full feedback</em></div></div>`;
+  }
+
+  function showAnswers(){
+    alert('Model answers:\n1 cats, 2 boxes, 3 ladies, 4 toys, 5 wolves, 6 buses, 7 cities, 8 churches, 9 mice, 10 children.\nSections B & C: see teacher guide in footer.');
+  }
+</script></body>
+</html>
