@@ -1,0 +1,256 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Grade 5 Reading Comprehension — Adventure at Willow Pond</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{--bg:#f3f7ff;--card:#ffffff;--accent:#4f46e5;--muted:#6b7280;--glass:rgba(255,255,255,0.6)}
+    *{box-sizing:border-box;font-family:Inter,system-ui,Segoe UI,Roboto,'Helvetica Neue',Arial;margin:0}
+    body{background:linear-gradient(180deg,#e6f0ff, #f8fbff);min-height:100vh;padding:36px;display:flex;align-items:center;justify-content:center}
+    .container{width:100%;max-width:980px}
+    header{display:flex;align-items:center;gap:16px;margin-bottom:20px}
+    .logo{width:64px;height:64px;border-radius:12px;background:linear-gradient(135deg,var(--accent),#06b6d4);display:flex;align-items:center;justify-content:center;color:white;font-weight:800;font-size:20px;box-shadow:0 6px 18px rgba(79,70,229,0.18)}
+    h1{font-size:20px;color:#0f172a}
+    p.lead{color:var(--muted);margin-top:4px}.card{background:var(--card);border-radius:14px;padding:22px;box-shadow:0 10px 30px rgba(15,23,42,0.06)}
+.layout{display:grid;grid-template-columns:1fr 380px;gap:20px}
+
+.passage{line-height:1.65;color:#0b1220}
+.passage h2{margin-bottom:8px;color:var(--accent)}
+.btn-row{display:flex;gap:10px;margin-top:14px}
+.btn{background:var(--accent);color:white;padding:8px 12px;border-radius:8px;border:none;cursor:pointer;font-weight:600}
+.btn.ghost{background:transparent;border:1px solid #e6e9ff;color:var(--accent)}
+
+.sidebar{position:sticky;top:28px}
+.timer{background:linear-gradient(90deg,#eef2ff,#ffffff);padding:12px;border-radius:10px;margin-bottom:14px}
+.questions{margin-top:8px}
+.q{padding:10px;border-radius:8px;background:#fbfdff;margin-bottom:8px;border:1px solid #f0f4ff}
+.options{margin-top:8px}
+.option{display:block;margin:8px 0}
+input[type='radio'],input[type='checkbox']{margin-right:8px}
+
+.answers{display:none;margin-top:8px;background:#f9fafb;padding:10px;border-radius:8px;border:1px dashed #e6eefc}
+.result{margin-top:12px;padding:10px;border-radius:8px;background:linear-gradient(180deg,#ecfdf5,#ffffff);border:1px solid #d1fae5}
+
+.footer{margin-top:14px;color:var(--muted);font-size:13px}
+
+@media (max-width:900px){.layout{grid-template-columns:1fr;}.sidebar{position:relative;top:0}}
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="logo">RC</div>
+      <div>
+        <h1>Grade 5 — Reading Comprehension</h1>
+        <p class="lead">Passage: <strong>"Adventure at Willow Pond"</strong> — read carefully, answer 10 questions.</p>
+      </div>
+    </header><div class="card layout">
+  <main>
+    <article class="passage">
+      <h2>Adventure at Willow Pond</h2>
+      <p>
+        On the edge of Maple Town there was a small, quiet place called Willow Pond. Most days the pond looked like a silver mirror, resting under the sky with tall willow trees leaning over it. Children often came to feed the ducks, and old Mr. Benson sat on a wooden bench reading the newspaper. But early one golden morning, when the mist still curled above the water, Lucy and her younger brother Tom discovered something unusual.
+      </p>
+      <p>
+        While skipping stones, Lucy noticed a faint ripple far from shore. It was not the usual circle a pebble makes; this ripple seemed to move slowly, as if it were waving. Tom leaned in and pointed: at the center of the ripple, a tiny wooden boat—no bigger than Tom’s toy cars—floated gently. It had a little blue sail and a tiny flag with a painted star.
+      </p>
+      <p>
+        "Who would leave such a small boat here?" Lucy wondered. The siblings remembered the stories their grandmother told them about the Willow Folk—tiny helpers who protected the pond long ago. They laughed at the thought, then suddenly a soft voice asked, "Would you like to take a ride?"
+      </p>
+      <p>
+        Lucy and Tom looked around but saw no one. The voice seemed to come from the boat itself. Tom, who loved adventures, reached out and touched the boat. It rocked, and the sail filled with an unseen breeze. The boat slowly drifted toward their hands. Without warning, Lucy and Tom felt themselves shrinking until the world towered around them. The willow leaves became like umbrellas, and pebbles looked like round boulders.
+      </p>
+      <p>
+        A gentle creature with sparkling wings—no larger than a robin—flew from the boat and introduced itself as Pippin, a Willow Folk messenger. Pippin explained that the pond had been losing its laughter; fewer children visited, and the reeds were growing too thick for the water frogs. The Willow Folk needed helpers to bring back the pond’s laughter.
+      </p>
+      <p>
+        The task sounded big, but Pippin smiled and handed the children tiny reed whistles. "Blow these where the reed beds are thick," Pippin said. "Music makes the pond feel merry. When that happens, animals will return and the water will clear." Lucy and Tom followed Pippin through a secret path of lily pads. They played sweet, bright tunes until dragonflies danced and frogs joined in a chorus. Gradually, the water lost its cloudy color and the reeds swayed more gently.
+      </p>
+      <p>
+        When the pond felt joyful again, Pippin led the children back to the shore and the magic wore off. Lucy and Tom grew back to normal size. Mr. Benson clapped from his bench, though he only said, "Good morning, children—what a fine tune you both played." The tiny boat bobbed once, then slipped under the willow roots as if returning to its hidden home.
+      </p>
+      <p>
+        From that day, Lucy and Tom visited Willow Pond more often. They kept the reed whistles in a small chest and sometimes, when the pond needed a bright song, they would tip their heads back and play. The laughter returned for good, and the pond shone like a silver mirror once more.
+      </p>
+    </article>
+
+    <div class="btn-row">
+      <button class="btn" id="checkBtn">Check Answers</button>
+      <button class="btn ghost" id="showKey">Show Answer Key</button>
+      <button class="btn ghost" id="resetBtn">Reset</button>
+    </div>
+
+    <div class="footer">Tip: Encourage full-sentence answers for short-answer questions to practice writing.</div>
+  </main>
+
+  <aside class="sidebar">
+    <div class="card timer">
+      <div style="font-weight:700">Timer</div>
+      <div style="margin-top:6px;color:var(--muted)">Try finishing in 20 minutes</div>
+      <div id="clock" style="font-size:18px;font-weight:700;margin-top:8px">20:00</div>
+      <div style="margin-top:8px"><button class="btn ghost" id="startTimer">Start</button></div>
+    </div>
+
+    <div class="card questions">
+      <div style="font-weight:700;margin-bottom:8px">Questions</div>
+
+      <div class="q" id="q1">
+        <div>1. What is the name of the place where the story happens?</div>
+        <div class="options">
+          <label class="option"><input type="radio" name="q1" value="A"> Maple Town</label>
+          <label class="option"><input type="radio" name="q1" value="B"> Willow Pond</label>
+          <label class="option"><input type="radio" name="q1" value="C"> Lily Lake</label>
+        </div>
+      </div>
+
+      <div class="q" id="q2">
+        <div>2. Who sat on the wooden bench most days?</div>
+        <div class="options">
+          <label class="option"><input type="radio" name="q2" value="A"> Mr. Benson</label>
+          <label class="option"><input type="radio" name="q2" value="B"> Pippin</label>
+          <label class="option"><input type="radio" name="q2" value="C"> The mayor</label>
+        </div>
+      </div>
+
+      <div class="q" id="q3">
+        <div>3. What did Lucy and Tom find floating on the pond?</div>
+        <div class="options">
+          <label class="option"><input type="radio" name="q3" value="A"> A wooden boat with a blue sail</label>
+          <label class="option"><input type="radio" name="q3" value="B"> A golden coin</label>
+          <label class="option"><input type="radio" name="q3" value="C"> A message in a bottle</label>
+        </div>
+      </div>
+
+      <div class="q" id="q4">
+        <div>4. Who introduced themself as a Willow Folk messenger?</div>
+        <div class="options">
+          <label class="option"><input type="radio" name="q4" value="A"> Mr. Benson</label>
+          <label class="option"><input type="radio" name="q4" value="B"> Pippin</label>
+          <label class="option"><input type="radio" name="q4" value="C"> The pond frog</label>
+        </div>
+      </div>
+
+      <div class="q" id="q5">
+        <div>5. Why did the Willow Folk need help?</div>
+        <div class="options">
+          <label class="option"><input type="radio" name="q5" value="A"> The pond had become too noisy</label>
+          <label class="option"><input type="radio" name="q5" value="B"> The pond had been losing its laughter and animals</label>
+          <label class="option"><input type="radio" name="q5" value="C"> The willow trees were sick</label>
+        </div>
+      </div>
+
+      <div class="q" id="q6">
+        <div>6. What were the children given to help the pond?</div>
+        <div class="options">
+          <label class="option"><input type="radio" name="q6" value="A"> Tiny reed whistles</label>
+          <label class="option"><input type="radio" name="q6" value="B"> A magic net</label>
+          <label class="option"><input type="radio" name="q6" value="C"> A bottle of clear water</label>
+        </div>
+      </div>
+
+      <div class="q" id="q7">
+        <div>7. What happened to the children after they touched the boat?</div>
+        <div class="options">
+          <label class="option"><input type="radio" name="q7" value="A"> They fell asleep</label>
+          <label class="option"><input type="radio" name="q7" value="B"> They started to sing</label>
+          <label class="option"><input type="radio" name="q7" value="C"> They shrank in size</label>
+        </div>
+      </div>
+
+      <div class="q" id="q8">
+        <div>8. Short answer: What did Lucy and Tom do to help the pond? (write 1-2 sentences)</div>
+        <div class="options">
+          <textarea id="q8txt" rows="3" style="width:100%;padding:8px;border-radius:6px;border:1px solid #e6eefc"></textarea>
+        </div>
+      </div>
+
+      <div class="q" id="q9">
+        <div>9. What did Mr. Benson say when the children returned?</div>
+        <div class="options">
+          <label class="option"><input type="radio" name="q9" value="A"> "You shouldn't have been here."</label>
+          <label class="option"><input type="radio" name="q9" value="B"> "Good morning, children—what a fine tune you both played."</label>
+          <label class="option"><input type="radio" name="q9" value="C"> "Who told you about the Willow Folk?"</label>
+        </div>
+      </div>
+
+      <div class="q" id="q10">
+        <div>10. Vocabulary: What does the word "chord" most closely mean in this poem?</div>
+        <div class="options">
+          <label class="option"><input type="radio" name="q10" value="A"> A tool</label>
+          <label class="option"><input type="radio" name="q10" value="B"> A musical sound or harmony</label>
+          <label class="option"><input type="radio" name="q10" value="C"> A type of plant</label>
+        </div>
+      </div>
+
+      <div class="answers" id="answerKey">
+        <div style="font-weight:700;margin-bottom:6px">Answer Key</div>
+        <ol>
+          <li>Question 1: Willow Pond</li>
+          <li>Question 2: Mr. Benson</li>
+          <li>Question 3: A wooden boat with a blue sail</li>
+          <li>Question 4: Pippin</li>
+          <li>Question 5: The pond had been losing its laughter and animals</li>
+          <li>Question 6: Tiny reed whistles</li>
+          <li>Question 7: They shrank in size</li>
+          <li>Question 8: (Sample) They played tunes on the reed whistles which made the animals return and the water clear.</li>
+          <li>Question 9: "Good morning, children—what a fine tune you both played."</li>
+          <li>Question 10: A musical sound or harmony</li>
+        </ol>
+      </div>
+
+      <div class="result" id="resultBox" style="display:none"></div>
+
+    </div>
+  </aside>
+</div>
+
+  </div>  <script>
+    // Timer
+    let timerInterval = null; let timeLeft = 20*60; // 20 minutes in seconds
+    const clock = document.getElementById('clock');
+    function formatTime(s){const m = Math.floor(s/60); const sec = s%60; return String(m).padStart(2,'0')+':'+String(sec).padStart(2,'0')}
+    clock.textContent = formatTime(timeLeft);
+    document.getElementById('startTimer').addEventListener('click', ()=>{
+      if(timerInterval) return; timerInterval = setInterval(()=>{timeLeft--; clock.textContent = formatTime(timeLeft); if(timeLeft<=0){clearInterval(timerInterval); alert('Time is up!');}},1000);
+    });
+
+    // Show answer key
+    document.getElementById('showKey').addEventListener('click', ()=>{
+      const key = document.getElementById('answerKey'); key.style.display = (key.style.display === 'block') ? 'none' : 'block';
+    });
+
+    // Reset
+    document.getElementById('resetBtn').addEventListener('click', ()=>{
+      document.querySelectorAll('input[type=radio]').forEach(i=>i.checked=false);
+      document.getElementById('q8txt').value='';
+      document.getElementById('resultBox').style.display='none';
+      document.getElementById('answerKey').style.display='none';
+    });
+
+    // Check answers
+    document.getElementById('checkBtn').addEventListener('click', ()=>{
+      let score = 0; const total = 9; // 9 auto-checked (q8 manual)
+      const answers = {q1:'B',q2:'A',q3:'A',q4:'B',q5:'B',q6:'A',q7:'C',q9:'B',q10:'B'};
+      for(const q in answers){const sel = document.querySelector('input[name='+q+']:checked'); if(sel && sel.value === answers[q]) score++;}
+      // short answer check (q8) - basic keyword check
+      const q8txt = document.getElementById('q8txt').value.toLowerCase(); let q8score = 0;
+      if(q8txt.includes('whistle') || q8txt.includes('reed') || q8txt.includes('play') || q8txt.includes('music')) q8score = 1;
+
+      const resultBox = document.getElementById('resultBox'); resultBox.style.display='block';
+      const combined = score + q8score; resultBox.innerHTML = `<div style=\"font-weight:700\">You scored ${combined} out of 10</div>` +
+        `<div style=\"margin-top:8px;color:var(--muted)\">Auto-checked: ${score} / 9. Short-answer (Q8) detected keywords: ${q8score ? 'Yes' : 'No'}.</div>`;
+
+      // show which multiple choices were wrong
+      let feedback = '<ul style="margin-top:8px">';
+      for(const q in answers){const sel = document.querySelector('input[name='+q+']:checked'); if(!sel) feedback += `<li>${q.toUpperCase()}: No answer selected</li>`; else if(sel.value !== answers[q]) feedback += `<li>${q.toUpperCase()}: Wrong (your: ${sel.value}, correct: ${answers[q]})</li>`;
+      }
+      feedback += '</ul>';
+      resultBox.innerHTML += feedback;
+
+    });
+  </script></body>
+</html>
