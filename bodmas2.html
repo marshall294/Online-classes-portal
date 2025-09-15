@@ -1,0 +1,306 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>MathCloud Tutorial — Order of Operations (BODMAS)</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      margin: 0; padding: 0;
+      background: #f9f9f9; color: #333;
+      line-height: 1.7;
+    }
+    header {
+      background: #1e3a8a; color: white;
+      padding: 1rem 2rem; text-align: center;
+      display: flex; flex-direction: column; align-items: center;
+    }
+    header img {
+      width: 80px; height: 80px;
+      border-radius: 50%; border: 3px solid #fff;
+      margin-bottom: 0.5rem;
+    }
+    header h1 {
+      margin: 0; font-size: 1.8rem;
+    }
+    .greeting {
+      background: #e0e7ff;
+      padding: 1rem; margin: 1rem auto; border-radius: 10px;
+      width: 90%; max-width: 800px; text-align: center;
+    }
+    .container {
+      width: 90%; max-width: 900px;
+      margin: auto; padding: 1rem;
+    }
+    h2 {
+      color: #1e3a8a;
+      border-bottom: 2px solid #ddd;
+      padding-bottom: 0.3rem;
+    }
+    .example, .assessment {
+      background: #fff; padding: 1rem;
+      margin: 1rem 0; border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+    .assessment ol { padding-left: 1.5rem; }
+    footer {
+      text-align: center;
+      padding: 1.5rem;
+      background: #1e3a8a; color: white;
+      margin-top: 2rem;
+    }
+    .whatsapp-box {
+      background: #fff;
+      padding: 1rem;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      margin: 2rem auto;
+      max-width: 600px;
+    }
+    .whatsapp-box input, .whatsapp-box textarea {
+      width: 100%; padding: 0.6rem;
+      margin: 0.5rem 0; border: 1px solid #ccc;
+      border-radius: 6px; font-size: 1rem;
+    }
+    .whatsapp-box button {
+      background: #25D366; color: white;
+      border: none; padding: 0.7rem 1.5rem;
+      border-radius: 6px; cursor: pointer;
+      font-size: 1rem;
+    }
+    .whatsapp-box button:hover {
+      background: #128C7E;
+    }
+  </style>
+</head>
+<body onload="updateGreeting()">
+
+  <!-- Header -->
+  <header>
+    <img src="mathcloud-logo.png" alt="MathCloud Logo">
+    <h1>MathCloud Tutorial</h1>
+  </header>
+
+  <!-- Greeting -->
+  <div class="greeting">
+    <p id="greetMsg">Hello! Welcome to MathCloud Tutorial.</p>
+  </div>
+
+  <!-- Main Lesson -->
+  <div class="container">
+    <h2>Lesson: Order of Operations (BODMAS)</h2>
+    <p>
+      In mathematics, the order in which we carry out operations is very important. 
+      If we do not follow the correct order, we will get different answers.  
+      The rule we use is called <strong>BODMAS</strong>:
+    </p>
+    <ul>
+      <li><b>B</b> — Brackets</li>
+      <li><b>O</b> — Orders (powers, roots)</li>
+      <li><b>D</b> — Division</li>
+      <li><b>M</b> — Multiplication</li>
+      <li><b>A</b> — Addition</li>
+      <li><b>S</b> — Subtraction</li>
+    </ul>
+
+    <div class="example">
+      <h3>Example 1</h3>
+      <p>Evaluate: \( 8 + 2 \times 5 \)</p>
+      <p>
+        Step 1: According to BODMAS, do multiplication before addition.  
+        \( 2 \times 5 = 10 \)  
+        Step 2: Add 8 + 10 = <b>18</b>.
+      </p>
+    </div>
+
+    <div class="example">
+      <h3>Example 2</h3>
+      <p>Evaluate: \( (6 + 4) \times 3 \)</p>
+      <p>
+        Step 1: Solve inside the brackets first. \( 6 + 4 = 10 \).  
+        Step 2: Multiply: \( 10 \times 3 = 30 \).  
+        Final Answer = <b>30</b>.
+      </p>
+    </div>
+
+    <div class="example">
+      <h3>Example 3</h3>
+      <p>Evaluate: \( 100 \div (5 \times 2) \)</p>
+      <p>
+        Step 1: Inside brackets: \( 5 \times 2 = 10 \).  
+        Step 2: Divide: \( 100 \div 10 = 10 \).  
+        Final Answer = <b>10</b>.
+      </p>
+    </div>
+<h2>Worked Examples</h2>
+
+    <div class="example">
+      <h3>Example 1</h3>
+      <p>Evaluate: \( 6 + 2 \times 3 \)</p>
+      <p>
+        Step 1: Multiplication first → \( 2 \times 3 = 6 \). <br>
+        Step 2: Add \( 6 + 6 = 12 \). <br>
+        Final Answer = <b>12</b>.
+      </p>
+    </div>
+
+    <div class="example">
+      <h3>Example 2</h3>
+      <p>Evaluate: \( (10 - 4) \times 2 \)</p>
+      <p>
+        Step 1: Brackets first → \( 10 - 4 = 6 \). <br>
+        Step 2: Multiply → \( 6 \times 2 = 12 \). <br>
+        Final Answer = <b>12</b>.
+      </p>
+    </div>
+
+    <div class="example">
+      <h3>Example 3</h3>
+      <p>Evaluate: \( 18 \div 3 + 2^2 \)</p>
+      <p>
+        Step 1: Orders (powers) → \( 2^2 = 4 \). <br>
+        Step 2: Division → \( 18 \div 3 = 6 \). <br>
+        Step 3: Add → \( 6 + 4 = 10 \). <br>
+        Final Answer = <b>10</b>.
+      </p>
+    </div>
+
+    <div class="example">
+      <h3>Example 4</h3>
+      <p>Evaluate: \( (20 \div 5) + (3 \times 4) \)</p>
+      <p>
+        Step 1: Inside brackets → \( 20 \div 5 = 4 \), \( 3 \times 4 = 12 \). <br>
+        Step 2: Add → \( 4 + 12 = 16 \). <br>
+        Final Answer = <b>16</b>.
+      </p>
+    </div>
+
+    <div class="example">
+      <h3>Example 5</h3>
+      <p>Evaluate: \( 100 - (6 + 2) \times 8 \)</p>
+      <p>
+        Step 1: Inside brackets → \( 6 + 2 = 8 \). <br>
+        Step 2: Multiply → \( 8 \times 8 = 64 \). <br>
+        Step 3: Subtract → \( 100 - 64 = 36 \). <br>
+        Final Answer = <b>36</b>.
+      </p>
+    </div>
+
+    <div class="example">
+      <h3>Example 6</h3>
+      <p>Evaluate: \( (12 - 2)^2 \div 5 \)</p>
+      <p>
+        Step 1: Inside brackets → \( 12 - 2 = 10 \). <br>
+        Step 2: Orders → \( 10^2 = 100 \). <br>
+        Step 3: Division → \( 100 \div 5 = 20 \). <br>
+        Final Answer = <b>20</b>.
+      </p>
+    </div>
+
+    <div class="example">
+      <h3>Example 7</h3>
+      <p>Evaluate: \( 60 \div [2 \times (5 + 5)] \)</p>
+      <p>
+        Step 1: Inner brackets → \( 5 + 5 = 10 \). <br>
+        Step 2: Multiply inside square brackets → \( 2 \times 10 = 20 \). <br>
+        Step 3: Divide → \( 60 \div 20 = 3 \). <br>
+        Final Answer = <b>3</b>.
+      </p>
+    </div>
+
+    <div class="example">
+      <h3>Example 8</h3>
+      <p>Evaluate: \( \{ [ (3 + 5) \times 2 ]^2 \div 8 \} - 7 \)</p>
+      <p>
+        Step 1: Innermost brackets → \( 3 + 5 = 8 \). <br>
+        Step 2: Multiply → \( 8 \times 2 = 16 \). <br>
+        Step 3: Square → \( 16^2 = 256 \). <br>
+        Step 4: Divide → \( 256 \div 8 = 32 \). <br>
+        Step 5: Subtract → \( 32 - 7 = 25 \). <br>
+        Final Answer = <b>25</b>.
+      </p>
+    </div>
+    <h2>Assessment 1 (15 Questions)</h2>
+    <div class="assessment">
+      <ol>
+        <li>\( 7 + 3 \times 2 \)</li>
+        <li>\( (12 - 4) \div 2 \)</li>
+        <li>\( 18 \div 3 + 2 \times 4 \)</li>
+        <li>\( (3 + 5) \times (2 + 4) \)</li>
+        <li>\( 50 - (6 \times 7) \)</li>
+        <li>\( 2^3 + 4 \times 2 \)</li>
+        <li>\( (25 - 5) \div (2 + 3) \)</li>
+        <li>\( 100 \div (5 \times 4) \)</li>
+        <li>\( (10 + 2)^2 \)</li>
+        <li>\( 36 \div 3 \times 2 \)</li>
+        <li>\( (8 + 2) \times (5 - 3) \)</li>
+        <li>\( 64 \div (4^2) \)</li>
+        <li>\( 120 - (8 \times 10) \)</li>
+        <li>\( (15 - 5) \times (12 \div 6) \)</li>
+        <li>\( 200 \div (20 + 5) \)</li>
+      </ol>
+    </div>
+  </div>
+<h2>Assessment Questions 2</h2>
+    <p>Try these questions. Apply <b>BODMAS</b> carefully. Show your working clearly.</p>
+  <div class="assessment">
+      <li>\( 12 + 4 \times 3 - 6 \)</li>
+      <li>\( (25 - 10) \div 5 + 7 \)</li>
+      <li>\( 18 \div (3 + 3) + 4^2 \)</li>
+      <li>\( (30 - 12) \times (4 + 2) \)</li>
+      <li>\( 45 \div (9 - 6) + 2^3 \)</li>
+      <li>\( 100 - \{ (15 \div 3) \times (2 + 8) \} \)</li>
+      <li>\( (8 + 4) \times (20 \div 5) - 6 \)</li>
+      <li>\( (50 \div 2) + [ (6 + 2) \times 3 ] \)</li>
+      <li>\( (40 - 25) \times (12 \div 3) + 18 \)</li>
+      <li>\( \{ (10 - 2) \times (5 + 3) \} \div 4 \)</li>
+      <li>\( 200 - [ (18 \div 3) + (12 - 4) ] \times 5 \)</li>
+      <li>\( \{ (6 + 2)^2 \times (9 - 3) \} \div 12 \)</li>
+      <li>\( (50 - 30)^2 \div (2 \times 5) \)</li>
+      <li>\( \{ [ (3 + 7) \times 2 ]^2 - 64 \} \div 8 \)</li>
+      <li>\( \{ (5^2 + 15) \div (4 + 1) \} \times (12 - 6) \)</li>
+    </ol>
+  <!-- WhatsApp Help -->
+  <div class="whatsapp-box">
+    <h3>Any Questions?</h3>
+    <p>Chat with Marshall directly on WhatsApp: <b>+2348102341648</b></p>
+    <input type="text" id="wName" placeholder="Enter your name">
+    <input type="text" id="wSubject" placeholder="Enter subject (e.g. Math)">
+    <input type="text" id="wClass" placeholder="Enter your class">
+    <textarea id="wQuestion" rows="4" placeholder="Type your question"></textarea>
+    <button onclick="sendToWhatsApp()">Send to WhatsApp</button>
+  </div>
+
+  <footer>
+    &copy; 2025 MathCloud Tutorial | Order of Operations (BODMAS)
+  </footer>
+
+  <script>
+    function updateGreeting(){
+      const now = new Date();
+      const options = {
+        weekday:'long', year:'numeric',
+        month:'long', day:'numeric',
+        hour:'2-digit', minute:'2-digit'
+      };
+      const dateStr = now.toLocaleDateString('en-US', options);
+      document.getElementById('greetMsg').innerText =
+        `Hello! Welcome to your lesson on Order of Operations (BODMAS). Today is ${dateStr}.`;
+    }
+
+    function sendToWhatsApp(){
+      const name = document.getElementById("wName").value;
+      const subject = document.getElementById("wSubject").value;
+      const clas = document.getElementById("wClass").value;
+      const question = document.getElementById("wQuestion").value;
+      const phoneNumber = "2348102341648";
+      const message = `Hello Marshall,%0AThis is ${name}.%0ASubject: ${subject}%0AClass: ${clas}%0AMy Question: ${question}`;
+      window.open(`https://wa.me/${phoneNumber}?text=${message}`, "_blank");
+    }
+  </script>
+</body>
+</html>
