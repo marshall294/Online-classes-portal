@@ -4,9 +4,25 @@
   <meta charset="UTF-8">
   <title>MathCloud - Surds & Indices (Year 10)</title>
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+
+  <!-- MathJax config: must come before the script -->
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['\\(', '\\)'], ['$', '$']],
+        displayMath: [['$$','$$'], ['\\[','\\]']]
+      },
+      chtml: {
+        scale: 1.35,              // enlarge all math (try 1.25–1.5)
+        mtextInheritFont: true    // match page font
+      }
+    };
+  </script>
+
+  <!-- Load MathJax -->
   <script id="MathJax-script" async
-  
-  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+          src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
   <style>
     body {
       font-family: "Segoe UI", Arial, sans-serif;
@@ -72,15 +88,16 @@
       font-weight: bold;
     }
 
-    /* 🔹 Scale up math symbols for better readability */
-    mjx-container[jax="CHTML"] {
-      font-size: 3.2em;
+    /* Force larger math font size as safety */
+    mjx-container, .mjx-chtml {
+      font-size: 1.35em !important;
+      line-height: 1.3 !important;
     }
   </style>
 </head>
 <body>
   <header>
-    <img src="logo.png" alt="MathCloud Logo">
+    <img src="mathcloud-logo.png" alt="MathCloud Logo">
     <h1>MathCloud Tutorial - Year 10</h1>
   </header>
 
@@ -92,7 +109,7 @@
   <div class="container">
     <h2>Topic: Surds and Indices</h2>
     <p>
-      In mathematics, **indices** (powers) and **surds** (roots left in exact form)
+      In mathematics, <b>indices</b> (powers) and <b>surds</b> (roots left in exact form)
       are essential tools. Understanding how to simplify and manipulate them
       is a key part of algebra.
     </p>
@@ -106,7 +123,7 @@
       </li>
       <li>Negative and fractional indices:  
         \[
-        a^{-n} = \frac{1}{a^n}, \quad a^{\frac{1}{n}} = \sqrt[n]{a}
+        a^{-n} = \frac{1}{a^n}, \quad a^{\tfrac{1}{n}} = \sqrt[n]{a}
         \]
       </li>
       <li>Surds: irrational roots expressed in exact form, e.g. \(\sqrt{2}, \sqrt[3]{5}\).</li>
@@ -115,38 +132,30 @@
     <h2>Worked Examples</h2>
     <div class="example">
       <b>Example 1:</b> Simplify \( 2^3 \times 2^5 \).  
-      <p>
-        By index law: \( 2^{3+5} = 2^8 = 256 \).
-      </p>
+      <p>By index law: \( 2^{3+5} = 2^8 = 256 \).</p>
     </div>
 
     <div class="example">
       <b>Example 2:</b> Simplify \( \frac{5^7}{5^3} \).  
-      <p>
-        Subtract powers: \( 5^{7-3} = 5^4 = 625 \).
-      </p>
+      <p>Subtract powers: \( 5^{7-3} = 5^4 = 625 \).</p>
     </div>
 
     <div class="example">
       <b>Example 3:</b> Simplify \( (3^2)^4 \).  
-      <p>
-        Multiply indices: \( 3^{2 \times 4} = 3^8 = 6561 \).
-      </p>
+      <p>Multiply indices: \( 3^{2 \times 4} = 3^8 = 6561 \).</p>
     </div>
 
     <div class="example">
       <b>Example 4:</b> Simplify \( 16^{\tfrac{1}{2}} \).  
-      <p>
-        This is the square root: \( \sqrt{16} = 4 \).
-      </p>
+      <p>This is the square root: \( \sqrt{16} = 4 \).</p>
     </div>
 
     <div class="example">
       <b>Example 5:</b> Simplify \( 8^{-\tfrac{2}{3}} \).  
       <p>
-        Step 1: Negative index ⇒ reciprocal: \( \frac{1}{8^{2/3}} \). <br>
+        Step 1: Negative index ⇒ reciprocal: \( \tfrac{1}{8^{2/3}} \). <br>
         Step 2: Cube root of 8 = 2. Square it ⇒ 4. <br>
-        So result = \( \frac{1}{4} \).
+        So result = \( \tfrac{1}{4} \).
       </p>
     </div>
 
@@ -168,9 +177,7 @@
 
     <div class="example">
       <b>Example 8:</b> Simplify \( \frac{\sqrt{18}}{\sqrt{2}} \).  
-      <p>
-        Combine under one root: \( \sqrt{\tfrac{18}{2}} = \sqrt{9} = 3 \).
-      </p>
+      <p>Combine under one root: \( \sqrt{\tfrac{18}{2}} = \sqrt{9} = 3 \).</p>
     </div>
 
     <h2>Assessment Questions</h2>
