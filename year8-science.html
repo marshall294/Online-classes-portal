@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Year 8 Science — Photosynthesis</title>
+  <style>
+    body{margin:0;font-family:'Inter',sans-serif;background:#0f1724;color:#f8f9fa;line-height:1.6}
+    header{position:fixed;top:0;left:0;right:0;background:#081225;display:flex;align-items:center;justify-content:center;padding:14px 20px;z-index:1000;box-shadow:0 2px 8px rgba(0,0,0,0.4)}
+    header h1{margin:0;font-size:20px;color:#6ee7b7}
+    main{padding:100px 20px 60px;max-width:900px;margin:auto}
+    h2{color:#6ee7b7;margin-top:40px}
+    .card{background:#122033;padding:20px;border-radius:12px;margin-bottom:24px;box-shadow:0 6px 18px rgba(0,0,0,0.4)}
+    ol,ul{padding-left:22px}
+    .example,.assessment{background:#0b1628;padding:14px;border-radius:8px;margin:10px 0}
+    .btn-solution{background:#6ee7b7;color:#042226;border:none;padding:8px 12px;border-radius:6px;cursor:pointer;margin-top:8px}
+    .solution{display:none;background:#071628;padding:10px;border-radius:6px;margin-top:6px}
+    .greeting{text-align:center;margin-bottom:30px}
+  </style>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+  <header>
+    <h1>Year 8 Science — Photosynthesis</h1>
+  </header>
+  <main>
+    <div class="greeting">
+      <p id="greetMsg">Hello Student! Welcome to Science Class.</p>
+    </div>
+
+    <h2>Introduction</h2>
+    <div class="card">
+      <p><b>Photosynthesis</b> is the process by which green plants make their own food using light energy, water, and carbon dioxide. It takes place in the <b>chloroplasts</b> of plant cells, which contain the green pigment <b>chlorophyll</b>.</p>
+      <p>The word equation for photosynthesis is:</p>
+      <p style="text-align:center;font-size:18px;">Carbon Dioxide + Water → Glucose + Oxygen</p>
+      <p>The balanced chemical equation is:</p>
+      <p style="text-align:center;font-size:18px;">\( 6CO_2 + 6H_2O \xrightarrow{\text{light, chlorophyll}} C_6H_{12}O_6 + 6O_2 \)</p>
+      <p>This process is vital because it produces <b>oxygen</b> for respiration and <b>glucose</b> for energy storage.</p>
+    </div>
+
+    <h2>Worked Examples</h2>
+    <div class="card">
+      <div class="example">
+        <b>Example 1:</b> Write the word equation for photosynthesis.  
+        <p><i>Solution:</i> Carbon Dioxide + Water → Glucose + Oxygen</p>
+      </div>
+      <div class="example">
+        <b>Example 2:</b> Balance the equation:  
+        <p><i>Solution:</i> \( 6CO_2 + 6H_2O \rightarrow C_6H_{12}O_6 + 6O_2 \)</p>
+      </div>
+      <div class="example">
+        <b>Example 3:</b> What is the role of chlorophyll?  
+        <p><i>Solution:</i> It absorbs light energy to drive photosynthesis.</p>
+      </div>
+      <div class="example">
+        <b>Example 4:</b> Why do plants kept in the dark not produce starch?  
+        <p><i>Solution:</i> No light → no photosynthesis → no glucose → no starch storage.</p>
+      </div>
+      <div class="example">
+        <b>Example 5:</b> A plant is tested with iodine after being exposed to sunlight. Why does the leaf turn blue-black?  
+        <p><i>Solution:</i> Because starch has been produced, showing photosynthesis occurred.</p>
+      </div>
+      <div class="example">
+        <b>Example 6:</b> Why are stomata important in photosynthesis?  
+        <p><i>Solution:</i> They allow carbon dioxide in and oxygen out.</p>
+      </div>
+      <div class="example">
+        <b>Example 7:</b> Explain how photosynthesis links to respiration.  
+        <p><i>Solution:</i> Photosynthesis produces glucose and oxygen, which are reactants for respiration.</p>
+      </div>
+      <div class="example">
+        <b>Example 8:</b> Why do farmers use greenhouses with extra CO₂ supply?  
+        <p><i>Solution:</i> Higher CO₂ concentration increases the rate of photosynthesis and crop yield.</p>
+      </div>
+    </div>
+
+    <h2>Assessment Questions</h2>
+    <div class="card">
+      <ol class="assessment">
+        <li>State the word equation for photosynthesis.</li>
+        <li>Write the balanced chemical equation for photosynthesis.</li>
+        <li>What is the role of chlorophyll in photosynthesis?</li>
+        <li>Why is sunlight necessary for photosynthesis?</li>
+        <li>Explain why photosynthesis is important to humans.</li>
+        <li>Describe an experiment to show that light is necessary for photosynthesis.</li>
+        <li>Why do leaves tested with iodine solution turn blue-black?</li>
+        <li>How do plants obtain carbon dioxide for photosynthesis?</li>
+        <li>Explain the role of stomata during photosynthesis.</li>
+        <li>How is the glucose made in photosynthesis stored in plants?</li>
+        <li>How does temperature affect the rate of photosynthesis?</li>
+        <li>Why do farmers use greenhouses to increase photosynthesis?</li>
+        <li>Explain how photosynthesis and respiration are interdependent.</li>
+        <li>Describe what happens to photosynthesis at night.</li>
+        <li>Challenge: A plant is kept in bright light, high CO₂ concentration, but low temperature. Predict and explain the rate of photosynthesis.</li>
+      </ol>
+    </div>
+  </main>
+
+  <script>
+    function updateGreeting(){
+      const now = new Date();
+      const options = {weekday:'long',year:'numeric',month:'long',day:'numeric',hour:'2-digit',minute:'2-digit'};
+      const dateStr = now.toLocaleDateString('en-US', options);
+      document.getElementById('greetMsg').innerText =
+        `Hello Student! Welcome to Science Class. Today is ${dateStr}.`;
+    }
+    updateGreeting();
+  </script>
+</body>
+</html>
