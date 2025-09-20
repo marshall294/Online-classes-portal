@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>RAGP Africa 🌍 - Admin Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script type="module">
+    // ---- Firebase Setup ----
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyAFsHg9fK6IDnHbuxmBleEfIIfVGsuLDik",
+      authDomain: "profile-b825d.firebaseapp.com",
+      projectId: "profile-b825d",
+      storageBucket: "profile-b825d.firebasestorage.app",
+      messagingSenderId: "925276859161",
+      appId: "1:925276859161:web:194c60f6dbd9f1ef8bf388"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    // ---- Load Users ----
+    async function loadUsers() {
+      const snapshot = await getDocs(collection(db, "participants"));
+      const users = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+
+      // Group users by referralName
+      const grouped = {};
+      users.forEach(user => {
+        const refName = user.referralName || "No Referrer";
+        if (!grouped[refName]) grouped[refName] = [];
+        grouped[refName].push(user);
+      });
+
+      // Render
+      const container = document.getElementById("users-container");
+      container.innerHTML = "";
+      Object.keys(grouped).forEach(refName => {
+        const group = grouped[refName];
+        const card = document.createElement("div");
+        card.className = "bg-white text-red-700 rounded-xl shadow-lg p-6 mb-6";
+
+        card.innerHTML = `
+          <h2 class="text-xl font-bold mb-3">👤 Referral: ${refName} <span class="text-sm text-gray-500">(${group.length} registrations)</span></h2>
+          <div class="overflow-x-auto">
+            <table class="w-full border-collapse border border-gray-300 text-sm">
+              <thead>
+                <tr class="bg-red-700 text-white">
+                  <th class="p-2 border border-gray-300">Name</th>
+                  <th class="p-2 border border-gray-300">Phone</th>
+                  <th class="p-2 border border-gray-300">Email</th>
+                  <th class="p-2 border border-gray-300">Address</th>
+                  <th class="p-2 border border-gray-300">Registered At</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${group.map(u => `
+                  <tr class="hover:bg-red-50">
+                    <td class="p-2 border border-gray-300">${u.name}</td>
+                    <td class="p-2 border border-gray-300">${u.phone}</td>
+                    <td class="p-2 border border-gray-300">${u.email}</td>
+                    <td class="p-2 border border-gray-300">${u.address}</td>
+                    <td class="p-2 border border-gray-300">${u.createdAt?.toDate ? u.createdAt.toDate().toLocaleString() : ""}</td>
+                  </tr>
+                `).join("")}
+              </tbody>
+            </table>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    window.addEventListener("DOMContentLoaded", loadUsers);
+  </script>
+</head>
+<body class="bg-red-700 text-white min-h-screen">
+  <header class="text-center py-6 bg-red-900 shadow-lg">
+    <h1 class="text-3xl font-bold">RAGP Africa 🌍 - Admin Dashboard</h1>
+    <p class="italic">View Participants by Referral</p>
+  </header>
+
+  <main class="p-6 max-w-6xl mx-auto">
+    <div id="users-container"></div>
+  </main>
+
+  <footer class="bg-red-900 py-4 text-center text-gray-200">
+    <p>&copy; 2025 RAGP Africa 🌍. Admin Panel.</p>
+  </footer>
+</body>
+</html>
