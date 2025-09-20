@@ -5,6 +5,16 @@
   <title>RAGP Africa 🌍 - Business Seminar Registration</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* Simple fade-up animation */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .fade-up {
+      animation: fadeUp 1s ease-out forwards;
+    }
+  </style>
   <script type="module">
     // ---- Firebase Setup ----
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
@@ -43,72 +53,81 @@
         return;
       }
 
-      // Save to Firestore
-      const docRef = await addDoc(collection(db, "participants"), {
-        name,
-        phone,
-        email,
-        address,
-        referralName,
-        referredBy: referrer,
-        createdAt: new Date()
-      });
+      try {
+        // Save to Firestore
+        const docRef = await addDoc(collection(db, "participants"), {
+          name,
+          phone,
+          email,
+          address,
+          referralName,
+          referredBy: referrer,
+          createdAt: new Date()
+        });
 
-      // Hide form + show referral link
-      document.getElementById("registration-form").classList.add("hidden");
-      document.getElementById("thankyou").classList.remove("hidden");
+        // Hide form + show referral link
+        document.getElementById("registration-form").classList.add("hidden");
+        document.getElementById("thankyou").classList.remove("hidden");
 
-      // Generate referral link
-      const referralLink = `${window.location.origin}${window.location.pathname}?ref=${docRef.id}`;
-      document.getElementById("referral-link").textContent = referralLink;
-      document.getElementById("referral-link").href = referralLink;
+        // Generate referral link
+        const referralLink = `${window.location.origin}${window.location.pathname}?ref=${docRef.id}`;
+        document.getElementById("referral-link").textContent = referralLink;
+        document.getElementById("referral-link").href = referralLink;
 
-      // Fetch referred people
-      const q = query(collection(db, "participants"), where("referredBy", "==", docRef.id));
-      const querySnapshot = await getDocs(q);
-      document.getElementById("referral-count").textContent = querySnapshot.size;
+        // Fetch referred people
+        const q = query(collection(db, "participants"), where("referredBy", "==", docRef.id));
+        const querySnapshot = await getDocs(q);
+        document.getElementById("referral-count").textContent = querySnapshot.size;
+      } catch (error) {
+        console.error("Error adding document: ", error);
+        alert("❌ Registration failed, please try again.");
+      }
     }
 
     window.registerUser = registerUser;
   </script>
 </head>
 <body class="bg-red-700 text-white">
-  <!-- Logo Section -->
-  <header class="text-center py-6">
-    <div class="w-32 h-32 mx-auto rounded-full border-4 border-white flex items-center justify-center overflow-hidden shadow-xl">
-      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQyIz1GA6XNLiHV56pPSGUw8SLdT2QJU0i69a0GysrP3S1MvTC5gnduwok&s=10" alt="RAGP Africa Logo" class="w-24 h-24 object-cover">
-    </div>
-    <h1 class="text-3xl md:text-4xl font-bold mt-4">RAGP Africa 🌍</h1>
-    <p class="italic">Realtime Aggregator Gateway Payment Africa</p>
-  </header>
-
-  <!-- Hero / Info Section -->
-  <section class="px-6 py-10 max-w-4xl mx-auto text-center">
-    <h2 class="text-2xl md:text-3xl font-bold mb-4">Exclusive RAGP Africa 🌍 Business Seminar</h2>
-    <p class="mb-4">Are you in <strong>Suleja, Niger State</strong> and her environs?</p>
-    <p class="leading-relaxed mb-6">Join us for an inspiring seminar where you’ll learn how to convert daily recharge of <strong>airtime, Data, Cable TV, Electric bills</strong> into wealth. Be your own boss, become the CEO of your own company, and live the life you deserve!</p>
-    <div class="bg-white text-red-700 rounded-xl shadow-lg p-6">
-      <h3 class="font-semibold text-xl">📅 Date: 27th September 2025</h3>
-      <h3 class="font-semibold text-xl">⏰ Time: 10:00 AM</h3>
+  <!-- Hero Section with background -->
+  <section class="relative bg-cover bg-center h-[90vh]" style="background-image: url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1500&q=80');">
+    <div class="absolute inset-0 bg-red-900 bg-opacity-70"></div>
+    <div class="relative z-10 flex flex-col items-center justify-center h-full text-center px-6 fade-up">
+      <!-- Logo -->
+      <div class="w-32 h-32 rounded-full border-4 border-white flex items-center justify-center overflow-hidden shadow-xl mb-4">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQyIz1GA6XNLiHV56pPSGUw8SLdT2QJU0i69a0GysrP3S1MvTC5gnduwok&s=10" alt="RAGP Africa Logo" class="w-24 h-24 object-cover">
+      </div>
+      <h1 class="text-4xl md:text-5xl font-bold mb-2">RAGP Africa 🌍</h1>
+      <p class="italic text-lg mb-6">Realtime Aggregator Gateway Payment Africa</p>
+      <h2 class="text-2xl md:text-3xl font-bold">Exclusive Business Seminar</h2>
+      <p class="mt-4">📅 27th September 2025 | ⏰ 10:00 AM | 📍 Suleja, Niger State</p>
     </div>
   </section>
 
-  <!-- Subscription Benefits -->
-  <section class="bg-red-800 py-10">
+  <!-- About Section -->
+  <section class="px-6 py-12 max-w-5xl mx-auto text-center fade-up">
+    <p class="text-lg leading-relaxed">
+      Join us for an inspiring seminar where you’ll learn how to convert daily recharge of 
+      <strong>airtime, Data, Cable TV, Electric bills</strong> into wealth.  
+      Be your own boss, become the CEO of your own company, and live the life you deserve!
+    </p>
+  </section>
+
+  <!-- Benefits Section -->
+  <section class="bg-red-800 py-12 fade-up">
     <div class="max-w-5xl mx-auto px-6 text-center">
-      <h2 class="text-2xl md:text-3xl font-bold mb-6">Join the Future of Finance 🚀</h2>
+      <h2 class="text-2xl md:text-3xl font-bold mb-6">Why Join? 🚀</h2>
       <ul class="text-lg space-y-3">
         <li>✨ Exclusive insights into the world of digital payments</li>
-        <li>✨ Updates on the latest fintech trends, news, and breakthroughs</li>
-        <li>✨ Access to expert analysis and thought leadership</li>
-        <li>✨ Learn from pioneers and innovators in Africa</li>
-        <li>✨ Proven strategies to achieve financial independence</li>
+        <li>✨ Updates on the latest fintech trends and breakthroughs</li>
+        <li>✨ Access to expert mentorship and resources</li>
+        <li>✨ Strategies to achieve financial independence</li>
+        <li>✨ Be part of Africa’s fintech revolution</li>
       </ul>
     </div>
   </section>
 
   <!-- Registration Form -->
-  <section class="py-16">
+  <section class="py-16 fade-up">
     <div class="max-w-xl mx-auto bg-white text-red-700 rounded-2xl shadow-2xl p-8">
       <form id="registration-form" onsubmit="registerUser(event)">
         <h2 class="text-2xl font-bold mb-4 text-center">Register Now</h2>
@@ -135,4 +154,4 @@
     <p>&copy; 2025 RAGP Africa 🌍. All Rights Reserved.</p>
   </footer>
 </body>
-</html>
+          </html>
