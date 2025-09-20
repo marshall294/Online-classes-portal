@@ -14,6 +14,16 @@
     .fade-up {
       animation: fadeUp 1s ease-out forwards;
     }
+    .frame-3d {
+      perspective: 1000px;
+    }
+    .frame-3d img {
+      transform: rotateY(10deg) rotateX(5deg);
+      transition: transform 0.3s ease;
+    }
+    .frame-3d img:hover {
+      transform: rotateY(0) rotateX(0) scale(1.05);
+    }
   </style>
   <script type="module">
     // ---- Firebase Setup ----
@@ -112,6 +122,21 @@
     </p>
   </section>
 
+  <!-- 3D Image Showcase -->
+  <section class="py-12 bg-red-800 fade-up">
+    <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 px-6">
+      <div class="frame-3d bg-white rounded-xl shadow-2xl overflow-hidden">
+        <img src="room.jpg" class="w-full h-64 object-cover">
+      </div>
+      <div class="frame-3d bg-white rounded-xl shadow-2xl overflow-hidden">
+        <img src="king.jpg" class="w-full h-64 object-cover">
+      </div>
+      <div class="frame-3d bg-white rounded-xl shadow-2xl overflow-hidden">
+        <img src="chair.jpg" class="w-full h-64 object-cover">
+      </div>
+    </div>
+  </section>
+
   <!-- Benefits Section -->
   <section class="bg-red-800 py-12 fade-up">
     <div class="max-w-5xl mx-auto px-6 text-center">
@@ -135,7 +160,22 @@
         <input id="phone" type="text" placeholder="Phone Number" class="w-full p-3 border rounded-lg mb-3" required>
         <input id="email" type="email" placeholder="Email Address" class="w-full p-3 border rounded-lg mb-3" required>
         <input id="address" type="text" placeholder="Home Address" class="w-full p-3 border rounded-lg mb-3" required>
-        <input id="referralName" type="text" placeholder="Referral Name" class="w-full p-3 border rounded-lg mb-3" required>
+
+        <!-- Referral Name Dropdown -->
+        <input list="referralOptions" id="referralName" placeholder="Referral Name" class="w-full p-3 border rounded-lg mb-3" required>
+        <datalist id="referralOptions">
+          <option value="John Ade">
+          <option value="Mary Obi">
+          <option value="Chinedu Okafor">
+          <option value="Aisha Bello">
+          <option value="Emeka Uche">
+          <option value="Grace Musa">
+          <option value="Ibrahim Sule">
+          <option value="Fatima Danladi">
+          <option value="Samuel Eze">
+          <option value="Ngozi Chika">
+        </datalist>
+
         <button type="submit" class="w-full bg-red-700 text-white py-3 rounded-lg font-semibold hover:bg-red-800 transition">Submit Registration</button>
       </form>
 
@@ -154,4 +194,4 @@
     <p>&copy; 2025 RAGP Africa 🌍. All Rights Reserved.</p>
   </footer>
 </body>
-          </html>
+    </html>
