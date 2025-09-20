@@ -1,507 +1,283 @@
 <!doctype html>
+
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Mathcloud Tutorial — Grade 5 English Week 2 | Marshall Jacob</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Grade 5 Reading Lesson — Reading Skills</title>
+  <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
   <style>
     :root{
-      --accent:#2b6cb0;
-      --muted:#6b7280;
-      --bg:#f7fafc;
-      --card:#ffffff;
-      --glass: rgba(255,255,255,0.7);
-      font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+      --bg:#f7fbff; --card:#ffffff; --accent:#4f46e5; --muted:#6b7280; --success:#10b981; --danger:#ef4444;
+      --radius:14px;
     }
     *{box-sizing:border-box}
-    body{margin:0;background:linear-gradient(180deg,#f0f7ff 0%,var(--bg) 60%);color:#0f172a;line-height:1.45}
-    header{background:transparent;padding:20px 18px;display:flex;align-items:center;justify-content:space-between;gap:12px}
-    .brand{display:flex;align-items:center;gap:12px}
-    .logo{width:56px;height:56px;border-radius:10px;background:linear-gradient(135deg,var(--accent),#7dd3fc);display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:18px}
-    nav{display:flex;gap:10px;align-items:center}
-    nav a{color:var(--accent);text-decoration:none;font-weight:600}
-    .container{max-width:1100px;margin:18px auto;padding:18px}.hero{display:grid;grid-template-columns:1fr;gap:18px;align-items:center;padding:18px;border-radius:14px;background:linear-gradient(180deg, rgba(255,255,255,0.9), var(--glass));box-shadow:0 8px 30px rgba(2,6,23,0.06)}
-.hero h1{margin:0;font-size:28px}
-.meta{color:var(--muted);font-size:14px}
-.grid{display:grid;grid-template-columns:1fr 360px;gap:18px;margin-top:18px}
-
-/* left column cards */
-.card{background:var(--card);padding:18px;border-radius:12px;box-shadow:0 6px 18px rgba(11,15,30,0.04)}
-.section-title{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
-.section-title h2{margin:0;font-size:18px}
-.lesson p{margin:8px 0}
-.rule{padding:10px;background:#f1f5f9;border-radius:8px;margin:8px 0}
-.examples{display:grid;gap:8px}
-.example{padding:10px;border-radius:8px;background:linear-gradient(90deg,#fff,#fbfdff);border:1px solid #eef2ff}
-
-/* right column */
-.sticky{position:sticky;top:20px}
-.listen-btn{display:inline-flex;gap:8px;align-items:center;background:var(--accent);color:white;padding:8px 12px;border-radius:8px;border:none}
-.accordion{border-radius:10px;overflow:hidden}
-.accordion .item{border-bottom:1px solid #eef2ff;padding:12px}
-.accordion .item:last-child{border-bottom:none}
-.accordion button{width:100%;text-align:left;background:none;border:none;padding:0;font-size:16px;display:flex;justify-content:space-between;align-items:center}
-
-/* Word Map tool */
-.wordmap{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.wordcard{padding:12px;border-radius:8px;background:#fff;border:1px solid #eef2ff}
-
-/* Assessment */
-.q-row{margin:10px 0}
-input[type=text], select, textarea{width:100%;padding:10px;border-radius:8px;border:1px solid #e6edf3}
-button.cta{background:var(--accent);color:white;padding:10px 14px;border-radius:8px;border:none;font-weight:700}
-
-footer{text-align:center;color:var(--muted);margin:36px 0}
-
-/* responsive */
-@media (max-width:900px){.grid{grid-template-columns:1fr}.logo{width:48px;height:48px}.hero h1{font-size:20px}.wordmap{grid-template-columns:1fr}}
+    body{font-family:Poppins, Comfortaa, Arial; background:linear-gradient(180deg,#f7fbff 0%, #ffffff 100%); color:#0f172a; margin:0; padding:24px}
+    .container{max-width:1100px; margin:0 auto}
+    header{display:flex; align-items:center; gap:18px; margin-bottom:18px}
+    .logo{width:64px; height:64px; border-radius:12px; background:linear-gradient(135deg,var(--accent),#06b6d4); display:flex; align-items:center; justify-content:center; color:white; font-weight:700; font-size:22px}
+    h1{font-size:26px; margin:0}
+    .subtitle{color:var(--muted); margin-top:6px}
+    .grid{display:grid; grid-template-columns:1fr 380px; gap:18px; align-items:start}
+    .card{background:var(--card); border-radius:var(--radius); padding:18px; box-shadow:0 6px 20px rgba(15,23,42,0.06)}
+    .section-title{display:flex; justify-content:space-between; align-items:center}
+    .small{font-size:13px; color:var(--muted)}
+    .passage{font-size:16px; line-height:1.6; padding:12px; background:linear-gradient(180deg,#f8fafc,#ffffff); border-radius:12px}
+    .controls{display:flex; gap:10px; margin-top:12px}
+    button{background:var(--accent); color:white; border:0; padding:10px 14px; border-radius:10px; cursor:pointer; font-weight:600}
+    button.secondary{background:#eef2ff; color:var(--accent)}
+    .examples{display:grid; grid-template-columns:1fr 1fr; gap:12px}
+    ol{padding-left:18px}
+    .question{margin:8px 0; padding:12px; border-radius:10px; background:#fbfdff}
+    .choices{display:flex; flex-direction:column; gap:8px; margin-top:8px}
+    .choice{padding:8px 10px; border-radius:8px; border:1px dashed #e6eefb; cursor:pointer}
+    .choice.correct{border-style:solid; border-color:var(--success)}
+    .choice.wrong{border-style:solid; border-color:var(--danger)}
+    .feedback{font-size:13px; margin-top:8px}
+    .hide{display:none}
+    footer{margin-top:18px; color:var(--muted); font-size:13px}
+    @media(max-width:900px){.grid{grid-template-columns:1fr} .examples{grid-template-columns:1fr}}
   </style>
 </head>
 <body>
-  <header class="container">
-    <div class="brand">
-      <div class="logo">MC</div>
+  <div class="container">
+    <header>
+      <div class="logo">RC</div>
       <div>
-        <div style="font-weight:800">Mathcloud Tutorial</div>
-        <div style="font-size:12px;color:var(--muted)">Marshall Jacob — Grade 5 English (Week 2)</div>
+        <h1>Grade 5 Reading Lesson — Building Strong Readers</h1>
+        <div class="subtitle">Short, friendly, and child-safe lesson. Includes passage, read-aloud, examples and instant self-check.</div>
+      </div>
+    </header><div class="grid">
+  <main class="card">
+    <div class="section-title">
+      <div>
+        <h2 style="margin:0 0 6px 0">Lesson Overview</h2>
+        <div class="small">Breaking reading into easy parts: vocabulary, main idea, inference, details, sequence, summarizing.</div>
+      </div>
+      <div class="small">Level: Grade 5 • Time: 35–50 mins</div>
+    </div>
+
+    <hr style="margin:12px 0">
+
+    <h3>Key Definitions (child-friendly)</h3>
+    <ul>
+      <li><strong>Vocabulary</strong> — words in the story and what they mean.</li>
+      <li><strong>Main idea</strong> — the most important thing the passage is about.</li>
+      <li><strong>Detail</strong> — a small fact or piece of information from the passage.</li>
+      <li><strong>Inference</strong> — a smart guess we make using clues from the text and our own thinking.</li>
+      <li><strong>Sequence</strong> — the order in which events happen.</li>
+      <li><strong>Summary</strong> — a short version of the story using the main idea and important details.</li>
+    </ul>
+
+    <h3>Explanation — How to read like a detective</h3>
+    <ol>
+      <li><strong>Preview:</strong> Look at the title and pictures. Guess what it might be about.</li>
+      <li><strong>Read:</strong> Read slowly and notice important words.</li>
+      <li><strong>Question:</strong> Ask who, what, when, where, why, and how as you read.</li>
+      <li><strong>Visualize:</strong> Make a movie in your head of the events.</li>
+      <li><strong>Check:</strong> After reading, say the main idea in one sentence.</li>
+    </ol>
+
+    <h3>8 Worked Examples (step-by-step)</h3>
+    <div class="examples">
+      <div>
+        <strong>Example 1 — Vocabulary</strong>
+        <p>Passage line: "The tiny boat drifted slowly toward the shore." What does "drifted" mean? <em>Answer:</em> It moved slowly without being pushed.</p>
+
+        <strong>Example 2 — Main idea</strong>
+        <p>Short text: "Anna fed the birds every morning because she loved watching them." Main idea: Anna loves feeding birds each morning.</p>
+
+        <strong>Example 3 — Detail</strong>
+        <p>Question: "What time did Anna feed the birds?" Look for small facts in the sentence: "every morning" is the detail.</p>
+
+        <strong>Example 4 — Inference</strong>
+        <p>Text: "Sam wore a coat and carried an umbrella." Inference: It might be cold or rainy.</p>
+      </div>
+      <div>
+        <strong>Example 5 — Sequence</strong>
+        <p>Text: "First she watered the plants, then she swept the porch, and finally she sat down." Order: water → sweep → sit.</p>
+
+        <strong>Example 6 — Summary</strong>
+        <p>Short: "Tom helped the lost puppy find home." Summary: Tom helped a puppy return home.</p>
+
+        <strong>Example 7 — Author's purpose</strong>
+        <p>Sentence: "Please recycle your bottles." Purpose: to persuade or give instruction.</p>
+
+        <strong>Example 8 — Cause & Effect</strong>
+        <p>Text: "Because it rained, the game was canceled." Cause: it rained. Effect: game canceled.</p>
       </div>
     </div>
-    <nav>
-      <a href="#spelling">Spelling</a>
-      <a href="#reading">Reading</a>
-      <a href="#vocab">Vocabulary</a>
-      <a href="#examples">Examples</a>
-      <a href="#assessment">Assessment</a>
-    </nav>
-  </header>
 
-  <main class="container">
-    <section class="hero card">
-      <div style="display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap">
-        <div>
-          <h1>Week 2 — Comprehensive Self-Tutoring: Word Building & Fluency</h1>
-          <div class="meta">Silent letters, prefixes & suffixes, homophones, contextual vocabulary, verb tenses and descriptive paragraph practice. Full worked examples, self-checks and a 20-question auto-graded test.</div>
-        </div>
-        <div style="display:flex;gap:8px;align-items:center">
-          <button class="listen-btn" id="readAllBtn" title="Read the lesson aloud">🔊 Read Aloud</button>
-          <button class="cta" id="printBtn">Print / Save PDF</button>
-        </div>
-      </div>
+    <hr style="margin:16px 0">
 
-      <div class="grid">
-        <div>
-          <!-- Spelling -->
-          <article id="spelling" class="card lesson">
-            <div class="section-title"><h2>Spelling — Silent Letters & Homophones</h2><div class="meta">Deep explanations, many examples</div></div>
+    <h3>Passage (read aloud available)</h3>
+    <div class="passage" id="passage">
+      Mira visited the old treehouse every Saturday. It stood at the end of a quiet lane and smelled like pine. One morning she found a tiny door on its floor. Behind the door was a note: "Leave a friend a smile." Mira drew a small picture and left it inside. Soon her small acts brought many smiles to neighbors she had never met. The treehouse became a kind, secret place where messages of hope were kept safe.
+    </div>
+    <div class="controls">
+      <button id="playBtn">🔊 Read Aloud</button>
+      <button id="pauseBtn" class="secondary">⏸ Pause</button>
+      <button id="stopBtn" class="secondary">⏹ Stop</button>
+    </div>
 
-            <p><strong>Silent letters</strong> — letters written but not pronounced. Common silent letters: <em>k</em> in <strong>kn</strong> (knife, know), <em>b</em> after <em>m</em> (thumb), <em>gh</em> (though), <em>l</em> in <em>alk</em> (talk, walk).</p>
+    <hr style="margin:16px 0">
 
-            <div class="rule"><strong>Tip:</strong> For silent letters, don't sound the silent letter. Learn common groups: <code>kn</code>, <code>mb</code>, <code>gh</code>, <code>wr</code>.</div>
+    <h3>Activities — Practice & Self Check</h3>
+    <p class="small">Try the quick checks below. Select an answer — you'll get feedback right under the question.</p>
 
-            <h3>Worked examples</h3>
-            <div class="examples">
-              <div class="example"><strong>knife</strong> — 'k' is silent: pronounce /naɪf/. Plural: knives.</div>
-              <div class="example"><strong>thumb</strong> — 'b' silent: /θʌm/.</div>
-              <div class="example"><strong>write</strong> — 'w' + 'r': 'w' is pronounced in 'write' (as /raɪt/), but 'wr' historically had silent w in some words — learn by word lists.</div>
-            </div>
+    <div id="quiz"></div>
 
-            <h3 style="margin-top:12px">Homophones — words that sound the same but differ in spelling/meaning</h3>
-            <div class="rule">Examples: <strong>there / their / they're</strong>, <strong>bare / bear</strong>, <strong>flower / flour</strong>.</div>
-            <div class="example">Choose the correct homophone: "The baker used flour/flower to make bread." → correct: flour.</div>
+    <div style="margin-top:12px; display:flex; gap:8px;">
+      <button id="showAnswers">Show Correct Answers</button>
+      <button id="resetQuiz" class="secondary">Reset</button>
+    </div>
 
-            <hr style="margin:14px 0;border:none;border-top:1px dashed #eef2ff">
-            <h3>Instant practice — Type answers</h3>
-            <div style="display:grid;gap:8px">
-              <div><label>1. knife → (plural) <input type="text" id="s1" placeholder="knives"></label></div>
-              <div><label>2. thumb → (pronounce silent letter) type the word: <input type="text" id="s2" placeholder="thumb"></label></div>
-              <div><label>3. Choose correct homophone: 'I left my ___ (there/their/they're) bag' <input type="text" id="s3" placeholder="their"></label></div>
-              <div style="display:flex;gap:8px"><button class="cta" onclick="checkSpellingSection()">Check answers</button><div id="spFeed" style="align-self:center;color:var(--muted)"></div></div>
-            </div>
-
-            <details style="margin-top:12px"><summary>Teacher note — how to master silent letters</summary>
-              <p class="small">Practice by sorting words into lists by silent-letter pattern (kn-, m b-, gh-). Use flashcards and read aloud daily. For homophones, always test meaning in the sentence before choosing the spelling.</p>
-            </details>
-          </article>
-
-          <!-- Reading -->
-          <article id="reading" class="card lesson" style="margin-top:18px">
-            <div class="section-title"><h2>Reading & Inference — Reading between the lines</h2><div class="meta">Inference, dialogue punctuation, practice</div></div>
-
-            <p><strong>Inference</strong> — using clues in the text (words, actions, setting) to work out ideas not directly stated. Tests often ask "Why did...?" or "What can we tell about...?"</p>
-            <div class="rule"><strong>How to infer:</strong> underline clues (words or actions), ask 'what does this tell me?' and answer in one short sentence.</div>
-
-            <h3>Dialogue punctuation</h3>
-            <p>When a character speaks, use quotation marks. Example: <em>"That's mine," said Sam.</em> The comma stays inside the quotation marks when followed by a dialogue tag.</p>
-
-            <h3>Passage (read & infer)</h3>
-            <div class="example" id="passage2">Lina wrapped her jacket tightly and hurried back to the house. She glanced at the dark clouds and fumbled for her umbrella.</div>
-
-            <h4>Questions — infer from passage</h4>
-            <div class="q-row"><label>1. Why did Lina hurry back? <input type="text" id="r1" placeholder="short answer"></label></div>
-            <div class="q-row"><label>2. What weather is coming? <input type="text" id="r2" placeholder="e.g., rain"></label></div>
-            <div style="display:flex;gap:8px"><button class="cta" onclick="checkReadingSection()">Check answers</button><div id="rFeed" style="align-self:center;color:var(--muted)"></div></div>
-
-            <details style="margin-top:12px"><summary>Exam tip — answering inference questions</summary>
-              <p class="small">Use one short sentence that quotes or paraphrases the clue: e.g., 'She saw dark clouds, so it was going to rain.' Examiners reward precise, text-based answers.</p>
-            </details>
-          </article>
-
-          <!-- Vocabulary -->
-          <article id="vocab" class="card lesson" style="margin-top:18px">
-            <div class="section-title"><h2>Vocabulary — Prefixes & Suffixes</h2><div class="meta">Learn meaning building blocks</div></div>
-
-            <p><strong>Prefixes</strong> — added at the start of words to change meaning. Examples: <em>un-</em> (not), <em>re-</em> (again), <em>pre-</em> (before).</p>
-            <p><strong>Suffixes</strong> — added at the end to change meaning or word class. Examples: <em>-ful</em> (full of), <em>-less</em> (without), <em>-ly</em> (makes an adverb).</p>
-
-            <div class="example"><strong>happy → unhappy</strong> (un- means not). <strong>care → careful</strong> (full of care). <strong>quick → quickly</strong> (adverb).</div>
-
-            <h3 style="margin-top:12px">Word map builder — self-tutoring tool</h3>
-            <div class="wordmap">
-              <div class="wordcard"><label><strong>Word</strong><br><input type="text" id="wm2_word" placeholder="e.g., unhappy"></label></div>
-              <div class="wordcard"><label><strong>Parts</strong><br><input type="text" id="wm2_parts" placeholder="prefix/suffix/root"></label></div>
-              <div class="wordcard"><label><strong>Meaning</strong><br><input type="text" id="wm2_mean" placeholder="short meaning"></label></div>
-              <div class="wordcard"><label><strong>Sentence</strong><br><input type="text" id="wm2_sent" placeholder="short sentence"></label></div>
-            </div>
-            <div style="display:flex;gap:8px;margin-top:10px"><button class="cta" onclick="buildMap2()">Build Map</button><button class="cta" style="background:#10b981" onclick="clearMap2()">Clear</button></div>
-            <div id="map2View" style="margin-top:12px"></div>
-
-            <h3 style="margin-top:12px">Instant practice — prefixes</h3>
-            <div class="q-row"><label>1. Add 're-' to 'play' → <input type="text" id="v1" placeholder="replay"></label></div>
-            <div class="q-row"><label>2. 'care' + '-less' → <input type="text" id="v2" placeholder="careless"></label></div>
-            <div style="display:flex;gap:8px"><button class="cta" onclick="checkVocabSection()">Check</button><div id="vFeed" style="align-self:center;color:var(--muted)"></div></div>
-          </article>
-
-          <!-- Grammar -->
-          <article id="grammar" class="card lesson" style="margin-top:18px">
-            <div class="section-title"><h2>Grammar — Subject-Verb Agreement & Verb Tenses</h2><div class="meta">Clear rules and practice</div></div>
-
-            <p><strong>Subject-verb agreement:</strong> A singular subject needs a singular verb (She runs). Plural subject needs plural verb (They run).</p>
-            <div class="rule">3rd person singular present adds -s: I play / He plays.</div>
-
-            <h3>Verb tenses quick guide</h3>
-            <div class="example"><strong>Present:</strong> She writes. <strong>Past:</strong> She wrote. <strong>Future:</strong> She will write.</div>
-
-            <h3 style="margin-top:12px">Practice</h3>
-            <div class="q-row"><label>1. (He) _____ (go) to school yesterday → <input type="text" id="g1" placeholder="went"></label></div>
-            <div class="q-row"><label>2. They _____ (play) every Saturday → <input type="text" id="g2" placeholder="play"></label></div>
-            <div style="display:flex;gap:8px"><button class="cta" onclick="checkGrammarSection()">Check</button><div id="gFeed" style="align-self:center;color:var(--muted)"></div></div>
-
-            <details style="margin-top:12px"><summary>Exam tip — subject-verb</summary>
-              <p class="small">Find the subject first (who or what). If subject is 'he/she/it' use singular verb (add -s in present). If subject is plural (they/we) use base verb.</p>
-            </details>
-          </article>
-
-          <!-- Examples -->
-          <article id="examples" class="card lesson" style="margin-top:18px">
-            <div class="section-title"><h2>More Worked Examples & Counter-examples</h2><div class="meta">Step-by-step reasoning</div></div>
-
-            <div class="example"><strong>Silent letter counter-example:</strong> <em>knife</em> → 'k' silent; compare with <em>knot</em> where 'k' is silent too. Both are learned as whole words.</div>
-            <div class="example"><strong>Homophone example:</strong> 'Their' shows possession (their bag). 'There' is a place. 'They're' is 'they are'. Always check grammar.</div>
-            <div class="example"><strong>Prefix example:</strong> 'redo' means 'do again'. 'undo' means 'not do' or 'reverse'.</div>
-            <div class="example"><strong>Tense example:</strong> 'He goes' (present), 'He went' (past). Irregular verbs must be memorized.</div>
-          </article>
-        </div>
-
-        <aside class="card sticky">
-          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
-            <div><strong>Quick Links</strong><div style="font-size:12px;color:var(--muted)">Jump to sections</div></div>
-            <div style="font-size:12px;color:var(--muted)">Marshall Jacob</div>
-          </div>
-
-          <div class="accordion">
-            <div class="item"><button onclick="toggleItem(event,'tipA')">How Read-Aloud works ▾</button><div id="tipA" style="display:none;margin-top:8px;color:var(--muted)">Read-Aloud uses browser speech. It reads lesson headings and examples. Use Chrome/Edge for best voice support.</div></div>
-            <div class="item"><button onclick="toggleItem(event,'tipB')">Printing & PDF ▾</button><div id="tipB" style="display:none;margin-top:8px;color:var(--muted)">Use Print to save a PDF or print for offline study.</div></div>
-            <div class="item"><button onclick="toggleItem(event,'tipC')">Self-tutoring tips ▾</button><div id="tipC" style="display:none;margin-top:8px;color:var(--muted)">Do the mini-checks, then revise mistakes before final assessment.</div></div>
-          </div>
-
-          <hr style="margin:12px 0;border:none;border-top:1px solid #eef2ff">
-          <div>
-            <strong>Quick practice</strong>
-            <p style="color:var(--muted);font-size:13px">Read aloud for 10 minutes daily — pick 2 silent-letter words and 2 homophones to practice every day.</p>
-          </div>
-        </aside>
-      </div>
-    </section>
-
-    <!-- Assessment -->
-    <section id="assessment" class="card" style="margin-top:18px">
-      <div class="section-title"><h2>Assessment — 20 Questions (Auto-graded)</h2><div class="meta">Instant scoring, per-question explanations, printable certificate at 70%+</div></div>
-
-      <form id="quiz" onsubmit="event.preventDefault();gradeQuiz()">
-        <h3>Section A — Spelling (8)</h3>
-        <ol>
-          <li>knife → <input type="text" name="q1"></li>
-          <li>thumb → <input type="text" name="q2"></li>
-          <li>their → <input type="text" name="q3"></li>
-          <li>flower (homophone) — choose: flour/flower → <input type="text" name="q4"></li>
-          <li>write (past) → <input type="text" name="q5" placeholder="wrote"></li>
-          <li>know → <input type="text" name="q6"></li>
-          <li>bear (animal) or bare (exposed) — choose: <input type="text" name="q7"></li>
-          <li>ghost → <input type="text" name="q8"></li>
-        </ol>
-
-        <h3>Section B — Reading & Inference (4)</h3>
-        <ol start="9">
-          <li>Passage: "Lina wrapped her jacket tightly and hurried back to the house." Q: Why did Lina hurry back? <input type="text" name="q9"></li>
-          <li>From same passage: What is Lina likely to do next? <input type="text" name="q10"></li>
-          <li>Dialogue punctuation: Fix this: "Stop said Mark" → <input type="text" name="q11"></li>
-          <li>Insert comma: I ate fish chips and peas → <input type="text" name="q12"></li>
-        </ol>
-
-        <h3>Section C — Vocabulary (4)</h3>
-        <ol start="13">
-          <li>unhappy — prefix 'un' means: <input type="text" name="q13"></li>
-          <li>careless — suffix '-less' means: <input type="text" name="q14"></li>
-          <li>replay — prefix 're' means: <input type="text" name="q15"></li>
-          <li>quickly — what word class is this? (noun/verb/adverb/adjective) <input type="text" name="q16"></li>
-        </ol>
-
-        <h3>Section D — Grammar (3)</h3>
-        <ol start="17">
-          <li>He (go) to the park yesterday → past form: <input type="text" name="q17"></li>
-          <li>She (be) happy every day → present form (she): <input type="text" name="q18"></li>
-          <li>The dogs (bark) loudly → present plural: <input type="text" name="q19"></li>
-        </ol>
-
-        <h3>Section E — Writing (1)</h3>
-        <div class="q-row" style="margin-top:10px">
-          <label>20. Write 3–5 sentences describing a fun day. (Aim 40+ words) <br><textarea name="q20" rows="4"></textarea></label>
-        </div>
-
-        <div style="display:flex;gap:8px;margin-top:12px"><button class="cta" type="submit">Submit & Grade</button><button type="button" onclick="showModelAnswers()" class="cta" style="background:#f59e0b">Show model answers</button></div>
-      </form>
-
-      <div id="quizResult" style="margin-top:12px"></div>
-      <div id="certArea" style="margin-top:12px"></div>
-    </section>
-
-    <footer>
-      <div style="font-weight:700">Marshall Jacob — Mathcloud Tutorial</div>
-      <div style="font-size:13px;color:var(--muted)">Week 2 — Self-tutoring: Word Building & Fluency</div>
-    </footer>
   </main>
 
-<script>
-  // Utilities
-  function toggleItem(e,id){
-    const el=document.getElementById(id);
-    el.style.display = el.style.display === 'none' ? 'block' : 'none';
-  }
+  <aside class="card">
+    <div style="display:flex; justify-content:space-between; align-items:center">
+      <h3 style="margin:0">Tips & Mini-Lessons</h3>
+      <div class="small">Quick reads</div>
+    </div>
 
-  // Read Aloud
-  document.getElementById('readAllBtn').addEventListener('click',()=>{
-    const parts=[];
-    const lessons = document.querySelectorAll('.lesson');
-    lessons.forEach(s=>{
-      const h = s.querySelector('h2');
-      if(h) parts.push(h.innerText + '.');
-      const nodes = s.querySelectorAll('p, .example, .rule');
-      nodes.forEach(n=>{ parts.push(n.innerText + '.'); });
+    <hr style="margin:12px 0">
+    <h4>Top Tips</h4>
+    <ol>
+      <li>Underline words you don’t know and try to guess meaning from the sentence.</li>
+      <li>Stop after each paragraph and ask: what happened? Why?</li>
+      <li>Use the read-aloud feature to hear tricky words.</li>
+    </ol>
+
+    <h4 style="margin-top:12px">Short Self-Check</h4>
+    <p class="small">After finishing the passage, close your eyes and say the main idea out loud. If you can’t, read again and look for clues.</p>
+
+    <h4 style="margin-top:12px">Extra Practice</h4>
+    <p class="small">Try writing 3 sentences that explain the message of the passage. Share with a friend or teacher.</p>
+
+    <hr style="margin:12px 0">
+    <h4>Answer Key (quick)</h4>
+    <ol id="answerKey" class="small"></ol>
+  </aside>
+</div>
+
+<footer class="small">Made for Grade 5 learners • Friendly design • Use on tablet or laptop</footer>
+
+  </div>  <script>
+    // Read-aloud (SpeechSynthesis)
+    const playBtn = document.getElementById('playBtn');
+    const pauseBtn = document.getElementById('pauseBtn');
+    const stopBtn = document.getElementById('stopBtn');
+    const passageText = document.getElementById('passage').innerText.trim();
+    let utter = null;
+
+    function speak(text){
+      if(!('speechSynthesis' in window)){
+        alert('Sorry — your browser does not support read aloud.');
+        return;
+      }
+      window.speechSynthesis.cancel();
+      utter = new SpeechSynthesisUtterance(text);
+      utter.rate = 0.95; utter.pitch = 1.0; utter.lang = 'en-US';
+      const voices = window.speechSynthesis.getVoices();
+      if(voices && voices.length) utter.voice = voices.find(v=>v.lang.includes('en')) || voices[0];
+      window.speechSynthesis.speak(utter);
+    }
+    playBtn.addEventListener('click', ()=>{ speak(passageText); });
+    pauseBtn.addEventListener('click', ()=>{ window.speechSynthesis.pause(); });
+    stopBtn.addEventListener('click', ()=>{ window.speechSynthesis.cancel(); });
+
+    // Quiz data (20 multiple choice questions from passage + comprehension)
+    const quizData = [
+      {q:'Where did Mira visit every Saturday?', a:['the library','the old treehouse','the school','the park'], correct:1, explain:'The passage begins: "Mira visited the old treehouse every Saturday."'},
+      {q:'What scent did the treehouse have?', a:['roses','pine','coffee','soap'], correct:1, explain:'It says the treehouse "smelled like pine."'},
+      {q:'What did Mira find on the floor of the treehouse?', a:['a tiny door','a map','a toy','a book'], correct:0, explain:'She found "a tiny door on its floor."'},
+      {q:'What was behind the tiny door?', a:['a note','a toy','a key','a coin'], correct:0, explain:'Behind the door was a note that read "Leave a friend a smile."'},
+      {q:'What did the note say?', a:['Keep it safe','Leave a friend a smile','Come back tomorrow','Bring a gift'], correct:1, explain:'The note said: "Leave a friend a smile."'},
+      {q:'What did Mira place inside the tiny door?', a:['a small picture','a letter','a toy','a stone'], correct:0, explain:'She drew and left a small picture.'},
+      {q:'What happened after Mira left the picture?', a:['nothing changed','many smiles came to neighbors','the tree fell','the picture got lost'], correct:1, explain:'Her small acts brought many smiles to neighbors.'},
+      {q:'Who benefited from Mira’s small act?', a:['only Mira','her family','neighbors she had never met','the birds'], correct:2, explain:'The passage says: "neighbors she had never met."'},
+      {q:'How is the treehouse described as a place?', a:['noisy and busy','dark and scary','a kind, secret place','a store'], correct:2, explain:'It became "a kind, secret place."'},
+      {q:'Which phrase shows the lane was quiet?', a:['end of a quiet lane','busy market lane','noisy street','crowded lane'], correct:0, explain:'The passage calls it "a quiet lane."'},
+      {q:'Why might Mira draw a picture for the note?', a:['to follow the note’s message','to sell it','to hide it','to throw it away'], correct:0, explain:'She followed the note: "Leave a friend a smile."'},
+      {q:'What feeling does the passage mostly share?', a:['kindness and hope','fear and anger','jealousy','boredom'], correct:0, explain:'The story highlights kindness and hope.'},
+      {q:'What is an inference you can make about Mira?', a:['She does not like neighbors','She is kind and thoughtful','She is a shopkeeper','She is terrible at drawing'], correct:1, explain:'Her actions show she is kind and thoughtful.'},
+      {q:'What does the tiny door symbolize in the story?', a:['a secret of sadness','a place to hide toys','a secret place for kindness','a store entrance'], correct:2, explain:'It became a secret place where messages of hope were kept.'},
+      {q:'What type of text is this passage?', a:['poem','fictional short passage','news report','instruction manual'], correct:1, explain:'It reads like a short fictional passage.'},
+      {q:'Which detail supports that the treehouse is old?', a:['it smelled like pine','it stood at the end of a quiet lane','it is called treehouse','the tiny door'], correct:1, explain:'The phrase "stood at the end of a quiet lane" and "old treehouse" suggest age; the first line calls it "the old treehouse."'},
+      {q:'What could be a good title for the passage?', a:['Mira’s Secret Treehouse','How to Build a Treehouse','Shopping at the Market','A Rainy Day'], correct:0, explain:'"Mira’s Secret Treehouse" fits well.'},
+      {q:'Which question is NOT answered in the passage?', a:['What was inside the tiny door?','Who left the note?','Where is the treehouse?','When did Mira visit it?'], correct:1, explain:'The passage does not say who left the note.'},
+      {q:'What lesson or message does the passage teach?', a:['Small acts can bring joy','Always be quiet','Never go to treehouses','Don’t share with neighbors'], correct:0, explain:'The passage shows small acts bring smiles to others.'},
+      {q:'Which word describes Mira’s action best?', a:['selfish','thoughtful','rude','late'], correct:1, explain:'Mira was thoughtful.'}
+    ];
+
+    // shuffle helper
+    function shuffle(arr){
+      for(let i=arr.length-1;i>0;i--){
+        const j=Math.floor(Math.random()*(i+1)); [arr[i],arr[j]]=[arr[j],arr[i]];
+      }
+    }
+
+    // render quiz
+    const quizDiv = document.getElementById('quiz');
+    const answerKeyList = document.getElementById('answerKey');
+    function renderQuiz(){
+      quizDiv.innerHTML=''; answerKeyList.innerHTML='';
+      quizData.forEach((item, idx)=>{
+        const qwrap = document.createElement('div'); qwrap.className='question';
+        const qtitle = document.createElement('div'); qtitle.innerHTML = `<strong>Q${idx+1}.</strong> ${item.q}`;
+        qwrap.appendChild(qtitle);
+        const choiceWrap = document.createElement('div'); choiceWrap.className='choices';
+        item.a.forEach((choice, cidx)=>{
+          const ch = document.createElement('div'); ch.className='choice'; ch.tabIndex=0;
+          ch.innerText = choice;
+          ch.addEventListener('click', ()=> handleChoice(idx, cidx, ch));
+          ch.addEventListener('keypress', (e)=>{ if(e.key==='Enter') handleChoice(idx,cidx,ch)});
+          choiceWrap.appendChild(ch);
+        });
+        qwrap.appendChild(choiceWrap);
+        const fb = document.createElement('div'); fb.className='feedback hide'; fb.id = `fb-${idx}`;
+        qwrap.appendChild(fb);
+        quizDiv.appendChild(qwrap);
+
+        // answer key
+        const ak = document.createElement('li'); ak.innerText = `Q${idx+1}: ${item.a[item.correct]}`; answerKeyList.appendChild(ak);
+      });
+    }
+
+    function handleChoice(qIdx, cIdx, elem){
+      const item = quizData[qIdx];
+      const fb = document.getElementById(`fb-${qIdx}`);
+      // clear previous highlights
+      const choiceEls = elem.parentElement.querySelectorAll('.choice');
+      choiceEls.forEach(e=>{ e.classList.remove('correct','wrong'); });
+
+      if(cIdx === item.correct){
+        elem.classList.add('correct');
+        fb.classList.remove('hide'); fb.style.color = 'var(--success)'; fb.innerHTML = `✅ Correct. ${item.explain}`;
+      } else {
+        elem.classList.add('wrong');
+        fb.classList.remove('hide'); fb.style.color = 'var(--danger)'; fb.innerHTML = `❌ Not quite. ${item.explain}`;
+        // also mark the correct one
+        choiceEls[item.correct].classList.add('correct');
+      }
+    }
+
+    document.getElementById('showAnswers').addEventListener('click', ()=>{
+      // reveal all answers
+      quizData.forEach((item, idx)=>{
+        const fb = document.getElementById(`fb-${idx}`);
+        fb.classList.remove('hide'); fb.style.color='var(--muted)'; fb.innerHTML = `Answer: ${item.a[item.correct]}. ${item.explain}`;
+        const choices = document.querySelectorAll(`#quiz .question:nth-child(${idx+1}) .choice`);
+        choices.forEach((c, ci)=>{ c.classList.remove('wrong'); c.classList.remove('correct'); if(ci===item.correct) c.classList.add('correct'); });
+      });
     });
-    speakText(parts.join(' '));
-  });
-  function speakText(txt){
-    if(!('speechSynthesis' in window)){alert('Speech not supported. Use Chrome or Edge.'); return;}
-    window.speechSynthesis.cancel();
-    const u = new SpeechSynthesisUtterance(txt);
-    u.rate = 0.95; u.pitch = 1; u.volume = 1;
-    window.speechSynthesis.speak(u);
-  }
-  // Print
-  document.getElementById('printBtn').addEventListener('click',()=>window.print());
 
-  // SECTION: Spelling checks
-  function checkSpellingSection(){
-    const a1=(document.getElementById('s1').value||'').trim().toLowerCase();
-    const a2=(document.getElementById('s2').value||'').trim().toLowerCase();
-    const a3=(document.getElementById('s3').value||'').trim().toLowerCase();
-    const out=[];
-    out.push(a1==='knives' || a1==='knifes' ? '1: ok' : '1: expected knives');
-    out.push(a2==='thumb' ? '2: ok' : '2: expected thumb');
-    out.push((a3==='their' || a3==="they're" || a3==='there') ? (a3==='their' ? '3: correct (their)' : `3: '${a3}' is different — check meaning`) : '3: expected their');
-    document.getElementById('spFeed').innerText = out.join(' • ');
-    updateProgress();
-  }
+    document.getElementById('resetQuiz').addEventListener('click', ()=>{ renderQuiz(); window.speechSynthesis.cancel(); });
 
-  // READING: inference checks
-  function checkReadingSection(){
-    const r1=(document.getElementById('r1').value||'').trim().toLowerCase();
-    const r2=(document.getElementById('r2').value||'').trim().toLowerCase();
-    const out=[];
-    if(r1.includes('rain') || r1.includes('cold') || r1.includes('storm') || r1.includes('back to house')) out.push('1: good — Lina hurried because of bad weather or to get inside');
-    else out.push('1: expected answer: she hurried because of dark clouds / rain likely');
-    if(r2.includes('rain')||r2.includes('storm')||r2.includes('umbrella')) out.push('2: good');
-    else out.push('2: expected: rain / storm / bad weather');
-    document.getElementById('rFeed').innerText = out.join(' • ');
-    updateProgress();
-  }
+    // initial render
+    renderQuiz();
 
-  // VOCAB: build word map
-  function buildMap2(){
-    const w=document.getElementById('wm2_word').value.trim();
-    const parts=document.getElementById('wm2_parts').value.trim();
-    const mean=document.getElementById('wm2_mean').value.trim();
-    const sent=document.getElementById('wm2_sent').value.trim();
-    if(!w){alert('Type a word');return}
-    const html = `<div style="padding:12px;border-radius:8px;border:1px solid #e6f0ff;background:linear-gradient(90deg,#fff,#f8fbff)">
-      <div style="font-weight:700">${escapeHtml(w)}</div>
-      <div style="font-size:13px;color:var(--muted)"><strong>Parts:</strong> ${escapeHtml(parts||'—')}<br><strong>Meaning:</strong> ${escapeHtml(mean||'—')}</div>
-      <div style="margin-top:8px;font-style:italic">Example: ${escapeHtml(sent||('The '+w+' helped her learn.'))}</div>
-    </div>`;
-    document.getElementById('map2View').innerHTML = html;
-    updateProgress();
-  }
-  function clearMap2(){document.getElementById('wm2_word').value='';document.getElementById('wm2_parts').value='';document.getElementById('wm2_mean').value='';document.getElementById('wm2_sent').value='';document.getElementById('map2View').innerHTML='';}
-  function checkVocabSection(){
-    const v1=(document.getElementById('v1').value||'').trim().toLowerCase();
-    const v2=(document.getElementById('v2').value||'').trim().toLowerCase();
-    const out=[];
-    out.push(v1==='replay' || v1==='re-play' ? '1: ok' : '1: expected replay');
-    out.push(v2==='careless' ? '2: ok' : '2: expected careless');
-    document.getElementById('vFeed').innerText = out.join(' • ');
-    updateProgress();
-  }
-
-  // GRAMMAR checks
-  function checkGrammarSection(){
-    const g1=(document.getElementById('g1').value||'').trim().toLowerCase();
-    const g2=(document.getElementById('g2').value||'').trim().toLowerCase();
-    const out=[];
-    out.push(g1==='went' ? '1: correct' : '1: expected went');
-    out.push(g2==='play' || g2==='plays' ? (g2==='play'?'2: correct (they play)':'2: check subject — they play') : '2: expected play');
-    document.getElementById('gFeed').innerText = out.join(' • ');
-    updateProgress();
-  }
-
-  // HELPERS
-  function escapeHtml(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
-  function updateProgress(){
-    // simple local progress indicator based on some activity flags
-    let done=0, steps=6;
-    if(document.getElementById('spFeed') && document.getElementById('spFeed').innerText) done++;
-    if(document.getElementById('rFeed') && document.getElementById('rFeed').innerText) done++;
-    if(document.getElementById('map2View') && document.getElementById('map2View').innerText) done++;
-    if(document.getElementById('vFeed') && document.getElementById('vFeed').innerText) done++;
-    if(document.getElementById('gFeed') && document.getElementById('gFeed').innerText) done++;
-    if(document.getElementById('quizResult') && document.getElementById('quizResult').innerText) done++;
-    const pct = Math.round((done/steps)*100);
-    // show on top-right sticky (append small progress if needed)
-    let pEl = document.getElementById('progressBadge');
-    if(!pEl){
-      pEl = document.createElement('div'); pEl.id='progressBadge';
-      pEl.style.position='fixed'; pEl.style.right='18px'; pEl.style.bottom='18px'; pEl.style.background='#fff'; pEl.style.border='1px solid #eef2ff';
-      pEl.style.padding='8px 10px'; pEl.style.borderRadius='10px'; pEl.style.boxShadow='0 6px 18px rgba(0,0,0,0.06)'; pEl.style.fontSize='13px';
-      document.body.appendChild(pEl);
-    }
-    pEl.innerText = `Progress: ${pct}%`;
-  }
-
-  // QUIZ grading
-  function gradeQuiz(){
-    const form = document.getElementById('quiz');
-    const data = new FormData(form);
-
-    const answers = {
-      q1:'knives', q2:'thumb', q3:'their', q4:'flour', q5:'wrote', q6:'know', q7:'bear', q8:'ghost',
-      q9:'she saw dark clouds/it was going to rain', q10:'she will get umbrella/go inside', q11:'"Stop," said Mark.', q12:',',
-      q13:'not', q14:'without', q15:'again', q16:'adverb',
-      q17:'went', q18:'is', q19:'bark' // for dogs (they) bark
-    };
-
-    let total=20, score=0, details=[];
-    // 1-8 spelling/homophone/silent checks (flexible)
-    for(let i=1;i<=8;i++){
-      const k='q'+i;
-      let given=(data.get(k)||'').toString().trim().toLowerCase();
-      if(!given){ details.push(`${i}: no answer`); continue; }
-      if(k==='q1'){ if(given==='knives') {score++; details.push(`${i}: correct (knives)`)} else details.push(`${i}: expected knives`); }
-      else if(k==='q2'){ if(given==='thumb') {score++; details.push(`${i}: correct`)} else details.push(`${i}: expected thumb`); }
-      else if(k==='q3'){ if(given==='their') {score++; details.push(`${i}: correct (their)`)} else details.push(`${i}: expected their`); }
-      else if(k==='q4'){ if(given==='flour') {score++; details.push(`${i}: correct (flour)`)} else details.push(`${i}: flour (baking) vs flower (plant)`); }
-      else if(k==='q5'){ if(given==='wrote') {score++; details.push(`${i}: correct (wrote)`)} else details.push(`${i}: expected wrote`); }
-      else if(k==='q6'){ if(given==='know') {score++; details.push(`${i}: correct`)} else details.push(`${i}: expected know`); }
-      else if(k==='q7'){ if(given==='bear' || given==='bare') {score++; details.push(`${i}: accepted (${given}) — check meaning`)} else details.push(`${i}: expected bear/bare`); }
-      else if(k==='q8'){ if(given==='ghost') {score++; details.push(`${i}: correct`)} else details.push(`${i}: expected ghost`); }
-    }
-
-    // 9-12 reading & punctuation
-    // q9 inference: accept if mentions rain/dark clouds/hurry inside
-    let q9=(data.get('q9')||'').toString().trim().toLowerCase();
-    if(q9 && (q9.includes('rain')||q9.includes('cloud')||q9.includes('house')||q9.includes('umbrella'))){ score++; details.push('9: good inference'); } else details.push('9: expected inference about rain / dark clouds');
-
-    let q10=(data.get('q10')||'').toString().trim().toLowerCase();
-    if(q10 && (q10.includes('umbrella')||q10.includes('go inside')||q10.includes('seek shelter'))){ score++; details.push('10: good'); } else details.push('10: expected she will take shelter/umbrella');
-
-    // q11 dialogue punctuation: expect quotes and comma
-    let q11=(data.get('q11')||'').toString().trim();
-    if(q11.includes('"') && (q11.includes(',') || q11.includes('said'))) { score++; details.push('11: punctuation ok'); } else details.push('11: expected "Stop," said Mark.');
-
-    // q12 comma insertion
-    let q12=(data.get('q12')||'').toString().trim();
-    if(q12.includes(',')){ score++; details.push('12: comma present'); } else details.push('12: add a comma between items');
-
-    // 13-16 vocabulary
-    let q13=(data.get('q13')||'').toString().trim().toLowerCase();
-    if(q13==='not' || q13==='not' ) { score++; details.push('13: correct (un = not)'); } else details.push('13: expected "not"');
-
-    let q14=(data.get('q14')||'').toString().trim().toLowerCase();
-    if(q14.includes('without') || q14==='without') { score++; details.push('14: correct (-less = without)'); } else details.push('14: expected "without"');
-
-    let q15=(data.get('q15')||'').toString().trim().toLowerCase();
-    if(q15==='again' || q15.includes('again')){ score++; details.push('15: correct (re- = again)'); } else details.push('15: expected "again"');
-
-    let q16=(data.get('q16')||'').toString().trim().toLowerCase();
-    if(q16==='adverb' || q16==='adverb.') { score++; details.push('16: correct (quickly is an adverb)'); } else details.push('16: expected adverb');
-
-    // 17-19 grammar
-    let q17=(data.get('q17')||'').toString().trim().toLowerCase();
-    if(q17==='went'){ score++; details.push('17: correct (went)'); } else details.push('17: expected went');
-
-    let q18=(data.get('q18')||'').toString().trim().toLowerCase();
-    if(q18==='is' || q18==='is.' || q18==='is') { score++; details.push('18: correct (she is)'); } else details.push('18: expected is');
-
-    let q19=(data.get('q19')||'').toString().trim().toLowerCase();
-    // dogs bark (plural subject) accept 'bark' or 'bark loudly'
-    if(q19.startsWith('bark') || q19.includes('bark')){ score++; details.push('19: correct (dogs bark)'); } else details.push('19: expected "bark"');
-
-    // 20 writing: basic auto-check for word count & sentences
-    let q20=(data.get('q20')||'').toString().trim();
-    const words = q20.split(/\s+/).filter(Boolean).length;
-    const sentences = q20.split(/[.!?]+/).filter(s=>s.trim().length>0).length;
-    if(words>=40 && sentences>=3){ score++; details.push('20: paragraph length & sentences good'); } else if (words>=25 && sentences>=2){ details.push('20: paragraph acceptable but aim 40+ words for higher marks'); } else { details.push('20: paragraph too short — aim 40+ words and 3+ sentences'); }
-
-    const pct = Math.round((score/total)*100);
-    const pass = pct >= 70;
-
-    // build feedback display
-    const resultHtml = `<div style="padding:12px;border-radius:8px;background:#fff;border:1px solid #eef2ff">
-      <strong>Your score: ${score}/${total} (${pct}%)</strong>
-      <div style="margin-top:8px;color:var(--muted);font-size:13px">
-        ${details.map(d=>escapeHtml(d)).join('<br>')}
-      </div></div>`;
-    document.getElementById('quizResult').innerHTML = resultHtml;
-
-    // certificate if pass
-    if(pass){
-      const certHtml = `<div style="margin-top:12px;padding:12px;border-radius:8px;background:#fff;border:1px dashed #e6f0ff">
-        <h3 style="margin:6px 0">Certificate of Completion</h3>
-        <div class="small">This certifies that the student has completed Week 2 — Mathcloud Tutorial (Marshall Jacob)</div>
-        <div style="margin-top:8px"><strong>Score:</strong> ${pct}%</div>
-        <div style="margin-top:8px;color:var(--muted);font-size:13px">${new Date().toLocaleDateString()}</div>
-      </div>`;
-      document.getElementById('certArea').innerHTML = certHtml;
-      document.getElementById('printBtn').innerText = 'Print / Save PDF (includes certificate)';
-    } else {
-      document.getElementById('certArea').innerHTML = '';
-    }
-
-    updateProgress();
-  }
-
-  function showModelAnswers(){
-    alert('Model answers (examples):\n1 knives 2 thumb 3 their 4 flour 5 wrote 6 know 7 bear 8 ghost\n9: because dark clouds/it might rain 10: take umbrella/go inside 11: \"Stop,\" said Mark. 12: I ate fish, chips, and peas.\n13: not 14: without 15: again 16: adverb\n17: went 18: is 19: bark\n20: model paragraph should be 40+ words and 3+ sentences.');
-  }
-</script>
-</body>
+    // Accessibility: allow keyboard play via space on Play button
+    playBtn.addEventListener('keydown', (e)=>{ if(e.key===' '|| e.key==='Enter') { e.preventDefault(); speak(passageText);} });
+  </script></body>
 </html>
