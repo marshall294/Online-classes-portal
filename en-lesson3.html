@@ -1,0 +1,210 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Grade 5 Grammar & Vocabulary Lesson</title>
+  <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;700&family=Poppins:wght@300;600&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#f9fafc; --card:#ffffff; --accent:#0ea5e9; --muted:#6b7280; --success:#16a34a; --danger:#dc2626;
+      --radius:14px;
+    }
+    *{box-sizing:border-box}
+    body{font-family:Poppins,Comfortaa,Arial; background:#f0f9ff; color:#111827; margin:0; padding:24px}
+    .container{max-width:1100px;margin:0 auto}
+    header{display:flex;align-items:center;gap:18px;margin-bottom:18px}
+    .logo{width:64px;height:64px;border-radius:12px;background:linear-gradient(135deg,var(--accent),#38bdf8);display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:22px}
+    h1{margin:0;font-size:26px}
+    .subtitle{color:var(--muted);margin-top:6px}
+    .grid{display:grid;grid-template-columns:1fr 360px;gap:18px;align-items:start}
+    .card{background:var(--card);border-radius:var(--radius);padding:18px;box-shadow:0 6px 20px rgba(15,23,42,0.06)}
+    h2,h3{margin-top:0}
+    .section-title{display:flex;justify-content:space-between;align-items:center}
+    ul,ol{padding-left:18px}
+    .word{display:flex;align-items:center;gap:8px;margin:6px 0}
+    button{background:var(--accent);color:white;border:0;padding:6px 10px;border-radius:10px;cursor:pointer;font-size:13px}
+    button.secondary{background:#e0f2fe;color:var(--accent)}
+    .examples{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    .question{margin:10px 0;padding:12px;border-radius:10px;background:#f8fafc}
+    .choices{display:flex;flex-direction:column;gap:6px;margin-top:8px}
+    .choice{padding:8px;border:1px dashed #cbd5e1;border-radius:8px;cursor:pointer}
+    .choice.correct{border-color:var(--success);border-style:solid}
+    .choice.wrong{border-color:var(--danger);border-style:solid}
+    .feedback{font-size:13px;margin-top:6px}
+    .hide{display:none}
+    footer{margin-top:18px;color:var(--muted);font-size:13px}
+    @media(max-width:900px){.grid{grid-template-columns:1fr}.examples{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="logo">GV</div>
+      <div>
+        <h1>Grade 5 Grammar & Vocabulary Lesson</h1>
+        <div class="subtitle">Friendly practice with words and sentences — includes read-aloud and auto-check questions.</div>
+      </div>
+    </header><div class="grid">
+  <main class="card">
+    <div class="section-title">
+      <h2>Lesson Overview</h2>
+      <div class="subtitle">Level: Grade 5 • Time: 40–50 mins</div>
+    </div>
+    <hr>
+
+    <h3>Vocabulary (Key Words)</h3>
+    <p>Here are some grade-level words. Click the speaker to hear them:</p>
+    <div id="vocabList"></div>
+
+    <h3>Grammar Focus</h3>
+    <ul>
+      <li><strong>Noun:</strong> a person, place, thing, or idea (e.g., <em>teacher, park</em>).</li>
+      <li><strong>Verb:</strong> an action word (e.g., <em>run, jump, think</em>).</li>
+      <li><strong>Adjective:</strong> a describing word (e.g., <em>happy, tall</em>).</li>
+      <li><strong>Adverb:</strong> tells more about the verb (e.g., <em>quickly, softly</em>).</li>
+      <li><strong>Sentence:</strong> A group of words that express a complete thought (begins with capital, ends with punctuation).</li>
+    </ul>
+
+    <h3>Worked Examples</h3>
+    <div class="examples">
+      <div>
+        <p><strong>Example 1:</strong> Word: <em>brave</em> → Sentence: The <u>brave</u> firefighter climbed the ladder.</p>
+        <p><strong>Example 2:</strong> Word: <em>silent</em> → Sentence: The library was very <u>silent</u>.</p>
+        <p><strong>Example 3:</strong> Grammar: Identify the noun — "The cat chased the mouse." Nouns: <u>cat</u>, <u>mouse</u>.</p>
+        <p><strong>Example 4:</strong> Grammar: Find the verb — "She runs every morning." Verb: <u>runs</u>.</p>
+      </div>
+      <div>
+        <p><strong>Example 5:</strong> Grammar: Find the adjective — "The tall tree touched the sky." Adjective: <u>tall</u>.</p>
+        <p><strong>Example 6:</strong> Grammar: Find the adverb — "He sang loudly." Adverb: <u>loudly</u>.</p>
+        <p><strong>Example 7:</strong> Correct sentence: "We are happy today." (Capital + punctuation)</p>
+        <p><strong>Example 8:</strong> Wrong vs Right → Wrong: "she play soccer" | Right: "She plays soccer."</p>
+      </div>
+    </div>
+
+    <hr>
+    <h3>Self-Check Quick Activities</h3>
+    <div id="quiz"></div>
+    <div style="margin-top:12px;display:flex;gap:8px">
+      <button id="showAnswers">Show Answers</button>
+      <button id="resetQuiz" class="secondary">Reset</button>
+    </div>
+
+  </main>
+
+  <aside class="card">
+    <h3>Mini Tips</h3>
+    <ol>
+      <li>Listen to new words and repeat them aloud.</li>
+      <li>Check if your sentence has a noun + verb.</li>
+      <li>Adjectives describe; adverbs tell how.</li>
+    </ol>
+    <hr>
+    <h4>Answer Key</h4>
+    <ol id="answerKey" class="subtitle"></ol>
+  </aside>
+</div>
+
+<footer>Made for Grade 5 • Practice words + grammar • Auto-graded quiz</footer>
+
+  </div>  <script>
+    // Vocabulary words with read aloud
+    const vocabWords = [
+      'brave','silent','curious','gentle','proud',
+      'bright','whisper','journey','discuss','future'
+    ];
+
+    const vocabDiv = document.getElementById('vocabList');
+    vocabWords.forEach(word=>{
+      const wrap=document.createElement('div');wrap.className='word';
+      wrap.innerHTML=`<span><strong>${word}</strong></span>`;
+      const btn=document.createElement('button');btn.textContent='🔊';
+      btn.addEventListener('click',()=>{ speak(word); });
+      wrap.appendChild(btn);
+      vocabDiv.appendChild(wrap);
+    });
+
+    function speak(text){
+      if(!('speechSynthesis' in window))return;
+      window.speechSynthesis.cancel();
+      const u=new SpeechSynthesisUtterance(text);
+      u.lang='en-US';u.rate=0.95;u.pitch=1.0;
+      window.speechSynthesis.speak(u);
+    }
+
+    // 20 auto-graded questions (mix vocabulary + grammar)
+    const quizData=[
+      {q:'Which word means “showing courage”?',a:['silent','brave','gentle','future'],correct:1,explain:'Brave = showing courage.'},
+      {q:'Which word means “not making noise”?',a:['silent','curious','proud','bright'],correct:0,explain:'Silent = quiet.'},
+      {q:'Which is a noun?',a:['run','tree','quickly','gentle'],correct:1,explain:'Tree is a thing (noun).'},
+      {q:'Which is a verb?',a:['happy','jump','silent','bright'],correct:1,explain:'Jump is an action (verb).'},
+      {q:'Which is an adjective?',a:['fast','dog','sing','tomorrow'],correct:0,explain:'Fast describes, so it is an adjective.'},
+      {q:'Which is an adverb?',a:['quickly','tree','song','child'],correct:0,explain:'Quickly tells how an action is done.'},
+      {q:'Correct the sentence: “he play soccer”',a:['He play soccer.','He plays soccer.','he plays soccer','He playing soccer.'],correct:1,explain:'Subject-verb agreement: He plays soccer.'},
+      {q:'Choose the adjective: “The bright star shone.”',a:['bright','star','shone','the'],correct:0,explain:'Bright describes the star.'},
+      {q:'Choose the adverb: “She sang softly.”',a:['she','sang','softly','song'],correct:2,explain:'Softly tells how she sang.'},
+      {q:'What is the noun in: “The dog barked.”',a:['dog','barked','the','in'],correct:0,explain:'Dog is a noun.'},
+      {q:'What is the verb in: “The dog barked.”',a:['dog','barked','the','noun'],correct:1,explain:'Barked is the action.'},
+      {q:'Which word means “to speak in a low voice”?',a:['journey','future','whisper','curious'],correct:2,explain:'Whisper = speak quietly.'},
+      {q:'Which word means “wanting to know something”?',a:['curious','gentle','silent','proud'],correct:0,explain:'Curious = eager to learn.'},
+      {q:'Which sentence is correct?',a:['We are play.','We plays soccer.','We play soccer.','We played soccer tomorrow.'],correct:2,explain:'We play soccer = correct present tense.'},
+      {q:'Which is an adjective in: “The gentle breeze blew.”',a:['gentle','breeze','blew','the'],correct:0,explain:'Gentle describes the breeze.'},
+      {q:'Which is the adverb in: “He ran quickly.”',a:['he','ran','quickly','none'],correct:2,explain:'Quickly tells how he ran.'},
+      {q:'Pick the noun: “The journey was long.”',a:['journey','long','was','the'],correct:0,explain:'Journey is the noun.'},
+      {q:'Pick the verb: “They discuss ideas.”',a:['they','discuss','ideas','none'],correct:1,explain:'Discuss is the verb.'},
+      {q:'Which word means “time that is still to come”?',a:['proud','future','silent','run'],correct:1,explain:'Future = time to come.'},
+      {q:'Choose the correct sentence.',a:['She is happy.','she happy','She happy','she is happy'],correct:0,explain:'She is happy. has capital + punctuation.'}
+    ];
+
+    const quizDiv=document.getElementById('quiz');
+    const answerKey=document.getElementById('answerKey');
+
+    function renderQuiz(){
+      quizDiv.innerHTML='';answerKey.innerHTML='';
+      quizData.forEach((item,idx)=>{
+        const wrap=document.createElement('div');wrap.className='question';
+        wrap.innerHTML=`<div><strong>Q${idx+1}.</strong> ${item.q}</div>`;
+        const choiceWrap=document.createElement('div');choiceWrap.className='choices';
+        item.a.forEach((ch,cidx)=>{
+          const c=document.createElement('div');c.className='choice';c.textContent=ch;
+          c.addEventListener('click',()=>handleChoice(idx,cidx,c));
+          choiceWrap.appendChild(c);
+        });
+        wrap.appendChild(choiceWrap);
+        const fb=document.createElement('div');fb.className='feedback hide';fb.id=`fb-${idx}`;wrap.appendChild(fb);
+        quizDiv.appendChild(wrap);
+
+        const ak=document.createElement('li');ak.innerText=`Q${idx+1}: ${item.a[item.correct]}`;answerKey.appendChild(ak);
+      });
+    }
+
+    function handleChoice(qIdx,cIdx,elem){
+      const item=quizData[qIdx];
+      const fb=document.getElementById(`fb-${qIdx}`);
+      const choiceEls=elem.parentElement.querySelectorAll('.choice');
+      choiceEls.forEach(e=>{e.classList.remove('correct','wrong')});
+      if(cIdx===item.correct){
+        elem.classList.add('correct');
+        fb.classList.remove('hide');fb.style.color='var(--success)';fb.innerHTML=`✅ Correct. ${item.explain}`;
+      }else{
+        elem.classList.add('wrong');
+        fb.classList.remove('hide');fb.style.color='var(--danger)';fb.innerHTML=`❌ Not quite. ${item.explain}`;
+        choiceEls[item.correct].classList.add('correct');
+      }
+    }
+
+    document.getElementById('showAnswers').addEventListener('click',()=>{
+      quizData.forEach((item,idx)=>{
+        const fb=document.getElementById(`fb-${idx}`);
+        fb.classList.remove('hide');fb.style.color='var(--muted)';fb.innerHTML=`Answer: ${item.a[item.correct]}. ${item.explain}`;
+        const choices=document.querySelectorAll(`#quiz .question:nth-child(${idx+1}) .choice`);
+        choices.forEach((c,ci)=>{c.classList.remove('wrong','correct');if(ci===item.correct)c.classList.add('correct')});
+      });
+    });
+
+    document.getElementById('resetQuiz').addEventListener('click',()=>renderQuiz());
+
+    renderQuiz();
+  </script></body>
+</html>
