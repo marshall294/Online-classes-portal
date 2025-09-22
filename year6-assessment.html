@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Year 6 Assessment</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #f4f7fb;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background: #4CAF50;
+      color: white;
+      text-align: center;
+      padding: 20px;
+      font-size: 1.5em;
+    }
+    .container {
+      width: 95%;
+      max-width: 900px;
+      margin: 20px auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+    }
+    h2 {
+      margin-top: 30px;
+      color: #333;
+    }
+    .question {
+      margin: 15px 0;
+    }
+    .question p {
+      font-weight: 600;
+    }
+    .options label {
+      display: block;
+      margin-bottom: 6px;
+      cursor: pointer;
+    }
+    input[type="text"], input[type="number"], input[type="email"] {
+      width: 100%;
+      padding: 8px;
+      margin: 6px 0 15px 0;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+    button {
+      background: #4CAF50;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 6px;
+      font-size: 1em;
+      cursor: pointer;
+      margin-top: 15px;
+    }
+    button:hover {
+      background: #45a049;
+    }
+    .success {
+      background: #e6ffe6;
+      border: 1px solid #4CAF50;
+      padding: 10px;
+      margin-top: 20px;
+      border-radius: 6px;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <header>Year 6 Assessment - Prime Numbers, Decimals, BODMAS</header>
+  <div class="container">
+    <h2>Student Details</h2>
+    <label>Full Name:</label>
+    <input type="text" id="studentName" required>
+    <label>Email:</label>
+    <input type="email" id="studentEmail" required>
+    <label>Class:</label>
+    <input type="text" id="studentClass" required>
+
+    <h2>Multiple Choice Questions (30)</h2>
+    <div id="mcqSection"></div>
+
+    <h2>Short Answer Questions (7)</h2>
+    <div id="shortSection"></div>
+
+    <button onclick="submitAssessment()">Submit Assessment</button>
+    <div class="success" id="successMsg">✅ Your responses have been submitted successfully!</div>
+  </div>
+
+  <!-- Firebase -->
+  <script type="module">
+    // Firebase config
+    const firebaseConfig = {
+      apiKey: "AIzaSyAFsHg9fK6IDnHbuxmBleEfIIfVGsuLDik",
+      authDomain: "profile-b825d.firebaseapp.com",
+      projectId: "profile-b825d",
+      storageBucket: "profile-b825d.firebasestorage.app",
+      messagingSenderId: "925276859161",
+      appId: "1:925276859161:web:194c60f6dbd9f1ef8bf388"
+    };
+
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
+    import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    // Define MCQ Questions (30 total)
+    const mcqQuestions = [
+      // Prime Numbers (10)
+      { q: "Which of these is a prime number?", options: ["9", "11", "21", "27"], answer: "11" },
+      { q: "Which of the following is NOT prime?", options: ["13", "19", "25", "29"], answer: "25" },
+      { q: "The smallest prime number is:", options: ["0", "1", "2", "3"], answer: "2" },
+      { q: "Which prime number comes after 43?", options: ["45", "47", "49", "51"], answer: "47" },
+      { q: "How many prime numbers are between 1 and 20?", options: ["6", "7", "8", "9"], answer: "8" },
+      { q: "Is 37 prime or composite?", options: ["Prime", "Composite"], answer: "Prime" },
+      { q: "Which of these is the largest prime?", options: ["53", "57", "59", "61"], answer: "61" },
+      { q: "The only even prime number is:", options: ["0", "1", "2", "4"], answer: "2" },
+      { q: "Which of the following is a prime factor of 91?", options: ["7", "9", "11", "13"], answer: "7" },
+      { q: "The next prime after 71 is:", options: ["72", "73", "75", "77"], answer: "73" },
+
+      // Decimals / Measurement (10)
+      { q: "Convert 2.5 kg to grams.", options: ["250g", "2500g", "25g", "25000g"], answer: "2500g" },
+      { q: "What is 3.45 + 2.1?", options: ["5.45", "5.55", "5.65", "6.55"], answer: "5.55" },
+      { q: "What is 12.5 cm in meters?", options: ["0.0125m", "0.125m", "1.25m", "12.5m"], answer: "0.125m" },
+      { q: "Which is heavier: 1.2kg or 1200g?", options: ["1.2kg", "1200g", "Same"], answer: "Same" },
+      { q: "Convert 3.75kg to grams.", options: ["375g", "3750g", "37500g", "37.5g"], answer: "3750g" },
+      { q: "What is 4.25 – 2.1?", options: ["1.05", "2.05", "2.15", "2.2"], answer: "2.15" },
+      { q: "Convert 0.5m to cm.", options: ["0.5cm", "5cm", "50cm", "500cm"], answer: "50cm" },
+      { q: "What is 7.2 ÷ 0.1?", options: ["0.72", "7.2", "72", "720"], answer: "72" },
+      { q: "Which is longer: 0.75m or 75cm?", options: ["0.75m", "75cm", "Same"], answer: "Same" },
+      { q: "Add: 1.45m + 2.55m", options: ["3.0m", "4.0m", "4.5m", "5.0m"], answer: "4.0m" },
+
+      // BODMAS (10)
+      { q: "Simplify: 8 + 2 × 3", options: ["30", "14", "20", "16"], answer: "14" },
+      { q: "Simplify: (10 – 2) × 4", options: ["8", "32", "40", "24"], answer: "32" },
+      { q: "Simplify: 12 ÷ 3 + 6", options: ["2", "8", "10", "12"], answer: "10" },
+      { q: "Simplify: 20 – (2 × 5)", options: ["10", "15", "20", "5"], answer: "10" },
+      { q: "Simplify: 50 ÷ (5 + 5)", options: ["1", "5", "10", "25"], answer: "5" },
+      { q: "Simplify: 3 × (4 + 6)", options: ["12", "18", "24", "30"], answer: "30" },
+      { q: "Simplify: (18 ÷ 3) × 2", options: ["6", "9", "12", "15"], answer: "12" },
+      { q: "Simplify: 100 – (10 + 20)", options: ["60", "70", "80", "90"], answer: "70" },
+      { q: "Simplify: (5 × 4) – 6", options: ["10", "12", "14", "20"], answer: "14" },
+      { q: "Simplify: (30 ÷ 5) + (2 × 3)", options: ["9", "10", "11", "12"], answer: "12" }
+    ];
+
+    // Short Questions (7)
+    const shortQuestions = [
+      { q: "Write the first five prime numbers." },
+      { q: "What is 12.5 cm in meters?" },
+      { q: "Simplify: (20 ÷ 5) + 3 × 2" },
+      { q: "Convert 3.75kg to grams." },
+      { q: "What is the prime number before 50?" },
+      { q: "Add 5.25 and 4.75" },
+      { q: "Simplify: 100 – (10 + 20)" }
+    ];
+
+    // Render MCQs
+    const mcqDiv = document.getElementById("mcqSection");
+    mcqQuestions.forEach((item, idx) => {
+      const qDiv = document.createElement("div");
+      qDiv.classList.add("question");
+      qDiv.innerHTML = `<p>${idx + 1}. ${item.q}</p>`;
+      const optDiv = document.createElement("div");
+      optDiv.classList.add("options");
+      item.options.forEach(opt => {
+        optDiv.innerHTML += `<label><input type="radio" name="mcq${idx}" value="${opt}"> ${opt}</label>`;
+      });
+      qDiv.appendChild(optDiv);
+      mcqDiv.appendChild(qDiv);
+    });
+
+    // Render Short Questions
+    const shortDiv = document.getElementById("shortSection");
+    shortQuestions.forEach((item, idx) => {
+      const qDiv = document.createElement("div");
+      qDiv.classList.add("question");
+      qDiv.innerHTML = `<p>${idx + 1}. ${item.q}</p>
+        <input type="text" id="short${idx}">`;
+      shortDiv.appendChild(qDiv);
+    });
+
+    // Submit function
+    async function submitAssessment() {
+      const name = document.getElementById("studentName").value.trim();
+      const email = document.getElementById("studentEmail").value.trim();
+      const studentClass = document.getElementById("studentClass").value.trim();
+      if (!name || !email || !studentClass) {
+        alert("Please fill in all student details.");
+        return;
+      }
+
+      let mcqAnswers = [];
+      let score = 0;
+      mcqQuestions.forEach((q, idx) => {
+        const selected = document.querySelector(`input[name="mcq${idx}"]:checked`);
+        const ans = selected ? selected.value : null;
+        mcqAnswers.push({ question: q.q, selected: ans, correct: q.answer });
+        if (ans === q.answer) score++;
+      });
+
+      let shortAnswers = [];
+      shortQuestions.forEach((q, idx) => {
+        const ans = document.getElementById(`short${idx}`).value.trim();
+        shortAnswers.push({ question: q.q, answer: ans });
+      });
+
+      try {
+        await addDoc(collection(db, "year6_assessments"), {
+          name,
+          email,
+          studentClass,
+          mcqAnswers,
+          shortAnswers,
+          score,
+          timestamp: new Date()
+        });
+        document.getElementById("successMsg").style.display = "block";
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      } catch (e) {
+        alert("Error submitting: " + e);
+      }
+    }
+
+    window.submitAssessment = submitAssessment;
+  </script>
+</body>
+</html>
