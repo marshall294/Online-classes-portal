@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Year 6 Assessment</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #f4f7fb;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background: #4CAF50;
+      color: white;
+      text-align: center;
+      padding: 20px;
+      font-size: 1.5em;
+    }
+    .container {
+      width: 95%;
+      max-width: 900px;
+      margin: 20px auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+    }
+    h2 {
+      margin-top: 30px;
+      color: #333;
+    }
+    .question {
+      margin: 15px 0;
+    }
+    .question p {
+      font-weight: 600;
+    }
+    .options label {
+      display: block;
+      margin-bottom: 6px;
+      cursor: pointer;
+    }
+    input[type="text"], input[type="number"], input[type="email"] {
+      width: 100%;
+      padding: 8px;
+      margin: 6px 0 15px 0;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+    button {
+      background: #4CAF50;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 6px;
+      font-size: 1em;
+      cursor: pointer;
+      margin-top: 15px;
+    }
+    button:hover {
+      background: #45a049;
+    }
+    .success {
+      background: #e6ffe6;
+      border: 1px solid #4CAF50;
+      padding: 10px;
+      margin-top: 20px;
+      border-radius: 6px;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <header>Year 10 Assessment</header>
+  <div class="container">
+    <h2>Student Details</h2>
+    <label>Full Name:</label>
+    <input type="text" id="studentName" required>
+    <label>Email:</label>
+    <input type="email" id="studentEmail" required>
+    <label>Class:</label>
+    <input type="text" id="studentClass" required>
+
+    <h2>Multiple Choice Questions (30)</h2>
+    <div id="mcqSection"></div>
+
+    <h2>Short Answer Questions (7)</h2>
+    <div id="shortSection"></div>
+
+    <button onclick="submitAssessment()">Submit Assessment</button>
+    <div class="success" id="successMsg">✅ Your responses have been submitted successfully!</div>
+  </div>
+
+  <!-- Firebase -->
+  <script type="module">
+    // Firebase config
+    const firebaseConfig = {
+      apiKey: "AIzaSyAFsHg9fK6IDnHbuxmBleEfIIfVGsuLDik",
+      authDomain: "profile-b825d.firebaseapp.com",
+      projectId: "profile-b825d",
+      storageBucket: "profile-b825d.firebasestorage.app",
+      messagingSenderId: "925276859161",
+      appId: "1:925276859161:web:194c60f6dbd9f1ef8bf388"
+    };
+
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
+    import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+   // Define MCQ Questions (30 total)
+const mcqQuestions = [
+  // Indices (10)
+  { q: "Simplify: 2³ × 2²", options: ["2⁵", "2⁶", "2⁴", "2³"], answer: "2⁵" },
+  { q: "Simplify: (5²)³", options: ["5⁵", "5⁶", "5⁸", "5⁹"], answer: "5⁶" },
+  { q: "Simplify: 3⁴ ÷ 3²", options: ["3²", "3³", "3⁶", "3⁸"], answer: "3²" },
+  { q: "Which is equal to 10⁰?", options: ["0", "1", "10", "None"], answer: "1" },
+  { q: "Simplify: (2³)²", options: ["2⁵", "2⁶", "2⁷", "2⁸"], answer: "2⁶" },
+  { q: "Simplify: 4⁻²", options: ["1/16", "1/4", "1/2", "16"], answer: "1/16" },
+  { q: "Simplify: (x²)³", options: ["x²", "x³", "x⁵", "x⁶"], answer: "x⁶" },
+  { q: "Simplify: 9^(1/2)", options: ["3", "9", "1/3", "81"], answer: "3" },
+  { q: "Simplify: 8^(2/3)", options: ["2", "4", "8", "16"], answer: "4" },
+  { q: "Simplify: (a³b²)²", options: ["a⁵b⁴", "a⁶b⁴", "a⁶b²", "a²b²"], answer: "a⁶b⁴" },
+
+  // Surds (10)
+  { q: "Simplify: √(49)", options: ["6", "7", "8", "9"], answer: "7" },
+  { q: "Simplify: √(50)", options: ["5√2", "10√2", "25√2", "2√5"], answer: "5√2" },
+  { q: "Simplify: √(12)", options: ["2√3", "3√2", "6√2", "√6"], answer: "2√3" },
+  { q: "Simplify: √(18)", options: ["3√2", "2√3", "9√2", "√9"], answer: "3√2" },
+  { q: "Simplify: √(72)", options: ["6√2", "12√2", "3√3", "8√2"], answer: "6√2" },
+  { q: "Simplify: (√3)²", options: ["√3", "3", "9", "1"], answer: "3" },
+  { q: "Simplify: √(27)", options: ["9√3", "3√3", "2√3", "√9"], answer: "3√3" },
+  { q: "Simplify: √(98)", options: ["7√2", "14√2", "2√7", "9√2"], answer: "7√2" },
+  { q: "Simplify: √(200)", options: ["10√2", "20√2", "5√2", "15√2"], answer: "10√2" },
+  { q: "Simplify: √(8)", options: ["2√2", "4√2", "√2", "8√2"], answer: "2√2" },
+
+  // Prime Numbers (5)
+  { q: "Which of the following is a prime number?", options: ["21", "23", "25", "27"], answer: "23" },
+  { q: "The largest prime less than 100 is:", options: ["89", "97", "99", "101"], answer: "97" },
+  { q: "How many prime numbers are between 1 and 20?", options: ["6", "7", "8", "9"], answer: "8" },
+  { q: "The only even prime number is:", options: ["0", "1", "2", "4"], answer: "2" },
+  { q: "Which of the following is NOT prime?", options: ["17", "19", "21", "23"], answer: "21" },
+
+  // BODMAS (5)
+  { q: "Simplify: 6 + 2 × 5", options: ["40", "16", "20", "60"], answer: "16" },
+  { q: "Simplify: (12 ÷ 3) + 8", options: ["10", "12", "16", "20"], answer: "12" },
+  { q: "Simplify: (2³ × 3) + 4", options: ["28", "30", "24", "20"], answer: "28" },
+  { q: "Simplify: (15 – 5) ÷ 2", options: ["2", "5", "10", "20"], answer: "5" },
+  { q: "Simplify: 100 – (6 × 7)", options: ["52", "58", "60", "62"], answer: "58" }
+];
+
+// Short Questions (7)
+const shortQuestions = [
+  { q: "Simplify: 2⁵ ÷ 2³" },
+  { q: "Simplify: (x²y³)²" },
+  { q: "Simplify: √(180)" },
+  { q: "List the prime numbers between 50 and 70" },
+  { q: "Simplify: (4² × 2³)" },
+  { q: "Simplify: √(75)" },
+  { q: "Simplify: (20 ÷ 5) + 3 × 2" }
+];
+
+    // Render MCQs
+    const mcqDiv = document.getElementById("mcqSection");
+    mcqQuestions.forEach((item, idx) => {
+      const qDiv = document.createElement("div");
+      qDiv.classList.add("question");
+      qDiv.innerHTML = `<p>${idx + 1}. ${item.q}</p>`;
+      const optDiv = document.createElement("div");
+      optDiv.classList.add("options");
+      item.options.forEach(opt => {
+        optDiv.innerHTML += `<label><input type="radio" name="mcq${idx}" value="${opt}"> ${opt}</label>`;
+      });
+      qDiv.appendChild(optDiv);
+      mcqDiv.appendChild(qDiv);
+    });
+
+    // Render Short Questions
+    const shortDiv = document.getElementById("shortSection");
+    shortQuestions.forEach((item, idx) => {
+      const qDiv = document.createElement("div");
+      qDiv.classList.add("question");
+      qDiv.innerHTML = `<p>${idx + 1}. ${item.q}</p>
+        <input type="text" id="short${idx}">`;
+      shortDiv.appendChild(qDiv);
+    });
+
+    // Submit function
+    async function submitAssessment() {
+      const name = document.getElementById("studentName").value.trim();
+      const email = document.getElementById("studentEmail").value.trim();
+      const studentClass = document.getElementById("studentClass").value.trim();
+      if (!name || !email || !studentClass) {
+        alert("Please fill in all student details.");
+        return;
+      }
+
+      let mcqAnswers = [];
+      let score = 0;
+      mcqQuestions.forEach((q, idx) => {
+        const selected = document.querySelector(`input[name="mcq${idx}"]:checked`);
+        const ans = selected ? selected.value : null;
+        mcqAnswers.push({ question: q.q, selected: ans, correct: q.answer });
+        if (ans === q.answer) score++;
+      });
+
+      let shortAnswers = [];
+      shortQuestions.forEach((q, idx) => {
+        const ans = document.getElementById(`short${idx}`).value.trim();
+        shortAnswers.push({ question: q.q, answer: ans });
+      });
+
+      try {
+        await addDoc(collection(db, "year6_assessments"), {
+          name,
+          email,
+          studentClass,
+          mcqAnswers,
+          shortAnswers,
+          score,
+          timestamp: new Date()
+        });
+        document.getElementById("successMsg").style.display = "block";
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      } catch (e) {
+        alert("Error submitting: " + e);
+      }
+    }
+
+    window.submitAssessment = submitAssessment;
+  </script>
+</body>
+</html>
