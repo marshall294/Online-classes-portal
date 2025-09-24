@@ -35,6 +35,7 @@
       padding: 15px;
       border-radius: 8px;
       background: #fdfdfd;
+      position: relative;
     }
     .student-card h3 {
       margin: 0 0 10px 0;
@@ -54,6 +55,34 @@
     }
     details {
       margin-top: 8px;
+    }
+    /* Modern buttons */
+    .actions {
+      margin-top: 10px;
+      display: flex;
+      gap: 10px;
+    }
+    .btn {
+      padding: 6px 14px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: 0.3s ease;
+    }
+    .btn-delete {
+      background: #f44336;
+      color: white;
+    }
+    .btn-delete:hover {
+      background: #d32f2f;
+    }
+    .btn-print {
+      background: #2196f3;
+      color: white;
+    }
+    .btn-print:hover {
+      background: #1976d2;
     }
   </style>
 </head>
@@ -77,7 +106,9 @@
     };
 
     import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
-    import { getFirestore, collection, getDocs, orderBy, query } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
+    import { 
+      getFirestore, collection, getDocs, orderBy, query, deleteDoc, doc 
+    } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
 
     const app = initializeApp(firebaseConfig);
     const db = getFirestore(app);
@@ -94,8 +125,8 @@
         return;
       }
 
-      qSnap.forEach(doc => {
-        const data = doc.data();
+      qSnap.forEach(docSnap => {
+        const data = docSnap.data();
         const card = document.createElement("div");
         card.classList.add("student-card");
 
@@ -133,13 +164,56 @@
           `;
         });
 
-        // Use <details> for expand/collapse
+        // Expand/collapse
         const details = document.createElement("details");
         details.innerHTML = "<summary>View Full Script</summary>";
         details.appendChild(mcqDiv);
         details.appendChild(shortDiv);
 
+        // Action buttons
+        const actionsDiv = document.createElement("div");
+        actionsDiv.classList.add("actions");
+
+        const deleteBtn = document.createElement("button");
+        deleteBtn.textContent = "Delete";
+        deleteBtn.classList.add("btn", "btn-delete");
+        deleteBtn.onclick = async () => {
+          if (confirm(`Delete submission for ${data.name}?`)) {
+            await deleteDoc(doc(db, "year6_assessments", docSnap.id));
+            alert("Submission deleted.");
+            loadResults();
+          }
+        };
+
+        const printBtn = document.createElement("button");
+        printBtn.textContent = "Print";
+        printBtn.classList.add("btn", "btn-print");
+        printBtn.onclick = () => {
+          const win = window.open("", "_blank");
+          win.document.write(`
+            <html>
+            <head><title>Print Script - ${data.name}</title></head>
+            <body style="font-family: Poppins, sans-serif; padding: 20px;">
+              <h2>${data.name} (${data.studentClass})</h2>
+              <p><strong>Email:</strong> ${data.email}</p>
+              <p><strong>Score (MCQ only):</strong> ${data.score} / 30</p>
+              <p><strong>Submitted:</strong> ${data.timestamp?.toDate ? data.timestamp.toDate().toLocaleString() : ""}</p>
+              <h3>MCQ Answers</h3>
+              ${mcqDiv.innerHTML}
+              <h3>Short Answers</h3>
+              ${shortDiv.innerHTML}
+            </body>
+            </html>
+          `);
+          win.document.close();
+          win.print();
+        };
+
+        actionsDiv.appendChild(printBtn);
+        actionsDiv.appendChild(deleteBtn);
+
         card.appendChild(details);
+        card.appendChild(actionsDiv);
         resultsDiv.appendChild(card);
       });
     }
