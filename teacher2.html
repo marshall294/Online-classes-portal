@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Teacher - Year 6 Assessment Results</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #f9fafc;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background: #333;
+      color: white;
+      text-align: center;
+      padding: 20px;
+      font-size: 1.5em;
+    }
+    .container {
+      width: 95%;
+      max-width: 1100px;
+      margin: 20px auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+    }
+    .student-card {
+      border: 1px solid #ccc;
+      margin: 15px 0;
+      padding: 15px;
+      border-radius: 8px;
+      background: #fdfdfd;
+      position: relative;
+    }
+    .student-card h3 {
+      margin: 0 0 10px 0;
+      color: #4CAF50;
+    }
+    .answers {
+      margin-top: 10px;
+      padding-left: 15px;
+    }
+    .mcq-correct {
+      color: green;
+      font-weight: bold;
+    }
+    .mcq-wrong {
+      color: red;
+      font-weight: bold;
+    }
+    details {
+      margin-top: 8px;
+    }
+    /* Modern buttons */
+    .actions {
+      margin-top: 10px;
+      display: flex;
+      gap: 10px;
+    }
+    .btn {
+      padding: 6px 14px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: 0.3s ease;
+    }
+    .btn-delete {
+      background: #f44336;
+      color: white;
+    }
+    .btn-delete:hover {
+      background: #d32f2f;
+    }
+    .btn-print {
+      background: #2196f3;
+      color: white;
+    }
+    .btn-print:hover {
+      background: #1976d2;
+    }
+  </style>
+</head>
+<body>
+  <header>Teacher Dashboard - Year 6 Assessment Scripts</header>
+  <div class="container">
+    <h2>All Student Submissions</h2>
+    <div id="results"></div>
+  </div>
+
+  <!-- Firebase -->
+  <script type="module">
+    // Firebase config
+    const firebaseConfig = {
+      apiKey: "AIzaSyAFsHg9fK6IDnHbuxmBleEfIIfVGsuLDik",
+      authDomain: "profile-b825d.firebaseapp.com",
+      projectId: "profile-b825d",
+      storageBucket: "profile-b825d.firebasestorage.app",
+      messagingSenderId: "925276859161",
+      appId: "1:925276859161:web:194c60f6dbd9f1ef8bf388"
+    };
+
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
+    import { 
+      getFirestore, collection, getDocs, orderBy, query, deleteDoc, doc 
+    } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    async function loadResults() {
+      const resultsDiv = document.getElementById("results");
+      resultsDiv.innerHTML = "Loading...";
+
+      const qSnap = await getDocs(query(collection(db, "year6_assessments"), orderBy("timestamp", "desc")));
+      resultsDiv.innerHTML = "";
+
+      if (qSnap.empty) {
+        resultsDiv.innerHTML = "<p>No submissions yet.</p>";
+        return;
+      }
+
+      qSnap.forEach(docSnap => {
+        const data = docSnap.data();
+        const card = document.createElement("div");
+        card.classList.add("student-card");
+
+        // Student info
+        card.innerHTML = `
+          <h3>${data.name} (${data.studentClass})</h3>
+          <p><strong>Email:</strong> ${data.email}</p>
+          <p><strong>Score (MCQ only):</strong> ${data.score} / 30</p>
+          <p><strong>Submitted:</strong> ${data.timestamp?.toDate ? data.timestamp.toDate().toLocaleString() : ""}</p>
+        `;
+
+        // MCQ answers
+        const mcqDiv = document.createElement("div");
+        mcqDiv.classList.add("answers");
+        mcqDiv.innerHTML = "<h4>MCQ Answers</h4>";
+        data.mcqAnswers.forEach((ans, i) => {
+          const isCorrect = ans.selected === ans.correct;
+          mcqDiv.innerHTML += `
+            <p>
+              <strong>Q${i+1}:</strong> ${ans.question}<br>
+              Student: <span class="${isCorrect ? 'mcq-correct' : 'mcq-wrong'}">${ans.selected ?? "Not answered"}</span> |
+              Correct: <span class="mcq-correct">${ans.correct}</span>
+            </p>
+          `;
+        });
+
+        // Short answers
+        const shortDiv = document.createElement("div");
+        shortDiv.classList.add("answers");
+        shortDiv.innerHTML = "<h4>Short Answers</h4>";
+        data.shortAnswers.forEach((ans, i) => {
+          shortDiv.innerHTML += `
+            <p><strong>Q${i+1}:</strong> ${ans.question}<br>
+            Answer: ${ans.answer || "Not answered"}</p>
+          `;
+        });
+
+        // Expand/collapse
+        const details = document.createElement("details");
+        details.innerHTML = "<summary>View Full Script</summary>";
+        details.appendChild(mcqDiv);
+        details.appendChild(shortDiv);
+
+        // Action buttons
+        const actionsDiv = document.createElement("div");
+        actionsDiv.classList.add("actions");
+
+        const deleteBtn = document.createElement("button");
+        deleteBtn.textContent = "Delete";
+        deleteBtn.classList.add("btn", "btn-delete");
+        deleteBtn.onclick = async () => {
+          if (confirm(`Delete submission for ${data.name}?`)) {
+            await deleteDoc(doc(db, "year6_assessments", docSnap.id));
+            alert("Submission deleted.");
+            loadResults();
+          }
+        };
+
+        const printBtn = document.createElement("button");
+        printBtn.textContent = "Print";
+        printBtn.classList.add("btn", "btn-print");
+        printBtn.onclick = () => {
+          const win = window.open("", "_blank");
+          win.document.write(`
+            <html>
+            <head><title>Print Script - ${data.name}</title></head>
+            <body style="font-family: Poppins, sans-serif; padding: 20px;">
+              <h2>${data.name} (${data.studentClass})</h2>
+              <p><strong>Email:</strong> ${data.email}</p>
+              <p><strong>Score (MCQ only):</strong> ${data.score} / 30</p>
+              <p><strong>Submitted:</strong> ${data.timestamp?.toDate ? data.timestamp.toDate().toLocaleString() : ""}</p>
+              <h3>MCQ Answers</h3>
+              ${mcqDiv.innerHTML}
+              <h3>Short Answers</h3>
+              ${shortDiv.innerHTML}
+            </body>
+            </html>
+          `);
+          win.document.close();
+          win.print();
+        };
+
+        actionsDiv.appendChild(printBtn);
+        actionsDiv.appendChild(deleteBtn);
+
+        card.appendChild(details);
+        card.appendChild(actionsDiv);
+        resultsDiv.appendChild(card);
+      });
+    }
+
+    loadResults();
+  </script>
+</body>
+</html>
