@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Year 8 Assessment</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #f4f7fb;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background: #4CAF50;
+      color: white;
+      text-align: center;
+      padding: 20px;
+      font-size: 1.5em;
+    }
+    .container {
+      width: 95%;
+      max-width: 900px;
+      margin: 20px auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+    }
+    h2 {
+      margin-top: 30px;
+      color: #333;
+    }
+    .question {
+      margin: 15px 0;
+    }
+    .question p {
+      font-weight: 600;
+    }
+    .options label {
+      display: block;
+      margin-bottom: 6px;
+      cursor: pointer;
+    }
+    input[type="text"], input[type="number"], input[type="email"] {
+      width: 100%;
+      padding: 8px;
+      margin: 6px 0 15px 0;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+    button {
+      background: #4CAF50;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 6px;
+      font-size: 1em;
+      cursor: pointer;
+      margin-top: 15px;
+    }
+    button:hover {
+      background: #45a049;
+    }
+    .success {
+      background: #e6ffe6;
+      border: 1px solid #4CAF50;
+      padding: 10px;
+      margin-top: 20px;
+      border-radius: 6px;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <header>Year 8 Assessment</header>
+  <div class="container">
+    <h2>Student Details</h2>
+    <label>Full Name:</label>
+    <input type="text" id="studentName" required>
+    <label>Email:</label>
+    <input type="email" id="studentEmail" required>
+    <label>Class:</label>
+    <input type="text" id="studentClass" required>
+
+    <h2>Multiple Choice Questions (30)</h2>
+    <div id="mcqSection"></div>
+
+    <h2>Short Answer Questions (7)</h2>
+    <div id="shortSection"></div>
+
+    <button onclick="submitAssessment()">Submit Assessment</button>
+    <div class="success" id="successMsg">✅ Your responses have been submitted successfully!</div>
+  </div>
+
+  <!-- Firebase -->
+  <script type="module">
+    // Firebase config
+    const firebaseConfig = {
+      apiKey: "AIzaSyAFsHg9fK6IDnHbuxmBleEfIIfVGsuLDik",
+      authDomain: "profile-b825d.firebaseapp.com",
+      projectId: "profile-b825d",
+      storageBucket: "profile-b825d.firebasestorage.app",
+      messagingSenderId: "925276859161",
+      appId: "1:925276859161:web:194c60f6dbd9f1ef8bf388"
+    };
+
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
+    import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+// Define MCQ Questions (30 total)
+const mcqQuestions = [
+  // HCF & LCM (10)
+  { q: "Find the HCF of 24 and 36", options: ["6", "8", "12", "18"], answer: "12" },
+  { q: "Find the LCM of 6 and 8", options: ["12", "16", "18", "24"], answer: "24" },
+  { q: "HCF of 45 and 75 is:", options: ["5", "10", "15", "25"], answer: "15" },
+  { q: "LCM of 12, 15, and 20 is:", options: ["30", "60", "120", "180"], answer: "60" },
+  { q: "HCF of 56 and 98 is:", options: ["7", "14", "28", "49"], answer: "14" },
+  { q: "LCM of 9 and 12 is:", options: ["18", "24", "36", "48"], answer: "36" },
+  { q: "HCF of 32 and 48 is:", options: ["8", "12", "16", "24"], answer: "16" },
+  { q: "LCM of 5, 10, and 15 is:", options: ["15", "20", "25", "30"], answer: "30" },
+  { q: "HCF of 63 and 81 is:", options: ["7", "9", "21", "27"], answer: "9" },
+  { q: "LCM of 4, 6, and 8 is:", options: ["12", "24", "48", "36"], answer: "24" },
+
+  // Prime Numbers (10)
+  { q: "Which of the following is a prime number?", options: ["33", "39", "41", "51"], answer: "41" },
+  { q: "The first prime number is:", options: ["0", "1", "2", "3"], answer: "2" },
+  { q: "The largest prime less than 50 is:", options: ["43", "47", "49", "53"], answer: "47" },
+  { q: "How many prime numbers are between 1 and 30?", options: ["9", "10", "11", "12"], answer: "10" },
+  { q: "Which of the following is NOT a prime?", options: ["29", "31", "33", "37"], answer: "33" },
+  { q: "What is the next prime after 59?", options: ["60", "61", "62", "63"], answer: "61" },
+  { q: "Which prime numbers add up to 10?", options: ["2 and 7", "3 and 7", "5 and 7", "2 and 5"], answer: "3 and 7" },
+  { q: "Twin primes are:", options: ["2 and 3", "11 and 13", "15 and 17", "20 and 23"], answer: "11 and 13" },
+  { q: "Which of the following is the only even prime?", options: ["0", "1", "2", "4"], answer: "2" },
+  { q: "What is the 5th prime number?", options: ["9", "11", "13", "7"], answer: "11" },
+
+  // BODMAS (10)
+  { q: "Simplify: 8 + 3 × 4", options: ["44", "20", "32", "12"], answer: "20" },
+  { q: "Simplify: (18 ÷ 3) + 7", options: ["10", "12", "13", "15"], answer: "13" },
+  { q: "Simplify: 2 × (3 + 5)", options: ["8", "10", "12", "16"], answer: "16" },
+  { q: "Simplify: (25 – 5) ÷ 2", options: ["5", "10", "15", "20"], answer: "10" },
+  { q: "Simplify: 40 – (6 × 5)", options: ["5", "10", "15", "20"], answer: "10" },
+  { q: "Simplify: (4 + 6) × 3", options: ["18", "20", "24", "30"], answer: "30" },
+  { q: "Simplify: 100 ÷ (2 × 5)", options: ["5", "10", "20", "25"], answer: "10" },
+  { q: "Simplify: 3 + 4 × 2 – 6", options: ["5", "6", "7", "8"], answer: "5" },
+  { q: "Simplify: (12 – 4) ÷ 2 + 6", options: ["8", "9", "10", "12"], answer: "10" },
+  { q: "Simplify: 15 – 3 × (2 + 1)", options: ["6", "12", "9", "15"], answer: "6" }
+];
+
+// Short Questions (7)
+const shortQuestions = [
+  { q: "Find the HCF of 36 and 48" },
+  { q: "Find the LCM of 12, 16, and 20" },
+  { q: "List all prime numbers between 30 and 50" },
+  { q: "Simplify: 20 – (4 × 3)" },
+  { q: "Simplify: (8 + 12) ÷ 5" },
+  { q: "Find the LCM of 18 and 24" },
+  { q: "Write down the first 7 prime numbers" }
+];
+
+    // Render MCQs
+    const mcqDiv = document.getElementById("mcqSection");
+    mcqQuestions.forEach((item, idx) => {
+      const qDiv = document.createElement("div");
+      qDiv.classList.add("question");
+      qDiv.innerHTML = `<p>${idx + 1}. ${item.q}</p>`;
+      const optDiv = document.createElement("div");
+      optDiv.classList.add("options");
+      item.options.forEach(opt => {
+        optDiv.innerHTML += `<label><input type="radio" name="mcq${idx}" value="${opt}"> ${opt}</label>`;
+      });
+      qDiv.appendChild(optDiv);
+      mcqDiv.appendChild(qDiv);
+    });
+
+    // Render Short Questions
+    const shortDiv = document.getElementById("shortSection");
+    shortQuestions.forEach((item, idx) => {
+      const qDiv = document.createElement("div");
+      qDiv.classList.add("question");
+      qDiv.innerHTML = `<p>${idx + 1}. ${item.q}</p>
+        <input type="text" id="short${idx}">`;
+      shortDiv.appendChild(qDiv);
+    });
+
+    // Submit function
+    async function submitAssessment() {
+      const name = document.getElementById("studentName").value.trim();
+      const email = document.getElementById("studentEmail").value.trim();
+      const studentClass = document.getElementById("studentClass").value.trim();
+      if (!name || !email || !studentClass) {
+        alert("Please fill in all student details.");
+        return;
+      }
+
+      let mcqAnswers = [];
+      let score = 0;
+      mcqQuestions.forEach((q, idx) => {
+        const selected = document.querySelector(`input[name="mcq${idx}"]:checked`);
+        const ans = selected ? selected.value : null;
+        mcqAnswers.push({ question: q.q, selected: ans, correct: q.answer });
+        if (ans === q.answer) score++;
+      });
+
+      let shortAnswers = [];
+      shortQuestions.forEach((q, idx) => {
+        const ans = document.getElementById(`short${idx}`).value.trim();
+        shortAnswers.push({ question: q.q, answer: ans });
+      });
+
+      try {
+        await addDoc(collection(db, "year6_assessments"), {
+          name,
+          email,
+          studentClass,
+          mcqAnswers,
+          shortAnswers,
+          score,
+          timestamp: new Date()
+        });
+        document.getElementById("successMsg").style.display = "block";
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      } catch (e) {
+        alert("Error submitting: " + e);
+      }
+    }
+
+    window.submitAssessment = submitAssessment;
+  </script>
+</body>
+</html>
