@@ -54,7 +54,7 @@
 
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-    import { getFirestore, collection, query, where, onSnapshot } 
+    import { getFirestore, collection, onSnapshot } 
       from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
     const firebaseConfig = {
@@ -77,17 +77,18 @@
     let allResults = [];
 
     // 🔹 Replace with logged in student's name
-    const studentName = "John Doe"; 
+    const studentName = "John Doe";  
 
-    // 🔄 Fetch student's submissions from Firestore
-    onSnapshot(
-      query(collection(db, "theorySubmissions"), where("studentName", "==", studentName)), 
-      (snapshot) => {
-        allResults = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-        populateSubjects(allResults);
-        renderResults();
-      }
-    );
+    // 🔄 Fetch ALL submissions in real-time
+    onSnapshot(collection(db, "theorySubmissions"), (snapshot) => {
+      // ✅ filter by studentName after fetching
+      allResults = snapshot.docs
+        .map(doc => ({ id: doc.id, ...doc.data() }))
+        .filter(r => r.studentName === studentName);
+
+      populateSubjects(allResults);
+      renderResults();
+    });
 
     // 🔹 Populate subjects filter dynamically
     function populateSubjects(results) {
@@ -153,4 +154,4 @@
     filterAssessment.addEventListener("change", renderResults);
   </script>
 </body>
-</html>
+  </html>
