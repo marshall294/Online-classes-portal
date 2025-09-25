@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Teacher - Grade Submissions</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 min-h-screen">
+
+  <div class="max-w-6xl mx-auto py-8 px-4">
+    <h1 class="text-3xl font-bold text-center mb-6">Student Submissions</h1>
+
+    <!-- 🔹 Filters -->
+    <div class="bg-white p-4 rounded shadow mb-6 flex flex-wrap gap-4">
+      <div>
+        <label class="block text-sm font-medium">Term</label>
+        <select id="filterTerm" class="border rounded p-2">
+          <option value="">All</option>
+          <option>First Term</option>
+          <option>Second Term</option>
+          <option>Third Term</option>
+        </select>
+      </div>
+      <div>
+        <label class="block text-sm font-medium">Subject</label>
+        <select id="filterSubject" class="border rounded p-2">
+          <option value="">All</option>
+        </select>
+      </div>
+      <div>
+        <label class="block text-sm font-medium">Assessment Name</label>
+        <select id="filterAssessment" class="border rounded p-2">
+          <option value="">All</option>
+          <option>CA1</option>
+          <option>CA2</option>
+          <option>Homework</option>
+          <option>Examination</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- 🔹 Student Table -->
+    <div class="bg-white rounded shadow overflow-x-auto">
+      <table class="min-w-full border-collapse">
+        <thead>
+          <tr class="bg-gray-200 text-left">
+            <th class="p-3 border">Student</th>
+            <th class="p-3 border">Subject</th>
+            <th class="p-3 border">Term</th>
+            <th class="p-3 border">Assessment</th>
+            <th class="p-3 border">Status</th>
+            <th class="p-3 border">Score</th>
+            <th class="p-3 border">Action</th>
+          </tr>
+        </thead>
+        <tbody id="submissionsTable"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- 🔹 Modal for grading -->
+  <div id="gradingModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+    <div class="bg-white w-11/12 max-w-4xl rounded-lg shadow-lg overflow-y-auto max-h-[90vh]">
+      <div class="flex justify-between items-center border-b p-4 bg-gray-100">
+        <div class="flex items-center gap-3">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/4/4a/Logo_2013_Google.png" alt="School Logo" class="w-10 h-10">
+          <h2 id="modalSchoolName" class="text-xl font-bold">My School Name</h2>
+        </div>
+        <button onclick="closeModal()" class="text-red-500 font-bold text-lg">✖</button>
+      </div>
+      <div class="p-6">
+        <h3 id="modalStudentName" class="text-2xl font-semibold mb-2"></h3>
+        <p id="modalAssessmentInfo" class="text-gray-600 mb-6"></p>
+        <div id="modalAnswers"></div>
+        <button id="saveScoresBtn" class="mt-4 bg-blue-600 text-white px-4 py-2 rounded">Save Scores</button>
+      </div>
+    </div>
+  </div>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+    import { getFirestore, collection, onSnapshot, doc, updateDoc } 
+      from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+    // 🔹 Firebase Config
+    const firebaseConfig = {
+      apiKey: "AIzaSyDPHMhSCOcexDYa2Mo2vILKh6yXOpH7f98",
+      authDomain: "soccer2-c47c2.firebaseapp.com",
+      projectId: "soccer2-c47c2",
+      storageBucket: "soccer2-c47c2.appspot.com",
+      messagingSenderId: "981614907089",
+      appId: "1:981614907089:web:f7c0a5a82f7843e2ab5e5a"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    // 🔹 DOM Elements
+    const submissionsTable = document.getElementById("submissionsTable");
+    const filterTerm = document.getElementById("filterTerm");
+    const filterSubject = document.getElementById("filterSubject");
+    const filterAssessment = document.getElementById("filterAssessment");
+
+    const gradingModal = document.getElementById("gradingModal");
+    const modalStudentName = document.getElementById("modalStudentName");
+    const modalAssessmentInfo = document.getElementById("modalAssessmentInfo");
+    const modalAnswers = document.getElementById("modalAnswers");
+    const saveScoresBtn = document.getElementById("saveScoresBtn");
+
+    let allSubmissions = [];
+    let currentDocId = null;
+
+    // 🔄 Load submissions in real time
+    onSnapshot(collection(db, "theorySubmissions"), (snapshot) => {
+      allSubmissions = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+      populateSubjects(allSubmissions);
+      renderSubmissions();
+    });
+
+    // 🔹 Populate subjects
+    function populateSubjects(submissions) {
+      const subjects = [...new Set(submissions.map(s => s.subject))].filter(Boolean);
+      filterSubject.innerHTML = `<option value="">All</option>`;
+      subjects.forEach(sub => {
+        const opt = document.createElement("option");
+        opt.value = sub;
+        opt.textContent = sub;
+        filterSubject.appendChild(opt);
+      });
+    }
+
+    // 🔹 Render table
+    function renderSubmissions() {
+      submissionsTable.innerHTML = "";
+      const termVal = filterTerm.value;
+      const subjectVal = filterSubject.value;
+      const assessVal = filterAssessment.value;
+
+      const filtered = allSubmissions.filter(s => {
+        return (!termVal || s.term === termVal) &&
+               (!subjectVal || s.subject === subjectVal) &&
+               (!assessVal || s.assessmentName === assessVal);
+      });
+
+      if (!filtered.length) {
+        submissionsTable.innerHTML = `<tr><td colspan="7" class="p-4 text-center text-gray-500">No submissions match filter</td></tr>`;
+        return;
+      }
+
+      filtered.forEach(data => {
+        const row = document.createElement("tr");
+        row.className = "hover:bg-gray-50";
+        row.innerHTML = `
+          <td class="p-3 border font-medium">${data.studentName}</td>
+          <td class="p-3 border">${data.subject}</td>
+          <td class="p-3 border">${data.term}</td>
+          <td class="p-3 border">${data.assessmentName}</td>
+          <td class="p-3 border ${data.graded ? 'text-green-600' : 'text-red-600'}">
+            ${data.graded ? '✅ Graded' : '📝 Not Graded'}
+          </td>
+          <td class="p-3 border font-semibold text-blue-700">${data.totalScore ?? '-'}</td>
+          <td class="p-3 border">
+            <button class="bg-indigo-600 text-white px-3 py-1 rounded gradeBtn" data-doc="${data.id}">Mark / Grade</button>
+          </td>
+        `;
+        submissionsTable.appendChild(row);
+      });
+
+      attachGradeEvents();
+    }
+
+    // 🔹 Attach events to Grade buttons
+    function attachGradeEvents() {
+      document.querySelectorAll(".gradeBtn").forEach(btn => {
+        btn.addEventListener("click", (e) => {
+          const docId = e.target.getAttribute("data-doc");
+          const data = allSubmissions.find(s => s.id === docId);
+          if (!data) return;
+
+          currentDocId = docId;
+          modalStudentName.textContent = data.studentName;
+          modalAssessmentInfo.textContent = `${data.assessmentName} - ${data.subject} (${data.term})`;
+
+          modalAnswers.innerHTML = data.answers ? data.answers.map((a, i) => `
+            <div class="mb-4 border-b pb-2">
+              <p class="font-medium">Q${i+1}: ${a.question}</p>
+              <p class="text-gray-700 mb-2"><span class="font-semibold">Student Answer:</span> ${a.answer}</p>
+              <label class="block">
+                <span class="text-sm">Score (Max ${a.expectedScore}):</span>
+                <input type="number" class="border rounded p-1 w-24 scoreInput"
+                       data-index="${i}" data-max="${a.expectedScore}" value="${a.score || ''}">
+              </label>
+            </div>
+          `).join("") : "<p>No answers available</p>";
+
+          gradingModal.classList.remove("hidden");
+        });
+      });
+    }
+
+    // 🔹 Save Scores
+    saveScoresBtn.addEventListener("click", async () => {
+      if (!currentDocId) return;
+
+      const inputs = modalAnswers.querySelectorAll(".scoreInput");
+      let totalScore = 0;
+      const updatedAnswers = [];
+      let error = false;
+
+      inputs.forEach(input => {
+        const index = parseInt(input.getAttribute("data-index"));
+        const max = parseInt(input.getAttribute("data-max"));
+        const val = parseInt(input.value) || 0;
+        if (val > max) {
+          alert(`Score cannot exceed max (${max})`);
+          error = true;
+          return;
+        }
+        updatedAnswers.push({
+          question: input.closest("div").querySelector("p.font-medium").innerText.replace(/^Q\d+: /, ""),
+          answer: input.closest("div").querySelector("p.text-gray-700").innerText.replace("Student Answer: ", ""),
+          expectedScore: max,
+          score: val
+        });
+        totalScore += val;
+      });
+
+      if (error) return;
+
+      await updateDoc(doc(db, "theorySubmissions", currentDocId), {
+        answers: updatedAnswers,
+        graded: true,
+        totalScore
+      });
+
+      alert("✅ Scores saved successfully!");
+      gradingModal.classList.add("hidden");
+    });
+
+    // 🔹 Close modal
+    function closeModal() {
+      gradingModal.classList.add("hidden");
+    }
+    window.closeModal = closeModal;
+
+    // 🔹 Re-render on filter change
+    filterTerm.addEventListener("change", renderSubmissions);
+    filterSubject.addEventListener("change", renderSubmissions);
+    filterAssessment.addEventListener("change", renderSubmissions);
+  </script>
+</body>
+          </html>
