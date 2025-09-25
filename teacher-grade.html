@@ -8,8 +8,39 @@
 </head>
 <body class="bg-gray-100 min-h-screen">
 
-  <div class="max-w-5xl mx-auto py-8 px-4">
+  <div class="max-w-6xl mx-auto py-8 px-4">
     <h1 class="text-3xl font-bold text-center mb-6">Student Submissions</h1>
+
+    <!-- 🔹 Filters -->
+    <div class="bg-white p-4 rounded shadow mb-6 flex flex-wrap gap-4">
+      <div>
+        <label class="block text-sm font-medium">Term</label>
+        <select id="filterTerm" class="border rounded p-2">
+          <option value="">All</option>
+          <option>First Term</option>
+          <option>Second Term</option>
+          <option>Third Term</option>
+        </select>
+      </div>
+      <div>
+        <label class="block text-sm font-medium">Subject</label>
+        <select id="filterSubject" class="border rounded p-2">
+          <option value="">All</option>
+        </select>
+      </div>
+      <div>
+        <label class="block text-sm font-medium">Assessment Name</label>
+        <select id="filterAssessment" class="border rounded p-2">
+          <option value="">All</option>
+          <option>CA1</option>
+          <option>CA2</option>
+          <option>Homework</option>
+          <option>Examination</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- 🔹 Submissions List -->
     <div id="submissionsContainer" class="space-y-6">
       <p class="text-gray-500">Loading submissions...</p>
     </div>
@@ -33,16 +64,50 @@
     const db = getFirestore(app);
 
     const submissionsContainer = document.getElementById("submissionsContainer");
+    const filterTerm = document.getElementById("filterTerm");
+    const filterSubject = document.getElementById("filterSubject");
+    const filterAssessment = document.getElementById("filterAssessment");
+
+    let allSubmissions = []; // cache all for filtering
 
     // 🔄 Load submissions in real time
     onSnapshot(collection(db, "theorySubmissions"), (snapshot) => {
-      submissionsContainer.innerHTML = "";
-      if (snapshot.empty) {
-        submissionsContainer.innerHTML = `<p class="text-gray-500">No submissions yet</p>`;
-      }
-      snapshot.forEach((docSnap) => {
-        const data = docSnap.data();
+      allSubmissions = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+      populateSubjects(allSubmissions);
+      renderSubmissions();
+    });
 
+    // 🔹 Populate subject dropdown dynamically
+    function populateSubjects(submissions) {
+      const subjects = [...new Set(submissions.map(s => s.subject))].filter(Boolean);
+      filterSubject.innerHTML = `<option value="">All</option>`;
+      subjects.forEach(sub => {
+        const opt = document.createElement("option");
+        opt.value = sub;
+        opt.textContent = sub;
+        filterSubject.appendChild(opt);
+      });
+    }
+
+    // 🔹 Render with filters
+    function renderSubmissions() {
+      submissionsContainer.innerHTML = "";
+      const termVal = filterTerm.value;
+      const subjectVal = filterSubject.value;
+      const assessVal = filterAssessment.value;
+
+      const filtered = allSubmissions.filter(s => {
+        return (!termVal || s.term === termVal) &&
+               (!subjectVal || s.subject === subjectVal) &&
+               (!assessVal || s.assessmentName === assessVal);
+      });
+
+      if (!filtered.length) {
+        submissionsContainer.innerHTML = `<p class="text-gray-500">No submissions match filter</p>`;
+        return;
+      }
+
+      filtered.forEach(data => {
         const div = document.createElement("div");
         div.className = "bg-white p-6 rounded shadow";
 
@@ -55,7 +120,7 @@
               <label class="block">
                 <span class="text-sm">Score (Max ${a.expectedScore}):</span>
                 <input type="number" class="border rounded p-1 w-24 scoreInput"
-                       data-doc="${docSnap.id}" data-index="${i}" 
+                       data-doc="${data.id}" data-index="${i}" 
                        data-max="${a.expectedScore}" value="${a.score || ''}">
               </label>
             </div>
@@ -69,19 +134,22 @@
             ${data.graded ? '✅ Graded' : '📝 Not Graded'}
           </p>
           ${answersHTML}
-          <button class="bg-blue-600 text-white px-4 py-2 rounded saveBtn" data-doc="${docSnap.id}">
+          <button class="bg-blue-600 text-white px-4 py-2 rounded saveBtn" data-doc="${data.id}">
             Save Scores
           </button>
         `;
         submissionsContainer.appendChild(div);
       });
 
-      // Attach event listeners to Save buttons
+      attachSaveEvents();
+    }
+
+    // 🔹 Attach save events
+    function attachSaveEvents() {
       document.querySelectorAll(".saveBtn").forEach(btn => {
         btn.addEventListener("click", async (e) => {
           const docId = e.target.getAttribute("data-doc");
 
-          // Collect all score inputs for this submission
           const inputs = document.querySelectorAll(`.scoreInput[data-doc="${docId}"]`);
           let totalScore = 0;
           const updatedAnswers = [];
@@ -102,7 +170,6 @@
             totalScore += val;
           });
 
-          // Update Firestore
           await updateDoc(doc(db, "theorySubmissions", docId), {
             answers: updatedAnswers,
             graded: true,
@@ -112,7 +179,12 @@
           alert("✅ Scores saved successfully!");
         });
       });
-    });
+    }
+
+    // 🔹 Re-render on filter change
+    filterTerm.addEventListener("change", renderSubmissions);
+    filterSubject.addEventListener("change", renderSubmissions);
+    filterAssessment.addEventListener("change", renderSubmissions);
   </script>
 </body>
 </html>
