@@ -38,6 +38,12 @@
           <option>Examination</option>
         </select>
       </div>
+      <div class="flex items-end">
+        <button onclick="window.print()" 
+          class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded shadow">
+          Print / Save PDF
+        </button>
+      </div>
     </div>
 
     <!-- 🔹 Results -->
@@ -70,10 +76,10 @@
 
     let allResults = [];
 
-    // 🔹 Replace with real student name (from login/session)
-    const studentName = "John Doe";
+    // 🔹 Replace with logged in student's name
+    const studentName = "John Doe"; 
 
-    // 🔄 Fetch this student's submissions
+    // 🔄 Fetch student's submissions from Firestore
     onSnapshot(
       query(collection(db, "theorySubmissions"), where("studentName", "==", studentName)), 
       (snapshot) => {
@@ -118,12 +124,12 @@
         div.className = "bg-white p-6 rounded shadow";
 
         let answersHTML = "";
-        if (r.answers) {
+        if (r.answers && r.answers.length > 0) {
           answersHTML = r.answers.map((a, i) => `
             <div class="mb-4 border-b pb-2">
               <p class="font-medium">Q${i+1}: ${a.question}</p>
               <p class="text-gray-700"><span class="font-semibold">Your Answer:</span> ${a.answer}</p>
-              <p class="text-sm text-blue-600"><span class="font-semibold">Score:</span> ${a.score || "Not graded"} / ${a.expectedScore}</p>
+              <p class="text-sm text-blue-600"><span class="font-semibold">Score:</span> ${a.score ?? "Not graded"} / ${a.expectedScore}</p>
             </div>
           `).join("");
         }
@@ -133,8 +139,8 @@
           <p class="mb-2 text-sm ${r.graded ? 'text-green-600' : 'text-red-600'}">
             ${r.graded ? '✅ Graded' : '📝 Awaiting Grading'}
           </p>
-          <p class="font-semibold mb-4">Total Score: ${r.totalScore || 0}</p>
-          ${answersHTML}
+          <p class="font-semibold mb-4">Total Score: ${r.totalScore ?? 0}</p>
+          ${answersHTML || "<p class='text-gray-500'>No answers submitted.</p>"}
         `;
 
         resultsContainer.appendChild(div);
