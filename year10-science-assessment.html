@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Year 10 Science Assessment</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #f4f7fb;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background: #4CAF50;
+      color: white;
+      text-align: center;
+      padding: 20px;
+      font-size: 1.5em;
+    }
+    .container {
+      width: 95%;
+      max-width: 900px;
+      margin: 20px auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+    }
+    h2 {
+      margin-top: 30px;
+      color: #333;
+    }
+    .question {
+      margin: 15px 0;
+    }
+    .question p {
+      font-weight: 600;
+    }
+    .options label {
+      display: block;
+      margin-bottom: 6px;
+      cursor: pointer;
+    }
+    input[type="text"], input[type="number"], input[type="email"] {
+      width: 100%;
+      padding: 8px;
+      margin: 6px 0 15px 0;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+    button {
+      background: #4CAF50;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 6px;
+      font-size: 1em;
+      cursor: pointer;
+      margin-top: 15px;
+    }
+    button:hover {
+      background: #45a049;
+    }
+    .success {
+      background: #e6ffe6;
+      border: 1px solid #4CAF50;
+      padding: 10px;
+      margin-top: 20px;
+      border-radius: 6px;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <header>Year 10 Science Assessment</header>
+  <div class="container">
+    <h2>Student Details</h2>
+    <label>Full Name:</label>
+    <input type="text" id="studentName" required>
+    <label>Email:</label>
+    <input type="email" id="studentEmail" required>
+    <label>Class:</label>
+    <input type="text" id="studentClass" required>
+
+    <h2>Multiple Choice Questions (20)</h2>
+    <div id="mcqSection"></div>
+
+    <h2>Short Answer Questions (5)</h2>
+    <div id="shortSection"></div>
+
+    <button onclick="submitAssessment()">Submit Assessment</button>
+    <div class="success" id="successMsg">✅ Your responses have been submitted successfully!</div>
+  </div>
+
+  <!-- Firebase -->
+  <script type="module">
+    // Firebase config
+    const firebaseConfig = {
+      apiKey: "AIzaSyAFsHg9fK6IDnHbuxmBleEfIIfVGsuLDik",
+      authDomain: "profile-b825d.firebaseapp.com",
+      projectId: "profile-b825d",
+      storageBucket: "profile-b825d.firebasestorage.app",
+      messagingSenderId: "925276859161",
+      appId: "1:925276859161:web:194c60f6dbd9f1ef8bf388"
+    };
+
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
+    import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    // MCQ Questions
+    const mcqQuestions = [
+      // Respiration
+      { q: "Where does aerobic respiration take place in a cell?", options: ["Nucleus", "Mitochondria", "Cytoplasm", "Ribosome"], answer: "Mitochondria" },
+      { q: "Which gas is taken in for respiration?", options: ["Oxygen", "Carbon dioxide", "Nitrogen", "Hydrogen"], answer: "Oxygen" },
+      { q: "Anaerobic respiration produces which of these?", options: ["Ethanol", "Glucose", "Oxygen", "Water"], answer: "Ethanol" },
+      { q: "Respiration releases energy stored in which molecule?", options: ["ATP", "DNA", "RNA", "Glucose"], answer: "ATP" },
+      { q: "Which process breaks down glucose without oxygen?", options: ["Photosynthesis", "Aerobic respiration", "Anaerobic respiration", "Transpiration"], answer: "Anaerobic respiration" },
+
+      // Photosynthesis
+      { q: "Which organelle carries out photosynthesis?", options: ["Chloroplast", "Mitochondria", "Ribosome", "Nucleus"], answer: "Chloroplast" },
+      { q: "Photosynthesis requires which of these gases?", options: ["Oxygen", "Carbon dioxide", "Nitrogen", "Hydrogen"], answer: "Carbon dioxide" },
+      { q: "Which pigment captures light energy?", options: ["Chlorophyll", "Carotene", "Xanthophyll", "Melanin"], answer: "Chlorophyll" },
+      { q: "Photosynthesis produces which type of sugar?", options: ["Glucose", "Fructose", "Sucrose", "Maltose"], answer: "Glucose" },
+      { q: "Which of the following is a raw material for photosynthesis?", options: ["Oxygen", "Water", "ATP", "Starch"], answer: "Water" },
+
+      // Animal Cells
+      { q: "Which organelle contains DNA?", options: ["Nucleus", "Mitochondria", "Ribosome", "Lysosome"], answer: "Nucleus" },
+      { q: "Which structure controls what enters and leaves the cell?", options: ["Cell membrane", "Cytoplasm", "Nucleus", "Ribosome"], answer: "Cell membrane" },
+      { q: "Which organelle produces energy?", options: ["Mitochondria", "Nucleus", "Ribosome", "Chloroplast"], answer: "Mitochondria" },
+      { q: "Which of the following is found only in animal cells?", options: ["Centrioles", "Cell wall", "Chloroplast", "Vacuole"], answer: "Centrioles" },
+      { q: "The jelly-like substance inside the cell is called?", options: ["Cytoplasm", "Nucleus", "Chloroplast", "Vacuole"], answer: "Cytoplasm" },
+
+      // Plant Cells
+      { q: "Which structure gives support to a plant cell?", options: ["Cell wall", "Cell membrane", "Nucleus", "Ribosome"], answer: "Cell wall" },
+      { q: "Which organelle contains green pigment?", options: ["Chloroplast", "Mitochondria", "Vacuole", "Nucleus"], answer: "Chloroplast" },
+      { q: "Plant cells have a large central ___?", options: ["Vacuole", "Nucleus", "Mitochondria", "Ribosome"], answer: "Vacuole" },
+      { q: "Which part of the plant cell controls activities?", options: ["Nucleus", "Cell wall", "Vacuole", "Cytoplasm"], answer: "Nucleus" },
+      { q: "Which of these is present in plant cells but not in animal cells?", options: ["Cell wall", "Mitochondria", "Ribosome", "Cytoplasm"], answer: "Cell wall" }
+    ];
+
+    // Short Answer Questions
+    const shortQuestions = [
+      { q: "Write the equation for photosynthesis." },
+      { q: "Write the equation for aerobic respiration." },
+      { q: "Name two differences between plant and animal cells." },
+      { q: "Explain why mitochondria are called the powerhouse of the cell." },
+      { q: "List three factors that affect the rate of photosynthesis." }
+    ];
+
+    // Render MCQs
+    const mcqDiv = document.getElementById("mcqSection");
+    mcqQuestions.forEach((item, idx) => {
+      const qDiv = document.createElement("div");
+      qDiv.classList.add("question");
+      qDiv.innerHTML = `<p>${idx + 1}. ${item.q}</p>`;
+      const optDiv = document.createElement("div");
+      optDiv.classList.add("options");
+      item.options.forEach(opt => {
+        optDiv.innerHTML += `<label><input type="radio" name="mcq${idx}" value="${opt}"> ${opt}</label>`;
+      });
+      qDiv.appendChild(optDiv);
+      mcqDiv.appendChild(qDiv);
+    });
+
+    // Render Short Questions
+    const shortDiv = document.getElementById("shortSection");
+    shortQuestions.forEach((item, idx) => {
+      const qDiv = document.createElement("div");
+      qDiv.classList.add("question");
+      qDiv.innerHTML = `<p>${idx + 1}. ${item.q}</p>
+        <input type="text" id="short${idx}">`;
+      shortDiv.appendChild(qDiv);
+    });
+
+    // Submit function
+    async function submitAssessment() {
+      const name = document.getElementById("studentName").value.trim();
+      const email = document.getElementById("studentEmail").value.trim();
+      const studentClass = document.getElementById("studentClass").value.trim();
+      if (!name || !email || !studentClass) {
+        alert("Please fill in all student details.");
+        return;
+      }
+
+      let mcqAnswers = [];
+      let score = 0;
+      mcqQuestions.forEach((q, idx) => {
+        const selected = document.querySelector(`input[name="mcq${idx}"]:checked`);
+        const ans = selected ? selected.value : null;
+        mcqAnswers.push({ question: q.q, selected: ans, correct: q.answer });
+        if (ans === q.answer) score++;
+      });
+
+      let shortAnswers = [];
+      shortQuestions.forEach((q, idx) => {
+        const ans = document.getElementById(`short${idx}`).value.trim();
+        shortAnswers.push({ question: q.q, answer: ans });
+      });
+
+      try {
+        await addDoc(collection(db, "year8_science_assessments"), {
+          name,
+          email,
+          studentClass,
+          mcqAnswers,
+          shortAnswers,
+          score,
+          timestamp: new Date()
+        });
+        document.getElementById("successMsg").style.display = "block";
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      } catch (e) {
+        alert("Error submitting: " + e);
+      }
+    }
+
+    window.submitAssessment = submitAssessment;
+  </script>
+</body>
+</html>

@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Year 8 Science Assessment - Respiration & Photosynthesis</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #f4f7fb;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background: #4CAF50;
+      color: white;
+      text-align: center;
+      padding: 20px;
+      font-size: 1.5em;
+    }
+    .container {
+      width: 95%;
+      max-width: 900px;
+      margin: 20px auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+    }
+    h2 {
+      margin-top: 30px;
+      color: #333;
+    }
+    .question {
+      margin: 15px 0;
+    }
+    .question p {
+      font-weight: 600;
+    }
+    .options label {
+      display: block;
+      margin-bottom: 6px;
+      cursor: pointer;
+    }
+    input[type="text"], input[type="number"], input[type="email"] {
+      width: 100%;
+      padding: 8px;
+      margin: 6px 0 15px 0;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+    button {
+      background: #4CAF50;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 6px;
+      font-size: 1em;
+      cursor: pointer;
+      margin-top: 15px;
+    }
+    button:hover {
+      background: #45a049;
+    }
+    .success {
+      background: #e6ffe6;
+      border: 1px solid #4CAF50;
+      padding: 10px;
+      margin-top: 20px;
+      border-radius: 6px;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <header>Year 8 Science Assessment - Respiration & Photosynthesis</header>
+  <div class="container">
+    <h2>Student Details</h2>
+    <label>Full Name:</label>
+    <input type="text" id="studentName" required>
+    <label>Email:</label>
+    <input type="email" id="studentEmail" required>
+    <label>Class:</label>
+    <input type="text" id="studentClass" required>
+
+    <h2>Multiple Choice Questions (20)</h2>
+    <div id="mcqSection"></div>
+
+    <h2>Short Answer Questions (5)</h2>
+    <div id="shortSection"></div>
+
+    <button onclick="submitAssessment()">Submit Assessment</button>
+    <div class="success" id="successMsg">✅ Your responses have been submitted successfully!</div>
+  </div>
+
+  <!-- Firebase -->
+  <script type="module">
+    const firebaseConfig = {
+      apiKey: "AIzaSyAFsHg9fK6IDnHbuxmBleEfIIfVGsuLDik",
+      authDomain: "profile-b825d.firebaseapp.com",
+      projectId: "profile-b825d",
+      storageBucket: "profile-b825d.firebasestorage.app",
+      messagingSenderId: "925276859161",
+      appId: "1:925276859161:web:194c60f6dbd9f1ef8bf388"
+    };
+
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
+    import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    // MCQ Questions (Respiration & Photosynthesis)
+    const mcqQuestions = [
+      // Respiration
+      { q: "Where does aerobic respiration occur?", options: ["Cytoplasm", "Mitochondria", "Nucleus", "Ribosome"], answer: "Mitochondria" },
+      { q: "Anaerobic respiration occurs when:", options: ["Oxygen is present", "Oxygen is absent", "Sugar is absent", "CO2 is produced"], answer: "Oxygen is absent" },
+      { q: "The main gas used in respiration is:", options: ["Carbon dioxide", "Oxygen", "Nitrogen", "Hydrogen"], answer: "Oxygen" },
+      { q: "Which molecule stores energy released by respiration?", options: ["ATP", "Glucose", "DNA", "RNA"], answer: "ATP" },
+      { q: "Anaerobic respiration in muscles produces:", options: ["Lactic acid", "Glucose", "Water", "Oxygen"], answer: "Lactic acid" },
+      { q: "The formula for aerobic respiration is:", options: ["Glucose + O2 → CO2 + H2O + energy", "CO2 + H2O → Glucose + O2", "Glucose → Lactic acid + energy", "O2 + CO2 → H2O + Glucose"], answer: "Glucose + O2 → CO2 + H2O + energy" },
+      { q: "Respiration releases energy by breaking down:", options: ["Starch", "Glucose", "Protein", "Fat"], answer: "Glucose" },
+      { q: "Which respiration type occurs in yeast?", options: ["Aerobic", "Anaerobic", "Both", "None"], answer: "Anaerobic" },
+      { q: "Lactic acid is produced in:", options: ["Yeast", "Plant cells", "Muscle cells", "Red blood cells"], answer: "Muscle cells" },
+      { q: "Which is a product of aerobic respiration?", options: ["Oxygen", "Ethanol", "Carbon dioxide", "Glucose"], answer: "Carbon dioxide" },
+
+      // Photosynthesis
+      { q: "Photosynthesis mainly occurs in:", options: ["Roots", "Leaves", "Stem", "Flowers"], answer: "Leaves" },
+      { q: "Which pigment captures light energy?", options: ["Chlorophyll", "Xanthophyll", "Carotene", "Melanin"], answer: "Chlorophyll" },
+      { q: "Photosynthesis produces:", options: ["Glucose and oxygen", "Carbon dioxide and water", "ATP and carbon dioxide", "Water and energy"], answer: "Glucose and oxygen" },
+      { q: "Photosynthesis requires:", options: ["Oxygen and water", "Carbon dioxide and water", "Glucose and oxygen", "ATP and CO2"], answer: "Carbon dioxide and water" },
+      { q: "Equation for photosynthesis is:", options: ["6CO2 + 6H2O → C6H12O6 + 6O2", "C6H12O6 + 6O2 → 6CO2 + 6H2O", "6O2 + 6H2O → C6H12O6 + 6CO2", "CO2 + H2O → ATP + O2"], answer: "6CO2 + 6H2O → C6H12O6 + 6O2" },
+      { q: "Which gas is released during photosynthesis?", options: ["Oxygen", "Carbon dioxide", "Nitrogen", "Hydrogen"], answer: "Oxygen" },
+      { q: "Photosynthesis takes place in which cell organelle?", options: ["Mitochondria", "Chloroplast", "Nucleus", "Ribosome"], answer: "Chloroplast" },
+      { q: "Glucose produced in photosynthesis is used for:", options: ["Respiration", "Growth", "Storage", "All of the above"], answer: "All of the above" },
+      { q: "Light energy is converted into:", options: ["Chemical energy", "Heat energy", "Kinetic energy", "Electrical energy"], answer: "Chemical energy" },
+      { q: "Photosynthesis is essential because it provides:", options: ["Food and oxygen", "Water and CO2", "Energy and nitrogen", "ATP only"], answer: "Food and oxygen" }
+    ];
+
+    // Short Answer Questions (Respiration & Photosynthesis)
+    const shortQuestions = [
+      { q: "Write the chemical equation for aerobic respiration." },
+      { q: "Write the chemical equation for photosynthesis." },
+      { q: "List two differences between aerobic and anaerobic respiration." },
+      { q: "Explain why chlorophyll is important in photosynthesis." },
+      { q: "Name three factors that affect the rate of photosynthesis." }
+    ];
+
+    // Render MCQs
+    const mcqDiv = document.getElementById("mcqSection");
+    mcqQuestions.forEach((item, idx) => {
+      const qDiv = document.createElement("div");
+      qDiv.classList.add("question");
+      qDiv.innerHTML = `<p>${idx + 1}. ${item.q}</p>`;
+      const optDiv = document.createElement("div");
+      optDiv.classList.add("options");
+      item.options.forEach(opt => {
+        optDiv.innerHTML += `<label><input type="radio" name="mcq${idx}" value="${opt}"> ${opt}</label>`;
+      });
+      qDiv.appendChild(optDiv);
+      mcqDiv.appendChild(qDiv);
+    });
+
+    // Render Short Questions
+    const shortDiv = document.getElementById("shortSection");
+    shortQuestions.forEach((item, idx) => {
+      const qDiv = document.createElement("div");
+      qDiv.classList.add("question");
+      qDiv.innerHTML = `<p>${idx + 1}. ${item.q}</p>
+        <input type="text" id="short${idx}">`;
+      shortDiv.appendChild(qDiv);
+    });
+
+    // Submit function
+    async function submitAssessment() {
+      const name = document.getElementById("studentName").value.trim();
+      const email = document.getElementById("studentEmail").value.trim();
+      const studentClass = document.getElementById("studentClass").value.trim();
+      if (!name || !email || !studentClass) {
+        alert("Please fill in all student details.");
+        return;
+      }
+
+      let mcqAnswers = [];
+      let score = 0;
+      mcqQuestions.forEach((q, idx) => {
+        const selected = document.querySelector(`input[name="mcq${idx}"]:checked`);
+        const ans = selected ? selected.value : null;
+        mcqAnswers.push({ question: q.q, selected: ans, correct: q.answer });
+        if (ans === q.answer) score++;
+      });
+
+      let shortAnswers = [];
+      shortQuestions.forEach((q, idx) => {
+        const ans = document.getElementById(`short${idx}`).value.trim();
+        shortAnswers.push({ question: q.q, answer: ans });
+      });
+
+      try {
+        await addDoc(collection(db, "year8_respiration_photosynthesis"), {
+          name,
+          email,
+          studentClass,
+          mcqAnswers,
+          shortAnswers,
+          score,
+          timestamp: new Date()
+        });
+        document.getElementById("successMsg").style.display = "block";
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      } catch (e) {
+        alert("Error submitting: " + e);
+      }
+    }
+
+    window.submitAssessment = submitAssessment;
+  </script>
+</body>
+</html>
