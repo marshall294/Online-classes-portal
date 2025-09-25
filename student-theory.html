@@ -2,94 +2,113 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Student - Theory Assessments</title>
-  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
-  <style>
-    body { font-family: Arial, sans-serif; margin: 20px; background:#f4f6f9; }
-    h2 { text-align:center; }
-    .container { max-width:800px; margin:auto; background:#fff; padding:20px; border-radius:10px; box-shadow:0 2px 6px rgba(0,0,0,.2);}
-    .assessment { border:1px solid #ddd; padding:15px; margin-top:15px; border-radius:8px;}
-    .question { margin:8px 0; padding:8px; background:#f9f9f9; border-radius:5px; }
-    input, textarea, select { width:100%; padding:8px; border:1px solid #ccc; border-radius:5px; margin-top:5px; }
-    button { margin-top:10px; padding:8px 15px; border:none; border-radius:5px; background:#28a745; color:#fff; cursor:pointer;}
-    button:hover{ background:#1f7d34; }
-  </style>
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-<div class="container">
-  <h2>Student Theory Assessments</h2>
-  
-  <label>Your Full Name</label>
-  <input type="text" id="studentName" placeholder="Enter your full name">
-  
-  <h3>Available Assessments</h3>
-  <div id="assessmentsList"></div>
-</div>
+<body class="bg-gray-100 min-h-screen">
 
-<script>
-  // 🔹 Firebase Config
-  const firebaseConfig = {
-    apiKey: "AIzaSyBcn1ADt-1WevZaWroF_gJl_JF-BCKbm6Y",
-    authDomain: "soccer2-c47c2.firebaseapp.com",
-    projectId: "soccer2-c47c2",
-    storageBucket: "soccer2-c47c2.appspot.com",
-    messagingSenderId: "927229666336",
-    appId: "1:927229666336:web:4eddb3aa4f92f0ff69b30e"
-  };
-  firebase.initializeApp(firebaseConfig);
-  const db = firebase.firestore();
+  <div class="max-w-4xl mx-auto py-8 px-4">
+    <h1 class="text-3xl font-bold text-center mb-6">Available Theory Assessments</h1>
 
-  const list = document.getElementById("assessmentsList");
+    <!-- Assessment List -->
+    <div id="assessmentsList" class="space-y-4">
+      <p class="text-gray-500">Loading assessments...</p>
+    </div>
+  </div>
 
-  // 🔹 Load published assessments in real time
-  db.collection("theoryAssessments").where("published","==",true).orderBy("createdAt","desc")
-    .onSnapshot(snapshot=>{
-      list.innerHTML="";
-      if(snapshot.empty){ list.innerHTML="<i>No published assessments yet</i>"; return; }
-      snapshot.forEach(doc=>{
-        const a=doc.data();
-        let div=document.createElement("div");
-        div.className="assessment";
-        div.innerHTML=`
-          <h4>${a.assessmentName} - ${a.term} - ${a.subject}</h4>
-          <form id="form-${doc.id}">
-            ${a.questions.map((q,i)=>`
-              <div class='question'>
-                <b>Q${i+1}:</b> ${q} <span style="color:#666">[${a.marks[i]} marks]</span><br>
-                <textarea name="q${i}" required placeholder="Type your answer here"></textarea>
-              </div>
-            `).join("")}
-            <button type="submit">Submit</button>
-          </form>
+  <!-- Firebase + Logic -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+    import { getFirestore, collection, query, where, onSnapshot, doc, getDoc, addDoc } 
+      from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyDPHMhSCOcexDYa2Mo2vILKh6yXOpH7f98",
+      authDomain: "soccer2-c47c2.firebaseapp.com",
+      projectId: "soccer2-c47c2",
+      storageBucket: "soccer2-c47c2.appspot.com",
+      messagingSenderId: "981614907089",
+      appId: "1:981614907089:web:f7c0a5a82f7843e2ab5e5a"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    const assessmentsList = document.getElementById("assessmentsList");
+
+    // 🔄 Listen for only published assessments
+    const q = query(collection(db, "theoryAssessments"), where("published", "==", true));
+
+    onSnapshot(q, (snapshot) => {
+      assessmentsList.innerHTML = "";
+      if (snapshot.empty) {
+        assessmentsList.innerHTML = `<p class="text-gray-500">No published assessments yet</p>`;
+      }
+      snapshot.forEach((docSnap) => {
+        const data = docSnap.data();
+        const div = document.createElement("div");
+        div.className = "p-4 border rounded bg-white shadow";
+        div.innerHTML = `
+          <h3 class="font-bold text-lg">${data.assessmentName} - ${data.subject} (${data.term})</h3>
+          <p class="text-sm text-gray-600">Total Score: ${data.totalScore}</p>
+          <button class="bg-blue-600 text-white px-3 py-1 mt-2 rounded"
+            onclick="startAssessment('${docSnap.id}')">Start Assessment</button>
         `;
-        list.appendChild(div);
-
-        // attach submit listener
-        document.getElementById(`form-${doc.id}`).onsubmit = async (e)=>{
-          e.preventDefault();
-          const name=document.getElementById("studentName").value.trim();
-          if(!name){ alert("Please enter your name first!"); return; }
-          const form=e.target;
-          const answers=[];
-          a.questions.forEach((q,i)=>{
-            answers.push(form[`q${i}`].value.trim());
-          });
-          // save submission under this assessment
-          const studentId = name.replace(/\s+/g,"_")+"_"+Date.now();
-          await db.collection("theorySubmissions").doc(doc.id)
-            .collection("students").doc(studentId).set({
-              studentName:name,
-              answers:answers,
-              scores:[],
-              totalScore:0,
-              submittedAt:Date.now()
-            });
-          alert("Your answers have been submitted successfully ✅");
-          form.reset();
-        };
+        assessmentsList.appendChild(div);
       });
     });
-</script>
+
+    // 🚀 Start Assessment
+    window.startAssessment = async (id) => {
+      const studentName = prompt("Enter your full name:");
+      if (!studentName) return;
+
+      const ref = doc(db, "theoryAssessments", id);
+      const snap = await getDoc(ref);
+      if (!snap.exists()) return alert("Assessment not found");
+
+      const data = snap.data();
+
+      // Render assessment form
+      assessmentsList.innerHTML = `
+        <div class="bg-white p-6 rounded shadow">
+          <h2 class="text-2xl font-bold mb-4">${data.assessmentName} - ${data.subject} (${data.term})</h2>
+          <form id="answerForm" class="space-y-4">
+            ${data.questions.map((q, i) => `
+              <div>
+                <p class="font-medium">${i+1}. ${q.text} <span class="text-gray-500">(Score: ${q.score})</span></p>
+                <textarea class="w-full p-2 border rounded answerBox" rows="3" placeholder="Type your answer here..."></textarea>
+              </div>
+            `).join("")}
+            <button type="submit" class="bg-green-600 text-white px-4 py-2 rounded">Submit Answers</button>
+          </form>
+        </div>
+      `;
+
+      // Handle submission
+      document.getElementById("answerForm").addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const answers = [];
+        document.querySelectorAll(".answerBox").forEach((a, i) => {
+          answers.push({ question: data.questions[i].text, answer: a.value, expectedScore: data.questions[i].score });
+        });
+
+        await addDoc(collection(db, "theorySubmissions"), {
+          studentName,
+          assessmentId: id,
+          assessmentName: data.assessmentName,
+          subject: data.subject,
+          term: data.term,
+          answers,
+          submittedAt: Date.now(),
+          graded: false
+        });
+
+        alert("Your answers have been submitted successfully!");
+        location.reload();
+      });
+    };
+  </script>
 </body>
 </html>
