@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Results & Scripts</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 min-h-screen">
+
+  <div class="max-w-5xl mx-auto py-8 px-4">
+    <h1 class="text-3xl font-bold text-center mb-6">My Results</h1>
+
+    <!-- 🔹 Filters -->
+    <div class="bg-white p-4 rounded shadow mb-6 flex flex-wrap gap-4">
+      <div>
+        <label class="block text-sm font-medium">Term</label>
+        <select id="filterTerm" class="border rounded p-2">
+          <option value="">All</option>
+          <option>First Term</option>
+          <option>Second Term</option>
+          <option>Third Term</option>
+        </select>
+      </div>
+      <div>
+        <label class="block text-sm font-medium">Subject</label>
+        <select id="filterSubject" class="border rounded p-2">
+          <option value="">All</option>
+        </select>
+      </div>
+      <div>
+        <label class="block text-sm font-medium">Assessment</label>
+        <select id="filterAssessment" class="border rounded p-2">
+          <option value="">All</option>
+          <option>CA1</option>
+          <option>CA2</option>
+          <option>Homework</option>
+          <option>Examination</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- 🔹 Results -->
+    <div id="resultsContainer" class="space-y-6">
+      <p class="text-gray-500">Loading results...</p>
+    </div>
+  </div>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+    import { getFirestore, collection, query, where, onSnapshot } 
+      from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyDPHMhSCOcexDYa2Mo2vILKh6yXOpH7f98",
+      authDomain: "soccer2-c47c2.firebaseapp.com",
+      projectId: "soccer2-c47c2",
+      storageBucket: "soccer2-c47c2.appspot.com",
+      messagingSenderId: "981614907089",
+      appId: "1:981614907089:web:f7c0a5a82f7843e2ab5e5a"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    const resultsContainer = document.getElementById("resultsContainer");
+    const filterTerm = document.getElementById("filterTerm");
+    const filterSubject = document.getElementById("filterSubject");
+    const filterAssessment = document.getElementById("filterAssessment");
+
+    let allResults = [];
+
+    // 🔹 Replace with real student name (from login/session)
+    const studentName = "John Doe";
+
+    // 🔄 Fetch this student's submissions
+    onSnapshot(
+      query(collection(db, "theorySubmissions"), where("studentName", "==", studentName)), 
+      (snapshot) => {
+        allResults = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+        populateSubjects(allResults);
+        renderResults();
+      }
+    );
+
+    // 🔹 Populate subjects filter dynamically
+    function populateSubjects(results) {
+      const subjects = [...new Set(results.map(r => r.subject))].filter(Boolean);
+      filterSubject.innerHTML = `<option value="">All</option>`;
+      subjects.forEach(sub => {
+        const opt = document.createElement("option");
+        opt.value = sub;
+        opt.textContent = sub;
+        filterSubject.appendChild(opt);
+      });
+    }
+
+    // 🔹 Render results with filters
+    function renderResults() {
+      resultsContainer.innerHTML = "";
+      const termVal = filterTerm.value;
+      const subjectVal = filterSubject.value;
+      const assessVal = filterAssessment.value;
+
+      const filtered = allResults.filter(r => {
+        return (!termVal || r.term === termVal) &&
+               (!subjectVal || r.subject === subjectVal) &&
+               (!assessVal || r.assessmentName === assessVal);
+      });
+
+      if (!filtered.length) {
+        resultsContainer.innerHTML = `<p class="text-gray-500">No results found</p>`;
+        return;
+      }
+
+      filtered.forEach(r => {
+        const div = document.createElement("div");
+        div.className = "bg-white p-6 rounded shadow";
+
+        let answersHTML = "";
+        if (r.answers) {
+          answersHTML = r.answers.map((a, i) => `
+            <div class="mb-4 border-b pb-2">
+              <p class="font-medium">Q${i+1}: ${a.question}</p>
+              <p class="text-gray-700"><span class="font-semibold">Your Answer:</span> ${a.answer}</p>
+              <p class="text-sm text-blue-600"><span class="font-semibold">Score:</span> ${a.score || "Not graded"} / ${a.expectedScore}</p>
+            </div>
+          `).join("");
+        }
+
+        div.innerHTML = `
+          <h2 class="text-xl font-bold mb-2">${r.assessmentName} - ${r.subject} (${r.term})</h2>
+          <p class="mb-2 text-sm ${r.graded ? 'text-green-600' : 'text-red-600'}">
+            ${r.graded ? '✅ Graded' : '📝 Awaiting Grading'}
+          </p>
+          <p class="font-semibold mb-4">Total Score: ${r.totalScore || 0}</p>
+          ${answersHTML}
+        `;
+
+        resultsContainer.appendChild(div);
+      });
+    }
+
+    // 🔹 Filter change handlers
+    filterTerm.addEventListener("change", renderResults);
+    filterSubject.addEventListener("change", renderResults);
+    filterAssessment.addEventListener("change", renderResults);
+  </script>
+</body>
+</html>
