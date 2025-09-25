@@ -29,6 +29,11 @@
     const closeModalBtn = document.getElementById("closeModal");
     const saveScoresBtn = document.getElementById("saveScores");
 
+    const filterTerm = document.getElementById("filterTerm");
+    const filterSubject = document.getElementById("filterSubject");
+    const filterAssessment = document.getElementById("filterAssessment");
+    const avgDisplay = document.getElementById("avgDisplay");
+
     let allSubmissions = [];
     let currentDocId = null;
     let currentAnswers = [];
@@ -39,18 +44,51 @@
         id: docSnap.id,
         ...docSnap.data()
       }));
+      populateFilters();
       renderSubmissions();
     });
+
+    // 🔹 Populate filter dropdowns dynamically
+    function populateFilters() {
+      const terms = [...new Set(allSubmissions.map(s => s.term).filter(Boolean))];
+      const subjects = [...new Set(allSubmissions.map(s => s.subject).filter(Boolean))];
+      const assessments = [...new Set(allSubmissions.map(s => s.assessmentName).filter(Boolean))];
+
+      fillDropdown(filterTerm, terms);
+      fillDropdown(filterSubject, subjects);
+      fillDropdown(filterAssessment, assessments);
+    }
+
+    function fillDropdown(select, items) {
+      const currentVal = select.value;
+      select.innerHTML = `<option value="">All</option>` + 
+        items.map(v => `<option value="${v}" ${v === currentVal ? 'selected' : ''}>${v}</option>`).join("");
+    }
 
     // 🔹 Render table
     function renderSubmissions() {
       submissionsTable.innerHTML = "";
-      if (!allSubmissions.length) {
+
+      const filtered = allSubmissions.filter(s => {
+        return (!filterTerm.value || s.term === filterTerm.value) &&
+               (!filterSubject.value || s.subject === filterSubject.value) &&
+               (!filterAssessment.value || s.assessmentName === filterAssessment.value);
+      });
+
+      if (!filtered.length) {
         submissionsTable.innerHTML = `<tr><td colspan="7" class="p-4 text-center text-gray-500">No submissions found</td></tr>`;
+        avgDisplay.innerHTML = "";
         return;
       }
 
-      allSubmissions.forEach(data => {
+      let totalScores = 0, gradedCount = 0;
+
+      filtered.forEach(data => {
+        if (data.graded) {
+          totalScores += (data.totalScore || 0);
+          gradedCount++;
+        }
+
         const row = document.createElement("tr");
         row.className = "hover:bg-gray-50";
         row.innerHTML = `
@@ -69,6 +107,14 @@
         submissionsTable.appendChild(row);
       });
 
+      // 🔹 Show average per subject
+      const avg = gradedCount > 0 ? (totalScores / gradedCount).toFixed(2) : "-";
+      avgDisplay.innerHTML = `
+        <div class="bg-gray-100 p-3 mt-2 rounded text-gray-700">
+          Average Score for current filter: <span class="font-bold text-indigo-700">${avg}</span>
+        </div>
+      `;
+
       attachGradeEvents();
     }
 
@@ -83,16 +129,26 @@
           currentDocId = docId;
           currentAnswers = submission.answers || [];
 
-          gradingContent.innerHTML = submission.answers.map((ans, idx) => `
-            <div class="mb-4">
-              <p class="font-semibold">Q${idx + 1}: ${ans.question}</p>
-              <p class="ml-2 text-gray-700">Answer: ${ans.answer}</p>
-              <input type="number" min="0" max="${ans.maxScore}" value="${ans.score ?? ''}"
-                class="scoreInput border rounded px-2 py-1 mt-1 w-24"
-                data-idx="${idx}" placeholder="Score / ${ans.maxScore}">
-              <span class="ml-2 text-sm text-gray-500">Max: ${ans.maxScore}</span>
+          let totalMax = 0;
+          gradingContent.innerHTML = submission.answers.map((ans, idx) => {
+            totalMax += ans.maxScore;
+            return `
+              <div class="mb-4">
+                <p class="font-semibold">Q${idx + 1}: ${ans.question}</p>
+                <p class="ml-2 text-gray-700">Answer: ${ans.answer}</p>
+                <input type="number" min="0" max="${ans.maxScore}" value="${ans.score ?? ''}"
+                  class="scoreInput border rounded px-2 py-1 mt-1 w-24"
+                  data-idx="${idx}" placeholder="Score / ${ans.maxScore}">
+                <span class="ml-2 text-sm text-gray-500">Max: ${ans.maxScore}</span>
+              </div>
+            `;
+          }).join("");
+
+          gradingContent.innerHTML += `
+            <div class="mt-4 p-3 bg-gray-200 rounded text-sm">
+              Expected Maximum Total Score: <span class="font-bold">${totalMax}</span>
             </div>
-          `).join("");
+          `;
 
           gradingModal.classList.remove("hidden");
         });
@@ -126,10 +182,40 @@
     closeModalBtn.addEventListener("click", () => {
       gradingModal.classList.add("hidden");
     });
+
+    // 🔹 Filter events
+    filterTerm.addEventListener("change", renderSubmissions);
+    filterSubject.addEventListener("change", renderSubmissions);
+    filterAssessment.addEventListener("change", renderSubmissions);
   </script>
 </head>
 <body class="bg-gray-100 min-h-screen p-6">
-  <h1 class="text-2xl font-bold mb-4">Teacher - Grade Submissions</h1>
+  <!-- 🔹 School Header -->
+  <div class="flex items-center justify-between mb-6">
+    <div class="flex items-center space-x-4">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/4/4a/Logo_2013_Google.png" alt="School Logo" class="h-14">
+      <div>
+        <h1 class="text-2xl font-bold">Bright Future Academy</h1>
+        <p class="text-gray-600">Assessment Grading System</p>
+      </div>
+    </div>
+    <div>
+      <p class="text-gray-500 text-sm">Academic Year: 2025</p>
+    </div>
+  </div>
+
+  <!-- 🔹 Filters -->
+  <div class="flex space-x-4 mb-4">
+    <select id="filterTerm" class="border p-2 rounded">
+      <option value="">All Terms</option>
+    </select>
+    <select id="filterSubject" class="border p-2 rounded">
+      <option value="">All Subjects</option>
+    </select>
+    <select id="filterAssessment" class="border p-2 rounded">
+      <option value="">All Assessments</option>
+    </select>
+  </div>
 
   <!-- 🔹 Table -->
   <div class="bg-white rounded shadow">
@@ -148,6 +234,9 @@
       <tbody id="submissionsTable"></tbody>
     </table>
   </div>
+
+  <!-- 🔹 Average -->
+  <div id="avgDisplay" class="mt-4"></div>
 
   <!-- 🔹 Grading Modal -->
   <div id="gradingModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
