@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Teacher - Theory Assessments</title>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; background:#f4f6f9; }
+    h2 { color:#333; }
+    .container { max-width:950px; margin:auto; background:#fff; padding:20px; border-radius:10px; box-shadow:0 2px 6px rgba(0,0,0,.2);}
+    label { display:block; margin-top:10px; font-weight:bold; }
+    select, input, textarea { padding:8px; border:1px solid #ccc; border-radius:5px; }
+    input[type=text], select { width:100%; }
+    button { margin-top:10px; padding:8px 15px; border:none; border-radius:5px; cursor:pointer; background:#007bff; color:#fff;}
+    button:hover{background:#0056b3;}
+    .assessment, .submission { border:1px solid #ddd; padding:10px; margin-top:10px; border-radius:8px; }
+    .question { margin:5px 0; padding:5px; background:#f9f9f9; border-radius:4px; }
+    .score-box { width:60px; padding:5px; margin-left:10px;}
+    .actions button { margin-right:5px;}
+    .q-row { display:flex; gap:10px; margin-top:8px; }
+    .q-row input[type=text] { flex:3; }
+    .q-row input[type=number] { flex:1; }
+  </style>
+</head>
+<body>
+<div class="container">
+  <h2>Teacher Theory Assessment Manager</h2>
+
+  <!-- Create New Assessment -->
+  <h3>Create New Assessment</h3>
+  <label>Assessment Name</label>
+  <select id="assessmentName">
+    <option>CA1</option>
+    <option>CA2</option>
+    <option>Homework</option>
+    <option>Examination</option>
+  </select>
+
+  <label>Term</label>
+  <select id="term">
+    <option>First Term</option>
+    <option>Second Term</option>
+    <option>Third Term</option>
+  </select>
+
+  <label>Subject</label>
+  <input type="text" id="subject" placeholder="e.g. Mathematics">
+
+  <label>Questions</label>
+  <div id="questionsContainer"></div>
+  <button type="button" onclick="addQuestion()">+ Add Question</button>
+
+  <button onclick="createAssessment()">Create Assessment</button>
+
+  <hr>
+
+  <!-- List of Assessments -->
+  <h3>All Assessments</h3>
+  <div id="assessmentsList"></div>
+</div>
+
+<script>
+  // 🔹 Firebase Config (your key)
+  const firebaseConfig = {
+    apiKey: "AIzaSyBcn1ADt-1WevZaWroF_gJl_JF-BCKbm6Y",
+    authDomain: "soccer2-c47c2.firebaseapp.com",
+    projectId: "soccer2-c47c2",
+    storageBucket: "soccer2-c47c2.appspot.com",
+    messagingSenderId: "927229666336",
+    appId: "1:927229666336:web:4eddb3aa4f92f0ff69b30e"
+  };
+  firebase.initializeApp(firebaseConfig);
+  const db = firebase.firestore();
+
+  // 🔹 Add question row
+  function addQuestion(q="", m=""){
+    const div=document.createElement("div");
+    div.className="q-row";
+    div.innerHTML=`
+      <input type="text" placeholder="Question text" value="${q}">
+      <input type="number" placeholder="Mark" value="${m}">
+      <button type="button" onclick="this.parentNode.remove()">❌</button>
+    `;
+    document.getElementById("questionsContainer").appendChild(div);
+  }
+
+  // add one question by default
+  addQuestion();
+
+  // 🔹 Create new assessment
+  async function createAssessment(){
+    const name = document.getElementById("assessmentName").value;
+    const term = document.getElementById("term").value;
+    const subject = document.getElementById("subject").value.trim();
+
+    let qRows=[...document.querySelectorAll("#questionsContainer .q-row")];
+    let questions=[], marks=[];
+    qRows.forEach(row=>{
+      const q=row.querySelector("input[type=text]").value.trim();
+      const m=parseInt(row.querySelector("input[type=number]").value)||0;
+      if(q){ questions.push(q); marks.push(m); }
+    });
+
+    if(!subject || questions.length===0){ alert("Please enter subject and at least one question"); return; }
+
+    await db.collection("theoryAssessments").add({
+      assessmentName:name, term:term, subject:subject,
+      questions:questions, marks:marks, published:false, createdAt:Date.now()
+    });
+    alert("Assessment created!");
+    document.getElementById("subject").value="";
+    document.getElementById("questionsContainer").innerHTML="";
+    addQuestion();
+  }
+
+  // 🔹 Render assessments in real time
+  db.collection("theoryAssessments").orderBy("createdAt","desc").onSnapshot(snapshot=>{
+    const list=document.getElementById("assessmentsList");
+    list.innerHTML="";
+    snapshot.forEach(doc=>{
+      const a=doc.data();
+      let div=document.createElement("div");
+      div.className="assessment";
+      div.innerHTML=`
+        <b>${a.assessmentName} - ${a.term} - ${a.subject}</b> 
+        <span style="color:${a.published?'green':'red'}">[${a.published?'Published':'Not Published'}]</span>
+        <div class="actions">
+          <button onclick="togglePublish('${doc.id}', ${!a.published})">${a.published?'Unpublish':'Publish'}</button>
+          <button onclick="deleteAssessment('${doc.id}')">Delete</button>
+        </div>
+        <div><b>Questions:</b><br>${a.questions.map((q,i)=>`<div class='question'>${i+1}. ${q} <b>[${a.marks[i]} marks]</b></div>`).join("")}</div>
+        <div id="subs-${doc.id}"><i>Loading submissions...</i></div>
+      `;
+      list.appendChild(div);
+      loadSubmissions(doc.id, a.questions, a.marks);
+    });
+  });
+
+  // 🔹 Publish/unpublish
+  async function togglePublish(id,state){
+    await db.collection("theoryAssessments").doc(id).update({published:state});
+  }
+
+  // 🔹 Delete assessment
+  async function deleteAssessment(id){
+    if(confirm("Delete this assessment?")){
+      await db.collection("theoryAssessments").doc(id).delete();
+    }
+  }
+
+  // 🔹 Load submissions for grading
+  function loadSubmissions(assessId, questions, marks){
+    db.collection("theorySubmissions").doc(assessId).collection("students")
+      .onSnapshot(snap=>{
+        let div=document.getElementById("subs-"+assessId);
+        if(snap.empty){ div.innerHTML="<i>No submissions yet</i>"; return; }
+        div.innerHTML="<h4>Submissions</h4>";
+        snap.forEach(doc=>{
+          const s=doc.data();
+          let html=`<div class='submission'><b>${s.studentName}</b><br>`;
+          s.answers.forEach((ans,i)=>{
+            const score = s.scores && s.scores[i]!==undefined ? s.scores[i] : "";
+            html += `<div>${i+1}. ${questions[i]} (${marks[i]} marks)<br>
+              <i>Answer:</i> ${ans}<br>
+              Score: <input type="number" class="score-box" id="score-${assessId}-${doc.id}-${i}" 
+              max="${marks[i]}" min="0"
+              value="${score}" onchange="updateScore('${assessId}','${doc.id}',${i},this.value)">
+            </div>`;
+          });
+          html+=`<b>Total Score:</b> ${s.totalScore||0}</div>`;
+          div.innerHTML+=html;
+        });
+      });
+  }
+
+  // 🔹 Update score in Firebase
+  async function updateScore(assessId, studId, qIndex, val){
+    const ref=db.collection("theorySubmissions").doc(assessId).collection("students").doc(studId);
+    const snap=await ref.get();
+    if(snap.exists){
+      let data=snap.data();
+      if(!data.scores){data.scores=[];}
+      data.scores[qIndex]=parseInt(val)||0;
+      data.totalScore=data.scores.reduce((a,b)=>a+(b||0),0);
+      await ref.update({scores:data.scores, totalScore:data.totalScore, updatedAt:Date.now()});
+    }
+  }
+</script>
+</body>
+</html>
