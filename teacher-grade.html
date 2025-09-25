@@ -48,8 +48,9 @@
 
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-    import { getFirestore, collection, onSnapshot, doc, updateDoc } 
-      from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+    import { 
+      getFirestore, collection, doc, getDocs, updateDoc 
+    } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
     const firebaseConfig = {
       apiKey: "AIzaSyDPHMhSCOcexDYa2Mo2vILKh6yXOpH7f98",
@@ -70,12 +71,27 @@
 
     let allSubmissions = []; // cache all for filtering
 
-    // 🔄 Load submissions in real time
-    onSnapshot(collection(db, "theorySubmissions"), (snapshot) => {
-      allSubmissions = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+    // 🔄 Load all submissions (2-level structure: assessment → students)
+    async function loadSubmissions() {
+      submissionsContainer.innerHTML = `<p class="text-gray-500">Loading submissions...</p>`;
+      let subs = [];
+      const assessmentsSnap = await getDocs(collection(db, "theorySubmissions"));
+
+      for (const assessmentDoc of assessmentsSnap.docs) {
+        const studentsSnap = await getDocs(collection(db, `theorySubmissions/${assessmentDoc.id}/students`));
+        studentsSnap.forEach(stuDoc => {
+          subs.push({
+            id: stuDoc.id,
+            assessmentId: assessmentDoc.id,
+            ...stuDoc.data()
+          });
+        });
+      }
+
+      allSubmissions = subs;
       populateSubjects(allSubmissions);
       renderSubmissions();
-    });
+    }
 
     // 🔹 Populate subject dropdown dynamically
     function populateSubjects(submissions) {
@@ -120,8 +136,9 @@
               <label class="block">
                 <span class="text-sm">Score (Max ${a.expectedScore}):</span>
                 <input type="number" class="border rounded p-1 w-24 scoreInput"
-                       data-doc="${data.id}" data-index="${i}" 
-                       data-max="${a.expectedScore}" value="${a.score || ''}">
+                       data-assess="${data.assessmentId}" data-doc="${data.id}" 
+                       data-index="${i}" data-max="${a.expectedScore}" 
+                       value="${a.score || ''}">
               </label>
             </div>
           `).join("");
@@ -134,7 +151,8 @@
             ${data.graded ? '✅ Graded' : '📝 Not Graded'}
           </p>
           ${answersHTML}
-          <button class="bg-blue-600 text-white px-4 py-2 rounded saveBtn" data-doc="${data.id}">
+          <button class="bg-blue-600 text-white px-4 py-2 rounded saveBtn" 
+                  data-assess="${data.assessmentId}" data-doc="${data.id}">
             Save Scores
           </button>
         `;
@@ -148,9 +166,10 @@
     function attachSaveEvents() {
       document.querySelectorAll(".saveBtn").forEach(btn => {
         btn.addEventListener("click", async (e) => {
+          const assessId = e.target.getAttribute("data-assess");
           const docId = e.target.getAttribute("data-doc");
 
-          const inputs = document.querySelectorAll(`.scoreInput[data-doc="${docId}"]`);
+          const inputs = document.querySelectorAll(`.scoreInput[data-assess="${assessId}"][data-doc="${docId}"]`);
           let totalScore = 0;
           const updatedAnswers = [];
           inputs.forEach(input => {
@@ -170,7 +189,7 @@
             totalScore += val;
           });
 
-          await updateDoc(doc(db, "theorySubmissions", docId), {
+          await updateDoc(doc(db, `theorySubmissions/${assessId}/students/${docId}`), {
             answers: updatedAnswers,
             graded: true,
             totalScore
@@ -185,6 +204,9 @@
     filterTerm.addEventListener("change", renderSubmissions);
     filterSubject.addEventListener("change", renderSubmissions);
     filterAssessment.addEventListener("change", renderSubmissions);
+
+    // Initial load
+    loadSubmissions();
   </script>
 </body>
-</html>
+</html
