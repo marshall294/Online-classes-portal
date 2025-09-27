@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Teacher Dashboard - Vocabulary Worksheet</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+  <style>
+    body { font-family: 'Poppins', sans-serif; background: #f8f9fa; margin: 0; padding: 0; }
+    header { background: #343a40; color: white; text-align: center; padding: 20px; font-size: 1.5em; }
+    .container { max-width: 1000px; margin: 20px auto; padding: 20px; }
+    table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+    th, td { padding: 10px; border: 1px solid #ddd; }
+    th { background: #007bff; color: white; }
+    tr:nth-child(even) { background: #f2f2f2; }
+    details { margin: 10px 0; }
+  </style>
+</head>
+<body>
+  <header>
+    Teacher Dashboard 📊 <br>
+    Mathcloud Tutorial - Teacher Marshall
+  </header>
+
+  <div class="container">
+    <h2>Student Submissions</h2>
+    <table id="studentsTable">
+      <thead>
+        <tr><th>Name</th><th>Class</th><th>Details</th></tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyAFsHg9fK6IDnHbuxmBleEfIIfVGsuLDik",
+      authDomain: "profile-b825d.firebaseapp.com",
+      projectId: "profile-b825d",
+      storageBucket: "profile-b825d.firebasestorage.app",
+      messagingSenderId: "925276859161",
+      appId: "1:925276859161:web:194c60f6dbd9f1ef8bf388"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+
+    const tableBody = document.querySelector("#studentsTable tbody");
+
+    db.collection("worksheets").orderBy("timestamp", "desc").onSnapshot(snapshot => {
+      tableBody.innerHTML = "";
+      snapshot.forEach(doc => {
+        const data = doc.data();
+        let details = "";
+        Object.keys(data).forEach(k => {
+          if (["name","class","timestamp"].includes(k)) return;
+          details += `<details><summary><b>${k}</b></summary>
+            Meaning: ${data[k].meaning}<br>
+            Synonyms: ${data[k].synonyms}<br>
+            Antonym: ${data[k].antonym}<br>
+            Sentences: ${data[k].sentences}
+          </details>`;
+        });
+        tableBody.innerHTML += `
+          <tr>
+            <td>${data.name}</td>
+            <td>${data.class}</td>
+            <td>${details}</td>
+          </tr>`;
+      });
+    });
+  </script>
+</body>
+</html>

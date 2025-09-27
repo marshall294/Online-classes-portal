@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Vocabulary Worksheet Game</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+  <style>
+    body { font-family: 'Poppins', sans-serif; background: #f0f8ff; margin: 0; padding: 0; }
+    header { background: #4facfe; color: white; text-align: center; padding: 20px; font-size: 1.5em; }
+    .container { max-width: 900px; margin: 20px auto; padding: 20px; }
+    .card { background: white; padding: 20px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); margin-bottom: 20px; }
+    label { font-weight: bold; }
+    input, textarea { width: 100%; padding: 10px; margin: 5px 0 15px; border-radius: 6px; border: 1px solid #ccc; }
+    button { background: #28a745; color: white; padding: 12px; border: none; border-radius: 6px; cursor: pointer; font-size: 1em; }
+    button:hover { background: #218838; }
+    .progress { margin: 15px 0; height: 20px; background: #ddd; border-radius: 10px; overflow: hidden; }
+    .progress-bar { height: 20px; width: 0%; background: #4facfe; transition: width 0.4s; }
+  </style>
+</head>
+<body>
+  <header>
+    Vocabulary Worksheet<br>
+    Mathcloud Tutorial - Teacher Marshall
+  </header>
+
+  <div class="container">
+    <div class="card">
+      <label>Student Name:</label>
+      <input type="text" id="studentName" placeholder="Enter your name" required>
+      <label>Class:</label>
+      <input type="text" id="studentClass" placeholder="Enter your class" required>
+    </div>
+
+    <div id="questions"></div>
+
+    <div class="progress"><div id="progressBar" class="progress-bar"></div></div>
+
+    <button onclick="submitAnswers()">Submit Worksheet</button>
+  </div>
+
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyAFsHg9fK6IDnHbuxmBleEfIIfVGsuLDik",
+      authDomain: "profile-b825d.firebaseapp.com",
+      projectId: "profile-b825d",
+      storageBucket: "profile-b825d.firebasestorage.app",
+      messagingSenderId: "925276859161",
+      appId: "1:925276859161:web:194c60f6dbd9f1ef8bf388"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+
+    // ✅ New words for this worksheet
+    const words = ["Grateful", "Curious", "Polite", "Loyal", "Hopeful", "Clever"];
+    const questionsDiv = document.getElementById("questions");
+
+    words.forEach((word, i) => {
+      questionsDiv.innerHTML += `
+        <div class="card">
+          <h3>${i+1}. ${word}</h3>
+          <label>Meaning:</label>
+          <textarea id="meaning-${word}"></textarea>
+          <label>3 Synonyms:</label>
+          <textarea id="synonyms-${word}"></textarea>
+          <label>Antonym:</label>
+          <input type="text" id="antonym-${word}">
+          <label>3 Example Sentences (with parts of speech):</label>
+          <textarea id="sentences-${word}"></textarea>
+        </div>
+      `;
+    });
+
+    function updateProgress() {
+      const total = words.length * 4; 
+      let filled = 0;
+      words.forEach(word => {
+        if (document.getElementById(`meaning-${word}`).value.trim()) filled++;
+        if (document.getElementById(`synonyms-${word}`).value.trim()) filled++;
+        if (document.getElementById(`antonym-${word}`).value.trim()) filled++;
+        if (document.getElementById(`sentences-${word}`).value.trim()) filled++;
+      });
+      const percent = (filled / total) * 100;
+      document.getElementById("progressBar").style.width = percent + "%";
+    }
+    document.addEventListener("input", updateProgress);
+
+    function submitAnswers() {
+      const studentName = document.getElementById("studentName").value.trim();
+      const studentClass = document.getElementById("studentClass").value.trim();
+      if (!studentName || !studentClass) {
+        alert("Please enter your name and class.");
+        return;
+      }
+      const answers = { name: studentName, class: studentClass, timestamp: new Date() };
+      words.forEach(word => {
+        answers[word] = {
+          meaning: document.getElementById(`meaning-${word}`).value,
+          synonyms: document.getElementById(`synonyms-${word}`).value,
+          antonym: document.getElementById(`antonym-${word}`).value,
+          sentences: document.getElementById(`sentences-${word}`).value
+        };
+      });
+      db.collection("worksheets").add(answers).then(() => {
+        alert("✅ Worksheet submitted successfully!");
+        location.reload();
+      }).catch(err => console.error(err));
+    }
+  </script>
+</body>
+</html>
