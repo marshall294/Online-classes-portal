@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Grade 5 Vocabulary Builder - Mathcloud Tutorial</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gradient-to-r from-indigo-100 via-pink-100 to-yellow-100 min-h-screen flex flex-col">
+
+  <!-- Header -->
+  <header class="bg-indigo-700 text-white p-6 text-center shadow-lg sticky top-0">
+    <h1 class="text-3xl font-bold">📘 Grade 5 Vocabulary Builder</h1>
+    <p class="text-lg">Interactive Learning by <b>Marshall</b> | <i>Mathcloud Tutorial</i></p>
+  </header>
+
+  <!-- Vocabulary Container -->
+  <main class="flex-grow p-6">
+    <div id="vocabContainer" class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3"></div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-indigo-700 text-white text-center p-4 mt-auto">
+    © 2025 Mathcloud Tutorial | Teacher: Marshall
+  </footer>
+
+  <script>
+    // Vocabulary Data - 20 words
+    const vocabWords = [
+      { word: "Brave", meaning: "Showing no fear in dangerous or difficult situations.", synonyms: ["courageous", "fearless", "bold"], antonym: "cowardly", sentence: "The brave boy helped his friend cross the river.", pos: "Nouns: boy, friend, river | Verbs: helped, cross | Adjective: brave" },
+      { word: "Gentle", meaning: "Kind and calm in behavior.", synonyms: ["kind", "tender", "soft"], antonym: "harsh", sentence: "The gentle breeze cooled the room.", pos: "Nouns: breeze, room | Verb: cooled | Adjective: gentle" },
+      { word: "Eager", meaning: "Excited and ready to do something.", synonyms: ["keen", "enthusiastic", "willing"], antonym: "reluctant", sentence: "The eager student finished her homework early.", pos: "Nouns: student, homework | Verb: finished | Adjective: eager | Adverb: early" },
+      { word: "Silent", meaning: "Completely quiet without any sound.", synonyms: ["quiet", "still", "hushed"], antonym: "noisy", sentence: "The room was silent after the speech.", pos: "Nouns: room, speech | Verb: was | Adjective: silent" },
+      { word: "Swift", meaning: "Moving very quickly.", synonyms: ["fast", "rapid", "speedy"], antonym: "slow", sentence: "The swift runner won the race.", pos: "Nouns: runner, race | Verb: won | Adjective: swift" },
+      { word: "Proud", meaning: "Feeling happy about something achieved.", synonyms: ["pleased", "honored", "satisfied"], antonym: "ashamed", sentence: "She felt proud of her hard work.", pos: "Nouns: she, work | Verb: felt | Adjective: proud" },
+      { word: "Wise", meaning: "Showing good judgment and knowledge.", synonyms: ["smart", "intelligent", "sensible"], antonym: "foolish", sentence: "The wise man gave us advice.", pos: "Nouns: man, advice | Verb: gave | Adjective: wise" },
+      { word: "Cheerful", meaning: "Happy and positive.", synonyms: ["joyful", "merry", "bright"], antonym: "sad", sentence: "The cheerful child sang loudly.", pos: "Nouns: child | Verb: sang | Adjective: cheerful | Adverb: loudly" },
+      { word: "Polite", meaning: "Showing good manners.", synonyms: ["respectful", "courteous", "well-mannered"], antonym: "rude", sentence: "The polite student greeted the teacher.", pos: "Nouns: student, teacher | Verb: greeted | Adjective: polite" },
+      { word: "Strong", meaning: "Having power or force.", synonyms: ["powerful", "sturdy", "tough"], antonym: "weak", sentence: "The strong bridge carried heavy trucks.", pos: "Nouns: bridge, trucks | Verb: carried | Adjective: strong" },
+      { word: "Calm", meaning: "Peaceful and relaxed.", synonyms: ["peaceful", "quiet", "relaxed"], antonym: "angry", sentence: "The calm water reflected the sun.", pos: "Nouns: water, sun | Verb: reflected | Adjective: calm" },
+      { word: "Bright", meaning: "Full of light or intelligent.", synonyms: ["shiny", "smart", "radiant"], antonym: "dull", sentence: "The bright lamp lit the room.", pos: "Nouns: lamp, room | Verb: lit | Adjective: bright" },
+      { word: "Friendly", meaning: "Kind and pleasant.", synonyms: ["kind", "amiable", "welcoming"], antonym: "hostile", sentence: "The friendly dog wagged its tail.", pos: "Nouns: dog, tail | Verb: wagged | Adjective: friendly" },
+      { word: "Lazy", meaning: "Not willing to work or use energy.", synonyms: ["idle", "inactive", "sluggish"], antonym: "hardworking", sentence: "The lazy boy avoided his chores.", pos: "Nouns: boy, chores | Verb: avoided | Adjective: lazy" },
+      { word: "Neat", meaning: "Tidy and well-organized.", synonyms: ["tidy", "orderly", "clean"], antonym: "messy", sentence: "Her room is always neat and clean.", pos: "Nouns: room | Verb: is | Adjectives: neat, clean" },
+      { word: "Brilliant", meaning: "Very intelligent or full of light.", synonyms: ["smart", "shining", "talented"], antonym: "dull", sentence: "The brilliant student solved the puzzle.", pos: "Nouns: student, puzzle | Verb: solved | Adjective: brilliant" },
+      { word: "Honest", meaning: "Telling the truth.", synonyms: ["truthful", "trustworthy", "sincere"], antonym: "dishonest", sentence: "The honest girl told the truth.", pos: "Nouns: girl, truth | Verb: told | Adjective: honest" },
+      { word: "Fierce", meaning: "Very strong, violent, or intense.", synonyms: ["wild", "angry", "ferocious"], antonym: "gentle", sentence: "The fierce tiger roared loudly.", pos: "Nouns: tiger | Verb: roared | Adjective: fierce | Adverb: loudly" },
+      { word: "Kind", meaning: "Being nice and caring.", synonyms: ["caring", "helpful", "generous"], antonym: "unkind", sentence: "The kind woman helped the child.", pos: "Nouns: woman, child | Verb: helped | Adjective: kind" },
+      { word: "Quick", meaning: "Moving fast or doing something in a short time.", synonyms: ["speedy", "rapid", "fast"], antonym: "slow", sentence: "The quick fox jumped over the fence.", pos: "Nouns: fox, fence | Verb: jumped | Adjective: quick" }
+    ];
+
+    const container = document.getElementById("vocabContainer");
+
+    vocabWords.forEach((item, index) => {
+      const card = document.createElement("div");
+      card.className = "bg-white rounded-2xl shadow-lg p-6 hover:scale-105 transition transform duration-300";
+
+      card.innerHTML = `
+        <h2 class="text-2xl font-bold text-indigo-700 mb-3">${item.word}</h2>
+        <p class="bg-blue-100 p-2 rounded"><b>Meaning:</b> ${item.meaning}</p>
+        <p class="bg-green-100 p-2 rounded mt-2"><b>Synonyms:</b> ${item.synonyms.join(", ")}</p>
+        <p class="bg-red-100 p-2 rounded mt-2"><b>Antonym:</b> ${item.antonym}</p>
+        <p class="bg-yellow-100 p-2 rounded mt-2"><b>Sentence:</b> ${item.sentence}</p>
+
+        <!-- Interactive Buttons -->
+        <div class="flex flex-wrap gap-2 mt-4">
+          <button onclick="speak('${item.word}')" class="bg-indigo-500 text-white px-3 py-1 rounded hover:bg-indigo-700">🔊 Hear Word</button>
+          <button onclick="showFeedback(${index}, true)" class="bg-green-500 text-white px-3 py-1 rounded hover:bg-green-700">✔ Correct</button>
+          <button onclick="showFeedback(${index}, false)" class="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-700">❌ Wrong</button>
+          <button onclick="togglePOS(${index}, '${item.pos}')" class="bg-yellow-500 text-white px-3 py-1 rounded hover:bg-yellow-700">📖 Show Parts of Speech</button>
+        </div>
+        <p id="feedback-${index}" class="mt-2 font-semibold"></p>
+        <p id="pos-${index}" class="hidden mt-2 bg-purple-100 p-2 rounded text-sm"></p>
+      `;
+      container.appendChild(card);
+    });
+
+    // Instant Feedback with sound
+    function showFeedback(id, correct) {
+      const fb = document.getElementById(`feedback-${id}`);
+      if (correct) {
+        fb.textContent = "✅ Great job!";
+        fb.className = "text-green-600 font-bold mt-2";
+        new Audio("https://actions.google.com/sounds/v1/cartoon/clang_and_wobble.ogg").play();
+      } else {
+        fb.textContent = "❌ Try again!";
+        fb.className = "text-red-600 font-bold mt-2";
+        new Audio("https://actions.google.com/sounds/v1/cartoon/wood_plank_flicks.ogg").play();
+      }
+    }
+
+    // Show / Hide Parts of Speech
+    function togglePOS(id, text) {
+      const posBox = document.getElementById(`pos-${id}`);
+      if (posBox.classList.contains("hidden")) {
+        posBox.textContent = text;
+        posBox.classList.remove("hidden");
+      } else {
+        posBox.classList.add("hidden");
+      }
+    }
+
+    // Text-to-Speech (Read Aloud)
+    function speak(text) {
+      const msg = new SpeechSynthesisUtterance(text);
+      msg.rate = 0.9;
+      msg.pitch = 1;
+      msg.lang = "en-US";
+      speechSynthesis.speak(msg);
+    }
+  </script>
+</body>
+</html>
