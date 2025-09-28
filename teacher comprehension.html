@@ -2,35 +2,85 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Teacher View - Reading Worksheet</title>
+  <title>Teacher Dashboard - Mathcloud Tutorial</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
-    body { font-family: 'Poppins', sans-serif; background: #f7f9fc; margin: 0; padding: 0; }
-    header { background: #4facfe; color: white; text-align: center; padding: 20px; font-size: 1.6em; }
-    .container { max-width: 1000px; margin: 20px auto; padding: 20px; }
-    .card { background: white; padding: 15px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); margin-bottom: 15px; }
-    .student-header { background: #28a745; color: white; padding: 12px; border-radius: 8px; cursor: pointer; }
-    .student-header:hover { background: #218838; }
-    .student-content { display: none; margin-top: 10px; padding: 10px; border-left: 4px solid #4facfe; background: #f9f9f9; border-radius: 6px; }
-    .answer-box { margin-bottom: 12px; padding: 10px; border-bottom: 1px solid #ddd; }
-    .question { font-weight: bold; color: #007bff; }
-    .student-answer { color: #333; margin: 5px 0; }
-    .correct-answer { color: #28a745; font-style: italic; }
+    body {
+      font-family: "Segoe UI", sans-serif;
+      background: #f9faff;
+      margin: 0;
+      padding: 0;
+      color: #333;
+    }
+    header {
+      background: #004d99;
+      color: white;
+      text-align: center;
+      padding: 1rem;
+    }
+    .container {
+      max-width: 1000px;
+      margin: auto;
+      padding: 20px;
+    }
+    details {
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      padding: 8px;
+      background: white;
+    }
+    summary {
+      font-weight: bold;
+      cursor: pointer;
+      color: #004d99;
+    }
+    .answer-block {
+      margin: 6px 0;
+      padding: 6px;
+      border-left: 4px solid #0066cc;
+      background: #f4faff;
+    }
+    .student-info {
+      background: #eaf4ff;
+      padding: 10px;
+      border-radius: 6px;
+      margin-bottom: 8px;
+    }
+    .correct {
+      color: green;
+      font-weight: bold;
+    }
+    .student {
+      color: darkred;
+    }
+    button {
+      padding: 6px 12px;
+      margin: 6px 0;
+      border: none;
+      border-radius: 6px;
+      background: #0066cc;
+      color: white;
+      cursor: pointer;
+    }
+    button:hover { background: #004d99; }
   </style>
 </head>
 <body>
-
   <header>
-    Teacher Page - Student Answers 👩‍🏫
+    <h1>📘 Mathcloud Tutorial</h1>
+    <h2>Teacher Comprehension Dashboard</h2>
   </header>
 
-  <div class="container" id="answersContainer">
-    <p>Loading student submissions...</p>
+  <div class="container">
+    <button onclick="loadSubmissions()">🔄 Refresh Submissions</button>
+    <div id="submissions"></div>
   </div>
 
-  <!-- Firebase -->
   <script type="module">
-    // Firebase config from you
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import { getFirestore, collection, getDocs, query, orderBy } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
     const firebaseConfig = {
       apiKey: "AIzaSyAFsHg9fK6IDnHbuxmBleEfIIfVGsuLDik",
       authDomain: "profile-b825d.firebaseapp.com",
@@ -40,83 +90,98 @@
       appId: "1:925276859161:web:194c60f6dbd9f1ef8bf388"
     };
 
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
-    import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
-
     const app = initializeApp(firebaseConfig);
     const db = getFirestore(app);
 
-    const answersContainer = document.getElementById("answersContainer");
+    // Correct answers (must match student page order)
+    const data = [
+      {
+        passage: "One sunny morning, Emma found a lost puppy near her house.",
+        answers: [
+          "Emma", "In the morning", "Milk", "To find its owner", "Near her house"
+        ]
+      },
+      {
+        passage: "The Nile River in Egypt is one of the longest rivers in the world.",
+        answers: [
+          "Egypt", "One of the longest rivers", "Helped grow crops", "Thousands of years", "Egypt"
+        ]
+      },
+      {
+        passage: "Birds migrate to warmer places during winter.",
+        answers: [
+          "Migrate", "Flock", "Spring", "To find warmth/food", "Spring"
+        ]
+      },
+      {
+        passage: "Thomas Edison invented the electric bulb.",
+        answers: [
+          "Thomas Edison", "Electric bulb", "Changed lives and work", "Thomas Edison", "Candles/lamps"
+        ]
+      },
+      {
+        passage: "The cheetah is the fastest land animal.",
+        answers: [
+          "Cheetah", "120 km/h", "To catch prey", "Prey", "Land animal"
+        ]
+      },
+      {
+        passage: "Mount Everest is the tallest mountain in the world.",
+        answers: [
+          "Tallest mountain", "Nepal/World", "Peak", "Every year", "Tallest mountain"
+        ]
+      },
+      {
+        passage: "Honeybees live in hives and make honey.",
+        answers: [
+          "Hives", "Honey", "Pollination", "Flowers and crops", "Hive"
+        ]
+      }
+    ];
 
-    // Correct answers key (should match student questions)
-    const correctAnswers = {
-      "Passage 1: The Lost Puppy": [
-        "The puppy", "At the park", "Because it was lost", "A boy", "Happy / relieved"
-      ],
-      "Passage 2: Rainy Day": [
-        "It rained all day", "Played indoors", "With her brother", "They played board games", "Rainy days can be fun indoors"
-      ],
-      "Passage 3: The Farmer": [
-        "Corn and beans", "To feed his family", "Early morning", "The farmer’s children", "Hard work brings rewards"
-      ],
-      "Passage 4: The Library": [
-        "She borrowed a book", "The library", "Reading is fun", "The librarian", "Books give knowledge"
-      ],
-      "Passage 5: The Beach": [
-        "Sandcastle", "The beach", "With her father", "They used buckets and spades", "Enjoying time with family"
-      ]
-    };
+    async function loadSubmissions() {
+      const submissionsDiv = document.getElementById("submissions");
+      submissionsDiv.innerHTML = "<p>Loading...</p>";
 
-    async function loadAnswers() {
-      const querySnapshot = await getDocs(collection(db, "worksheetAnswers"));
-      answersContainer.innerHTML = "";
+      const q = query(collection(db, "comprehensionAnswers"), orderBy("timestamp", "desc"));
+      const snapshot = await getDocs(q);
 
-      querySnapshot.forEach(doc => {
-        const data = doc.data();
-        const studentName = data.name || "Unknown";
-        const studentClass = data.class || "N/A";
-        const answers = data.answers || {};
+      submissionsDiv.innerHTML = "";
 
-        const card = document.createElement("div");
-        card.className = "card";
-
-        const header = document.createElement("div");
-        header.className = "student-header";
-        header.innerText = `${studentName} (${studentClass})`;
-        card.appendChild(header);
-
-        const content = document.createElement("div");
-        content.className = "student-content";
-
-        Object.keys(answers).forEach(passage => {
-          const passageDiv = document.createElement("div");
-          passageDiv.innerHTML = `<h3>${passage}</h3>`;
-
-          answers[passage].forEach((ans, idx) => {
-            const ansBox = document.createElement("div");
-            ansBox.className = "answer-box";
-            ansBox.innerHTML = `
-              <div class="question">Q${idx + 1}:</div>
-              <div class="student-answer">Student: ${ans || "No answer"}</div>
-              <div class="correct-answer">Correct: ${correctAnswers[passage][idx]}</div>
-            `;
-            passageDiv.appendChild(ansBox);
-          });
-
-          content.appendChild(passageDiv);
-        });
-
-        card.appendChild(content);
-        answersContainer.appendChild(card);
-
-        // Toggle expand
-        header.addEventListener("click", () => {
-          content.style.display = content.style.display === "block" ? "none" : "block";
-        });
+      snapshot.forEach(doc => {
+        const dataDoc = doc.data();
+        const studentBlock = document.createElement("details");
+        studentBlock.innerHTML = `
+          <summary>${dataDoc.name} (${dataDoc.class})</summary>
+          <div class="student-info">
+            Submitted: ${dataDoc.timestamp?.toDate?.().toLocaleString?.() || "Unknown"}
+          </div>
+          ${renderAnswers(dataDoc.answers)}
+        `;
+        submissionsDiv.appendChild(studentBlock);
       });
     }
 
-    loadAnswers();
+    function renderAnswers(answers) {
+      let html = "";
+      data.forEach((p,i)=>{
+        html += `<details><summary>Passage ${i+1}</summary>`;
+        p.answers.forEach((ans,j)=>{
+          const studentAns = answers[`Passage${i+1}_Q${j+1}`] || "(No Answer)";
+          html += `
+            <div class="answer-block">
+              <b>Q${j+1}:</b> <span class="student">${studentAns}</span><br>
+              <span class="correct">✔ Correct: ${ans}</span>
+            </div>
+          `;
+        });
+        html += "</details>";
+      });
+      return html;
+    }
+
+    window.loadSubmissions = loadSubmissions;
+    loadSubmissions();
   </script>
 </body>
-</html>
+  </html>
