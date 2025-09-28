@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Teacher View - Reading Worksheet</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body { font-family: 'Poppins', sans-serif; background: #f7f9fc; margin: 0; padding: 0; }
+    header { background: #4facfe; color: white; text-align: center; padding: 20px; font-size: 1.6em; }
+    .container { max-width: 1000px; margin: 20px auto; padding: 20px; }
+    .card { background: white; padding: 15px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); margin-bottom: 15px; }
+    .student-header { background: #28a745; color: white; padding: 12px; border-radius: 8px; cursor: pointer; }
+    .student-header:hover { background: #218838; }
+    .student-content { display: none; margin-top: 10px; padding: 10px; border-left: 4px solid #4facfe; background: #f9f9f9; border-radius: 6px; }
+    .answer-box { margin-bottom: 12px; padding: 10px; border-bottom: 1px solid #ddd; }
+    .question { font-weight: bold; color: #007bff; }
+    .student-answer { color: #333; margin: 5px 0; }
+    .correct-answer { color: #28a745; font-style: italic; }
+  </style>
+</head>
+<body>
+
+  <header>
+    Teacher Page - Student Answers 👩‍🏫
+  </header>
+
+  <div class="container" id="answersContainer">
+    <p>Loading student submissions...</p>
+  </div>
+
+  <!-- Firebase -->
+  <script type="module">
+    // Firebase config from you
+    const firebaseConfig = {
+      apiKey: "AIzaSyAFsHg9fK6IDnHbuxmBleEfIIfVGsuLDik",
+      authDomain: "profile-b825d.firebaseapp.com",
+      projectId: "profile-b825d",
+      storageBucket: "profile-b825d.firebasestorage.app",
+      messagingSenderId: "925276859161",
+      appId: "1:925276859161:web:194c60f6dbd9f1ef8bf388"
+    };
+
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
+    import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    const answersContainer = document.getElementById("answersContainer");
+
+    // Correct answers key (should match student questions)
+    const correctAnswers = {
+      "Passage 1: The Lost Puppy": [
+        "The puppy", "At the park", "Because it was lost", "A boy", "Happy / relieved"
+      ],
+      "Passage 2: Rainy Day": [
+        "It rained all day", "Played indoors", "With her brother", "They played board games", "Rainy days can be fun indoors"
+      ],
+      "Passage 3: The Farmer": [
+        "Corn and beans", "To feed his family", "Early morning", "The farmer’s children", "Hard work brings rewards"
+      ],
+      "Passage 4: The Library": [
+        "She borrowed a book", "The library", "Reading is fun", "The librarian", "Books give knowledge"
+      ],
+      "Passage 5: The Beach": [
+        "Sandcastle", "The beach", "With her father", "They used buckets and spades", "Enjoying time with family"
+      ]
+    };
+
+    async function loadAnswers() {
+      const querySnapshot = await getDocs(collection(db, "worksheetAnswers"));
+      answersContainer.innerHTML = "";
+
+      querySnapshot.forEach(doc => {
+        const data = doc.data();
+        const studentName = data.name || "Unknown";
+        const studentClass = data.class || "N/A";
+        const answers = data.answers || {};
+
+        const card = document.createElement("div");
+        card.className = "card";
+
+        const header = document.createElement("div");
+        header.className = "student-header";
+        header.innerText = `${studentName} (${studentClass})`;
+        card.appendChild(header);
+
+        const content = document.createElement("div");
+        content.className = "student-content";
+
+        Object.keys(answers).forEach(passage => {
+          const passageDiv = document.createElement("div");
+          passageDiv.innerHTML = `<h3>${passage}</h3>`;
+
+          answers[passage].forEach((ans, idx) => {
+            const ansBox = document.createElement("div");
+            ansBox.className = "answer-box";
+            ansBox.innerHTML = `
+              <div class="question">Q${idx + 1}:</div>
+              <div class="student-answer">Student: ${ans || "No answer"}</div>
+              <div class="correct-answer">Correct: ${correctAnswers[passage][idx]}</div>
+            `;
+            passageDiv.appendChild(ansBox);
+          });
+
+          content.appendChild(passageDiv);
+        });
+
+        card.appendChild(content);
+        answersContainer.appendChild(card);
+
+        // Toggle expand
+        header.addEventListener("click", () => {
+          content.style.display = content.style.display === "block" ? "none" : "block";
+        });
+      });
+    }
+
+    loadAnswers();
+  </script>
+</body>
+</html>
