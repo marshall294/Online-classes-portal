@@ -2,204 +2,98 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Reading Worksheet - Student</title>
+  <title>Mathcloud Tutorial - Reading Comprehension</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
-    body { font-family: 'Poppins', sans-serif; background: #f0f8ff; margin: 0; padding: 0; }
-    header { background: #4facfe; color: white; text-align: center; padding: 20px; font-size: 1.6em; }
-    .container { max-width: 900px; margin: 20px auto; padding: 20px; }
-    .card { background: white; padding: 15px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); margin-bottom: 15px; }
-    .toggle { background: #28a745; color: white; padding: 12px; width: 100%; border: none; text-align: left; font-size: 1em; border-radius: 8px; cursor: pointer; margin-bottom: 8px; }
-    .toggle:hover { background: #218838; }
-    .content { display: none; padding: 12px; background: #f9f9f9; border-left: 4px solid #4facfe; border-radius: 6px; margin-bottom: 12px; }
-    .read-btn { background: #6f42c1; color: white; padding: 8px 12px; border: none; border-radius: 6px; margin-bottom: 12px; cursor: pointer; }
-    .read-btn:hover { background: #5a32a3; }
-    .question { background: #007bff; color: white; padding: 10px; border: none; border-radius: 6px; margin: 6px 0; width: 100%; text-align: left; cursor: pointer; }
-    .question:hover { background: #0056b3; }
-    .answer { display: none; padding: 10px; margin-top: 6px; background: #fff; border-left: 4px solid #28a745; border-radius: 6px; }
-    .answer input { width: 100%; padding: 8px; border-radius: 6px; border: 1px solid #ccc; }
-    .submit-btn { background: #ff5722; color: white; padding: 12px 20px; border: none; border-radius: 8px; margin-top: 20px; cursor: pointer; font-size: 1em; }
-    .submit-btn:hover { background: #e64a19; }
-    .info { margin-bottom: 20px; }
-    .info input { padding: 10px; width: 48%; margin: 4px 1%; border: 1px solid #ccc; border-radius: 6px; }
+    body {
+      font-family: "Segoe UI", sans-serif;
+      background: #f0f8ff;
+      margin: 0;
+      padding: 0;
+      color: #333;
+    }
+    header {
+      background: #0066cc;
+      color: white;
+      text-align: center;
+      padding: 1rem;
+    }
+    .container {
+      max-width: 900px;
+      margin: auto;
+      padding: 20px;
+    }
+    .student-info {
+      margin-bottom: 20px;
+      background: #eaf4ff;
+      padding: 15px;
+      border-radius: 8px;
+    }
+    input {
+      padding: 8px;
+      margin: 5px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      width: 95%;
+    }
+    button {
+      padding: 8px 15px;
+      margin: 5px;
+      border: none;
+      border-radius: 6px;
+      background: #0066cc;
+      color: white;
+      cursor: pointer;
+    }
+    button:hover { background: #004d99; }
+    details {
+      margin-bottom: 12px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      padding: 8px;
+      background: white;
+    }
+    summary {
+      font-weight: bold;
+      cursor: pointer;
+      color: #0066cc;
+    }
+    .question {
+      margin: 10px 0;
+    }
+    textarea {
+      width: 95%;
+      padding: 8px;
+      border-radius: 6px;
+      border: 1px solid #aaa;
+    }
   </style>
 </head>
 <body>
   <header>
-    Reading Worksheet 📖 - Student Page
+    <h1>📖 Mathcloud Tutorial</h1>
+    <h2>Interactive Reading & Comprehension</h2>
   </header>
 
   <div class="container">
-    <div class="info">
-      <input type="text" id="studentName" placeholder="Enter your name">
-      <input type="text" id="studentClass" placeholder="Enter your class">
+    <div class="student-info">
+      <label>Student Name:</label><br>
+      <input type="text" id="studentName"><br>
+      <label>Class:</label><br>
+      <input type="text" id="studentClass">
     </div>
 
-    <!-- Passages Start -->
+    <!-- === PASSAGE TOGGLES === -->
+    <div id="passages"></div>
 
-    <!-- Passage 1 -->
-    <div class="card">
-      <button class="toggle">📘 Passage 1: The Lost Puppy</button>
-      <div class="content">
-        <p class="passage">
-          A little puppy wandered away from home and got lost. It was scared and hungry. 
-          A kind girl found the puppy, gave it food, and helped it return home.
-        </p>
-        <button class="read-btn">🔊 Read Aloud</button>
-
-        <button class="question">Q1. Who got lost?</button>
-        <div class="answer"><input type="text" data-question="P1Q1"></div>
-
-        <button class="question">Q2. How did the puppy feel?</button>
-        <div class="answer"><input type="text" data-question="P1Q2"></div>
-
-        <button class="question">Q3. Who helped the puppy?</button>
-        <div class="answer"><input type="text" data-question="P1Q3"></div>
-
-        <button class="question">Q4. What did the girl give the puppy?</button>
-        <div class="answer"><input type="text" data-question="P1Q4"></div>
-
-        <button class="question">Q5. Where did the puppy return?</button>
-        <div class="answer"><input type="text" data-question="P1Q5"></div>
-      </div>
-    </div>
-
-    <!-- Passage 2 -->
-    <div class="card">
-      <button class="toggle">📘 Passage 2: The Rainy Day</button>
-      <div class="content">
-        <p class="passage">
-          It rained all morning. The children could not play outside, so they built a tent in the living room 
-          and played games together. They laughed and had fun indoors.
-        </p>
-        <button class="read-btn">🔊 Read Aloud</button>
-
-        <button class="question">Q1. What happened all morning?</button>
-        <div class="answer"><input type="text" data-question="P2Q1"></div>
-        <button class="question">Q2. Why could the children not play outside?</button>
-        <div class="answer"><input type="text" data-question="P2Q2"></div>
-        <button class="question">Q3. Where did they build a tent?</button>
-        <div class="answer"><input type="text" data-question="P2Q3"></div>
-        <button class="question">Q4. What did the children do inside?</button>
-        <div class="answer"><input type="text" data-question="P2Q4"></div>
-        <button class="question">Q5. How did they feel?</button>
-        <div class="answer"><input type="text" data-question="P2Q5"></div>
-      </div>
-    </div>
-
-    <!-- Passage 3 -->
-    <div class="card">
-      <button class="toggle">📘 Passage 3: The Big Tree</button>
-      <div class="content">
-        <p class="passage">
-          In the park, there was a very big tree. Birds made nests on its branches. Children loved to play under its shade on hot days.
-        </p>
-        <button class="read-btn">🔊 Read Aloud</button>
-        <button class="question">Q1. Where was the big tree?</button>
-        <div class="answer"><input type="text" data-question="P3Q1"></div>
-        <button class="question">Q2. Who made nests in the tree?</button>
-        <div class="answer"><input type="text" data-question="P3Q2"></div>
-        <button class="question">Q3. Who loved the tree’s shade?</button>
-        <div class="answer"><input type="text" data-question="P3Q3"></div>
-        <button class="question">Q4. When did children use the tree’s shade?</button>
-        <div class="answer"><input type="text" data-question="P3Q4"></div>
-        <button class="question">Q5. What did the tree provide?</button>
-        <div class="answer"><input type="text" data-question="P3Q5"></div>
-      </div>
-    </div>
-
-    <!-- Passage 4 -->
-    <div class="card">
-      <button class="toggle">📘 Passage 4: The Market Visit</button>
-      <div class="content">
-        <p class="passage">
-          Anna went to the market with her mother. They bought fruits, vegetables, and bread. Anna carried a basket and helped her mother happily.
-        </p>
-        <button class="read-btn">🔊 Read Aloud</button>
-        <button class="question">Q1. Who went to the market?</button>
-        <div class="answer"><input type="text" data-question="P4Q1"></div>
-        <button class="question">Q2. What did they buy?</button>
-        <div class="answer"><input type="text" data-question="P4Q2"></div>
-        <button class="question">Q3. What did Anna carry?</button>
-        <div class="answer"><input type="text" data-question="P4Q3"></div>
-        <button class="question">Q4. Who was Anna with?</button>
-        <div class="answer"><input type="text" data-question="P4Q4"></div>
-        <button class="question">Q5. How did Anna feel?</button>
-        <div class="answer"><input type="text" data-question="P4Q5"></div>
-      </div>
-    </div>
-
-    <!-- Passage 5 -->
-    <div class="card">
-      <button class="toggle">📘 Passage 5: The Birthday Cake</button>
-      <div class="content">
-        <p class="passage">
-          It was Tom’s birthday. His friends surprised him with a big chocolate cake. They sang songs and gave him presents.
-        </p>
-        <button class="read-btn">🔊 Read Aloud</button>
-        <button class="question">Q1. Whose birthday was it?</button>
-        <div class="answer"><input type="text" data-question="P5Q1"></div>
-        <button class="question">Q2. What kind of cake did Tom get?</button>
-        <div class="answer"><input type="text" data-question="P5Q2"></div>
-        <button class="question">Q3. What did his friends do?</button>
-        <div class="answer"><input type="text" data-question="P5Q3"></div>
-        <button class="question">Q4. What did they sing?</button>
-        <div class="answer"><input type="text" data-question="P5Q4"></div>
-        <button class="question">Q5. What else did they give him?</button>
-        <div class="answer"><input type="text" data-question="P5Q5"></div>
-      </div>
-    </div>
-
-    <!-- Passage 6 -->
-    <div class="card">
-      <button class="toggle">📘 Passage 6: The School Bus</button>
-      <div class="content">
-        <p class="passage">
-          Every morning, children waited at the bus stop for the yellow school bus. The driver greeted them with a smile, and they rode happily to school.
-        </p>
-        <button class="read-btn">🔊 Read Aloud</button>
-        <button class="question">Q1. What color was the school bus?</button>
-        <div class="answer"><input type="text" data-question="P6Q1"></div>
-        <button class="question">Q2. Where did children wait?</button>
-        <div class="answer"><input type="text" data-question="P6Q2"></div>
-        <button class="question">Q3. Who greeted the children?</button>
-        <div class="answer"><input type="text" data-question="P6Q3"></div>
-        <button class="question">Q4. How did the children feel?</button>
-        <div class="answer"><input type="text" data-question="P6Q4"></div>
-        <button class="question">Q5. Where were they going?</button>
-        <div class="answer"><input type="text" data-question="P6Q5"></div>
-      </div>
-    </div>
-
-    <!-- Passage 7 -->
-    <div class="card">
-      <button class="toggle">📘 Passage 7: The Snowman</button>
-      <div class="content">
-        <p class="passage">
-          During winter, children played in the snow and built a snowman. They used a carrot for the nose and stones for the eyes.
-        </p>
-        <button class="read-btn">🔊 Read Aloud</button>
-        <button class="question">Q1. When did children build a snowman?</button>
-        <div class="answer"><input type="text" data-question="P7Q1"></div>
-        <button class="question">Q2. What season was it?</button>
-        <div class="answer"><input type="text" data-question="P7Q2"></div>
-        <button class="question">Q3. What did they use for the snowman’s nose?</button>
-        <div class="answer"><input type="text" data-question="P7Q3"></div>
-        <button class="question">Q4. What did they use for the eyes?</button>
-        <div class="answer"><input type="text" data-question="P7Q4"></div>
-        <button class="question">Q5. What were the children doing?</button>
-        <div class="answer"><input type="text" data-question="P7Q5"></div>
-      </div>
-    </div>
-
-    <!-- Submit -->
-    <button class="submit-btn">Submit Answers</button>
+    <button onclick="submitAnswers()">Submit Answers</button>
   </div>
 
-  <!-- Firebase -->
-  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
-  <script>
+  <script type="module">
+    // Firebase config
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
     const firebaseConfig = {
       apiKey: "AIzaSyAFsHg9fK6IDnHbuxmBleEfIIfVGsuLDik",
       authDomain: "profile-b825d.firebaseapp.com",
@@ -209,55 +103,131 @@
       appId: "1:925276859161:web:194c60f6dbd9f1ef8bf388"
     };
 
-    firebase.initializeApp(firebaseConfig);
-    const db = firebase.firestore();
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
 
-    // Toggle passages
-    document.querySelectorAll(".toggle").forEach(btn => {
-      btn.addEventListener("click", () => {
-        const content = btn.nextElementSibling;
-        content.style.display = content.style.display === "block" ? "none" : "block";
-      });
-    });
+    // Passages & Questions
+    const data = [
+      {
+        passage: "One sunny morning, Emma found a lost puppy near her house. She took it home, gave it milk, and promised to find its owner.",
+        questions: [
+          "Who found the puppy?",
+          "When did Emma find the puppy?",
+          "What did Emma give the puppy?",
+          "What promise did Emma make?",
+          "Where did Emma find the puppy?"
+        ]
+      },
+      {
+        passage: "The Nile River in Egypt is one of the longest rivers in the world. It has helped people grow crops for thousands of years.",
+        questions: [
+          "Where is the Nile River located?",
+          "What is special about the Nile?",
+          "What has the Nile helped people to do?",
+          "How long have people used the Nile?",
+          "Which country does the passage mention?"
+        ]
+      },
+      {
+        passage: "Birds migrate to warmer places during winter. They fly in groups called flocks and return in the spring.",
+        questions: [
+          "What do birds do in winter?",
+          "What is a group of birds called?",
+          "When do birds return?",
+          "Why do birds migrate?",
+          "What season do birds come back?"
+        ]
+      },
+      {
+        passage: "Thomas Edison invented the electric bulb. His invention changed the way people lived and worked.",
+        questions: [
+          "Who invented the bulb?",
+          "What did he invent?",
+          "How did his invention change lives?",
+          "What is the full name of Edison?",
+          "What did the bulb replace at night?"
+        ]
+      },
+      {
+        passage: "The cheetah is the fastest land animal. It can run up to 120 kilometers per hour while chasing prey.",
+        questions: [
+          "Which animal is the fastest?",
+          "How fast can a cheetah run?",
+          "Why does it run so fast?",
+          "What does the cheetah chase?",
+          "What type of animal is the cheetah?"
+        ]
+      },
+      {
+        passage: "Mount Everest is the tallest mountain in the world. Many climbers try to reach its peak every year.",
+        questions: [
+          "What is Mount Everest?",
+          "Where is Mount Everest?",
+          "What do climbers try to reach?",
+          "How often do climbers attempt this?",
+          "What is special about Everest?"
+        ]
+      },
+      {
+        passage: "Honeybees live in hives and make honey. They are very important for pollinating flowers and crops.",
+        questions: [
+          "Where do honeybees live?",
+          "What do honeybees make?",
+          "Why are they important?",
+          "What do honeybees pollinate?",
+          "What is the home of bees called?"
+        ]
+      }
+    ];
 
-    // Toggle questions
-    document.querySelectorAll(".question").forEach(q => {
-      q.addEventListener("click", () => {
-        const answerBox = q.nextElementSibling;
-        answerBox.style.display = answerBox.style.display === "block" ? "none" : "block";
-      });
+    // Render passages
+    const container = document.getElementById("passages");
+    data.forEach((item, i) => {
+      const block = document.createElement("details");
+      block.innerHTML = `
+        <summary>Passage ${i+1}</summary>
+        <p>${item.passage} 
+        <button onclick="readText('${item.passage.replace(/'/g, "\\'")}')">🔊 Read Aloud</button></p>
+        ${item.questions.map((q,j) => `
+          <details>
+            <summary>Question ${j+1}</summary>
+            <div class="question">${q} 
+              <button onclick="readText('${q.replace(/'/g, "\\'")}')">🔊</button>
+              <br><textarea id="ans-${i}-${j}" placeholder="Type your answer..."></textarea>
+            </div>
+          </details>
+        `).join("")}
+      `;
+      container.appendChild(block);
     });
 
     // Read aloud
-    document.querySelectorAll(".read-btn").forEach(btn => {
-      btn.addEventListener("click", () => {
-        const passageText = btn.parentElement.querySelector(".passage").innerText;
-        const utterance = new SpeechSynthesisUtterance(passageText);
-        utterance.rate = 1; utterance.pitch = 1;
-        speechSynthesis.speak(utterance);
-      });
-    });
+    window.readText = function(text) {
+      const speech = new SpeechSynthesisUtterance(text);
+      speech.lang = "en-US";
+      window.speechSynthesis.speak(speech);
+    }
 
     // Submit answers
-    document.querySelector(".submit-btn").addEventListener("click", async () => {
+    window.submitAnswers = async function() {
       const name = document.getElementById("studentName").value.trim();
-      const studentClass = document.getElementById("studentClass").value.trim();
-      if (!name || !studentClass) {
-        alert("Please enter your name and class.");
+      const cls = document.getElementById("studentClass").value.trim();
+      if (!name || !cls) {
+        alert("Please enter your name and class!");
         return;
       }
-
-      let answers = {};
-      document.querySelectorAll("input[data-question]").forEach(input => {
-        answers[input.dataset.question] = input.value.trim();
+      const answers = {};
+      data.forEach((item,i)=>{
+        item.questions.forEach((q,j)=>{
+          const val = document.getElementById(`ans-${i}-${j}`).value.trim();
+          answers[`Passage${i+1}_Q${j+1}`] = val;
+        });
       });
-
-      await db.collection("worksheetAnswers").add({
-        name, class: studentClass, answers, timestamp: new Date()
+      await addDoc(collection(db,"comprehensionAnswers"), {
+        name, class: cls, answers, timestamp: new Date()
       });
-
-      alert("✅ Your answers have been submitted!");
-    });
+      alert("✅ Answers submitted successfully!");
+    }
   </script>
 </body>
 </html>
