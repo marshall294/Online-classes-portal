@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nathan Ubajaka — Module 1 Progress Report | MathCloud Tutorial</title>
+
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Playfair+Display:wght@500;700&family=Roboto+Slab:wght@400;600&display=swap" rel="stylesheet">
+
+<!-- AOS Animation -->
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(180deg, #f8fbff, #f2f6fc);
+    color: #333;
+    overflow-x: hidden;
+  }
+  header {
+    text-align: center;
+    background: linear-gradient(120deg, #007bff, #00b4d8);
+    color: white;
+    padding: 2.5rem 1rem;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  }
+  header img {
+    width: 90px;
+    animation: float 3s ease-in-out infinite;
+  }
+  @keyframes float {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+    100% { transform: translateY(0); }
+  }
+  header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    margin: 10px 0 5px;
+  }
+  header p {
+    font-size: 1.05rem;
+    opacity: 0.9;
+  }
+
+  .container {
+    max-width: 950px;
+    margin: 2rem auto;
+    background: white;
+    border-radius: 20px;
+    padding: 2.5rem;
+    box-shadow: 0 5px 25px rgba(0,0,0,0.05);
+    animation: fadeUp 1s ease forwards;
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  h2 {
+    font-family: 'Playfair Display', serif;
+    color: #007bff;
+    margin-bottom: 0.3rem;
+  }
+  h3 {
+    font-family: 'Roboto Slab', serif;
+    color: #0056b3;
+    margin-top: 1.7rem;
+  }
+  p, li { font-size: 1rem; line-height: 1.8; }
+  ul { padding-left: 1.5rem; }
+  section { margin-bottom: 1.7rem; }
+  section:nth-child(even) {
+    background: #f9fbff;
+    border-radius: 12px;
+    padding: 1.2rem 1.5rem;
+  }
+  .signature {
+    margin-top: 2rem;
+    font-weight: 500;
+  }
+
+  footer {
+    background: #f0f8ff;
+    text-align: center;
+    padding: 2.5rem 1rem;
+    border-top: 1px solid #e5e9ef;
+    box-shadow: inset 0 4px 12px rgba(0,0,0,0.03);
+  }
+  footer h3 {
+    font-family: 'Playfair Display', serif;
+    color: #007bff;
+    margin-bottom: 0.8rem;
+  }
+  .rating {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 1rem;
+  }
+  .star {
+    font-size: 1.8rem;
+    color: #ccc;
+    cursor: pointer;
+    transition: color 0.3s ease, transform 0.3s ease;
+  }
+  .star:hover, .star.active {
+    color: gold;
+    transform: scale(1.2);
+  }
+  textarea {
+    width: 100%;
+    max-width: 500px;
+    height: 80px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 10px;
+    font-family: 'Poppins', sans-serif;
+    resize: none;
+    margin-top: 10px;
+  }
+  button {
+    background: #007bff;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    padding: 10px 25px;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background 0.3s ease;
+  }
+  button:hover {
+    background: #0056b3;
+  }
+  .thankyou {
+    display: none;
+    background: #e9f8ef;
+    border-radius: 12px;
+    padding: 1rem;
+    margin-top: 1.5rem;
+    color: #228b22;
+    font-weight: 600;
+    animation: fadeIn 1s ease forwards;
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (max-width: 600px) {
+    .container { padding: 1.7rem; }
+    header h1 { font-size: 1.6rem; }
+    textarea { width: 90%; }
+  }
+</style>
+</head>
+<body>
+
+<header data-aos="zoom-in">
+  <img src="logo1.png" alt="MathCloud Logo">
+  <h1>MathCloud Tutorial</h1>
+  <p>Personalized Learning Progress Report</p>
+</header>
+
+<div class="container" data-aos="fade-up">
+  <section>
+    <h2>Nathan Ubajaka — Module 1 Progress Report</h2>
+    <p><strong>Tutor:</strong> Marshall Jacob<br>
+    <strong>Program:</strong> MathCloud Tutorial<br>
+    <strong>Duration:</strong> 4 Weeks (8 Sessions | 16 Hours)</p>
+  </section>
+
+  <section data-aos="fade-right">
+    <h3>Week 1</h3>
+    <p>I began by observing Nathan’s strengths and weaknesses in spelling, reading, and comprehension. His willingness to learn and adapt quickly to a new teacher was commendable. However, his reading fluency, spelling accuracy, and comprehension skills require improvement to reach international standards.</p>
+  </section>
+
+  <section data-aos="fade-left">
+    <h3>Week 2</h3>
+    <p>I introduced digital learning tools, particularly a spelling enhancement application. With consistent use, Nathan’s spelling skills improved from <strong>35%</strong> to <strong>52%</strong>, showing clear progress and growing confidence.</p>
+  </section>
+
+  <section data-aos="fade-right">
+    <h3>Week 3</h3>
+    <p>Using an interactive reading and grammar platform, Nathan’s comprehension skills gradually improved. He now confidently identifies nouns, adjectives, verbs, and adverbs within simple sentences. His engagement and focus have notably increased.</p>
+  </section>
+
+  <section data-aos="fade-left">
+    <h3>Week 4</h3>
+    <p>This week focused on reinforcing <strong>spelling, comprehension, and grammar</strong> through practical exercises and contextual reading. Nathan practiced sentence formation, short paragraph reading, and discussed short stories to enhance inferential understanding and vocabulary. In grammar, he applied parts of speech to form accurate and meaningful sentences, strengthening his communication and writing clarity. His confidence and enthusiasm for learning continue to grow impressively.</p>
+  </section>
+
+  <section data-aos="fade-up">
+    <h3>Resources and Tools Used</h3>
+    <ul>
+      <li>Google Classroom</li>
+      <li>Spelling Enhancement Application</li>
+      <li>Comprehension Web Application</li>
+      <li>Academic Portal</li>
+      <li>Amira Tutor (pending activation)</li>
+    </ul>
+  </section>
+
+  <section data-aos="fade-up">
+    <h3>Recommendation</h3>
+    <p>I recommend establishing an instant follow-up and communication channel to enable more frequent feedback and updates on Nathan’s progress between sessions.</p>
+  </section>
+
+  <section class="signature" data-aos="zoom-in">
+    <p><strong>Thank you,</strong><br>
+    <em>Marshall Jacob</em><br>
+    MathCloud Tutorial</p>
+  </section>
+</div>
+
+<footer data-aos="fade-up">
+  <h3>Feedback & Rating</h3>
+  <p>We value your opinion — please rate our service:</p>
+  <div class="rating" id="rating">
+    <span class="star" data-value="1">★</span>
+    <span class="star" data-value="2">★</span>
+    <span class="star" data-value="3">★</span>
+    <span class="star" data-value="4">★</span>
+    <span class="star" data-value="5">★</span>
+  </div>
+
+  <textarea id="feedback" placeholder="Leave your feedback or suggestion..."></textarea><br>
+  <button id="sendFeedback">Submit Feedback</button>
+
+  <div class="thankyou" id="thankyou">MathCloud thanks you for your feedback!</div>
+
+  <p style="margin-top: 1.5rem;">For more inquiries, reach us on WhatsApp:<br>
+  <a href="https://wa.me/2348102341648" target="_blank">+234 810 234 1648</a></p>
+
+  <p style="font-size: 0.9rem; opacity: 0.8;">© 2025 MathCloud Tutorial | All Rights Reserved</p>
+</footer>
+
+<!-- JS -->
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+  AOS.init({ duration: 1000, once: true });
+
+  const stars = document.querySelectorAll('.star');
+  const feedbackBox = document.getElementById('feedback');
+  const thankyou = document.getElementById('thankyou');
+  const sendBtn = document.getElementById('sendFeedback');
+  let selectedRating = 0;
+
+  stars.forEach(star => {
+    star.addEventListener('click', () => {
+      stars.forEach(s => s.classList.remove('active'));
+      star.classList.add('active');
+      selectedRating = star.getAttribute('data-value');
+    });
+  });
+
+  sendBtn.addEventListener('click', () => {
+    const feedback = feedbackBox.value.trim();
+    if (selectedRating === 0) {
+      alert("Please select a rating first.");
+      return;
+    }
+    if (feedback === "") {
+      alert("Please write a short comment.");
+      return;
+    }
+
+    // Encode message for WhatsApp
+    const message = encodeURIComponent(`MathCloud Feedback:\nRating: ${selectedRating} ⭐\nComment: ${feedback}`);
+    const phone = "2348102341648";
+    window.open(`https://wa.me/${phone}?text=${message}`, '_blank');
+
+    feedbackBox.value = "";
+    stars.forEach(s => s.classList.remove('active'));
+    selectedRating = 0;
+    thankyou.style.display = "block";
+  });
+</script>
+</body>
+</html>
