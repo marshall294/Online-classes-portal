@@ -20,153 +20,59 @@
       --light-gray: #f5f5f5;
       --shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
     }
-
     * { box-sizing: border-box; }
-
     body {
-      margin: 0;
-      padding: 0;
+      margin: 0; padding: 0;
       font-family: 'Poppins', sans-serif;
-      background: var(--cream);
-      color: var(--dark);
+      background: var(--cream); color: var(--dark);
       scroll-behavior: smooth;
     }
-
     a { text-decoration: none; color: inherit; }
 
     /* ===== HEADER ===== */
-    header {
-      position: fixed;
-      top: 0;
-      width: 100%;
+    header { position: fixed; top: 0; width: 100%;
       background: linear-gradient(145deg, var(--purple), #5f3ea0);
-      color: white;
-      box-shadow: var(--shadow);
-      z-index: 1000;
-    }
-
-    nav {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 15px 30px;
-    }
-
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-weight: 700;
-      font-size: 1.2rem;
-    }
-
-    .logo img {
-      width: 55px;
-      height: 55px;
-      border-radius: 8px;
-      object-fit: cover;
-      box-shadow: var(--shadow);
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 25px;
-      align-items: center;
-      position: relative;
-    }
-
-    .nav-links a {
-      color: white;
-      font-weight: 500;
-      transition: color 0.3s;
-      padding: 6px 10px;
-    }
-
+      color: white; box-shadow: var(--shadow); z-index: 1000; }
+    nav { display: flex; align-items: center; justify-content: space-between; padding: 15px 30px; }
+    .logo { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 1.2rem; }
+    .logo img { width: 55px; height: 55px; border-radius: 8px; object-fit: cover; box-shadow: var(--shadow); }
+    .nav-links { display: flex; gap: 25px; align-items: center; position: relative; }
+    .nav-links a { color: white; font-weight: 500; transition: color 0.3s; padding: 6px 10px; }
     .nav-links a:hover { color: var(--gold); }
 
     /* Dropdown */
-    .dropdown {
-      position: relative;
-    }
-    .dropdown-content {
-      display: none;
-      position: absolute;
-      top: 40px;
-      background: var(--purple);
-      min-width: 180px;
-      box-shadow: var(--shadow);
-      border-radius: 8px;
-      overflow: hidden;
-    }
-    .dropdown-content a {
-      display: block;
-      padding: 10px;
-      color: white;
-      text-align: left;
-      transition: background 0.3s;
-    }
+    .dropdown { position: relative; }
+    .dropdown-content { display: none; position: absolute; top: 40px; background: var(--purple);
+      min-width: 180px; box-shadow: var(--shadow); border-radius: 8px; overflow: hidden; }
+    .dropdown-content a { display: block; padding: 10px; color: white; text-align: left; transition: background 0.3s; }
     .dropdown-content a:hover { background: #5f3ea0; }
     .dropdown:hover .dropdown-content { display: block; }
 
-    .donate-btn {
-      background: var(--gold);
-      color: white;
-      padding: 8px 18px;
-      border-radius: 25px;
-      font-weight: 600;
-      transition: all 0.3s ease;
-    }
-
+    .donate-btn { background: var(--gold); color: white; padding: 8px 18px;
+      border-radius: 25px; font-weight: 600; transition: all 0.3s ease; }
     .donate-btn:hover { background: #e0aa2d; }
+    .menu-toggle { display: none; font-size: 1.5rem; cursor: pointer; }
 
-    .menu-toggle {
-      display: none;
-      font-size: 1.5rem;
-      cursor: pointer;
+    /* Language selector */
+    .lang-select {
+      background: white; color: var(--purple);
+      border: none; padding: 6px 12px; border-radius: 6px;
+      font-weight: 500; cursor: pointer;
     }
 
     @media (max-width: 768px) {
-      .nav-links {
-        display: none;
-        flex-direction: column;
-        background: var(--purple);
-        position: absolute;
-        top: 70px;
-        right: 0;
-        width: 100%;
-        text-align: center;
-        box-shadow: var(--shadow);
-      }
+      .nav-links { display: none; flex-direction: column; background: var(--purple);
+        position: absolute; top: 70px; right: 0; width: 100%; text-align: center; box-shadow: var(--shadow); }
       .nav-links.active { display: flex; }
       .menu-toggle { display: block; }
     }
 
     /* ===== HERO ===== */
-    .hero {
-      height: 95vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      color: white;
-      position: relative;
-      background-size: cover;
-      background-position: center;
-      transition: background-image 1s ease-in-out;
-    }
-    .hero::after {
-      content: '';
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: rgba(0,0,0,0.55);
-    }
-    .hero-content {
-      position: relative;
-      z-index: 2;
-      max-width: 700px;
-      padding: 20px;
-    }
+    .hero { height: 95vh; display: flex; align-items: center; justify-content: center;
+      text-align: center; color: white; position: relative;
+      background-size: cover; background-position: center; transition: background-image 1s ease-in-out; }
+    .hero::after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.55); }
+    .hero-content { position: relative; z-index: 2; max-width: 700px; padding: 20px; }
     .hero-content h1 { font-size: 2.8rem; margin-bottom: 20px; }
     .hero-content p { font-size: 1.2rem; line-height: 1.7; }
     .hero-content .donate-btn { margin-top: 25px; font-size: 1.1rem; }
@@ -177,72 +83,21 @@
     }
 
     /* ===== SECTIONS ===== */
-    section {
-      padding: 100px 20px;
-      max-width: 1200px;
-      margin: auto;
-    }
-    .section-title {
-      color: var(--purple);
-      text-align: center;
-      font-size: 2.2rem;
-      margin-bottom: 50px;
-      position: relative;
-    }
-    .section-title::after {
-      content: '';
-      width: 70px; height: 4px;
-      background: var(--gold);
-      display: block;
-      margin: 10px auto 0;
-      border-radius: 2px;
-    }
+    section { padding: 100px 20px; max-width: 1200px; margin: auto; }
+    .section-title { color: var(--purple); text-align: center; font-size: 2.2rem; margin-bottom: 50px; position: relative; }
+    .section-title::after { content: ''; width: 70px; height: 4px; background: var(--gold); display: block; margin: 10px auto 0; border-radius: 2px; }
 
-    /* 3D card style */
-    .article-card, .testimonial, .faq-item {
-      background: white;
-      border-radius: 15px;
-      padding: 25px;
-      box-shadow: var(--shadow);
-      margin-bottom: 25px;
-      transition: transform 0.3s;
-    }
-    .article-card:hover, .testimonial:hover, .faq-item:hover {
-      transform: translateY(-6px);
-    }
+    .article-card, .testimonial, .faq-item { background: white; border-radius: 15px; padding: 25px;
+      box-shadow: var(--shadow); margin-bottom: 25px; transition: transform 0.3s; }
+    .article-card:hover, .testimonial:hover, .faq-item:hover { transform: translateY(-6px); }
 
-    /* Partners logos */
-    .partners {
-      display: flex;
-      justify-content: center;
-      gap: 40px;
-      flex-wrap: wrap;
-    }
-    .partners img {
-      width: 120px;
-      height: 120px;
-      object-fit: contain;
-      background: white;
-      padding: 10px;
-      border-radius: 12px;
-      box-shadow: var(--shadow);
-      transition: transform 0.3s;
-    }
+    .partners { display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; }
+    .partners img { width: 120px; height: 120px; object-fit: contain; background: white; padding: 10px;
+      border-radius: 12px; box-shadow: var(--shadow); transition: transform 0.3s; }
     .partners img:hover { transform: scale(1.05); }
 
-    /* ===== FOOTER ===== */
-    footer {
-      background: var(--purple);
-      color: white;
-      text-align: center;
-      padding: 60px 20px;
-    }
-    .socials a {
-      color: white;
-      margin: 0 12px;
-      font-size: 1.4rem;
-      transition: color 0.3s;
-    }
+    footer { background: var(--purple); color: white; text-align: center; padding: 60px 20px; }
+    .socials a { color: white; margin: 0 12px; font-size: 1.4rem; transition: color 0.3s; }
     .socials a:hover { color: var(--gold); }
     .footer-note { font-size: 0.9rem; margin-top: 20px; color: #ddd; }
   </style>
@@ -258,20 +113,27 @@
       </div>
       <div class="menu-toggle" onclick="toggleMenu()"><i class="fas fa-bars"></i></div>
       <div class="nav-links" id="navLinks">
-        <a href="#home">Home</a>
+        <a href="#home" data-key="navHome">Home</a>
         <div class="dropdown">
-          <a href="#about">About <i class="fas fa-caret-down"></i></a>
+          <a href="#about" data-key="navAbout">About <i class="fas fa-caret-down"></i></a>
           <div class="dropdown-content">
-            <a href="#about">Mission</a>
-            <a href="#about">Vision</a>
-            <a href="#articles">Articles</a>
+            <a href="#about" data-key="navMission">Mission</a>
+            <a href="#about" data-key="navVision">Vision</a>
+            <a href="#articles" data-key="navArticles">Articles</a>
           </div>
         </div>
-        <a href="#testimonies">Testimonies</a>
-        <a href="#faq">FAQ</a>
-        <a href="#partners">Partners</a>
-        <a href="#contact">Contact</a>
-        <a href="https://flutterwave.com/pay/k8ty9m0syros" class="donate-btn" target="_blank" rel="noopener">Donate</a>
+        <a href="#testimonies" data-key="navTestimonies">Testimonies</a>
+        <a href="#faq" data-key="navFaq">FAQ</a>
+        <a href="#partners" data-key="navPartners">Partners</a>
+        <a href="#contact" data-key="navContact">Contact</a>
+        <a href="https://flutterwave.com/pay/k8ty9m0syros" class="donate-btn" target="_blank" rel="noopener" data-key="navDonate">Donate</a>
+        <!-- Language selector -->
+        <select class="lang-select" id="langSelect">
+          <option value="en">English</option>
+          <option value="ha">Hausa</option>
+          <option value="ig">Igbo</option>
+          <option value="yo">Yoruba</option>
+        </select>
       </div>
     </nav>
   </header>
@@ -279,14 +141,12 @@
   <!-- ===== HERO ===== -->
   <section class="hero" id="home">
     <div class="hero-content">
-      <h1>International Day of the Girl Child 2025</h1>
-      <p>Join us in empowering girls across Nigeria. Together, we invest in girls’ rights,
-        leadership, and well-being to build a brighter, inclusive future.</p>
-      <a href="https://flutterwave.com/pay/k8ty9m0syros" class="donate-btn" target="_blank" rel="noopener">
-        Donate Now
-      </a>
+      <h1 data-key="heroTitle">International Day of the Girl Child 2025</h1>
+      <p data-key="heroText">Join us in empowering girls across Nigeria. Together, we invest in girls’ rights, leadership, and well-being to build a brighter, inclusive future.</p>
+      <a href="https://flutterwave.com/pay/k8ty9m0syros" class="donate-btn" target="_blank" rel="noopener" data-key="heroDonate">Donate Now</a>
     </div>
   </section>
+
   <!-- ===== ABOUT / MISSION / VISION ===== -->
   <section id="about">
     <h2 class="section-title">About & Vision</h2>
@@ -452,6 +312,48 @@
     }
     changeBackground();
     setInterval(changeBackground, 5000);
+
+    // Translations
+    const translations = {
+      en: {
+        navHome: "Home", navAbout: "About", navMission: "Mission", navVision: "Vision", navArticles: "Articles",
+        navTestimonies: "Testimonies", navFaq: "FAQ", navPartners: "Partners", navContact: "Contact", navDonate: "Donate",
+        heroTitle: "International Day of the Girl Child 2025",
+        heroText: "Join us in empowering girls across Nigeria. Together, we invest in girls’ rights, leadership, and well-being to build a brighter, inclusive future.",
+        heroDonate: "Donate Now"
+      },
+      ha: {
+        navHome: "Gida", navAbout: "Game da Mu", navMission: "Manufa", navVision: "Hangen Nesa", navArticles: "Maqaloli",
+        navTestimonies: "Shaidu", navFaq: "Tambayoyi", navPartners: "Abokan Hulɗa", navContact: "Tuntuɓi Mu", navDonate: "Tallafa",
+        heroTitle: "Ranar Ƴarinyar Duniya 2025",
+        heroText: "Ku haɗa hannu wajen ƙarfafa ƴan mata a Najeriya. Tare za mu saka hannun jari a cikin haƙƙoƙi, jagoranci, da jin daɗinsu don gina kyakkyawar makoma.",
+        heroDonate: "Tallafa Yanzu"
+      },
+      ig: {
+        navHome: "Ụlọ", navAbout: "Banyere Anyị", navMission: "Ebumnobi", navVision: "Ncheta", navArticles: "Akwụkwọ",
+        navTestimonies: "Nkwupụta", navFaq: "Ajụjụ", navPartners: "Ndị mmekọ", navContact: "Kpọtụrụ Anyị", navDonate: "Nyere aka",
+        heroTitle: "Ụbọchị Ụmụ agbọghọ 2025",
+        heroText: "Sonyere anyị iji mee ka ụmụ agbọghọ dị ike n’ime Naịjirịa. Anyị na-etinye ego n’ime ikike ha, nduzi, na ahụike ha iji wuo ọdịnihu ọma.",
+        heroDonate: "Nyere Aka Ugbu a"
+      },
+      yo: {
+        navHome: "Ile", navAbout: "Nipa Wa", navMission: "Ìpinnu", navVision: "Ìran", navArticles: "Àpilẹkọ",
+        navTestimonies: "Ẹrí", navFaq: "Ìbéèrè", navPartners: "Àwọn alábàáṣiṣẹpọ", navContact: "Kan si Wa", navDonate: "Ṣe iranwọ́",
+        heroTitle: "Ọjọ Ìyàwó Ọmọbìnrin Agbaye 2025",
+        heroText: "Darapọ̀ mọ́ wa láti fi agbára fún àwọn ọmọbìnrin ní Naijiria. Papọ̀, a ń nawo nínú ẹ̀tọ́ wọn, ìsọ̀kan wọn, àti ilera wọn láti dá ìjọ́gbọ̀n ọjọ́ iwájú.",
+        heroDonate: "Ṣe iranwọ́ báyìí"
+      }
+    };
+
+    document.getElementById("langSelect").addEventListener("change", function () {
+      const lang = this.value;
+      document.querySelectorAll("[data-key]").forEach(el => {
+        const key = el.getAttribute("data-key");
+        if (translations[lang][key]) {
+          el.textContent = translations[lang][key];
+        }
+      });
+    });
   </script>
 </body>
 </html>
