@@ -6,15 +6,10 @@
   <title>International Day of the Girl Child 2025 | She Reigns Initiative</title>
 
   <!-- Google Fonts -->
-  <link
-    href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
-    rel="stylesheet"
-  />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
   <!-- Font Awesome -->
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
-  />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
   <style>
     :root {
@@ -23,11 +18,10 @@
       --cream: #f8f4ef;
       --dark: #222;
       --light-gray: #f5f5f5;
+      --shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
     }
 
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     body {
       margin: 0;
@@ -38,19 +32,16 @@
       scroll-behavior: smooth;
     }
 
-    a {
-      text-decoration: none;
-      color: inherit;
-    }
+    a { text-decoration: none; color: inherit; }
 
-    /* ===== HEADER & NAV ===== */
+    /* ===== HEADER ===== */
     header {
       position: fixed;
       top: 0;
       width: 100%;
       background: linear-gradient(145deg, var(--purple), #5f3ea0);
       color: white;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      box-shadow: var(--shadow);
       z-index: 1000;
     }
 
@@ -70,26 +61,52 @@
     }
 
     .logo img {
-      width: 45px;
-      height: 45px;
-      object-fit: contain;
+      width: 55px;
+      height: 55px;
+      border-radius: 8px;
+      object-fit: cover;
+      box-shadow: var(--shadow);
     }
 
     .nav-links {
       display: flex;
       gap: 25px;
       align-items: center;
+      position: relative;
     }
 
     .nav-links a {
       color: white;
       font-weight: 500;
       transition: color 0.3s;
+      padding: 6px 10px;
     }
 
-    .nav-links a:hover {
-      color: var(--gold);
+    .nav-links a:hover { color: var(--gold); }
+
+    /* Dropdown */
+    .dropdown {
+      position: relative;
     }
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      top: 40px;
+      background: var(--purple);
+      min-width: 180px;
+      box-shadow: var(--shadow);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .dropdown-content a {
+      display: block;
+      padding: 10px;
+      color: white;
+      text-align: left;
+      transition: background 0.3s;
+    }
+    .dropdown-content a:hover { background: #5f3ea0; }
+    .dropdown:hover .dropdown-content { display: block; }
 
     .donate-btn {
       background: var(--gold);
@@ -100,9 +117,7 @@
       transition: all 0.3s ease;
     }
 
-    .donate-btn:hover {
-      background: #e0aa2d;
-    }
+    .donate-btn:hover { background: #e0aa2d; }
 
     .menu-toggle {
       display: none;
@@ -120,197 +135,100 @@
         right: 0;
         width: 100%;
         text-align: center;
-        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+        box-shadow: var(--shadow);
       }
-
-      .nav-links.active {
-        display: flex;
-      }
-
-      .menu-toggle {
-        display: block;
-      }
+      .nav-links.active { display: flex; }
+      .menu-toggle { display: block; }
     }
 
-    /* ===== HERO / BANNER ===== */
+    /* ===== HERO ===== */
     .hero {
-      background: url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1400&q=80')
-        center/cover no-repeat;
-      height: 90vh;
+      height: 95vh;
       display: flex;
       align-items: center;
       justify-content: center;
       text-align: center;
       color: white;
       position: relative;
+      background-size: cover;
+      background-position: center;
+      transition: background-image 1s ease-in-out;
     }
-
     .hero::after {
       content: '';
       position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.5);
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.55);
     }
-
     .hero-content {
       position: relative;
       z-index: 2;
       max-width: 700px;
       padding: 20px;
     }
+    .hero-content h1 { font-size: 2.8rem; margin-bottom: 20px; }
+    .hero-content p { font-size: 1.2rem; line-height: 1.7; }
+    .hero-content .donate-btn { margin-top: 25px; font-size: 1.1rem; }
 
-    .hero-content h1 {
-      font-size: 2.8rem;
-      margin-bottom: 20px;
-    }
-
-    .hero-content p {
-      font-size: 1.2rem;
-      line-height: 1.8;
-    }
-
-    .hero-content .donate-btn {
-      margin-top: 25px;
-      font-size: 1rem;
+    @media (max-width: 768px) {
+      .hero-content h1 { font-size: 2rem; }
+      .hero-content p { font-size: 1rem; }
     }
 
     /* ===== SECTIONS ===== */
     section {
-      padding: 80px 20px;
-      max-width: 1100px;
+      padding: 100px 20px;
+      max-width: 1200px;
       margin: auto;
     }
-
     .section-title {
       color: var(--purple);
       text-align: center;
       font-size: 2.2rem;
-      margin-bottom: 40px;
+      margin-bottom: 50px;
       position: relative;
     }
-
     .section-title::after {
       content: '';
-      width: 60px;
-      height: 4px;
+      width: 70px; height: 4px;
       background: var(--gold);
       display: block;
       margin: 10px auto 0;
+      border-radius: 2px;
     }
 
-    /* — About / Mission / Vision / Schedule / Articles etc. — */
-    .about p,
-    .mission p,
-    .vision p,
-    .articles p {
-      font-size: 1.05rem;
-      line-height: 1.8;
-      color: #444;
-    }
-
-    .articles .article-card {
-      background: #fff;
-      border-radius: 12px;
-      padding: 30px;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-      margin-bottom: 30px;
+    /* 3D card style */
+    .article-card, .testimonial, .faq-item {
+      background: white;
+      border-radius: 15px;
+      padding: 25px;
+      box-shadow: var(--shadow);
+      margin-bottom: 25px;
       transition: transform 0.3s;
     }
-
-    .articles .article-card:hover {
-      transform: translateY(-8px);
+    .article-card:hover, .testimonial:hover, .faq-item:hover {
+      transform: translateY(-6px);
     }
 
-    .article-card h3 {
-      margin-top: 0;
-      color: var(--purple);
-    }
-
-    .article-card a.read-more {
-      display: inline-block;
-      margin-top: 15px;
-      color: var(--gold);
-      font-weight: 600;
-    }
-
-    /* ===== TESTIMONIES ===== */
-    .testimonies {
-      background: var(--light-gray);
-      border-radius: 20px;
-      padding: 50px 20px;
-    }
-
-    .testimonial {
-      text-align: center;
-      margin-bottom: 50px;
-    }
-
-    .testimonial p {
-      font-style: italic;
-      color: #333;
-    }
-
-    .testimonial h4 {
-      margin-top: 15px;
-      color: var(--gold);
-      font-weight: 600;
-    }
-
-    /* ===== FAQ ===== */
-    .faq {
-      max-width: 800px;
-      margin: auto;
-    }
-
-    .faq-item {
-      margin-bottom: 20px;
-    }
-
-    .faq-item h4 {
-      cursor: pointer;
-      padding: 15px 20px;
-      background: #fff;
-      border-radius: 8px;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-      margin: 0;
-      transition: background 0.3s;
-    }
-
-    .faq-item h4:hover {
-      background: #f0f0f0;
-    }
-
-    .faq-item p {
-      margin: 0;
-      padding: 15px 20px;
-      display: none;
-      background: #fafafa;
-      border-left: 3px solid var(--purple);
-      border-radius: 0 0 8px 8px;
-    }
-
-    /* ===== PARTNERS ===== */
+    /* Partners logos */
     .partners {
       display: flex;
-      flex-wrap: wrap;
       justify-content: center;
       gap: 40px;
-      align-items: center;
+      flex-wrap: wrap;
     }
-
     .partners img {
-      max-width: 150px;
-      opacity: 0.8;
-      transition: opacity 0.3s, transform 0.3s;
+      width: 120px;
+      height: 120px;
+      object-fit: contain;
+      background: white;
+      padding: 10px;
+      border-radius: 12px;
+      box-shadow: var(--shadow);
+      transition: transform 0.3s;
     }
-
-    .partners img:hover {
-      opacity: 1;
-      transform: scale(1.05);
-    }
+    .partners img:hover { transform: scale(1.05); }
 
     /* ===== FOOTER ===== */
     footer {
@@ -319,23 +237,14 @@
       text-align: center;
       padding: 60px 20px;
     }
-
     .socials a {
       color: white;
       margin: 0 12px;
       font-size: 1.4rem;
       transition: color 0.3s;
     }
-
-    .socials a:hover {
-      color: var(--gold);
-    }
-
-    .footer-note {
-      font-size: 0.9rem;
-      margin-top: 20px;
-      color: #ddd;
-    }
+    .socials a:hover { color: var(--gold); }
+    .footer-note { font-size: 0.9rem; margin-top: 20px; color: #ddd; }
   </style>
 </head>
 
@@ -344,16 +253,20 @@
   <header>
     <nav>
       <div class="logo">
-        <img src="logo44.jpg" alt="She Reigns Logo" />
+        <img src="https://online-classes-portal.vercel.app/logo44.jpg" alt="She Reigns Logo" />
         SHE REIGNS
       </div>
-      <div class="menu-toggle" onclick="toggleMenu()">
-        <i class="fas fa-bars"></i>
-      </div>
+      <div class="menu-toggle" onclick="toggleMenu()"><i class="fas fa-bars"></i></div>
       <div class="nav-links" id="navLinks">
         <a href="#home">Home</a>
-        <a href="#about">About</a>
-        <a href="#articles">Articles</a>
+        <div class="dropdown">
+          <a href="#about">About <i class="fas fa-caret-down"></i></a>
+          <div class="dropdown-content">
+            <a href="#about">Mission</a>
+            <a href="#about">Vision</a>
+            <a href="#articles">Articles</a>
+          </div>
+        </div>
         <a href="#testimonies">Testimonies</a>
         <a href="#faq">FAQ</a>
         <a href="#partners">Partners</a>
@@ -363,25 +276,17 @@
     </nav>
   </header>
 
-  <!-- ===== HERO SECTION ===== -->
+  <!-- ===== HERO ===== -->
   <section class="hero" id="home">
     <div class="hero-content">
       <h1>International Day of the Girl Child 2025</h1>
-      <p>
-        Join us in empowering girls across Nigeria. Together, we invest in girls’ rights,
-        leadership, and well-being to build a brighter, inclusive future.
-      </p>
-      <a
-        href="https://flutterwave.com/pay/k8ty9m0syros"
-        class="donate-btn"
-        target="_blank"
-        rel="noopener"
-      >
+      <p>Join us in empowering girls across Nigeria. Together, we invest in girls’ rights,
+        leadership, and well-being to build a brighter, inclusive future.</p>
+      <a href="https://flutterwave.com/pay/k8ty9m0syros" class="donate-btn" target="_blank" rel="noopener">
         Donate Now
       </a>
     </div>
   </section>
-
   <!-- ===== ABOUT / MISSION / VISION ===== -->
   <section id="about">
     <h2 class="section-title">About & Vision</h2>
@@ -503,26 +408,15 @@
       </div>
     </div>
   </section>
+<!-- ===== PARTNERS ===== --> <section id="partners"> <h2 class="section-title">Our Partners & Supporters</h2> <div class="partners"> <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_frRuhEQo2rmwhKAIB8gK1-6_BKkviIyBwA&s" alt="Matori Foundation Logo" /> <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTWBuB632p-BzikvlVaPUTEubUuieUuoFM2TQ&s" alt="Partner 2 Logo" /> <img src="https://thumbs.dreamstime.com/z/creative-simple-dragons-silhouettes-logo-stylized-vector-illustrations-simple-dragons-silhouettes-logo-130475058.jpg" alt="Partner 3 Logo" /> </div> </section>
 
-  <!-- ===== PARTNERS ===== -->
-  <section id="partners">
-    <h2 class="section-title">Our Partners & Supporters</h2>
-    <div class="partners">
-      <img src="https://via.placeholder.com/150x80?text=Matori+Foundation" alt="Matori Foundation Logo" />
-      <img src="https://via.placeholder.com/150x80?text=Partner+2" alt="Partner 2 Logo" />
-      <img src="https://via.placeholder.com/150x80?text=Partner+3" alt="Partner 3 Logo" />
-    </div>
-  </section>
-
-  <!-- ===== CONTACT & FOOTER ===== -->
   <footer id="contact">
     <section>
       <h2 class="section-title" style="color: white;">Get in Touch</h2>
       <p>
-        <i class="fas fa-phone"></i> 0816 215 725 | <i class="fas fa-envelope"></i>
-        <a href="mailto:shereignsempowerment@gmail.com" style="color: white;">
-          shereignsempowerment@gmail.com
-        </a>
+        <i class="fas fa-phone"></i> 0816 215 725 | 
+        <i class="fas fa-envelope"></i>
+        <a href="mailto:shereignsempowerment@gmail.com" style="color: white;">shereignsempowerment@gmail.com</a>
       </p>
       <div class="socials">
         <a href="#"><i class="fab fa-facebook-f"></i></a>
@@ -542,13 +436,22 @@
       document.getElementById('navLinks').classList.toggle('active');
     }
 
-    // FAQ toggle logic
-    document.querySelectorAll('.faq-item h4').forEach((item) => {
-      item.addEventListener('click', () => {
-        const p = item.nextElementSibling;
-        p.style.display = p.style.display === 'block' ? 'none' : 'block';
-      });
-    });
+    // Hero Slideshow
+    const hero = document.querySelector('.hero');
+    const images = [
+      "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1400&q=80",
+      "https://images.unsplash.com/photo-1509099836639-18ba1795216d?auto=format&fit=crop&w=1400&q=80",
+      "https://images.unsplash.com/photo-1508780709619-79562169bc64?auto=format&fit=crop&w=1400&q=80",
+      "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?auto=format&fit=crop&w=1400&q=80",
+      "https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?auto=format&fit=crop&w=1400&q=80"
+    ];
+    let currentIndex = 0;
+    function changeBackground() {
+      hero.style.backgroundImage = `url(${images[currentIndex]})`;
+      currentIndex = (currentIndex + 1) % images.length;
+    }
+    changeBackground();
+    setInterval(changeBackground, 5000);
   </script>
 </body>
 </html>
