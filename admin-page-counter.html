@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Visitor Log Dashboard</title>
+  <style>
+    body {
+      font-family: "Poppins", sans-serif;
+      background: #f5f5f5;
+      padding: 40px;
+      color: #333;
+    }
+    h1 {
+      text-align: center;
+      color: #4a2b8a;
+    }
+    .filters {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 20px;
+    }
+    select {
+      padding: 8px 12px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      background: white;
+      font-size: 14px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+      background: white;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    th, td {
+      padding: 12px;
+      text-align: center;
+      border-bottom: 1px solid #ddd;
+    }
+    th {
+      background: #4a2b8a;
+      color: white;
+    }
+    tr {
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    tr:hover {
+      background: #f0f0ff;
+    }
+    .note {
+      text-align: center;
+      color: #777;
+      margin-top: 15px;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Visitor Logs</h1>
+
+  <div class="filters">
+    <select id="countryFilter"><option value="">All Countries</option></select>
+    <select id="regionFilter"><option value="">All Regions</option></select>
+    <select id="cityFilter"><option value="">All Cities</option></select>
+  </div>
+
+  <p class="note">💡 Tip: Click on any visitor row to view their location on Google Maps.</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Date & Time</th>
+        <th>IP Address</th>
+        <th>City</th>
+        <th>Region</th>
+        <th>Country</th>
+        <th>Latitude</th>
+        <th>Longitude</th>
+        <th>Device Info</th>
+      </tr>
+    </thead>
+    <tbody id="visitorTable"></tbody>
+  </table>
+
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database-compat.js"></script>
+
+  <script>
+    // Firebase Config
+    const firebaseConfig = {
+      apiKey: "AIzaSyC3Ef_ZnjmU_X2JJDbUlDYv6enGkuuW2n0",
+      authDomain: "school-6425b.firebaseapp.com",
+      databaseURL: "https://school-6425b-default-rtdb.firebaseio.com",
+      projectId: "school-6425b",
+      storageBucket: "school-6425b.firebasestorage.app",
+      messagingSenderId: "929265479935",
+      appId: "1:929265479935:web:af45ea5968ee50258a1cca"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.database();
+
+    const tableBody = document.getElementById("visitorTable");
+    const countryFilter = document.getElementById("countryFilter");
+    const regionFilter = document.getElementById("regionFilter");
+    const cityFilter = document.getElementById("cityFilter");
+
+    let allVisitors = [];
+
+    // Load visitors in realtime
+    function loadVisitors() {
+      db.ref("visitors").on("value", snapshot => {
+        const data = snapshot.val() || {};
+        allVisitors = Object.values(data);
+        renderFilters(allVisitors);
+        renderTable(allVisitors);
+      });
+    }
+
+    // Populate filter dropdowns
+    function renderFilters(data) {
+      const countries = new Set(), regions = new Set(), cities = new Set();
+
+      data.forEach(v => {
+        if (v.country && v.country !== "N/A") countries.add(v.country);
+        if (v.region && v.region !== "N/A") regions.add(v.region);
+        if (v.city && v.city !== "N/A") cities.add(v.city);
+      });
+
+      populateSelect(countryFilter, countries, "All Countries");
+      populateSelect(regionFilter, regions, "All Regions");
+      populateSelect(cityFilter, cities, "All Cities");
+    }
+
+    function populateSelect(selectEl, set, defaultText) {
+      const options = [`<option value="">${defaultText}</option>`];
+      [...set].sort().forEach(v => options.push(`<option value="${v}">${v}</option>`));
+      selectEl.innerHTML = options.join("");
+    }
+
+    // Render filtered data into table
+    function renderTable(data) {
+      const cFilter = countryFilter.value;
+      const rFilter = regionFilter.value;
+      const cityF = cityFilter.value;
+
+      tableBody.innerHTML = "";
+
+      const filtered = data.filter(v =>
+        (!cFilter || v.country === cFilter) &&
+        (!rFilter || v.region === rFilter) &&
+        (!cityF || v.city === cityF)
+      );
+
+      filtered.forEach(v => {
+        const lat = v.latitude || "N/A";
+        const lon = v.longitude || "N/A";
+        const mapLink = (lat !== "N/A" && lon !== "N/A")
+          ? `https://www.google.com/maps?q=${lat},${lon}`
+          : "#";
+
+        const row = document.createElement("tr");
+        row.innerHTML = `
+          <td>${v.fullDateTime || v.time || "N/A"}</td>
+          <td>${v.ip || "N/A"}</td>
+          <td>${v.city || "N/A"}</td>
+          <td>${v.region || "N/A"}</td>
+          <td>${v.country || "N/A"}</td>
+          <td>${lat}</td>
+          <td>${lon}</td>
+          <td>${v.userAgent ? v.userAgent.substring(0, 40) + "..." : "N/A"}</td>
+        `;
+
+        if (mapLink !== "#") {
+          row.addEventListener("click", () => window.open(mapLink, "_blank"));
+        }
+
+        tableBody.appendChild(row);
+      });
+    }
+
+    [countryFilter, regionFilter, cityFilter].forEach(el => {
+      el.addEventListener("change", () => renderTable(allVisitors));
+    });
+
+    loadVisitors();
+  </script>
+</body>
+</html>
