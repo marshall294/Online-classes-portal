@@ -46,11 +46,23 @@
       color: white;
     }
     tr {
-      cursor: pointer;
       transition: background 0.2s;
     }
     tr:hover {
       background: #f0f0ff;
+    }
+    .delete-btn {
+      background: #e63946;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      padding: 6px 10px;
+      cursor: pointer;
+      font-size: 13px;
+      transition: 0.2s;
+    }
+    .delete-btn:hover {
+      background: #c62828;
     }
     .note {
       text-align: center;
@@ -69,7 +81,7 @@
     <select id="cityFilter"><option value="">All Cities</option></select>
   </div>
 
-  <p class="note">💡 Tip: Click on any visitor row to view their location on Google Maps.</p>
+  <p class="note">💡 Tip: Click on any row to view their location on Google Maps, or delete them permanently.</p>
 
   <table>
     <thead>
@@ -82,6 +94,7 @@
         <th>Latitude</th>
         <th>Longitude</th>
         <th>Device Info</th>
+        <th>Action</th>
       </tr>
     </thead>
     <tbody id="visitorTable"></tbody>
@@ -117,7 +130,7 @@
     function loadVisitors() {
       db.ref("visitors").on("value", snapshot => {
         const data = snapshot.val() || {};
-        allVisitors = Object.values(data);
+        allVisitors = Object.keys(data).map(id => ({ id, ...data[id] }));
         renderFilters(allVisitors);
         renderTable(allVisitors);
       });
@@ -144,12 +157,11 @@
       selectEl.innerHTML = options.join("");
     }
 
-    // Render filtered data into table
+    // Render table
     function renderTable(data) {
       const cFilter = countryFilter.value;
       const rFilter = regionFilter.value;
       const cityF = cityFilter.value;
-
       tableBody.innerHTML = "";
 
       const filtered = data.filter(v =>
@@ -175,11 +187,25 @@
           <td>${lat}</td>
           <td>${lon}</td>
           <td>${v.userAgent ? v.userAgent.substring(0, 40) + "..." : "N/A"}</td>
+          <td><button class="delete-btn" data-id="${v.id}">Delete</button></td>
         `;
 
-        if (mapLink !== "#") {
-          row.addEventListener("click", () => window.open(mapLink, "_blank"));
-        }
+        // Open location in Google Maps on row click (excluding delete button)
+        row.addEventListener("click", (e) => {
+          if (!e.target.classList.contains("delete-btn") && mapLink !== "#") {
+            window.open(mapLink, "_blank");
+          }
+        });
+
+        // Delete record
+        row.querySelector(".delete-btn").addEventListener("click", async (e) => {
+          e.stopPropagation();
+          const confirmDelete = confirm("Are you sure you want to delete this visitor record?");
+          if (confirmDelete) {
+            await db.ref("visitors/" + v.id).remove();
+            alert("Visitor record deleted successfully.");
+          }
+        });
 
         tableBody.appendChild(row);
       });
