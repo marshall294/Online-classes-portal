@@ -1,0 +1,408 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Expanding Brackets — Year 8 Lesson</title>
+
+  <!-- Fonts: readable UI + math-friendly fallback -->
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&family=STIX+Two+Text&display=swap" rel="stylesheet">
+
+  <!-- Tailwind-like quick utility (small subset) for cleanliness without build tools -->
+  <style>
+    :root{
+      --bg:#f8fafc; --card:#ffffff; --muted:#6b7280; --accent:#0ea5a4; --green:#16a34a; --red:#ef4444;
+      --serif-math: "STIX Two Text", "Times New Roman", Times, serif;
+      --ui-sans: "Nunito", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    }
+    html,body{height:100%}
+    body{font-family:var(--ui-sans); background:var(--bg); color:#0f172a; margin:0; padding:24px; -webkit-font-smoothing:antialiased}
+    .container{max-width:1024px;margin:0 auto}
+    .card{background:var(--card); border-radius:14px; padding:18px; box-shadow:0 6px 20px rgba(2,6,23,0.06); margin-bottom:18px}
+    h1{font-size:26px;margin:0 0 6px 0}
+    h2{font-size:20px;margin:0 0 10px 0}
+    p.lead{color:var(--muted); margin:6px 0 0 0}
+    .muted{color:var(--muted)}
+    .grid{display:grid; gap:12px}
+    .row{display:flex; gap:12px; align-items:center}
+    .btn{border:0;padding:8px 12px;border-radius:8px;font-weight:600;cursor:pointer}
+    .btn-primary{background:var(--accent);color:white}
+    .btn-ghost{background:transparent;border:1px solid #e6eef0;color:#0f172a}
+    .btn-success{background:var(--green);color:white}
+    .btn-danger{background:var(--red);color:white}
+    .small{font-size:13px}
+    input[type="text"], textarea{width:100%; padding:10px;border-radius:8px;border:1px solid #e6eef0;font-size:15px}
+    .math-display{font-family:var(--serif-math); text-align:center; font-size:1.25rem; margin:12px 0}
+    .math-centered{display:block; text-align:center}
+    .example-steps{background:#fbfdff;padding:12px;border-radius:8px;margin-top:10px}
+    .toolbar{display:flex; gap:6px; flex-wrap:wrap}
+    .toolbar .btn{padding:6px 8px; font-size:14px}
+    .feedback-correct{color:var(--green); font-weight:700}
+    .feedback-wrong{color:var(--red); font-weight:700}
+    .score{font-weight:700}
+    .center{text-align:center}
+    .kbd{background:#f3f4f6;border-radius:6px;padding:6px 8px;font-family:monospace;display:inline-block}
+    /* ensure MathJax output uses serif math font where possible */
+    .mjx-chtml { font-family: var(--serif-math) !important; line-height:1.6 !important; font-size:1.05em !important; }
+    /* responsiveness */
+    @media (max-width:720px){ .row{flex-direction:column;align-items:stretch} .math-display{font-size:1.05rem} h1{font-size:22px} }
+  </style>
+
+  <!-- MathJax config: TeX input + CHTML output, common packages, make inline display clearer -->
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['\\(','\\)'], ['$', '$']],
+        displayMath: [['$$','$$'], ['\\[','\\]']],
+        packages: {'[+]': ['ams']},
+      },
+      options: {
+        renderActions: {
+          addMenu: [0, '', '']
+        }
+      },
+      chtml: {
+        // set font family preference for math output (browser will fallback if unavailable)
+        scale: 1,
+        displayAlign: 'center'
+      }
+    };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+</head>
+<body>
+  <div class="container">
+    <header class="card">
+      <h1>Expanding Brackets — Year 8</h1>
+      <p class="lead">Learn how to expand expressions such as <span class="kbd">2x(3x + 6)</span>. This lesson has worked examples, a symbol toolbar for typing maths easily, live LaTeX preview, and a 20-question auto-graded assessment.</p>
+    </header>
+
+    <!-- Core idea -->
+    <section class="card">
+      <h2>Core idea</h2>
+      <p class="muted">Multiply the outside term by <strong>every</strong> term inside the bracket, then simplify.</p>
+
+      <div class="math-display">
+        <!-- centered and larger equation -->
+        <span id="coreEq">\(2x(3x+6)=2x\times3x+2x\times6=6x^2+12x\)</span>
+      </div>
+
+      <ul>
+        <li>Multiply coefficients (numbers): \(2\times 3 = 6\).</li>
+        <li>Multiply the variables: \(x\times x = x^2\).</li>
+        <li>Do this for each term inside the bracket.</li>
+      </ul>
+    </section>
+
+    <!-- Examples -->
+    <section id="examples" class="card">
+      <h2>Worked examples (click "Show steps")</h2>
+
+      <!-- We'll inject 10 examples via JS; placeholder for no-JS fallback -->
+      <div id="examplesList" class="grid"></div>
+    </section>
+
+    <!-- Math-input toolbar and preview -->
+    <section class="card">
+      <h2>Math input & symbol toolbar</h2>
+      <p class="muted">Use the buttons to insert common symbols/superscripts. You can type LaTeX directly (for example <code>6x^2+12x</code> or <code>6x^{2}+12x</code>). Press <strong>Preview</strong> to render.</p>
+
+      <div class="toolbar" style="margin-bottom:10px">
+        <button class="btn btn-ghost" data-insert="^">^</button>
+        <button class="btn btn-ghost" data-insert="^{ }">x²</button>
+        <button class="btn btn-ghost" data-insert="^{ }">^{ }</button>
+        <button class="btn btn-ghost" data-insert="\\times">×</button>
+        <button class="btn btn-ghost" data-insert="\\div">÷</button>
+        <button class="btn btn-ghost" data-insert="(">(</button>
+        <button class="btn btn-ghost" data-insert=")">)</button>
+        <button class="btn btn-ghost" data-insert="+">+</button>
+        <button class="btn btn-ghost" data-insert="-">−</button>
+        <button class="btn btn-ghost" data-insert="\\frac{ }{ }">frac</button>
+        <button class="btn btn-ghost" id="clearInput">Clear</button>
+      </div>
+
+      <textarea id="mathInput" rows="2" placeholder="Type math here (LaTeX). Example: 6x^2+12x" style="font-family:inherit"></textarea>
+
+      <div class="row" style="margin-top:10px">
+        <button id="previewBtn" class="btn btn-primary">Preview</button>
+        <button id="insertAnsBtn" class="btn btn-success">Insert last correct answer</button>
+        <div id="previewFeedback" class="muted small" style="margin-left:8px"></div>
+      </div>
+
+      <div class="math-display" id="livePreviewArea" aria-live="polite"></div>
+    </section>
+
+    <!-- Assessment -->
+    <section id="assessment" class="card">
+      <h2>Assessment — 20 questions (auto-graded)</h2>
+      <p class="muted">Type answers using the toolbar or directly in LaTeX. Use <code>^</code> for powers or superscript characters. Click "Check" for each question or "Check all" to grade the whole test. Acceptable answers are algebraic expressions such as <code>6x^2+12x</code>.</p>
+
+      <div id="assessmentList" class="grid"></div>
+
+      <div class="row" style="margin-top:12px; justify-content:space-between; align-items:center">
+        <div>
+          <button id="checkAllBtn" class="btn btn-primary">Check all and grade</button>
+          <button id="resetAllBtn" class="btn btn-ghost">Reset</button>
+        </div>
+        <div class="center">
+          <span class="muted small">Score: </span>
+          <span id="score" class="score">—</span>
+        </div>
+      </div>
+    </section>
+
+    <footer class="muted" style="margin-top:12px">Tip: use parentheses for clarity and braces with exponents, e.g. <code>x^{2}</code>. The toolbar inserts helpful LaTeX snippets.</footer>
+  </div>
+
+  <!-- Main script -->
+  <script>
+    // ---------- Examples (10) ----------
+    const workedExamples = [
+      { q: '\\(2x(3x+6)\\)', steps: ['Multiply: \\(2x\\times3x = 6x^2\\)', 'Multiply: \\(2x\\times6 = 12x\\)', 'Combine: \\(6x^2 + 12x\\)'], ans: '6x^2+12x' },
+      { q: '\\(4x(2x-5)\\)', steps: ['\\(4x\\times2x = 8x^2\\)', '\\(4x\\times(-5) = -20x\\)', 'Result: \\(8x^2 - 20x\\)'], ans: '8x^2-20x' },
+      { q: '\\(-3x(5x+4)\\)', steps: ['\\(-3x\\times5x = -15x^2\\)', '\\(-3x\\times4 = -12x\\)', 'Result: \\(-15x^2 - 12x\\)'], ans: '-15x^2-12x' },
+      { q: '\\(5x(3x-2)\\)', steps: ['\\(5x\\times3x = 15x^2\\)', '\\(5x\\times(-2) = -10x\\)', 'Result: \\(15x^2 - 10x\\)'], ans: '15x^2-10x' },
+      { q: '\\(-2x(4x-7)\\)', steps: ['\\(-2x\\times4x = -8x^2\\)', '\\(-2x\\times(-7) = 14x\\)', 'Result: \\(-8x^2 + 14x\\)'], ans: '-8x^2+14x' },
+      { q: '\\(3x(7x+8)\\)', steps: ['\\(3x\\times7x = 21x^2\\)', '\\(3x\\times8 = 24x\\)', 'Result: \\(21x^2 + 24x\\)'], ans: '21x^2+24x' },
+      { q: '\\(6x(2x-4)\\)', steps: ['\\(6x\\times2x = 12x^2\\)', '\\(6x\\times(-4) = -24x\\)', 'Result: \\(12x^2 - 24x\\)'], ans: '12x^2-24x' },
+      { q: '\\(-5x(4x+1)\\)', steps: ['\\(-5x\\times4x = -20x^2\\)', '\\(-5x\\times1 = -5x\\)', 'Result: \\(-20x^2 - 5x\\)'], ans: '-20x^2-5x' },
+      { q: '\\(x(3x+4)\\)', steps: ['\\(x\\times3x = 3x^2\\)', '\\(x\\times4 = 4x\\)', 'Result: \\(3x^2 + 4x\\)'], ans: '3x^2+4x' },
+      { q: '\\(2x(8x+1)\\)', steps: ['\\(2x\\times8x = 16x^2\\)', '\\(2x\\times1 = 2x\\)', 'Result: \\(16x^2 + 2x\\)'], ans: '16x^2+2x' }
+    ];
+
+    const exList = document.getElementById('examplesList');
+    exList.innerHTML = workedExamples.map((ex, idx) => `
+      <div class="card small">
+        <div class="row" style="justify-content:space-between">
+          <div style="min-width:0">
+            <div style="font-weight:700">Example ${idx+1}</div>
+            <div class="math-centered" style="margin-top:6px">${ex.q}</div>
+          </div>
+          <div style="flex-shrink:0">
+            <button class="btn btn-primary" data-ex="${idx}" onclick="toggleExample(${idx})">Show steps</button>
+          </div>
+        </div>
+        <div id="exsteps${idx}" class="example-steps" style="display:none">
+          ${ex.steps.map(s => `<div class="math-centered">${s}</div>`).join('')}
+          <div class="math-centered" style="margin-top:6px"><strong>Answer:</strong> \\(${ex.ans}\\)</div>
+        </div>
+      </div>
+    `).join('');
+
+    function toggleExample(i){
+      const el = document.getElementById('exsteps'+i);
+      el.style.display = (el.style.display === 'none' || el.style.display === '') ? 'block' : 'none';
+      MathJax.typesetPromise();
+    }
+
+    // ---------- Symbol toolbar and input ----------
+    const toolbar = document.querySelectorAll('.toolbar .btn');
+    const mathInput = document.getElementById('mathInput');
+    const previewBtn = document.getElementById('previewBtn');
+    const livePreview = document.getElementById('livePreviewArea');
+    const clearInput = document.getElementById('clearInput');
+    const insertAnsBtn = document.getElementById('insertAnsBtn');
+    let lastCorrectAnswer = '';
+
+    // Attach insert handlers for dynamically created toolbar buttons
+    document.querySelectorAll('.toolbar .btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const snippet = btn.getAttribute('data-insert');
+        if(!snippet) return;
+        insertAtCursor(MathJaxUnwrap(snippet));
+      });
+    });
+
+    // handle the special x² insertion (we make it smart)
+    document.querySelectorAll('.toolbar .btn[data-insert="^{ }"]').forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        const selStart = mathInput.selectionStart || 0;
+        // insert ^{ } and move caret inside braces
+        insertAtCursor('^{ }');
+        // move cursor back inside braces
+        mathInput.focus();
+        const pos = selStart + 2; // position right after ^{
+        mathInput.setSelectionRange(pos, pos);
+      });
+    });
+
+    clearInput.addEventListener('click', ()=>{ mathInput.value=''; livePreview.innerHTML=''; previewFeedback.textContent=''; mathInput.focus(); });
+
+    // insert last correct answer
+    insertAnsBtn.addEventListener('click', ()=>{ if(lastCorrectAnswer){ insertAtCursor(lastCorrectAnswer); } });
+
+    function insertAtCursor(text){
+      const el = mathInput;
+      const start = el.selectionStart || 0;
+      const end = el.selectionEnd || 0;
+      const before = el.value.substring(0,start);
+      const after = el.value.substring(end);
+      el.value = before + text + after;
+      const pos = start + text.length;
+      el.focus();
+      el.setSelectionRange(pos,pos);
+    }
+
+    function MathJaxUnwrap(s){
+      // If user clicked × or ÷ we want to insert LaTeX command, otherwise insert literal
+      if(s === '\\times' || s === '\\div' || s === '\\frac{ }{ }') return s;
+      return s;
+    }
+
+    // Preview button — render the student's LaTeX wrapped inline
+    previewBtn.addEventListener('click', ()=>{
+      const raw = mathInput.value.trim();
+      if(!raw){ livePreview.innerHTML = '<span class="muted">(No input)</span>'; return; }
+      // Ensure it's valid TeX: if user used plain ascii like x^2 we still wrap it
+      livePreview.innerHTML = `\\(${raw}\\)`;
+      MathJax.typesetPromise([livePreview]).then(()=>{ previewFeedback.textContent = 'Rendered preview'; setTimeout(()=>previewFeedback.textContent='',1200); });
+    });
+
+    // ---------- Assessment (20 questions) ----------
+    const assessmentQuestions = [
+      { q: '\\(2x(3x+6)\\)', a: '6x^2+12x' },
+      { q: '\\(2x(4x-3)\\)', a: '8x^2-6x' },
+      { q: '\\(2x(-5x+7)\\)', a: '-10x^2+14x' },
+      { q: '\\(-3x(5x+4)\\)', a: '-15x^2-12x' },
+      { q: '\\(5x(3x-2)\\)', a: '15x^2-10x' },
+      { q: '\\(-4x(2x-9)\\)', a: '-8x^2+36x' },
+      { q: '\\(3x(7x+8)\\)', a: '21x^2+24x' },
+      { q: '\\(6x(2x-4)\\)', a: '12x^2-24x' },
+      { q: '\\(-5x(4x+1)\\)', a: '-20x^2-5x' },
+      { q: '\\(2x(3x+6)+4x\\)', a: '6x^2+16x' },
+      { q: '\\(3x(5x-2)\\)', a: '15x^2-6x' },
+      { q: '\\(-2x(3x+6)\\)', a: '-6x^2-12x' },
+      { q: '\\(7x(2x+5)\\)', a: '14x^2+35x' },
+      { q: '\\(x(3x+4)\\)', a: '3x^2+4x' },
+      { q: '\\(-8x(2x-3)\\)', a: '-16x^2+24x' },
+      { q: '\\(5x(6x+2)\\)', a: '30x^2+10x' },
+      { q: '\\(3x(2x-9)\\)', a: '6x^2-27x' },
+      { q: '\\(-9x(4x+7)\\)', a: '-36x^2-63x' },
+      { q: '\\(10x(3x-5)\\)', a: '30x^2-50x' },
+      { q: '\\(2x(8x+1)\\)', a: '16x^2+2x' }
+    ];
+
+    const assessmentList = document.getElementById('assessmentList');
+    assessmentList.innerHTML = assessmentQuestions.map((it, idx) => `
+      <div class="card small" id="qcard${idx}">
+        <div style="display:flex; justify-content:space-between; align-items:center; gap:12px">
+          <div style="min-width:0">
+            <div style="font-weight:700">Q${idx+1}</div>
+            <div class="math-centered" style="margin-top:6px">${it.q}</div>
+          </div>
+          <div style="flex-shrink:0; width:380px">
+            <input id="input${idx}" type="text" placeholder="Type answer — e.g. 6x^2+12x" />
+            <div style="display:flex; gap:8px; margin-top:6px">
+              <button class="btn btn-success small" onclick="checkOne(${idx})">Check</button>
+              <button class="btn btn-ghost small" onclick="reveal(${idx})">Reveal answer</button>
+              <div id="fb${idx}" style="margin-left:8px;"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    `).join('');
+
+    // Normalization helpers
+    function unifyUnicodeSuperscripts(s){
+      // convert common unicode superscripts (like ²) to ^2
+      if(!s) return s;
+      const map = { '²':'^2','³':'^3','⁴':'^4','⁵':'^5','⁶':'^6','⁷':'^7','⁸':'^8','⁹':'^9' };
+      return s.replace(/[²³⁴⁵⁶⁷⁸⁹]/g, m => map[m] || m);
+    }
+
+    function normalizeAnswer(raw){
+      if(raw === null || raw === undefined) return '';
+      let s = String(raw);
+      s = s.replace(/\\(|\\)|\\$|\\\\\\(|\\\\\\)/g,''); // remove math wrappers if present
+      s = s.replace(/\s+/g,'');
+      s = s.replace(/×/g,'*');
+      s = s.replace(/−/g,'-');
+      s = unifyUnicodeSuperscripts(s);
+      // transform x^2 and x2 variants to consistent x^2 form (basic handling)
+      s = s.replace(/([a-zA-Z])(\^?)(\d+)/g, (m,p1,p2,p3)=> p1 + '^' + p3);
+      // remove redundant plus signs like + at beginning
+      s = s.replace(/^\+/, '');
+      // convert to lower-case
+      return s.toLowerCase();
+    }
+
+    function checkOne(i){
+      const user = document.getElementById('input'+i).value;
+      const fb = document.getElementById('fb'+i);
+      const correct = normalizeAnswer(user);
+      const expected = normalizeAnswer(assessmentQuestions[i].a);
+      const ok = (correct === expected);
+      if(ok){
+        fb.innerHTML = '<span class="feedback-correct">✔ Correct</span>';
+        lastCorrectAnswer = assessmentQuestions[i].a; // store for quick insert
+      } else {
+        fb.innerHTML = '<span class="feedback-wrong">✖ Incorrect</span>';
+      }
+      updateScoreDisplay(); // optional partial score
+      return ok;
+    }
+
+    function reveal(i){
+      document.getElementById('input'+i).value = assessmentQuestions[i].a;
+      const fb = document.getElementById('fb'+i);
+      fb.innerHTML = '<span class="muted small">Revealed</span>';
+    }
+
+    // Check all and grade
+    document.getElementById('checkAllBtn').addEventListener('click', ()=>{
+      let correctCount = 0;
+      for(let i=0;i<assessmentQuestions.length;i++){
+        const ok = checkOne(i);
+        if(ok) correctCount++;
+      }
+      const total = assessmentQuestions.length;
+      const scoreEl = document.getElementById('score');
+      scoreEl.textContent = `${correctCount}/${total} (${Math.round((correctCount/total)*100)}%)`;
+      // optionally show a message
+      if(correctCount===total){
+        alert('Excellent — all answers correct! Score: ' + scoreEl.textContent);
+      } else {
+        alert('You scored ' + scoreEl.textContent + '. Review the worked examples for similar problems.');
+      }
+      MathJax.typesetPromise();
+    });
+
+    // Reset all
+    document.getElementById('resetAllBtn').addEventListener('click', ()=>{
+      for(let i=0;i<assessmentQuestions.length;i++){
+        document.getElementById('input'+i).value = '';
+        document.getElementById('fb'+i).innerHTML = '';
+      }
+      document.getElementById('score').textContent = '—';
+    });
+
+    function updateScoreDisplay(){
+      // show running partial counts (optional). We'll compute how many currently correct
+      let c = 0; let filled = 0;
+      for(let i=0;i<assessmentQuestions.length;i++){
+        const val = document.getElementById('input'+i).value;
+        if(val !== '') filled++;
+        if(normalizeAnswer(val) === normalizeAnswer(assessmentQuestions[i].a)) c++;
+      }
+      document.getElementById('score').textContent = `${c}/${assessmentQuestions.length} (${Math.round((c/assessmentQuestions.length)*100)}%)`;
+    }
+
+    // Keep the score updated as students type (lightweight)
+    assessmentQuestions.forEach((_, idx) => {
+      const el = document.getElementById('input'+idx);
+      el.addEventListener('input', ()=>{ updateScoreDisplay(); });
+      // allow pressing Enter to check
+      el.addEventListener('keydown', (ev)=>{ if(ev.key === 'Enter'){ ev.preventDefault(); checkOne(idx); }});
+    });
+
+    // Expose checkOne/reveal globally for onClick inline calls
+    window.checkOne = checkOne;
+    window.reveal = reveal;
+    window.toggleExample = toggleExample;
+
+    // Final MathJax typeset initial content
+    MathJax.typesetPromise();
+
+  </script>
+</body>
+</html>
