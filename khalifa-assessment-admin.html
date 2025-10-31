@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Mathcloud Tutorials | Admin Panel</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, sans-serif;
+      background: linear-gradient(to bottom right, #e9f0ff, #f4f7fb);
+      margin: 0;
+      padding: 0;
+      color: #333;
+    }
+
+    h1 {
+      background: #2d6cdf;
+      color: white;
+      text-align: center;
+      padding: 20px;
+      margin: 0;
+      font-size: 28px;
+      letter-spacing: 1px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 40px auto;
+      background: white;
+      padding: 25px 30px;
+      border-radius: 12px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
+    }
+
+    .container:hover {
+      box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+    }
+
+    h3 {
+      color: #2d6cdf;
+      border-left: 5px solid #2d6cdf;
+      padding-left: 10px;
+      margin-bottom: 15px;
+    }
+
+    #searchBar {
+      width: 100%;
+      padding: 10px 14px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      margin-bottom: 15px;
+      font-size: 15px;
+      transition: 0.2s;
+    }
+
+    #searchBar:focus {
+      outline: none;
+      border-color: #2d6cdf;
+      box-shadow: 0 0 5px rgba(45,108,223,0.3);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+
+    th, td {
+      border: 1px solid #ddd;
+      padding: 10px 8px;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th {
+      background: #2d6cdf;
+      color: white;
+      font-weight: 600;
+    }
+
+    tr:nth-child(even) { background-color: #f9f9f9; }
+    tr:hover { background-color: #eef3ff; }
+
+    .theory, .answers {
+      white-space: pre-wrap;
+      font-size: 14px;
+      color: #333;
+      background: #f8faff;
+      border-radius: 6px;
+      padding: 10px;
+      display: none;
+      margin-top: 6px;
+      line-height: 1.5;
+    }
+
+    .toggle-btn {
+      background: #2d6cdf;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      padding: 6px 10px;
+      cursor: pointer;
+      font-size: 13px;
+      transition: 0.2s;
+    }
+
+    .toggle-btn:hover {
+      background: #244fc3;
+    }
+
+    .score {
+      font-weight: bold;
+      color: #2d6cdf;
+    }
+
+    @media (max-width: 700px) {
+      th, td {
+        font-size: 13px;
+      }
+      h1 {
+        font-size: 22px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Mathcloud Tutorials - Admin Panel</h1>
+
+  <div class="container">
+    <h3>Year 8 Mathematics Assessment Submissions</h3>
+
+    <input type="text" id="searchBar" placeholder="🔍 Search by student name...">
+
+    <table id="resultsTable">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Score</th>
+          <th>Date Submitted</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+
+  <!-- Firebase imports -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+    import { getFirestore, collection, onSnapshot, query, orderBy } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+    // 🔹 Firebase config (yours)
+    const firebaseConfig = {
+      apiKey: "AIzaSyAFsHg9fK6IDnHbuxmBleEfIIfVGsuLDik",
+      authDomain: "profile-b825d.firebaseapp.com",
+      projectId: "profile-b825d",
+      storageBucket: "profile-b825d.firebasestorage.app",
+      messagingSenderId: "925276859161",
+      appId: "1:925276859161:web:194c60f6dbd9f1ef8bf388"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    const tableBody = document.querySelector("#resultsTable tbody");
+    const searchBar = document.querySelector("#searchBar");
+
+    // 🔹 Listen live to Firestore collection
+    const q = query(collection(db, "year8_math_scores"), orderBy("date", "desc"));
+    onSnapshot(q, (snapshot) => {
+      tableBody.innerHTML = "";
+      snapshot.forEach((doc) => {
+        const data = doc.data();
+
+        const theoryText = Object.entries(data.theoryAnswers || {})
+          .map(([k, v]) => `${k}: ${v || "(no answer)"}`)
+          .join("\n");
+
+        const mcqText = Object.entries(data.answers || {})
+          .map(([k, v]) => `${k}: ${v || "(no answer)"}`)
+          .join("\n");
+
+        const row = document.createElement("tr");
+        row.innerHTML = `
+          <td>${data.name}</td>
+          <td class="score">${data.score}/${data.total}</td>
+          <td>${new Date(data.date).toLocaleString()}</td>
+          <td>
+            <button class="toggle-btn">Show Answers</button>
+            <div class="answers"><b>MCQ Answers:</b>\n${mcqText}</div>
+            <div class="theory"><b>Theory Answers:</b>\n${theoryText}</div>
+          </td>
+        `;
+
+        // Toggle exact answers visibility
+        const toggleBtn = row.querySelector(".toggle-btn");
+        const answerDivs = row.querySelectorAll(".answers, .theory");
+
+        toggleBtn.addEventListener("click", () => {
+          const visible = answerDivs[0].style.display === "block";
+          answerDivs.forEach(div => div.style.display = visible ? "none" : "block");
+          toggleBtn.textContent = visible ? "Show Answers" : "Hide Answers";
+        });
+
+        tableBody.appendChild(row);
+      });
+    });
+
+    // 🔹 Search Filter
+    searchBar.addEventListener("input", (e) => {
+      const searchText = e.target.value.toLowerCase();
+      document.querySelectorAll("#resultsTable tbody tr").forEach((row) => {
+        const name = row.children[0].textContent.toLowerCase();
+        row.style.display = name.includes(searchText) ? "" : "none";
+      });
+    });
+  </script>
+
+</body>
+</html>
