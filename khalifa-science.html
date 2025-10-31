@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Mathcloud Tutorials | Year 8 Science Assessment</title>
+  <style>
+    body{font-family:Arial,Helvetica,sans-serif;background:#f4f7fb;margin:0}
+    h1{background:#2d6cdf;color:#fff;text-align:center;padding:20px;margin:0}
+    .container{max-width:900px;margin:30px auto;background:#fff;padding:30px;
+      border-radius:10px;box-shadow:0 4px 10px rgba(0,0,0,.1)}
+    input[type=text]{width:100%;padding:10px;margin:10px 0;border:1px solid #ccc;border-radius:6px}
+    .question{margin-bottom:20px;padding:10px 0;border-bottom:1px solid #eee}
+    .question p{font-weight:bold}
+    textarea{width:100%;border:1px solid #ccc;border-radius:6px;padding:8px;resize:vertical}
+    button{background:#2d6cdf;color:#fff;padding:12px 20px;border:none;border-radius:6px;
+      cursor:pointer;font-size:16px;display:block;margin:20px auto}
+    button:hover{background:#1e4eb8}
+    #result{text-align:center;font-size:18px;margin-top:20px;color:#333;font-weight:bold}
+  </style>
+</head>
+<body>
+  <h1>Mathcloud Tutorials<br>Year 8 Science Assessment</h1>
+
+  <div class="container">
+    <label>Enter your full name:</label>
+    <input type="text" id="studentName" placeholder="e.g. Sarah Johnson" required>
+    <div id="quiz"></div>
+    <button id="submitBtn">Submit Answers</button>
+    <p id="result"></p>
+  </div>
+
+  <!-- Firebase v10+ -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+    import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+    // Firebase config (same project)
+    const firebaseConfig = {
+      apiKey: "AIzaSyAFsHg9fK6IDnHbuxmBleEfIIfVGsuLDik",
+      authDomain: "profile-b825d.firebaseapp.com",
+      projectId: "profile-b825d",
+      storageBucket: "profile-b825d.firebasestorage.app",
+      messagingSenderId: "925276859161",
+      appId: "1:925276859161:web:194c60f6dbd9f1ef8bf388"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db  = getFirestore(app);
+
+    // 🔹 Year 8 Science Questions
+    const questions = [
+      {q:"1. What is the basic unit of life?",options:["Cell","Atom","Molecule","Organ"],answer:"Cell"},
+      {q:"2. Which gas do plants absorb for photosynthesis?",options:["Carbon dioxide","Oxygen","Nitrogen","Hydrogen"],answer:"Carbon dioxide"},
+      {q:"3. Which part of the atom has a positive charge?",options:["Proton","Electron","Neutron","Nucleus"],answer:"Proton"},
+      {q:"4. Which planet is known as the Red Planet?",options:["Mars","Venus","Jupiter","Mercury"],answer:"Mars"},
+      {q:"5. What force keeps us on the ground?",options:["Gravity","Friction","Magnetism","Pressure"],answer:"Gravity"},
+      {q:"6. What is H₂O commonly known as?",options:["Water","Oxygen","Hydrogen","Salt"],answer:"Water"},
+      {q:"7. Which organ pumps blood around the body?",options:["Heart","Lungs","Brain","Liver"],answer:"Heart"},
+      {q:"8. Which part of the plant carries water from the roots?",options:["Xylem","Phloem","Stem","Leaf"],answer:"Xylem"},
+      {q:"9. What gas do humans need to survive?",options:["Oxygen","Carbon dioxide","Nitrogen","Helium"],answer:"Oxygen"},
+      {q:"10. Which process turns liquid water into gas?",options:["Evaporation","Condensation","Freezing","Melting"],answer:"Evaporation"},
+      {q:"11. Which planet is closest to the Sun?",options:["Mercury","Venus","Earth","Mars"],answer:"Mercury"},
+      {q:"12. Which metal is liquid at room temperature?",options:["Mercury","Iron","Aluminium","Gold"],answer:"Mercury"},
+      {q:"13. What is the boiling point of water (°C)?",options:["100","0","50","212"],answer:"100"},
+      {q:"14. Which part of the human body controls movement and thoughts?",options:["Brain","Heart","Lungs","Kidneys"],answer:"Brain"},
+      {q:"15. Which energy resource is renewable?",options:["Solar","Coal","Oil","Gas"],answer:"Solar"},
+      {q:"16. What colour of light is reflected by a red object?",options:["Red","Green","Blue","All colours"],answer:"Red"},
+      {q:"17. What is the chemical symbol for Oxygen?",options:["O","O₂","Ox","Om"],answer:"O"},
+      {q:"18. Which planet has rings?",options:["Saturn","Mars","Earth","Venus"],answer:"Saturn"},
+      {q:"19. What happens to particles when they are heated?",options:["They move faster","They stop moving","They get smaller","They move slower"],answer:"They move faster"},
+      {q:"20. What type of energy is stored in food?",options:["Chemical","Light","Kinetic","Heat"],answer:"Chemical"},
+      {q:"21. Which instrument measures temperature?",options:["Thermometer","Barometer","Speedometer","Manometer"],answer:"Thermometer"},
+      {q:"22. What is the largest planet in our Solar System?",options:["Jupiter","Saturn","Neptune","Earth"],answer:"Jupiter"},
+      {q:"23. What gas do plants release during photosynthesis?",options:["Oxygen","Carbon dioxide","Nitrogen","Hydrogen"],answer:"Oxygen"},
+      {q:"24. Which organ helps us breathe?",options:["Lungs","Heart","Brain","Stomach"],answer:"Lungs"},
+      {q:"25. Which is the hardest natural substance?",options:["Diamond","Iron","Gold","Quartz"],answer:"Diamond"},
+      {q:"26. What type of energy comes from the Sun?",options:["Light and Heat","Sound","Electrical","Chemical"],answer:"Light and Heat"},
+      {q:"27. What is the process by which plants make food?",options:["Photosynthesis","Respiration","Evaporation","Transpiration"],answer:"Photosynthesis"},
+      {q:"28. Which organ filters blood in the human body?",options:["Kidneys","Lungs","Liver","Heart"],answer:"Kidneys"},
+      {q:"29. What is the main gas found in the air?",options:["Nitrogen","Oxygen","Carbon dioxide","Helium"],answer:"Nitrogen"},
+      {q:"30. Which force slows down moving objects?",options:["Friction","Gravity","Magnetism","Buoyancy"],answer:"Friction"},
+      {q:"31. Which part of the flower makes seeds?",options:["Ovary","Petal","Stamen","Sepal"],answer:"Ovary"},
+      {q:"32. What part of the eye controls the amount of light entering?",options:["Pupil","Retina","Cornea","Iris"],answer:"Pupil"},
+      {q:"33. What do you call an animal that eats only plants?",options:["Herbivore","Carnivore","Omnivore","Detritivore"],answer:"Herbivore"},
+      {q:"34. Which state of matter has a definite shape and volume?",options:["Solid","Liquid","Gas","Plasma"],answer:"Solid"},
+      {q:"35. What is the process of liquid turning into solid called?",options:["Freezing","Melting","Condensation","Evaporation"],answer:"Freezing"},
+      {q:"36. What is Earth's only natural satellite?",options:["Moon","Sun","Mars","Venus"],answer:"Moon"},
+      {q:"37. Which part of the cell contains genetic material?",options:["Nucleus","Cell wall","Cytoplasm","Membrane"],answer:"Nucleus"},
+      {q:"38. What is the main function of white blood cells?",options:["Fight infection","Carry oxygen","Digest food","Control temperature"],answer:"Fight infection"},
+      {q:"39. What is another name for a chemical change?",options:["Reaction","Mixture","Evaporation","Separation"],answer:"Reaction"},
+      {q:"40. What type of energy does a stretched rubber band have?",options:["Elastic potential","Kinetic","Sound","Light"],answer:"Elastic potential"},
+      {q:"41. What is the process of water changing from gas to liquid?",options:["Condensation","Evaporation","Freezing","Sublimation"],answer:"Condensation"},
+      {q:"42. Which blood vessels carry blood away from the heart?",options:["Arteries","Veins","Capillaries","Valves"],answer:"Arteries"},
+      {q:"43. What is the main source of energy for the water cycle?",options:["Sun","Wind","Earth’s core","Moon"],answer:"Sun"},
+      {q:"44. What type of simple machine is a seesaw?",options:["Lever","Pulley","Wheel","Inclined plane"],answer:"Lever"},
+      {q:"45. Which part of a circuit provides electrical energy?",options:["Battery","Bulb","Switch","Wire"],answer:"Battery"},
+      {q:"46. What is the main purpose of chlorophyll?",options:["Absorb light energy","Provide water","Store food","Protect leaves"],answer:"Absorb light energy"},
+      {q:"47. Which planet is known for its Great Red Spot?",options:["Jupiter","Mars","Saturn","Neptune"],answer:"Jupiter"},
+      {q:"48. Which organ in humans produces insulin?",options:["Pancreas","Liver","Heart","Kidney"],answer:"Pancreas"},
+      {q:"49. What is the main function of the roots of a plant?",options:["Absorb water","Make food","Store oxygen","Produce seeds"],answer:"Absorb water"},
+      {q:"50. Which element do all organic compounds contain?",options:["Carbon","Oxygen","Hydrogen","Nitrogen"],answer:"Carbon"}
+    ];
+
+    const theory = [
+      "1. Explain how photosynthesis works and why it is important.",
+      "2. Describe the main differences between solids, liquids, and gases.",
+      "3. Explain how the human circulatory system functions.",
+      "4. Describe the stages of the water cycle.",
+      "5. Explain how energy is transferred in food chains.",
+      "6. Describe the structure and function of the cell nucleus.",
+      "7. Explain how friction can be both helpful and harmful."
+    ];
+
+    // 🔹 Render questions
+    const quizDiv = document.getElementById("quiz");
+    questions.forEach((q,i)=>{
+      const div=document.createElement("div");
+      div.classList.add("question");
+      div.innerHTML=`<p>${q.q}</p>`+
+        q.options.map(opt=>`<label><input type="radio" name="q${i}" value="${opt}"> ${opt}</label><br>`).join("");
+      quizDiv.appendChild(div);
+    });
+
+    quizDiv.innerHTML+="<h3>Theory Questions</h3>";
+    theory.forEach((t,i)=>{
+      quizDiv.innerHTML+=`<p>${t}</p><textarea id="theory${i}" rows="3"></textarea>`;
+    });
+
+    document.getElementById("submitBtn").addEventListener("click",async()=>{
+      const name=document.getElementById("studentName").value.trim();
+      if(!name){alert("Please enter your name");return;}
+
+      let score=0;
+      questions.forEach((q,i)=>{
+        const sel=document.querySelector(`input[name="q${i}"]:checked`);
+        if(sel&&sel.value===q.answer)score++;
+      });
+
+      const theoryAnswers={};
+      theory.forEach((t,i)=>{
+        theoryAnswers[`theory${i+1}`]=document.getElementById(`theory${i}`).value.trim();
+      });
+
+      try{
+        await addDoc(collection(db,"year8_science_scores"),{
+          name,score,total:questions.length,theoryAnswers,date:new Date().toISOString()
+        });
+        document.getElementById("result").textContent=
+          `✅ Thanks ${name}! You scored ${score}/${questions.length}. Saved to Firebase.`;
+        window.scrollTo({top:0,behavior:"smooth"});
+      }catch(err){
+        alert("Error saving to Firebase: "+err.message);
+      }
+    });
+  </script>
+</body>
+</html>
