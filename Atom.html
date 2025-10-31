@@ -1,0 +1,525 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Atoms & Periodic Table — Complete Lesson + 50 Questions | Orli International Academy</title>
+  <style>
+    :root{--brand:#082f49;--accent:#0ea5a3;--muted:#6b7280;--card:#f8fafc}
+    *{box-sizing:border-box}
+    body{font-family:Inter,ui-sans-serif,system-ui,Segoe UI,Roboto,Helvetica,Arial;line-height:1.5;margin:0;background:linear-gradient(180deg,#f7fbfc,white);color:#0b1720}
+    header{background:var(--brand);color:white;padding:18px 20px;display:flex;gap:16px;align-items:center}
+    header img.logo{height:48px;border-radius:6px;background:white;padding:6px}
+    header h1{font-size:1.15rem;margin:0}
+    .container{max-width:1100px;margin:24px auto;padding:16px}
+    .grid{display:grid;grid-template-columns:1fr 380px;gap:18px}
+    @media(max-width:980px){.grid{grid-template-columns:1fr}header{flex-direction:column;align-items:flex-start}header img.logo{height:44px}}
+    .card{background:white;border-radius:12px;padding:16px;box-shadow:0 6px 18px rgba(2,6,23,0.06)}
+    .muted{color:var(--muted)}
+    h2{margin:6px 0 12px}
+    .sub{font-size:0.92rem;color:var(--muted)}
+    details summary{cursor:pointer;font-weight:600}
+    pre{background:#0b1720;color:#f8fafc;padding:10px;border-radius:8px;overflow:auto}
+    .question{margin-bottom:12px}
+    .choices{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}
+    @media(max-width:540px){.choices{grid-template-columns:1fr}}
+    .btn{border:0;padding:10px;border-radius:8px;cursor:pointer;background:var(--card)}
+    .btn:hover{box-shadow:0 6px 18px rgba(2,6,23,0.06)}
+    .correct{background:linear-gradient(90deg,#dcfce7,#bbf7d0);border:1px solid #16a34a}
+    .wrong{background:linear-gradient(90deg,#fee2e2,#fecaca);border:1px solid #ef4444}
+    .explain{padding:10px;margin-top:8px;border-radius:8px;background:#fafafa;border-left:4px solid var(--accent)}
+    .toolbar{display:flex;gap:8px;align-items:center;margin-bottom:12px}
+    .pill{background:#eef2ff;padding:8px;border-radius:999px;font-weight:600;color:#3730a3}
+    footer{padding:28px;text-align:center;color:var(--muted)}
+    .tools input, .tools button, .tools select{padding:8px;border-radius:8px;border:1px solid #e6eef0}
+  </style>
+</head>
+<body>
+  <header>
+    <img class="logo" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='64' height='64'><rect rx='10' width='64' height='64' fill='%23082349'/><text x='50%' y='55%' font-size='26' fill='white' font-family='Arial' text-anchor='middle'>OR</text></svg>" alt="ORLI Logo" />
+    <div>
+      <h1>Atoms & Periodic Table — Complete Lesson & 50 Questions</h1>
+      <div class="sub">Comprehensive Year 8–10 chemistry lesson: atoms, elements, compounds, separation, electrons, ions, and periodic table history</div>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="grid">
+      <section class="card" id="main-content">
+        <div class="toolbar">
+          <div class="pill">ORLI International Academy • Atoms & Periodic Table</div>
+          <button class="btn" onclick="printPage()">Print Lesson</button>
+          <button class="btn" onclick="downloadHTML()">Download HTML</button>
+          <div style="margin-left:auto" class="muted">Interactive quiz + instant feedback — real chemical symbols used</div>
+        </div>
+
+        <article class="notes">
+          <h2>Lesson Notes — Click each topic to expand</h2>
+          <p class="sub">Detailed notes, examples and worked problems for teachers & students.</p>
+
+          <details open>
+            <summary>1. Atoms — structure and particles</summary>
+            <div style="margin-top:10px">
+              <p><strong>Atom:</strong> smallest part of an element that retains chemical identity.</p>
+              <h3>Subatomic particles</h3>
+              <ul>
+                <li><strong>Proton (p⁺):</strong> +1 charge, relative mass ≈ 1, located in nucleus.</li>
+                <li><strong>Neutron (n⁰):</strong> 0 charge, relative mass ≈ 1, located in nucleus.</li>
+                <li><strong>Electron (e⁻):</strong> −1 charge, negligible mass, orbit in shells.</li>
+              </ul>
+
+              <h4>Notation</h4>
+              <p>Atomic number (Z) = number of protons. Mass number (A) = protons + neutrons.</p>
+              <p>Example notation: <strong>²³Na</strong> (mass number 23) or standard form Na (atomic number 11).</p>
+
+              <h4>Worked example</h4>
+              <p>Chlorine-35 (³⁵Cl): Z = 17 → 17 protons, electrons = 17 (neutral), neutrons = 35−17 = 18.</p>
+            </div>
+          </details>
+
+          <details>
+            <summary>2. Elements — symbols and periodic shorthand</summary>
+            <div style="margin-top:10px">
+              <p>An <strong>element</strong> contains only one type of atom. Each element has a symbol, usually 1 or 2 letters. First letter capitalised, second lowercase.</p>
+              <p>Common examples: H, He, Li, Be, B, C, N, O, F, Ne, Na, Mg, Al, Si, P, S, Cl, Ar, K, Ca.</p>
+
+              <h4>Examples with properties</h4>
+              <ul>
+                <li><strong>H (Hydrogen)</strong> — atomic number 1, gas at room temp.</li>
+                <li><strong>O (Oxygen)</strong> — atomic number 8, essential for respiration.</li>
+                <li><strong>Na (Sodium)</strong> — reactive metal, reacts with water.</li>
+                <li><strong>Cl (Chlorine)</strong> — reactive non-metal, forms NaCl.</li>
+              </ul>
+            </div>
+          </details>
+
+          <details>
+            <summary>3. Compounds — bonding and formulas</summary>
+            <div style="margin-top:10px">
+              <p><strong>Compound:</strong> substance made when elements chemically combine in fixed ratios. Shown by a chemical formula.</p>
+              <h4>Types of bonding (basic)</h4>
+              <ul>
+                <li><strong>Ionic bonding:</strong> transfer of electrons (metal + non-metal). Example: NaCl (Na⁺ Cl⁻).</li>
+                <li><strong>Covalent bonding:</strong> sharing of electrons (non-metal + non-metal). Example: H₂O, CO₂.</li>
+              </ul>
+
+              <h4>Worked examples</h4>
+              <p>Water, H₂O: 2 hydrogen atoms covalently bonded to 1 oxygen.</p>
+              <p>Sodium chloride: Na (11 → 2,8,1) loses 1 electron → Na⁺; Cl (17 → 2,8,7) gains 1 electron → Cl⁻; ionic bond forms.</p>
+            </div>
+          </details>
+
+          <details>
+            <summary>4. Separating Techniques — mixtures (not chemical compounds)</summary>
+            <div style="margin-top:10px">
+              <p>Separating techniques are used for mixtures where substances are physically mixed not chemically bonded.</p>
+              <h4>List & brief use</h4>
+              <ul>
+                <li><strong>Filtration:</strong> separates insoluble solids from liquids (sand + water).</li>
+                <li><strong>Evaporation:</strong> removes solvent to leave dissolved solids (salt from saltwater).</li>
+                <li><strong>Simple distillation:</strong> separate liquids with different boiling points (pure water from salt solution).</li>
+                <li><strong>Fractional distillation:</strong> separate liquids with closer boiling points (fractions from crude oil).</li>
+                <li><strong>Chromatography:</strong> separates substances based on solubility/affinity (separating dyes).</li>
+              </ul>
+
+              <h4>Practical example</h4>
+              <p>Separating a mixture of sand and salt: dissolve mixture in water (salt dissolves), filter to remove sand, evaporate water to recover salt.</p>
+            </div>
+          </details>
+
+          <details>
+            <summary>5. Electron configuration — shells & patterns</summary>
+            <div style="margin-top:10px">
+              <p>Electrons fill shells around the nucleus. A simple school model uses capacities 2, 8, 8 (first three shells).</p>
+              <h4>Examples</h4>
+              <ul>
+                <li>H: 1 → 1</li>
+                <li>He: 2 → 2</li>
+                <li>Li: 3 → 2,1</li>
+                <li>Be: 4 → 2,2</li>
+                <li>O: 8 → 2,6</li>
+                <li>Na: 11 → 2,8,1</li>
+                <li>Cl: 17 → 2,8,7</li>
+              </ul>
+
+              <h4>Why it matters</h4>
+              <p>The number of outer (valence) electrons determines chemical reactivity and which ions an atom forms.</p>
+            </div>
+          </details>
+
+          <details>
+            <summary>6. Ion formation — cations & anions</summary>
+            <div style="margin-top:10px">
+              <p>Atoms become ions to achieve a more stable electron configuration (usually a full outer shell like a noble gas).</p>
+              <h4>Examples</h4>
+              <ul>
+                <li><strong>Sodium:</strong> Na → loses 1 e⁻ → Na⁺ (2,8)</li>
+                <li><strong>Chlorine:</strong> Cl + e⁻ → Cl⁻ (2,8,8)</li>
+                <li><strong>Magnesium:</strong> Mg → loses 2 e⁻ → Mg²⁺</li>
+              </ul>
+
+              <h4>Ionic formulae</h4>
+              <p>Combine charges to make neutral compounds: e.g., Mg²⁺ + 2Cl⁻ → MgCl₂</p>
+            </div>
+          </details>
+
+          <details>
+            <summary>7. Development of the Periodic Table — history & modern layout</summary>
+            <div style="margin-top:10px">
+              <p>Key stages in understanding elements and their arrangement.</p>
+              <ol>
+                <li><strong>Dobereiner (1829):</strong> triads (groups of three with similar properties).</li>
+                <li><strong>Newlands (1864):</strong> Law of Octaves — properties repeat every 8 elements (not perfect).</li>
+                <li><strong>Mendeleev (1869):</strong> arranged elements by atomic mass and left gaps for predicted elements; could predict properties of undiscovered elements.</li>
+                <li><strong>Modern periodic table (1913+):</strong> arranged by atomic number (Z) after discovery of proton and electronic structure — explains periodicity.</li>
+              </ol>
+
+              <h4>Groups & periods</h4>
+              <p>Vertical columns = groups (same valence electrons). Horizontal rows = periods (same number of electron shells).</p>
+
+              <h4>Examples</h4>
+              <ul>
+                <li>Group 1: Li, Na, K — 1 valence electron, very reactive metals.</li>
+                <li>Group 7 (17): F, Cl, Br — halogens, reactive non-metals.</li>
+                <li>Group 0 (18): He, Ne, Ar — noble gases, inert due to full outer shells.</li>
+              </ul>
+            </div>
+          </details>
+
+          <details>
+            <summary>8. Common practicals & demonstration ideas</summary>
+            <div style="margin-top:10px">
+              <h4>Chromatography of inks</h4>
+              <p>Use paper chromatography to separate dyes in pens. Observe Rf values and compare pigments.</p>
+
+              <h4>Flame tests</h4>
+              <p>Sodium gives yellow flame, lithium red, potassium lilac, copper green/blue. (Follow safety rules — small samples, Bunsen flame, goggles.)</p>
+
+              <h4>Simple distillation</h4>
+              <p>Distill water from a salt solution to demonstrate separation by boiling point.</p>
+
+            </div>
+          </details>
+
+        </article>
+
+        <hr style="margin:18px 0">
+
+        <section class="card" id="tools">
+          <h2>Tools & Quick Converters</h2>
+          <div style="display:flex;gap:12px;flex-wrap:wrap">
+            <div style="flex:1;min-width:220px">
+              <label class="muted">Electron configuration helper (enter atomic number)</label>
+              <div style="display:flex;gap:8px;margin-top:6px"><input id="atomicNum" placeholder="e.g. 11" /><button class="btn" onclick="showEconfig()">Show config</button></div>
+              <div id="ecResult" class="muted" style="margin-top:6px"></div>
+            </div>
+
+            <div style="flex:1;min-width:220px">
+              <label class="muted">Ionic charge quick hint (enter element symbol)</label>
+              <div style="display:flex;gap:8px;margin-top:6px"><input id="symIn" placeholder="e.g. Cl" /><button class="btn" onclick="ionHint()">Get</button></div>
+              <div id="ionResult" class="muted" style="margin-top:6px"></div>
+            </div>
+          </div>
+        </section>
+
+        <hr style="margin:18px 0">
+
+        <section class="card" id="quiz">
+          <h2>Interactive Assessment — 50 Questions</h2>
+          <p class="sub">Real chemical symbols (e.g. Na, Cl, H₂O) are used in questions. Select answers for instant feedback and explanations.</p>
+
+          <div id="quiz-container"></div>
+
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-top:12px">
+            <div class="muted">Answered: <span id="answeredCount">0</span>/50</div>
+            <div style="display:flex;gap:8px">
+              <button class="btn" onclick="showScore()">Show Score</button>
+              <button class="btn" onclick="resetQuiz()">Reset</button>
+            </div>
+          </div>
+
+          <div id="finalScore" style="margin-top:12px;font-weight:700"></div>
+        </section>
+
+      </section>
+
+      <aside class="card" id="sidebar">
+        <h3>Quick periodic table reference</h3>
+        <p class="muted">Common groups</p>
+        <ul>
+          <li>Group 1: Alkali metals — Li, Na, K (reactive)</li>
+          <li>Group 2: Alkaline earths — Be, Mg, Ca</li>
+          <li>Group 7 (17): Halogens — F, Cl, Br</li>
+          <li>Group 0 (18): Noble gases — He, Ne, Ar</li>
+        </ul>
+
+        <hr>
+
+        <h3>50 Questions — Rapid Index</h3>
+        <div id="qIndex" style="display:grid;grid-template-columns:repeat(2,1fr);gap:6px;margin-top:8px"></div>
+
+        <hr>
+
+        <h3>Revision tips</h3>
+        <ol>
+          <li>Memorise symbols, atomic numbers and simple electron configurations.</li>
+          <li>Practice naming ionic compounds (balance charges).</li>
+          <li>Understand which separations are appropriate for mixtures vs compounds.</li>
+        </ol>
+      </aside>
+    </div>
+
+  </main>
+
+  <footer>
+    Created for <strong>Orli International Academy</strong> — Atoms & Periodic Table. Use or adapt for lessons and quizzes.
+  </footer>
+
+<script>
+function printPage(){window.print()}
+function downloadHTML(){const blob=new Blob([document.documentElement.outerHTML],{type:'text/html'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='atoms_periodic_orli.html';a.click();URL.revokeObjectURL(url)}
+
+// electron config helper
+after=function(n){return n};
+function showEconfig(){const z=parseInt(document.getElementById('atomicNum').value);if(!z||z<1){document.getElementById('ecResult').innerText='Enter a valid atomic number (1..118)';return}
+  // simple shells 2,8,8,18,18,32 not required beyond basic 2,8,8 model
+  let remaining=z;const shells=[];const capacities=[2,8,8,18,18,32];for(let i=0;i<capacities.length;i++){const take=Math.min(capacities[i],remaining);shells.push(take);remaining-=take; if(remaining<=0) break}
+  document.getElementById('ecResult').innerText=`Atomic number ${z}: electron config (by shell) = ${shells.join(',')}`}
+
+function ionHint(){const s=document.getElementById('symIn').value.trim();if(!s){document.getElementById('ionResult').innerText='Enter element symbol (e.g. Na, Cl)';return}
+  const table={H:0,He:0,Li:+1,Be:+2,B:+3,C:0,N:0,O:0,F:-1,Ne:0,Na:+1,Mg:+2,Al:+3,Si:0,P:0,S:0,Cl:-1,Ar:0,K:+1,Ca:+2,Br:-1,I:-1};
+  const val=table[s.charAt(0).toUpperCase()+s.slice(1)];document.getElementById('ionResult').innerText=(typeof val==='undefined')? 'Symbol not in quick list' : `Common ion: ${val>0? s+'→'+s+'^'+val+'+' : val<0? s+'→'+s+'^'+Math.abs(val)+'-' : s+' is usually uncharged (noble gas or metalloids)'}`}
+
+// Quiz data - 50 Qs with choices, correct index, explanation (use real symbols)
+const questions=[
+  {id:1,topic:'Atoms',q:"What particle has a +1 charge and mass ~1 u?",choices:['Electron','Proton','Neutron','Photon'],a:1,explain:'Protons have +1 charge and relative mass ≈1.'},
+  {id:2,topic:'Atoms',q:'Which part of the atom contains most of the mass?',choices:['Electron cloud','Nucleus','Shells','Valence band'],a:1,explain:'The nucleus (protons + neutrons) contains almost all mass.'},
+  {id:3,topic:'Atoms',q:'Atomic number (Z) equals the number of:',choices:['Neutrons','Protons','Electrons + Neutrons','Isotopes'],a:1,explain:'Z is the number of protons.'},
+  {id:4,topic:'Atoms',q:'What is the mass number (A)?',choices:['Protons only','Protons + Neutrons','Electrons only','Protons + Electrons'],a:1,explain:'Mass number = protons + neutrons.'},
+  {id:5,topic:'Atoms',q:'Chlorine-35 has 17 protons. How many neutrons?',choices:['18','17','35','52'],a:0,explain:'35 (mass) − 17 (protons) = 18 neutrons.'},
+  {id:6,topic:'Elements',q:'Which symbol is correct for sodium?',choices:['S','Na','N','So'],a:1,explain:'Sodium is Na (from Latin Natrium). S is sulfur.'},
+  {id:7,topic:'Elements',q:'Which of these is an element?',choices:['H2O','NaCl','O','CO2'],a:2,explain:'O is oxygen, an element. H2O and CO2 are compounds.'},
+  {id:8,topic:'Elements',q:'Which element is a noble gas?',choices:['Cl','Ne','Na','K'],a:1,explain:'Ne (neon) is a noble gas with full outer shell.'},
+  {id:9,topic:'Elements',q:'Symbol for potassium is:',choices:['P','Po','K','Pt'],a:2,explain:'Potassium is K (Latin Kalium). P is phosphorus.'},
+  {id:10,topic:'Elements',q:'Which pair are both halogens?',choices:['Na & K','F & Cl','He & Ne','Ca & Mg'],a:1,explain:'Fluorine (F) and chlorine (Cl) are halogens.'},
+
+  {id:11,topic:'Compounds',q:'What type of bonding in NaCl?',choices:['Covalent','Ionic','Metallic','Hydrogen bonding'],a:1,explain:'Na (metal) + Cl (non-metal) form ionic bonds: Na⁺Cl⁻.'},
+  {id:12,topic:'Compounds',q:'H2O is an example of a:',choices:['Element','Compound','Mixture','Alloy'],a:1,explain:'Water is a compound made from hydrogen and oxygen.'},
+  {id:13,topic:'Compounds',q:'Which shows covalent bonding?',choices:['NaCl','H2','MgO','Fe'],a:1,explain:'H2 is two hydrogen atoms sharing electrons (covalent bond).'},
+  {id:14,topic:'Compounds',q:'Formula for carbon dioxide is:',choices:['CO','CO2','C2O','OC2'],a:1,explain:'Carbon dioxide = CO2 (one carbon, two oxygen).'},
+  {id:15,topic:'Compounds',q:'Which property is typical of ionic compounds?',choices:['Conduct electricity when solid','Conduct when molten or in solution','Low melting points','Molecules held by weak forces'],a:1,explain:'Ionic compounds conduct when molten or dissolved because ions can move.'},
+
+  {id:16,topic:'Separations',q:'Which technique separates sand from water?',choices:['Distillation','Filtration','Chromatography','Electrolysis'],a:1,explain:'Filtration traps insoluble sand while water passes through.'},
+  {id:17,topic:'Separations',q:'Which separates dissolved salt from water?',choices:['Filtration','Evaporation','Magnetic separation','Paper chromatography'],a:1,explain:'Evaporation leaves salt behind after water evaporates.'},
+  {id:18,topic:'Separations',q:'Distillation is best to:',choices:['Separate oils by boiling point','Separate sand and water','Extract pigments','Make alloys'],a:0,explain:'Distillation separates liquids based on boiling points.'},
+  {id:19,topic:'Separations',q:'Chromatography separates substances by:',choices:['Density','Solubility and affinity','Boiling point','Colour only'],a:1,explain:'Chromatography separates based on how substances partition between solvent and paper/stationary phase.'},
+  {id:20,topic:'Separations',q:'Fractional distillation is used for:',choices:['Simple salt recovery','Separating crude oil into fractions','Separating gases from vacuum','Filtering solids'],a:1,explain:'Fractional distillation separates complex mixtures like crude oil into fractions.'},
+
+  {id:21,topic:'E-config',q:'Electron configuration of O (atomic number 8) is:',choices:['2,6','2,8','2,2,4','8'],a:0,explain:'Oxygen has 8 electrons: 2 in first shell, 6 in second → 2,6.'},
+  {id:22,topic:'E-config',q:'Which atom has config 2,8,1?',choices:['Na','Mg','Al','Ne'],a:0,explain:'Sodium (Na) atomic number 11 → 2,8,1.'},
+  {id:23,topic:'E-config',q:'First shell holds up to how many electrons?',choices:['1','2','8','18'],a:1,explain:'First shell holds up to 2 electrons.'},
+  {id:24,topic:'E-config',q:'Which element has valence electrons 7 (e.g. 2,8,7)?',choices:['Cl','Na','Mg','He'],a:0,explain:'Chlorine (Cl) has 7 valence electrons and configuration 2,8,7.'},
+  {id:25,topic:'E-config',q:'Valence electrons determine:',choices:['Atomic mass','Chemical reactivity','Nucleus size','Melting point always'],a:1,explain:'Valence electrons largely determine how atoms react chemically.'},
+
+  {id:26,topic:'Ions',q:'Na → Na⁺ + e⁻ is an example of:',choices:['Reduction','Oxidation','Ionic bonding','Electron capture'],a:1,explain:'Na loses an electron (oxidation) to form Na⁺.'},
+  {id:27,topic:'Ions',q:'Cl + e⁻ → Cl⁻ is:',choices:['Oxidation','Reduction','Neutralisation','Sublimation'],a:1,explain:'Cl gains an electron (reduction) to form Cl⁻.'},
+  {id:28,topic:'Ions',q:'Mg²⁺ + 2Cl⁻ gives formula:',choices:['MgCl','MgCl2','Mg2Cl','MgCl3'],a:1,explain:'Charges balance: Mg²⁺ with two Cl⁻ → MgCl2.'},
+  {id:29,topic:'Ions',q:'Which tends to form cations?',choices:['Non-metals','Metals','Noble gases','Halogens'],a:1,explain:'Metals typically lose electrons to form positive ions (cations).'},
+  {id:30,topic:'Ions',q:'Which element commonly forms a 2− ion?',choices:['O','Na','Mg','K'],a:0,explain:'Oxygen commonly gains 2 electrons to form O²⁻.'},
+
+  {id:31,topic:'Periodic',q:'Who created a periodic table arranging elements by atomic mass and left gaps?',choices:['Newlands','Mendeleev','Rutherford','Dalton'],a:1,explain:'Dmitri Mendeleev arranged elements by relative atomic mass and predicted properties of missing elements.'},
+  {id:32,topic:'Periodic',q:'Modern periodic table is arranged by:',choices:['Atomic mass','Atomic number','Boiling point','Mass number'],a:1,explain:'Elements are ordered by atomic number (proton count).'},
+  {id:33,topic:'Periodic',q:'Elements in same group have:',choices:['Same atomic mass','Same number of shells','Same number of valence electrons','Same melting point'],a:2,explain:'Group members share the same valence electron count, giving similar chemistry.'},
+  {id:34,topic:'Periodic',q:'Which is in Group 1?',choices:['Na','Cl','Ne','O'],a:0,explain:'Sodium (Na) is an alkali metal in Group 1.'},
+  {id:35,topic:'Periodic',q:'Which is a noble gas?',choices:['Ar','Br','K','Mg'],a:0,explain:'Argon (Ar) is a noble gas with a full outer shell.'},
+
+  {id:36,topic:'Compounds',q:'Formula for calcium chloride (Ca²⁺ and Cl⁻) is:',choices:['CaCl','CaCl2','Ca2Cl','CaCl3'],a:1,explain:'Calcium is 2+, needs two Cl− → CaCl2.'},
+  {id:37,topic:'Separations',q:'Which technique uses solvent and paper?',choices:['Evaporation','Chromatography','Filtration','Distillation'],a:1,explain:'Paper chromatography uses solvent flow to separate mixture components.'},
+  {id:38,topic:'Elements',q:'Which element has symbol Fe?',choices:['Fluorine','Iron','Francium','Fermium'],a:1,explain:'Fe is iron (from Latin Ferrum).'},
+  {id:39,topic:'E-config',q:'Which electron configuration belongs to neon (Ne, Z=10)?',choices:['2,8','2,6,2','2,8,1','10'],a:0,explain:'Neon has 10 electrons: 2 in first shell, 8 in second → 2,8.'},
+  {id:40,topic:'Ions',q:'Which is the correct ion for aluminium?',choices:['Al−','Al⁺','Al³⁺','Al2+'],a:2,explain:'Aluminium commonly forms Al³⁺ by losing three electrons.'},
+
+  {id:41,topic:'Periodic',q:'Newlands proposed law of octaves because:',choices:['He arranged elements by atomic number','Properties repeated every 8 elements','He used electron shells','He discovered protons'],a:1,explain:'Newlands noticed a repeating pattern roughly every 8 elements (Law of Octaves).'},
+  {id:42,topic:'Periodic',q:'Rutherford is famous for:',choices:['Plum pudding model','Gold foil experiment -> nucleus','Periodic law','Atomic spheres'],a:1,explain:'Rutherford's gold foil experiment revealed a small dense nucleus.'},
+  {id:43,topic:'Atoms',q:'Isotopes are atoms of same element with:',choices:['Different protons','Different electrons','Different neutrons','Different chemical properties always'],a:2,explain:'Isotopes have same proton number but different neutron numbers.'},
+  {id:44,topic:'Compounds',q:'Which is a covalent compound?',choices:['NaCl','CO2','MgO','KBr'],a:1,explain:'CO2 is covalently bonded (non-metal atoms share electrons).'},
+  {id:45,topic:'Separations',q:'To separate two miscible liquids with different bps use:',choices:['Filtration','Simple distillation','Fractional distillation','Chromatography'],a:2,explain:'Fractional distillation is for separating liquids with nearer boiling points.'},
+
+  {id:46,topic:'Elements',q:'Which symbol stands for gold?',choices:['Au','Ag','Gd','Ga'],a:0,explain:'Gold is Au (from Latin Aurum).'},
+  {id:47,topic:'Ions',q:'What is the charge on sulfate ion SO4?',choices:['2−','1−','2+','0'],a:0,explain:'Sulfate ion is SO4²⁻.'},
+  {id:48,topic:'Periodic',q:'Which has similar chemical properties: Na and',choices:['Mg','Cl','K','He'],a:2,explain:'Potassium (K) is in same group (1) as sodium (Na), similar chemistry.'},
+  {id:49,topic:'Atoms',q:'Which statement about electrons is correct?',choices:['Electrons are in nucleus','Electrons have positive charge','Electrons move in shells/orbitals','Electrons determine mass'],a:2,explain:'Electrons are arranged in shells/orbitals around nucleus and have negative charge.'},
+  {id:50,topic:'Compounds',q:'Which is produced by ionic bonding?',choices:['H2O','NaCl','CH4','NH3'],a:1,explain:'NaCl is ionic (metal + non-metal forming ions).'}
+];
+
+// Build quiz UI
+const qc=document.getElementById('quiz-container');const qIndex=document.getElementById('qIndex');let answered=0;let score=0;let answeredSet={};
+function buildQuiz(){questions.forEach((q,i)=>{
+  const div=document.createElement('div');div.className='question card';div.id='q'+q.id;
+  const title=document.createElement('div');title.innerHTML=`<strong>Q${q.id}.</strong> ${q.q}`;
+  div.appendChild(title);
+  const choices=document.createElement('div');choices.className='choices';
+  q.choices.forEach((c,ci)=>{
+    const btn=document.createElement('button');btn.className='btn';btn.innerText=c;btn.onclick=()=>selectAnswer(q.id,ci,btn);
+    choices.appendChild(btn);
+  });
+  div.appendChild(choices);
+  const fb=document.createElement('div');fb.className='explain muted';fb.style.display='none';div.appendChild(fb);
+  qc.appendChild(div);
+
+  // index
+  const idx=document.createElement('a');idx.href='#q'+q.id;idx.style.display='block';idx.style.fontSize='0.9rem';idx.innerText='Q'+q.id+' — '+q.topic; qIndex.appendChild(idx);
+});}
+
+function selectAnswer(qid,choice,btn){const q=questions.find(x=>x.id===qid);const container=document.getElementById('q'+qid);const buttons=container.querySelectorAll('button');const fb=container.querySelector('.explain');if(answeredSet[qid]) return; // lock once answered
+  answeredSet[qid]=true;answered++;document.getElementById('answeredCount').innerText=answered+'/50';
+  buttons.forEach((b,bi)=>{b.disabled=true; if(b===btn){ if(bi===q.a){b.classList.add('correct');score++; fb.innerHTML=`✅ Correct. ${q.explain}`;} else {b.classList.add('wrong'); fb.innerHTML=`❌ Incorrect. ${q.explain}`}} });
+  fb.style.display='block';
+}
+
+function showScore(){document.getElementById('finalScore').innerText=`Score: ${score}/50 (${Math.round((score/50)*100)}%) — Answered: ${answered}/50`}
+function resetQuiz(){if(!confirm('Reset all answers?')) return;answered=0;score=0;answeredSet={};document.getElementById('answeredCount').innerText='0';document.getElementById('finalScore').innerText='';const nodes=document.querySelectorAll('#quiz-container .question');nodes.forEach(n=>{n.querySelectorAll('button').forEach(b=>{b.disabled=false;b.classList.remove('correct','wrong')}); const fb=n.querySelector('.explain');fb.style.display='none'; fb.innerText='';});}
+
+// initial build
+buildQuiz();
+</script>
+</body>
+</html>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Atoms & Periodic Table — One-question CBT | Orli International Academy</title>
+  <style>
+    :root{--brand:#082f49;--accent:#0ea5a3;--muted:#6b7280;--card:#f8fafc}
+    *{box-sizing:border-box}
+    body{font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial;margin:0;background:#f7fbfc;color:#071123}
+    .wrap{max-width:900px;margin:24px auto;padding:16px}
+    header{display:flex;align-items:center;gap:12px}
+    header h1{margin:0;font-size:1.1rem}
+    .card{background:white;border-radius:10px;padding:16px;box-shadow:0 6px 18px rgba(2,6,23,0.06)}
+    .muted{color:var(--muted)}
+    .choices{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
+    .btn{padding:10px;border-radius:8px;border:0;cursor:pointer;background:#f1f5f9}
+    .btn:hover{box-shadow:0 6px 18px rgba(2,6,23,0.06)}
+    .correct{background:linear-gradient(90deg,#dcfce7,#bbf7d0);border:1px solid #16a34a}
+    .wrong{background:linear-gradient(90deg,#fee2e2,#fecaca);border:1px solid #ef4444}
+    .explain{margin-top:12px;padding:10px;background:#fbfbfb;border-left:4px solid var(--accent);border-radius:6px}
+    .controls{display:flex;gap:8px;align-items:center;margin-top:10px}
+    .progress{margin-left:auto;font-weight:600}
+    @media(max-width:600px){.choices{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header><h1>Atoms & Periodic Table — One-question CBT</h1><div class="muted">(Mathcloud Tutorials )</div></header>
+
+    <main class="card" id="testCard">
+      <p class="muted">You will see <strong>one question at a time</strong>. Select an answer to receive instant feedback. Use Next/Previous to navigate. Questions lock after answering to record your attempt.</p>
+
+      <div id="qArea" style="margin-top:12px">
+        <!-- question injected here -->
+      </div>
+
+      <div class="controls">
+        <button class="btn" id="prevBtn" onclick="prevQ()" disabled>Previous</button>
+        <button class="btn" id="nextBtn" onclick="nextQ()">Next</button>
+        <button class="btn" onclick="showScore()">Show Score</button>
+        <button class="btn" onclick="resetAll()">Reset</button>
+
+        <div class="progress muted" id="prog">Q1 / 50</div>
+      </div>
+
+      <div style="margin-top:12px" class="muted">Answered: <span id="answeredCount">0</span>/50</div>
+      <div id="final" style="margin-top:10px;font-weight:700"></div>
+    </main>
+
+    <footer style="text-align:center;margin-top:18px;color:var(--muted)">Created for Orli International Academy. Use in class or as a self-test.</footer>
+  </div>
+
+<script>
+// --- QUESTIONS (same 50 questions, real symbols) ---
+const questions = [
+  {id:1,topic:'Atoms',q:"What particle has a +1 charge and mass ~1 u?",choices:['Electron','Proton','Neutron','Photon'],a:1,explain:'Protons have +1 charge and relative mass ≈1.'},
+  {id:2,topic:'Atoms',q:'Which part of the atom contains most of the mass?',choices:['Electron cloud','Nucleus','Shells','Valence band'],a:1,explain:'The nucleus (protons + neutrons) contains almost all mass.'},
+  {id:3,topic:'Atoms',q:'Atomic number (Z) equals the number of:',choices:['Neutrons','Protons','Electrons + Neutrons','Isotopes'],a:1,explain:'Z is the number of protons.'},
+  {id:4,topic:'Atoms',q:'What is the mass number (A)?',choices:['Protons only','Protons + Neutrons','Electrons only','Protons + Electrons'],a:1,explain:'Mass number = protons + neutrons.'},
+  {id:5,topic:'Atoms',q:'Chlorine-35 has 17 protons. How many neutrons?',choices:['18','17','35','52'],a:0,explain:'35 (mass) − 17 (protons) = 18 neutrons.'},
+  {id:6,topic:'Elements',q:'Which symbol is correct for sodium?',choices:['S','Na','N','So'],a:1,explain:'Sodium is Na (from Latin Natrium). S is sulfur.'},
+  {id:7,topic:'Elements',q:'Which of these is an element?',choices:['H2O','NaCl','O','CO2'],a:2,explain:'O is oxygen, an element. H2O and CO2 are compounds.'},
+  {id:8,topic:'Elements',q:'Which element is a noble gas?',choices:['Cl','Ne','Na','K'],a:1,explain:'Ne (neon) is a noble gas with full outer shell.'},
+  {id:9,topic:'Elements',q:'Symbol for potassium is:',choices:['P','Po','K','Pt'],a:2,explain:'Potassium is K (Latin Kalium). P is phosphorus.'},
+  {id:10,topic:'Elements',q:'Which pair are both halogens?',choices:['Na & K','F & Cl','He & Ne','Ca & Mg'],a:1,explain:'Fluorine (F) and chlorine (Cl) are halogens.'},
+  {id:11,topic:'Compounds',q:'What type of bonding in NaCl?',choices:['Covalent','Ionic','Metallic','Hydrogen bonding'],a:1,explain:'Na (metal) + Cl (non-metal) form ionic bonds: Na⁺Cl⁻.'},
+  {id:12,topic:'Compounds',q:'H2O is an example of a:',choices:['Element','Compound','Mixture','Alloy'],a:1,explain:'Water is a compound made from hydrogen and oxygen.'},
+  {id:13,topic:'Compounds',q:'Which shows covalent bonding?',choices:['NaCl','H2','MgO','Fe'],a:1,explain:'H2 is two hydrogen atoms sharing electrons (covalent bond).'},
+  {id:14,topic:'Compounds',q:'Formula for carbon dioxide is:',choices:['CO','CO2','C2O','OC2'],a:1,explain:'Carbon dioxide = CO2 (one carbon, two oxygen).'},
+  {id:15,topic:'Compounds',q:'Which property is typical of ionic compounds?',choices:['Conduct electricity when solid','Conduct when molten or in solution','Low melting points','Molecules held by weak forces'],a:1,explain:'Ionic compounds conduct when molten or dissolved because ions can move.'},
+  {id:16,topic:'Separations',q:'Which technique separates sand from water?',choices:['Distillation','Filtration','Chromatography','Electrolysis'],a:1,explain:'Filtration traps insoluble sand while water passes through.'},
+  {id:17,topic:'Separations',q:'Which separates dissolved salt from water?',choices:['Filtration','Evaporation','Magnetic separation','Paper chromatography'],a:1,explain:'Evaporation leaves salt behind after water evaporates.'},
+  {id:18,topic:'Separations',q:'Distillation is best to:',choices:['Separate oils by boiling point','Separate sand and water','Extract pigments','Make alloys'],a:0,explain:'Distillation separates liquids based on boiling points.'},
+  {id:19,topic:'Separations',q:'Chromatography separates substances by:',choices:['Density','Solubility and affinity','Boiling point','Colour only'],a:1,explain:'Chromatography separates based on how substances partition between solvent and paper/stationary phase.'},
+  {id:20,topic:'Separations',q:'Fractional distillation is used for:',choices:['Simple salt recovery','Separating crude oil into fractions','Separating gases from vacuum','Filtering solids'],a:1,explain:'Fractional distillation separates complex mixtures like crude oil into fractions.'},
+  {id:21,topic:'E-config',q:'Electron configuration of O (atomic number 8) is:',choices:['2,6','2,8','2,2,4','8'],a:0,explain:'Oxygen has 8 electrons: 2 in first shell, 6 in second → 2,6.'},
+  {id:22,topic:'E-config',q:'Which atom has config 2,8,1?',choices:['Na','Mg','Al','Ne'],a:0,explain:'Sodium (Na) atomic number 11 → 2,8,1.'},
+  {id:23,topic:'E-config',q:'First shell holds up to how many electrons?',choices:['1','2','8','18'],a:1,explain:'First shell holds up to 2 electrons.'},
+  {id:24,topic:'E-config',q:'Which element has valence electrons 7 (e.g. 2,8,7)?',choices:['Cl','Na','Mg','He'],a:0,explain:'Chlorine (Cl) has 7 valence electrons and configuration 2,8,7.'},
+  {id:25,topic:'E-config',q:'Valence electrons determine:',choices:['Atomic mass','Chemical reactivity','Nucleus size','Melting point always'],a:1,explain:'Valence electrons largely determine how atoms react chemically.'},
+  {id:26,topic:'Ions',q:'Na → Na⁺ + e⁻ is an example of:',choices:['Reduction','Oxidation','Ionic bonding','Electron capture'],a:1,explain:'Na loses an electron (oxidation) to form Na⁺.'},
+  {id:27,topic:'Ions',q:'Cl + e⁻ → Cl⁻ is:',choices:['Oxidation','Reduction','Neutralisation','Sublimation'],a:1,explain:'Cl gains an electron (reduction) to form Cl⁻.'},
+  {id:28,topic:'Ions',q:'Mg²⁺ + 2Cl⁻ gives formula:',choices:['MgCl','MgCl2','Mg2Cl','MgCl3'],a:1,explain:'Charges balance: Mg²⁺ with two Cl⁻ → MgCl2.'},
+  {id:29,topic:'Ions',q:'Which tends to form cations?',choices:['Non-metals','Metals','Noble gases','Halogens'],a:1,explain:'Metals typically lose electrons to form positive ions (cations).'},
+  {id:30,topic:'Ions',q:'Which element commonly forms a 2− ion?',choices:['O','Na','Mg','K'],a:0,explain:'Oxygen commonly gains 2 electrons to form O²⁻.'},
+  {id:31,topic:'Periodic',q:'Who created a periodic table arranging elements by atomic mass and left gaps?',choices:['Newlands','Mendeleev','Rutherford','Dalton'],a:1,explain:'Dmitri Mendeleev arranged elements by relative atomic mass and predicted properties of missing elements.'},
+  {id:32,topic:'Periodic',q:'Modern periodic table is arranged by:',choices:['Atomic mass','Atomic number','Boiling point','Mass number'],a:1,explain:'Elements are ordered by atomic number (proton count).'},
+  {id:33,topic:'Periodic',q:'Elements in same group have:',choices:['Same atomic mass','Same number of shells','Same number of valence electrons','Same melting point'],a:2,explain:'Group members share the same valence electron count, giving similar chemistry.'},
+  {id:34,topic:'Periodic',q:'Which is in Group 1?',choices:['Na','Cl','Ne','O'],a:0,explain:'Sodium (Na) is an alkali metal in Group 1.'},
+  {id:35,topic:'Periodic',q:'Which is a noble gas?',choices:['Ar','Br','K','Mg'],a:0,explain:'Argon (Ar) is a noble gas with a full outer shell.'},
+  {id:36,topic:'Compounds',q:'Formula for calcium chloride (Ca²⁺ and Cl⁻) is:',choices:['CaCl','CaCl2','Ca2Cl','CaCl3'],a:1,explain:'Calcium is 2+, needs two Cl− → CaCl2.'},
+  {id:37,topic:'Separations',q:'Which technique uses solvent and paper?',choices:['Evaporation','Chromatography','Filtration','Distillation'],a:1,explain:'Paper chromatography uses solvent flow to separate mixture components.'},
+  {id:38,topic:'Elements',q:'Which element has symbol Fe?',choices:['Fluorine','Iron','Francium','Fermium'],a:1,explain:'Fe is iron (from Latin Ferrum).'},
+  {id:39,topic:'E-config',q:'Which electron configuration belongs to neon (Ne, Z=10)?',choices:['2,8','2,6,2','2,8,1','10'],a:0,explain:'Neon has 10 electrons: 2 in first shell, 8 in second → 2,8.'},
+  {id:40,topic:'Ions',q:'Which is the correct ion for aluminium?',choices:['Al−','Al⁺','Al³⁺','Al2+'],a:2,explain:'Aluminium commonly forms Al³⁺ by losing three electrons.'},
+  {id:41,topic:'Periodic',q:'Newlands proposed law of octaves because:',choices:['He arranged elements by atomic number','Properties repeated every 8 elements','He used electron shells','He discovered protons'],a:1,explain:'Newlands noticed a repeating pattern roughly every 8 elements (Law of Octaves).'},
+  {id:42,topic:'Periodic',q:'Rutherford is famous for:',choices:['Plum pudding model','Gold foil experiment -> nucleus','Periodic law','Atomic spheres'],a:1,explain:'Rutherford\'s gold foil experiment revealed a small dense nucleus.'},
+  {id:43,topic:'Atoms',q:'Isotopes are atoms of same element with:',choices:['Different protons','Different electrons','Different neutrons','Different chemical properties always'],a:2,explain:'Isotopes have same proton number but different neutron numbers.'},
+  {id:44,topic:'Compounds',q:'Which is a covalent compound?',choices:['NaCl','CO2','MgO','KBr'],a:1,explain:'CO2 is covalently bonded (non-metal atoms share electrons).'},
+  {id:45,topic:'Separations',q:'To separate two miscible liquids with different bps use:',choices:['Filtration','Simple distillation','Fractional distillation','Chromatography'],a:2,explain:'Fractional distillation is for separating liquids with nearer boiling points.'},
+  {id:46,topic:'Elements',q:'Which symbol stands for gold?',choices:['Au','Ag','Gd','Ga'],a:0,explain:'Gold is Au (from Latin Aurum).'},
+  {id:47,topic:'Ions',q:'What is the charge on sulfate ion SO4?',choices:['2−','1−','2+','0'],a:0,explain:'Sulfate ion is SO4²⁻.'},
+  {id:48,topic:'Periodic',q:'Which has similar chemical properties: Na and',choices:['Mg','Cl','K','He'],a:2,explain:'Potassium (K) is in same group (1) as sodium (Na), similar chemistry.'},
+  {id:49,topic:'Atoms',q:'Which statement about electrons is correct?',choices:['Electrons are in nucleus','Electrons have positive charge','Electrons move in shells/orbitals','Electrons determine mass'],a:2,explain:'Electrons are arranged in shells/orbitals around nucleus and have negative charge.'},
+  {id:50,topic:'Compounds',q:'Which is produced by ionic bonding?',choices:['H2O','NaCl','CH4','NH3'],a:1,explain:'NaCl is ionic (metal + non-metal forming ions).'}
+];
+
+// --- State ---
+let current = 0; let answered = 0; let score = 0; const total = questions.length; const answeredSet = {}; const userAns = {};
+
+function render(){ const q = questions[current]; const area = document.getElementById('qArea'); area.innerHTML = '';
+  const qtitle = document.createElement('div'); qtitle.innerHTML = `<strong>Q${q.id}.</strong> ${q.q}`; area.appendChild(qtitle);
+  const choices = document.createElement('div'); choices.className='choices';
+  q.choices.forEach((c,ci)=>{ const b = document.createElement('button'); b.className='btn'; b.innerHTML = c.replace(/(\d)2/g,'$1<sub>2</sub>').replace(/(\d)3/g,'$1<sub>3</sub>'); b.onclick = ()=>selectAnswer(ci,b); choices.appendChild(b); });
+  area.appendChild(choices);
+  const exp = document.createElement('div'); exp.className='explain'; exp.style.display='none'; area.appendChild(exp);
+  // if answered show feedback
+  if(answeredSet[q.id]){ const chosen = userAns[q.id]; const btns = choices.querySelectorAll('button'); btns.forEach((b,bi)=>{ b.disabled=true; if(bi===chosen){ if(bi===q.a) b.classList.add('correct'); else b.classList.add('wrong'); }});
+    exp.style.display='block'; exp.innerHTML = (userAns[q.id]===q.a)? `✅ Correct. ${q.explain}` : `❌ Incorrect. ${q.explain}`; }
+  document.getElementById('prog').innerText = `Q${current+1} / ${total}`; document.getElementById('prevBtn').disabled = (current===0); document.getElementById('nextBtn').disabled = (current===total-1);
+}
+
+function selectAnswer(choiceIndex, btn){ const q = questions[current]; const exp = document.querySelector('.explain'); if(answeredSet[q.id]) return; answeredSet[q.id]=true; userAns[q.id]=choiceIndex; answered++; const btns = document.querySelectorAll('.choices button'); btns.forEach((b,bi)=>{ b.disabled=true; if(bi===choiceIndex){ if(bi===q.a){ b.classList.add('correct'); score++; exp.innerHTML = `✅ Correct. ${q.explain}` } else { b.classList.add('wrong'); exp.innerHTML = `❌ Incorrect. ${q.explain}` } }}); exp.style.display='block'; document.getElementById('answeredCount').innerText = answered + '/' + total; }
+
+function nextQ(){ if(current < total-1){ current++; render(); } }
+function prevQ(){ if(current > 0){ current--; render(); } }
+function showScore(){ document.getElementById('final').innerText = `Score: ${score}/${total} (${Math.round((score/total)*100)}%) — Answered: ${answered}/${total}` }
+function resetAll(){ if(!confirm('Reset all attempts?')) return; current=0; answered=0; score=0; for(const k in questions){ answeredSet[questions[k].id]=false; } for(const k in userAns) delete userAns[k]; document.getElementById('answeredCount').innerText = '0/' + total; document.getElementById('final').innerText=''; render(); }
+
+function downloadCSV(){ const rows=[['QID','Question','ChoiceA','ChoiceB','ChoiceC','ChoiceD','CorrectIndex','Explanation']]; questions.forEach(q=>rows.push([q.id,q.q].concat(q.choices).concat([q.a,q.explain]))); const csv = rows.map(r=>r.map(c=>'"'+String(c).replace(/"/g,'""')+'"').join(',')).join('\n'); const blob = new Blob([csv],{type:'text/csv'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href=url; a.download='atoms_periodic_cbt.csv'; a.click(); URL.revokeObjectURL(url); }
+
+// initial
+render();
+</script>
+</body>
+</html>
+

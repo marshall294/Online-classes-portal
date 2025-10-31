@@ -1,0 +1,443 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Cells — Complete Lesson & 50 Questions | Orli International Academy</title>
+  <style>
+    :root{--brand:#064e3b;--accent:#0ea5a3;--muted:#6b7280;--card:#f8fafc}
+    *{box-sizing:border-box}
+    body{font-family:Inter,ui-sans-serif,system-ui,Segoe UI,Roboto,Helvetica,Arial;line-height:1.5;margin:0;background:linear-gradient(180deg,#f8fafc,white);color:#0f172a}
+    header{background:var(--brand);color:white;padding:18px 20px;display:flex;gap:16px;align-items:center}
+    header img.logo{height:48px;border-radius:6px;background:white;padding:6px}
+    header h1{font-size:1.15rem;margin:0}
+    .container{max-width:1100px;margin:24px auto;padding:16px}
+    .grid{display:grid;grid-template-columns:1fr 380px;gap:18px}
+    @media(max-width:980px){.grid{grid-template-columns:1fr}header{flex-direction:column;align-items:flex-start}header img.logo{height:44px}}
+
+    /* cards */
+    .card{background:white;border-radius:12px;padding:16px;box-shadow:0 6px 18px rgba(2,6,23,0.06)}
+    .muted{color:var(--muted)}
+    h2{margin:6px 0 12px}
+    .sub{font-size:0.92rem;color:var(--muted)}
+
+    /* collapsible notes */
+    .notes .topic{border-radius:10px;padding:12px;margin-bottom:10px;background:linear-gradient(90deg,rgba(14,165,163,0.04),transparent);}
+    details summary{cursor:pointer;font-weight:600}
+    pre{background:#0f172a;color:#f8fafc;padding:10px;border-radius:8px;overflow:auto}
+
+    /* quiz */
+    .question{margin-bottom:12px}
+    .choices{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}
+    @media(max-width:540px){.choices{grid-template-columns:1fr}}
+    .btn{border:0;padding:10px;border-radius:8px;cursor:pointer;background:var(--card)}
+    .btn:hover{box-shadow:0 6px 18px rgba(2,6,23,0.06)}
+    .correct{background:linear-gradient(90deg,#dcfce7,#bbf7d0);border:1px solid #16a34a}
+    .wrong{background:linear-gradient(90deg,#fee2e2,#fecaca);border:1px solid #ef4444}
+    .explain{padding:10px;margin-top:8px;border-radius:8px;background:#fafafa;border-left:4px solid var(--accent)}
+
+    /* toolbar */
+    .toolbar{display:flex;gap:8px;align-items:center;margin-bottom:12px}
+    .pill{background:#eef2ff;padding:8px;border-radius:999px;font-weight:600;color:#3730a3}
+
+    footer{padding:28px;text-align:center;color:var(--muted)}
+
+    /* formula panel */
+    .tools input, .tools button, .tools select{padding:8px;border-radius:8px;border:1px solid #e6eef0}
+
+    /* print */
+    @media print{header,footer,.sidebar-actions{display:none}.container{max-width:100%;margin:0;padding:0}}
+  </style>
+</head>
+<body>
+  <header>
+    <img class="logo" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='64' height='64'><rect rx='10' width='64' height='64' fill='%23064e3b'/><text x='50%' y='55%' font-size='26' fill='white' font-family='Arial' text-anchor='middle'>OR</text></svg>" alt="ORLI Logo" />
+    <div>
+      <h1>Cells — Complete Lesson & 50 Questions</h1>
+      <div class="sub">Comprehensive Year 7–9 biology lesson: structure, specialisation, microscopy, transport & practicals</div>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="grid">
+      <section class="card" id="main-content">
+        <div class="toolbar">
+          <div class="pill">ORLI International Academy • Cells</div>
+          <button class="btn" onclick="printPage()">Print Lesson</button>
+          <button class="btn" onclick="downloadHTML()">Download HTML</button>
+          <div style="margin-left:auto" class="muted">Interactive quiz + instant feedback</div>
+        </div>
+
+        <article class="notes">
+          <h2>Lesson Notes — Quick Navigation</h2>
+          <p class="sub">Click each topic to expand full notes, diagrams, examples and worked problems.</p>
+
+          <details class="topic" open>
+            <summary>1. Cell Structure — animal & plant cells</summary>
+            <div style="margin-top:10px">
+              <p><strong>Definition:</strong> A <em>cell</em> is the basic unit of life. All organisms are made of one or more cells.</p>
+              <h3>Key organelles</h3>
+              <ul>
+                <li><strong>Cell membrane:</strong> a thin layer that controls entry and exit of substances (selectively permeable)</li>
+                <li><strong>Cytoplasm:</strong> gel-like fluid where chemical reactions occur</li>
+                <li><strong>Nucleus:</strong> contains DNA and controls cell activities</li>
+                <li><strong>Mitochondria:</strong> site of aerobic respiration — makes ATP</li>
+                <li><strong>Ribosomes:</strong> where proteins are built</li>
+                <li><strong>Cell wall (plants):</strong> rigid cellulose layer for support</li>
+                <li><strong>Chloroplasts (plants):</strong> contain chlorophyll for photosynthesis</li>
+                <li><strong>Vacuole (plants):</strong> stores cell sap and maintains turgor pressure</li>
+              </ul>
+
+              <h4>Annotated diagrams</h4>
+              <p class="muted">(Simple diagrams are included for classroom use — draw from these descriptions)</p>
+              <ol>
+                <li>Animal cell: oval shape with membrane, nucleus, cytoplasm, mitochondria and ribosomes.</li>
+                <li>Plant cell: rectangular outline with cell wall outside the membrane, large central vacuole, chloroplasts and smaller mitochondria.</li>
+              </ol>
+
+              <h4>Worked example</h4>
+              <p><strong>Q:</strong> Name two differences between plant and animal cells. <strong>A:</strong> Plant cells have chloroplasts and cell walls; animal cells do not. Plant cells often have a large central vacuole.</p>
+            </div>
+          </details>
+
+          <details class="topic">
+            <summary>2. Cell Specialisation</summary>
+            <div style="margin-top:10px">
+              <p>Cells adapt their structure to perform specific functions. This process is called <strong>specialisation</strong>.</p>
+              <table style="width:100%;border-collapse:collapse">
+                <tr><th style="text-align:left">Cell</th><th style="text-align:left">Adaptation</th><th style="text-align:left">Function</th></tr>
+                <tr><td>Sperm</td><td>Tail (flagellum), streamlined head, lots of mitochondria</td><td>Swim to the egg</td></tr>
+                <tr><td>Nerve</td><td>Long axon, branched endings</td><td>Send electrical signals over long distances</td></tr>
+                <tr><td>Muscle</td><td>Protein fibres able to contract, many mitochondria</td><td>Contract to produce movement</td></tr>
+                <tr><td>Root hair</td><td>Long thin extension (hair)</td><td>Increase surface area for water/mineral uptake</td></tr>
+                <tr><td>Palisade cell</td><td>Many chloroplasts, tall shape</td><td>Absorb light for photosynthesis</td></tr>
+              </table>
+
+              <h4>Exam tip</h4>
+              <p>Always link structure to function — e.g. more mitochondria → more ATP produced → suits energy-demanding cells like muscle and sperm.</p>
+            </div>
+          </details>
+
+          <details class="topic">
+            <summary>3. Types of Cells: Prokaryotic vs Eukaryotic</summary>
+            <div style="margin-top:10px">
+              <p><strong>Prokaryotic</strong> cells (bacteria) have no nucleus, small size (0.1–5 μm), and sometimes have plasmids.</p>
+              <p><strong>Eukaryotic</strong> cells (plants, animals, fungi) have a nucleus and membrane-bound organelles and are larger (10–100 μm).</p>
+
+              <h4>Example comparison</h4>
+              <ul>
+                <li>DNA: free in cytoplasm (prokaryote) vs inside nucleus (eukaryote)</li>
+                <li>Organelles: no chloroplasts in most bacteria, but in plant eukaryotes yes</li>
+              </ul>
+            </div>
+          </details>
+
+          <details class="topic">
+            <summary>4. Standard Form & Units</summary>
+            <div style="margin-top:10px">
+              <p>Cells and organelles are tiny. Use micrometres (μm) and standard form for accuracy.</p>
+              <ul>
+                <li>1 mm = 1000 μm</li>
+                <li>1 μm = 1000 nm</li>
+                <li>Common conversions: 0.02 mm = 20 μm; 3 μm = 3 × 10⁻⁶ m</li>
+              </ul>
+
+              <h4>Quick tool (below) converts between units and shows standard form.</h4>
+            </div>
+          </details>
+
+          <details class="topic">
+            <summary>5. Microscopy</summary>
+            <div style="margin-top:10px">
+              <p>Microscopes magnify small objects — two common types below.</p>
+              <ul>
+                <li><strong>Light microscope</strong>: beams of light, up to ~2000× (typical school microscopes 40–400×). Good for cells and tissues.</li>
+                <li><strong>Electron microscope</strong>: electrons, much higher magnification and resolution — can see organelle details. Not used in normal school practicals.</li>
+              </ul>
+
+              <h4>Magnification formula</h4>
+              <p><code>magnification = image size ÷ actual size</code></p>
+              <p>Worked example: if image is 40 mm and actual cell is 0.04 mm, magnification = 40 / 0.04 = 1000×.</p>
+            </div>
+          </details>
+
+          <details class="topic">
+            <summary>6. Modes of Transport</summary>
+            <div style="margin-top:10px">
+              <h4>Diffusion</h4>
+              <p>Net movement of particles from <strong>high concentration → low concentration</strong> until equilibrium. Does not require energy.</p>
+              <p><em>Example:</em> Oxygen diffusing from alveoli into blood.</p>
+
+              <h4>Osmosis</h4>
+              <p>Special case of diffusion: <strong>movement of water</strong> through a <strong>partially permeable membrane</strong> from high water potential to low water potential.</p>
+              <p><em>Example:</em> Plant root cells gaining water from soil.</p>
+
+              <h4>Active transport</h4>
+              <p>Movement of particles <strong>against</strong> a concentration gradient, using energy (ATP).</p>
+              <p><em>Example:</em> Mineral ions absorbed into root hair cells from dilute soil.</p>
+
+              <h4>Factors affecting diffusion/osmosis</h4>
+              <ul>
+                <li>Concentration gradient</li>
+                <li>Surface area</li>
+                <li>Temperature</li>
+                <li>Distance (thinner exchange surfaces are faster)</li>
+              </ul>
+            </div>
+          </details>
+
+          <details class="topic">
+            <summary>7. Microscopy Required Practical (RP)</summary>
+            <div style="margin-top:10px">
+              <h4>Aim</h4>
+              <p>To prepare and observe plant and animal cells using a light microscope.</p>
+
+              <h4>Method (step-by-step)</h4>
+              <ol>
+                <li>Place a drop of water on a clean slide.</li>
+                <li>Using forceps, peel a thin layer of onion epidermis (or use a cheek swab for animal cells).</li>
+                <li>Place the sample on the slide and add a drop of iodine (staining improves contrast).</li>
+                <li>Gently place a coverslip at an angle to avoid air bubbles.</li>
+                <li>Start with low-power objective, focus, then move to higher magnification.</li>
+                <li>Draw observed cells and label organelles.</li>
+              </ol>
+
+              <h4>Safety</h4>
+              <p>Handle blades and glassware carefully. Dispose of biological samples hygienically and wash hands.</p>
+
+              <h4>What to record</h4>
+              <ul>
+                <li>Magnification used</li>
+                <li>Cell features observed (nucleus, cell wall, chloroplasts, vacuole, etc.)</li>
+                <li>Annotated drawings</li>
+              </ul>
+            </div>
+          </details>
+
+          <details class="topic">
+            <summary>8. Osmosis Required Practical (RP)</summary>
+            <div style="margin-top:10px">
+              <h4>Aim</h4>
+              <p>To investigate the effect of different sugar solution concentrations on potato cylinder mass (evidence for osmosis).</p>
+
+              <h4>Method</h4>
+              <ol>
+                <li>Cut identical potato cylinders (same length and diameter) and record initial masses.</li>
+                <li>Place cylinders into labelled beakers of solutions (e.g. 0%, 10%, 20%, 30% sugar).</li>
+                <li>Leave for set time (30–60 minutes), remove, blot dry, weigh again.</li>
+                <li>Calculate percentage mass change: ((final - initial)/initial) × 100%</li>
+              </ol>
+
+              <h4>Expected results</h4>
+              <p>In pure water (0%) the potato will gain mass (water enters) — positive change. In concentrated sugar, potato will lose mass (water leaves) — negative change.</p>
+
+              <h4>Variables</h4>
+              <ul>
+                <li>Independent: solution concentration</li>
+                <li>Dependent: mass change</li>
+                <li>Control: temperature, time, size of potato cylinders</li>
+              </ul>
+            </div>
+          </details>
+
+        </article>
+
+        <hr style="margin:18px 0">
+
+        <section class="card" id="tools">
+          <h2>Tools & Quick Activities</h2>
+          <div class="tools" style="display:flex;gap:8px;flex-wrap:wrap">
+            <div style="flex:1;min-width:220px">
+              <label class="muted">Magnification calculator</label>
+              <div style="display:flex;gap:8px;margin-top:6px"><input id="imageSize" placeholder="image size (mm)" /><input id="actualSize" placeholder="actual size (mm)" /><button class="btn" onclick="calcMag()">Calc</button></div>
+              <div id="magResult" class="muted" style="margin-top:6px"></div>
+            </div>
+
+            <div style="flex:1;min-width:220px">
+              <label class="muted">Standard form converter (to metres)</label>
+              <div style="display:flex;gap:8px;margin-top:6px"><input id="numVal" placeholder="value (e.g. 3 μm or 0.02 mm)" /><button class="btn" onclick="convertSF()">Convert</button></div>
+              <div id="sfResult" class="muted" style="margin-top:6px"></div>
+            </div>
+          </div>
+        </section>
+
+        <hr style="margin:18px 0">
+
+        <section class="card" id="quiz">
+          <h2>Interactive Assessment — 50 Questions</h2>
+          <p class="sub">Select answers to get instant feedback and explanations. Track your score at the bottom.</p>
+
+          <div id="quiz-container"></div>
+
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-top:12px">
+            <div class="muted">Answered: <span id="answeredCount">0</span>/50</div>
+            <div style="display:flex;gap:8px">
+              <button class="btn" onclick="showScore()">Show Score</button>
+              <button class="btn" onclick="resetQuiz()">Reset</button>
+            </div>
+          </div>
+
+          <div id="finalScore" style="margin-top:12px;font-weight:700"></div>
+        </section>
+
+      </section>
+
+      <aside class="card" id="sidebar">
+        <h3>Practical checklists</h3>
+        <p class="muted">Quick reminders for demonstrations and RPs.</p>
+        <ul>
+          <li>Microscope: start on low power, then increase.</li>
+          <li>Onion slide: use iodine to stain nuclei.</li>
+          <li>Osmosis RP: control cylinder size and time.</li>
+          <li>Record raw data carefully, include units.</li>
+        </ul>
+
+        <hr>
+
+        <h3>50 Questions — Rapid Index</h3>
+        <p class="muted">Jump to question numbers by clicking the links below when using on desktop.</p>
+        <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:6px;margin-top:8px">
+          <!-- small index will be built by JS on load -->
+          <div id="qIndex"></div>
+        </div>
+
+        <hr>
+
+        <h3>Revision tips</h3>
+        <ol>
+          <li>Practice drawing and labelling cells.</li>
+          <li>Use keywords: diffusion, osmosis, partially permeable, active transport, plasmid.</li>
+          <li>Always mention units and magnification in microscope questions.</li>
+        </ol>
+
+      </aside>
+    </div>
+
+  </main>
+
+  <footer>
+    Created for <strong>Orli International Academy</strong> — Cells topic. Use and adapt for classroom learning.
+  </footer>
+
+<script>
+// -- utilities: print / download
+function printPage(){window.print()}
+function downloadHTML(){const blob=new Blob([document.documentElement.outerHTML],{type:'text/html'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='cells_lesson_orli.html';a.click();URL.revokeObjectURL(url)}
+
+// -- Magnification & Standard form
+function calcMag(){const img=parseFloat(document.getElementById('imageSize').value);const act=parseFloat(document.getElementById('actualSize').value);if(!img||!act){document.getElementById('magResult').innerText='Enter numeric values (mm).';return}const mag=(img/act);document.getElementById('magResult').innerText=`Magnification = ${mag.toFixed(0)}×`}
+function convertSF(){let v=document.getElementById('numVal').value.trim();if(!v){document.getElementById('sfResult').innerText='Enter a value such as "3 μm" or "0.02 mm".';return}
+  v=v.replace('μ','u');v=v.replace('µ','u');
+  const parts=v.split(' ');
+  if(parts.length!==2){document.getElementById('sfResult').innerText='Enter a value followed by unit, e.g. "3 μm".';return}
+  let num=parseFloat(parts[0]);let unit=parts[1].toLowerCase();let metres;
+  if(unit==='mm') metres=num/1000;
+  else if(unit==='um'||unit==='u' || unit==='μm') metres=num/1e6;
+  else if(unit==='nm') metres=num/1e9;
+  else{document.getElementById('sfResult').innerText='Unit not recognised. Use mm, μm (um) or nm.';return}
+  const sf=metres.toExponential();document.getElementById('sfResult').innerText=`${num} ${parts[1]} = ${metres} m (standard form: ${sf})`}
+
+// -- Quiz data: 50 questions with choices, correct index, explanation
+const questions = [
+  // 1-10 Cell structure
+  {id:1, topic:'Cell structure', q:'Which structure controls the activities of the cell?', choices:['Nucleus','Cytoplasm','Mitochondria','Cell wall'], a:0, explain:'The nucleus contains DNA and regulates the cell\'s activities.'},
+  {id:2, topic:'Cell structure', q:'Site of aerobic respiration in a cell is:', choices:['Ribosome','Mitochondrion','Golgi apparatus','Vacuole'], a:1, explain:'Mitochondria are the sites where aerobic respiration occurs to produce ATP.'},
+  {id:3, topic:'Cell structure', q:'Which part is the jelly-like substance where reactions occur?', choices:['Vacuole','Cytoplasm','Cell membrane','Nucleus'], a:1, explain:'Cytoplasm holds organelles and is where many metabolic reactions occur.'},
+  {id:4, topic:'Cell structure', q:'Which is only present in plant cells?', choices:['Cell membrane','Chloroplast','Mitochondria','Ribosomes'], a:1, explain:'Chloroplasts contain chlorophyll and are used for photosynthesis; they are only in plant cells.'},
+  {id:5, topic:'Cell structure', q:'Ribosomes are the site of:', choices:['Protein synthesis','Photosynthesis','Respiration','Structural support'], a:0, explain:'Ribosomes translate mRNA to produce proteins.'},
+  {id:6, topic:'Cell structure', q:'The large central vacuole in plant cells contains:', choices:['Cell sap','Mitochondria','Chlorophyll','Protein'], a:0, explain:'Cell sap stores water, sugars and salts and helps maintain turgor.'},
+  {id:7, topic:'Cell structure', q:'Which organelle contains chlorophyll?', choices:['Vacuole','Chloroplast','Nucleus','Mitochondria'], a:1, explain:'Chloroplasts contain chlorophyll which captures light for photosynthesis.'},
+  {id:8, topic:'Cell structure', q:'What is the cell wall made of?', choices:['Cellulose','Protein','Lipid','Starch'], a:0, explain:'Plant cell walls are mainly composed of cellulose.'},
+  {id:9, topic:'Cell structure', q:'Which part contains the cell\'s genetic material?', choices:['Mitochondria','Nucleus','Ribosome','Cell membrane'], a:1, explain:'DNA is stored in the nucleus (in eukaryotes).'},
+  {id:10, topic:'Cell structure', q:'The thin boundary that controls entry and exit of substances is:', choices:['Cell wall','Cell membrane','Vacuole','Chloroplast'], a:1, explain:'The cell membrane is selectively permeable and regulates transport.'},
+
+  // 11-20 Specialisation
+  {id:11, topic:'Specialisation', q:'Which adaptation helps a sperm cell swim?', choices:['Large vacuole','Tail (flagellum)','Cell wall','Chloroplasts'], a:1, explain:'Sperm cells have a flagellum (tail) to propel them.'},
+  {id:12, topic:'Specialisation', q:'Nerve cells are specialised because they have:', choices:['Many chloroplasts','A long axon','A thick cell wall','Large vacuoles'], a:1, explain:'A long axon helps nerve cells transmit electrical impulses over distances.'},
+  {id:13, topic:'Specialisation', q:'Which cell has many mitochondria to supply energy for contraction?', choices:['Nerve cell','Root hair cell','Muscle cell','Palisade cell'], a:2, explain:'Muscle cells need lots of ATP for contraction so they have many mitochondria.'},
+  {id:14, topic:'Specialisation', q:'Root hair cells increase absorption by having:', choices:['A thin cell wall','A large vacuole','Long thin extensions to increase surface area','Many nuclei'], a:2, explain:'Root hair extensions increase surface area to absorb water and minerals.'},
+  {id:15, topic:'Specialisation', q:'Xylem vessels have which feature?', choices:['Sieve plates','Hollow tubes and lignified walls','Many chloroplasts','Flagella'], a:1, explain:'Xylem are hollow, lignified tubes that transport water.'},
+  {id:16, topic:'Specialisation', q:'Phloem vessels are adapted to transport sugars because of:', choices:['Sieve plates','Cellulose walls','Large vacuoles','Cilia'], a:0, explain:'Sieve plates help movement of dissolved sugars along phloem tubes.'},
+  {id:17, topic:'Specialisation', q:'Which feature is unique to mammalian red blood cells?', choices:['No nucleus when mature','Cell wall','Chloroplasts','Many mitochondria'], a:0, explain:'Mature red blood cells lack a nucleus to maximise space for haemoglobin.'},
+  {id:18, topic:'Specialisation', q:'Ciliated epithelial cells help by:', choices:['Carrying oxygen','Moving mucus and debris','Making proteins','Storing energy'], a:1, explain:'Cilia beat to move mucus out of airways.'},
+  {id:19, topic:'Specialisation', q:'Palisade mesophyll cells are specialised for:', choices:['Transport','Storing water','Photosynthesis','Secretion'], a:2, explain:'Palisade cells have many chloroplasts for efficient photosynthesis.'},
+  {id:20, topic:'Specialisation', q:'An egg cell is adapted to:', choices:['Carry oxygen','Release energy','Provide nutrients for early embryo','Move quickly'], a:2, explain:'Egg cells contain reserves (yolk) to nourish the embryo early on.'},
+
+  // 21-25 Types of cells
+  {id:21, topic:'Types', q:'Bacteria are classified as which type of cell?', choices:['Eukaryotic','Prokaryotic','Plant','Fungal'], a:1, explain:'Bacteria are prokaryotes — no nucleus and smaller size.'},
+  {id:22, topic:'Types', q:'Which feature is present in eukaryotic cells but not prokaryotic?', choices:['Plasmids','Nucleus','Cell membrane','Ribosomes'], a:1, explain:'Eukaryotes have a nucleus; prokaryotes do not.'},
+  {id:23, topic:'Types', q:'Where is DNA located in a typical bacterium?', choices:['Nucleus','Mitochondria','Free in cytoplasm','Chloroplast'], a:2, explain:'Prokaryotic DNA is not in a nucleus; it floats in the cytoplasm.'},
+  {id:24, topic:'Types', q:'Which of these is an example of a eukaryote?', choices:['E. coli','Bacillus','Yeast','Mycoplasma'], a:2, explain:'Yeast are eukaryotic fungi.'},
+  {id:25, topic:'Types', q:'What is a plasmid?', choices:['Cell wall component','A small ring of DNA','Protein structure','Organelle'], a:1, explain:'Plasmids are small circular DNA molecules in bacteria that can carry extra genes.'},
+
+  // 26-30 Standard form
+  {id:26, topic:'Standard form', q:'How many micrometres are in 1 mm?', choices:['10','100','1000','10000'], a:2, explain:'1 mm = 1000 μm.'},
+  {id:27, topic:'Standard form', q:'How many nanometres in 1 μm?', choices:['10','100','1000','10000'], a:2, explain:'1 μm = 1000 nm.'},
+  {id:28, topic:'Standard form', q:'Convert 0.02 mm to μm.', choices:['20 μm','2 μm','200 μm','0.2 μm'], a:0, explain:'0.02 mm × 1000 = 20 μm.'},
+  {id:29, topic:'Standard form', q:'Write 0.0005 m in standard form.', choices:['5 × 10⁻⁴ m','5 × 10⁻³ m','5 × 10⁻⁵ m','5 × 10⁻² m'], a:0, explain:'0.0005 = 5 × 10⁻⁴.'},
+  {id:30, topic:'Standard form', q:'Convert 3 μm to metres.', choices:['3 × 10⁻³ m','3 × 10⁻⁶ m','3 × 10⁻⁹ m','3 × 10⁻⁴ m'], a:1, explain:'3 μm = 3 × 10⁻6 m.'},
+
+  // 31-35 Microscopy
+  {id:31, topic:'Microscopy', q:'Magnification is calculated by:', choices:['actual ÷ image','image ÷ actual','image × actual','actual - image'], a:1, explain:'Magnification = image size ÷ actual size.'},
+  {id:32, topic:'Microscopy', q:'If an image is 5 mm and the actual is 0.005 mm, magnification =', choices:['100×','500×','1000×','10×'], a:2, explain:'5 / 0.005 = 1000×.'},
+  {id:33, topic:'Microscopy', q:'Main advantage of electron microscope is:', choices:['Lower cost','Higher resolution','Portable','No training needed'], a:1, explain:'Electron microscopes have much higher resolution.'},
+  {id:34, topic:'Microscopy', q:'A limitation of light microscopes is:', choices:['Cannot view living specimens','Too small for cells','Lower resolution than electron microscopes','Cannot use stains'], a:2, explain:'Light microscopes have lower resolution than electron microscopes, limiting detail seen.'},
+  {id:35, topic:'Microscopy', q:'Why would you add iodine to an onion cell slide?', choices:['To kill the cells','To provide nutrients','To stain and increase contrast','To make it move'], a:2, explain:'Iodine stains starch and increases contrast, making structures easier to see.'},
+
+  // 36-45 Transport
+  {id:36, topic:'Transport', q:'Diffusion is:', choices:['Movement from low to high concentration','Movement from high to low concentration','Movement of water only','Active transport of ions'], a:1, explain:'Diffusion is the net movement from high to low concentration.'},
+  {id:37, topic:'Transport', q:'Osmosis is the movement of:', choices:['Solute','Water','Proteins','Air'], a:1, explain:'Osmosis is specifically the movement of water across a partially permeable membrane.'},
+  {id:38, topic:'Transport', q:'Active transport differs because it:', choices:['Needs no energy','Moves down the gradient','Requires energy to move substances against gradient','Is faster than diffusion always'], a:2, explain:'Active transport uses energy (ATP) to move molecules against their concentration gradient.'},
+  {id:39, topic:'Transport', q:'An example of diffusion in the body is:', choices:['Mineral uptake in roots','Oxygen into blood in lungs','Water entering plant root','Sugar movement in phloem'], a:1, explain:'Oxygen diffuses from alveoli into blood due to a concentration gradient.'},
+  {id:40, topic:'Transport', q:'If plant cells gain water by osmosis they become:', choices:['Plasmolysed','Turgid','Flaccid','Lysed'], a:1, explain:'When water enters plant cells they become turgid and firm.'},
+  {id:41, topic:'Transport', q:'Mineral ions absorbed by root hair cells often use:', choices:['Diffusion','Osmosis','Active transport','Evaporation'], a:2, explain:'Mineral ions are often absorbed by active transport because soil concentration can be lower than inside the root.'},
+  {id:42, topic:'Transport', q:'A partially permeable membrane allows:', choices:['All particles to pass','Only water to pass','Only solutes to pass','Some particles like water to pass but not larger solutes'], a:3, explain:'Partially permeable membranes allow certain small molecules (like water) through but block larger solutes.'},
+  {id:43, topic:'Transport', q:'ATP in active transport provides:', choices:['Structural support','Energy','Genetic material','Oxygen'], a:1, explain:'ATP provides the energy needed for active transport mechanisms.'},
+  {id:44, topic:'Transport', q:'Which affects rate of diffusion?', choices:['Concentration gradient','Colour of solution','Temperature only','Presence of oxygen only'], a:0, explain:'A steeper concentration gradient increases diffusion rate; temperature and surface area also matter.'},
+  {id:45, topic:'Transport', q:'If a cell loses water by osmosis it will:', choices:['Swell','Become turgid','Shrink (plasmolyse)','Divide'], a:2, explain:'Losing water makes cells shrink (plasmolysis in plant cells).'},
+
+  // 46-50 Practicals
+  {id:46, topic:'Practicals', q:'First step in preparing an onion slide for microscopy is to:', choices:['Boil the onion','Peel a thin layer of epidermis','Cut large chunks','Dry the onion'], a:1, explain:'Peeling a thin epidermal layer provides a single-cell layer suitable for observation.'},
+  {id:47, topic:'Practicals', q:'Which stain is commonly used to see plant cell structures?', choices:['Iodine','Crystal violet','Methylene blue','Ethanol'], a:0, explain:'Iodine stains cell structures (and starch) in plant cells.'},
+  {id:48, topic:'Practicals', q:'In the osmosis potato RP the independent variable is:', choices:['Mass change','Solution concentration','Room temperature','Blotting method'], a:1, explain:'The independent variable is the solution concentration that you change.'},
+  {id:49, topic:'Practicals', q:'The dependent variable measured in the osmosis RP is:', choices:['Potato brand','Percentage mass change','Colour','Ph level'], a:1, explain:'You measure how the potato mass changes as a result of osmosis.'},
+  {id:50, topic:'Practicals', q:'Potato cylinders in pure water (0% sugar) would be expected to:', choices:['Lose mass','Gain mass','Stay the same','Explode'], a:1, explain:'In pure water water enters the potato cells by osmosis, so mass increases.'}
+];
+
+// Build quiz UI
+const qc=document.getElementById('quiz-container');const qIndex=document.getElementById('qIndex');let answered=0;let score=0;let answeredSet={};
+function buildQuiz(){questions.forEach((q,i)=>{
+  const div=document.createElement('div');div.className='question card';div.id='q'+q.id;
+  const title=document.createElement('div');title.innerHTML=`<strong>Q${q.id}.</strong> ${q.q}`;
+  div.appendChild(title);
+  const choices=document.createElement('div');choices.className='choices';
+  q.choices.forEach((c,ci)=>{
+    const btn=document.createElement('button');btn.className='btn';btn.innerText=c;btn.onclick=()=>selectAnswer(q.id,ci,btn);
+    choices.appendChild(btn);
+  });
+  div.appendChild(choices);
+  const fb=document.createElement('div');fb.className='explain muted';fb.style.display='none';div.appendChild(fb);
+  qc.appendChild(div);
+
+  // index
+  const idx=document.createElement('a');idx.href='#q'+q.id;idx.style.display='block';idx.style.fontSize='0.9rem';idx.innerText='Q'+q.id+' — '+q.topic; qIndex.appendChild(idx);
+});}
+
+function selectAnswer(qid,choice,btn){const q=questions.find(x=>x.id===qid);const container=document.getElementById('q'+qid);const buttons=container.querySelectorAll('button');const fb=container.querySelector('.explain');if(answeredSet[qid]) return; // lock once answered per design
+  answeredSet[qid]=true;answered++;document.getElementById('answeredCount').innerText=answered+'/50';
+  buttons.forEach((b,bi)=>{b.disabled=true; if(b===btn){ if(bi===q.a){b.classList.add('correct');score++; fb.innerHTML=`✅ Correct. ${q.explain}`;} else {b.classList.add('wrong'); fb.innerHTML=`❌ Incorrect. ${q.explain}`}} });
+  fb.style.display='block';
+}
+
+function showScore(){document.getElementById('finalScore').innerText=`Score: ${score}/50 (${Math.round((score/50)*100)}%) — Answered: ${answered}/50`}
+function resetQuiz(){if(!confirm('Reset all answers?')) return;answered=0;score=0;answeredSet={};document.getElementById('answeredCount').innerText='0';document.getElementById('finalScore').innerText='';const nodes=document.querySelectorAll('#quiz-container .question');nodes.forEach(n=>{n.querySelectorAll('button').forEach(b=>{b.disabled=false;b.classList.remove('correct','wrong')}); const fb=n.querySelector('.explain');fb.style.display='none'; fb.innerText='';});}
+
+// initial build
+buildQuiz();
+
+// accessibility: keyboard navigation
+document.addEventListener('keydown',e=>{if(e.key==='?'||e.key==='h'){alert('Tip: use tab to move between choices and Enter to select (or click).')}})
+
+</script>
+</body>
+</html>
