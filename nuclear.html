@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nuclear Physics Lesson & Quiz</title>
+<style>
+  body {
+    font-family: "Segoe UI", sans-serif;
+    margin: 30px;
+    background: #f8f9fc;
+    color: #222;
+    line-height: 1.6;
+  }
+  h1, h2, h3 {
+    color: #003366;
+  }
+  details {
+    background: #fff;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+  summary {
+    font-weight: bold;
+    font-size: 1.1em;
+    cursor: pointer;
+  }
+  .example {
+    background: #eef6ff;
+    padding: 10px;
+    border-left: 4px solid #0078D7;
+    margin: 8px 0;
+  }
+  .question {
+    margin: 12px 0;
+    padding: 10px;
+    background: #fff;
+    border-radius: 6px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+  }
+  .options button {
+    display: block;
+    width: 100%;
+    text-align: left;
+    margin: 4px 0;
+    padding: 8px;
+    background: #f0f0f0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .options button:hover { background: #dbe8ff; }
+  .feedback {
+    display: none;
+    margin-top: 5px;
+    font-style: italic;
+  }
+  .correct { color: green; }
+  .wrong { color: red; }
+</style>
+</head>
+<body>
+
+  <h1>NUCLEAR PHYSICS</h1>
+  <p><strong>Topics Covered:</strong> Development of the Atom · Properties of Radiation · Nuclear Equations · Half-Life · Irradiation & Contamination</p>
+
+  <!-- DEVELOPMENT OF THE ATOM -->
+  <details open>
+    <summary>1?? Development of the Atom</summary>
+    <p><strong>Overview:</strong> The atomic model evolved over time as scientists conducted experiments to better understand atomic structure.</p>
+    <ul>
+      <li><strong>John Dalton (1800):</strong> Proposed atoms as indivisible solid spheres; each element has its own kind of atom.</li>
+      <li><strong>J.J. Thomson (1897):</strong> Discovered the electron using cathode rays; proposed the “plum pudding model”.</li>
+      <li><strong>Ernest Rutherford (1911):</strong> Gold foil experiment showed atoms have a small, dense, positive nucleus — most of the atom is empty space.</li>
+      <li><strong>Niels Bohr (1913):</strong> Proposed electrons orbit in fixed energy levels (shells).</li>
+      <li><strong>James Chadwick (1932):</strong> Discovered the neutron, explaining differences between atomic mass and atomic number.</li>
+    </ul>
+    <div class="example">
+      <strong>Example:</strong> In Rutherford’s experiment, most a-particles passed through the gold foil (atom mostly empty), while some deflected — showing a dense nucleus.
+    </div>
+  </details>
+
+  <!-- PROPERTIES OF RADIATION -->
+  <details>
+    <summary>2?? Properties of Radiation</summary>
+    <p><strong>Definition:</strong> Radioactive substances emit ionizing radiation from unstable nuclei. The three main types are alpha (a), beta (ß), and gamma (?).</p>
+    <table>
+      <tr>
+        <th>Type</th><th>Symbol</th><th>Charge</th><th>Mass</th><th>Penetration</th><th>Ionizing Power</th><th>Stopped By</th>
+      </tr>
+      <tr>
+        <td>Alpha (a)</td><td>42He</td><td>+2</td><td>4</td><td>Low</td><td>High</td><td>Paper / Skin</td>
+      </tr>
+      <tr>
+        <td>Beta (ß?)</td><td>°?1e</td><td>-1</td><td>Very Small</td><td>Medium</td><td>Moderate</td><td>Aluminium</td>
+      </tr>
+      <tr>
+        <td>Gamma (?)</td><td>?</td><td>0</td><td>None (wave)</td><td>High</td><td>Low</td><td>Lead / Concrete</td>
+      </tr>
+    </table>
+    <p><strong>Ionization:</strong> Radiation knocks electrons off atoms, creating ions — this can damage living cells and DNA.</p>
+    <div class="example">
+      <strong>Example:</strong> Alpha radiation is highly ionizing but stopped by paper, while gamma radiation penetrates deeply and needs thick lead shielding.
+    </div>
+  </details>
+
+  <!-- NUCLEAR EQUATIONS -->
+  <details>
+    <summary>3?? Nuclear Equations</summary>
+    <p><strong>Definition:</strong> Nuclear equations show how unstable nuclei change during decay. Both <strong>mass number (A)</strong> and <strong>atomic number (Z)</strong> are conserved.</p>
+    <ul>
+      <li>Total mass number before = total mass number after.</li>
+      <li>Total atomic number before = total atomic number after.</li>
+    </ul>
+    <div class="example">
+      <strong>Alpha decay:</strong><br>
+      ²³892U ? ²³490Th + 42He<br><br>
+      <strong>Beta decay:</strong><br>
+      ¹46C ? ¹47N + °?1e
+    </div>
+    <p><strong>Note:</strong> Gamma (?) radiation often follows alpha or beta decay when the nucleus releases extra energy.</p>
+  </details>
+
+  <!-- HALF-LIFE -->
+  <details>
+    <summary>4?? Half-Life Calculations</summary>
+    <p><strong>Definition:</strong> The <em>half-life</em> of a radioactive isotope is the time for half of its nuclei to decay.</p>
+    <p><strong>Formula:</strong> N = N0(½)^(t/t½)</p>
+    <ul>
+      <li>N = remaining activity or nuclei</li>
+      <li>N0 = initial activity</li>
+      <li>t = time elapsed</li>
+      <li>t½ = half-life</li>
+    </ul>
+    <div class="example">
+      <strong>Example:</strong> A sample has 800 Bq and a half-life of 10 s.<br>
+      After 30 s: N = 800 × (½)³ = <strong>100 Bq</strong>
+    </div>
+    <p><strong>Applications:</strong> Carbon dating, medical tracers, and nuclear waste management.</p>
+  </details>
+
+  <!-- IRRADIATION & CONTAMINATION -->
+  <details>
+    <summary>5?? Irradiation and Contamination</summary>
+    <p><strong>Irradiation:</strong> Exposure to radiation from an external source. Does not make objects radioactive.</p>
+    <p><strong>Contamination:</strong> When radioactive materials land on or enter an object/person. The object becomes radioactive until decontaminated or decayed.</p>
+    <table>
+      <tr>
+        <th>Aspect</th><th>Irradiation</th><th>Contamination</th>
+      </tr>
+      <tr>
+        <td>Cause</td><td>Exposure to radiation source</td><td>Contact with radioactive material</td>
+      </tr>
+      <tr>
+        <td>Does it make object radioactive?</td><td>No</td><td>Yes</td>
+      </tr>
+      <tr>
+        <td>Removable?</td><td>Yes (remove source)</td><td>Difficult (requires cleaning or decay)</td>
+      </tr>
+      <tr>
+        <td>Example</td><td>X-ray exposure</td><td>Spilled isotope on clothing</td>
+      </tr>
+    </table>
+    <p><strong>Safety Measures:</strong> Use shielding, increase distance, and minimize time (ALARA principle — “As Low As Reasonably Achievable”).</p>
+  </details>
+
+
+<hr>
+<h2>?? 50-Question Interactive Quiz</h2>
+
+<div id="quiz"></div>
+
+<script>
+const quizData = [
+  // DEVELOPMENT OF ATOM (1–10)
+  {q:"Who proposed the 'plum pudding' model?", options:["Rutherford","Bohr","Thomson","Dalton"], correct:2, feedback:"?? J.J. Thomson proposed the plum pudding model."},
+  {q:"Which experiment led to the discovery of the nucleus?", options:["Oil drop","Gold foil","Cathode ray","Cloud chamber"], correct:1, feedback:"?? Rutherford’s gold foil experiment revealed the nucleus."},
+  {q:"The nucleus contains:", options:["Electrons","Protons and neutrons","Only protons","Only neutrons"], correct:1, feedback:"?? The nucleus contains protons and neutrons."},
+  {q:"Chadwick discovered the:", options:["Electron","Neutron","Proton","Positron"], correct:1, feedback:"?? The neutron was discovered by James Chadwick."},
+  {q:"Electrons orbit in:", options:["Shells","Nucleus","Cloud","Vacuum"], correct:0, feedback:"?? Electrons orbit in shells or energy levels."},
+  {q:"Most alpha particles passed straight through foil because:", options:["Atoms are solid","Nucleus is large","Atoms are mostly empty space","Alpha particles are small"], correct:2, feedback:"?? Most of the atom is empty space."},
+  {q:"Deflection of alpha particles was due to:", options:["Neutrons","Electrons","Positive nucleus","Air resistance"], correct:2, feedback:"?? The positively charged nucleus repelled alpha particles."},
+  {q:"Who proposed fixed energy levels?", options:["Dalton","Bohr","Thomson","Curie"], correct:1, feedback:"?? Niels Bohr suggested fixed electron orbits."},
+  {q:"Which came first?", options:["Bohr","Rutherford","Thomson","Chadwick"], correct:2, feedback:"?? Thomson’s model preceded Rutherford’s."},
+  {q:"Size of nucleus is approximately:", options:["1×10?¹5 m","1×10?8 m","1 m","1×10?¹° m"], correct:0, feedback:"?? About 1×10?¹5 m."},
+
+  // PROPERTIES OF RADIATION (11–20)
+  {q:"Alpha radiation is a:", options:["Helium nucleus","Electron","Photon","Proton"], correct:0, feedback:"?? Alpha is a helium nucleus (2p+2n)."},
+  {q:"Beta radiation carries charge:", options:["+2","-1","0","+1"], correct:1, feedback:"?? Beta minus has a -1 charge."},
+  {q:"Gamma rays are a type of:", options:["Matter","Sound","EM wave","Proton beam"], correct:2, feedback:"?? Gamma rays are electromagnetic waves."},
+  {q:"Most ionising radiation:", options:["Alpha","Beta","Gamma","All same"], correct:0, feedback:"?? Alpha is most ionising."},
+  {q:"Stopped by aluminium:", options:["Alpha","Beta","Gamma","None"], correct:1, feedback:"?? Beta is stopped by thin aluminium."},
+  {q:"Which is most penetrating?", options:["Alpha","Beta","Gamma","Neutron"], correct:2, feedback:"?? Gamma rays are most penetrating."},
+  {q:"Which radiation changes element into another?", options:["Alpha and Beta","Gamma only","Alpha only","Beta only"], correct:0, feedback:"?? Alpha and Beta change the nucleus."},
+  {q:"Which has no mass?", options:["Alpha","Beta","Gamma","All have mass"], correct:2, feedback:"?? Gamma is massless."},
+  {q:"Travels nearly at speed of light:", options:["Alpha","Beta","Gamma","None"], correct:2, feedback:"?? Gamma and beta travel close to light speed."},
+  {q:"Stopped by paper:", options:["Alpha","Beta","Gamma","Neutron"], correct:0, feedback:"?? Alpha stopped by paper."},
+
+  // NUCLEAR EQUATIONS (21–30)
+  {q:"Alpha decay of uranium-238 gives:", options:["Th-234 + He-4","Pa-234 + e-","Pb-214 + He-4","N-14 + e-"], correct:0, feedback:"?? ²³8U ? ²³4Th + 4He."},
+  {q:"Beta decay of carbon-14 gives:", options:["B-14","N-14","O-14","C-13"], correct:1, feedback:"?? ¹4C ? ¹4N + ß?."},
+  {q:"In ß? decay a neutron changes into:", options:["Proton + electron","Proton + positron","Electron only","Neutron"], correct:0, feedback:"?? Neutron ? proton + electron."},
+  {q:"What is conserved in nuclear equations?", options:["Mass only","Charge only","Mass & atomic number","Neither"], correct:2, feedback:"?? Both mass and atomic number are conserved."},
+  {q:"²¹°84Po ? ²°682Pb + ?", options:["42He","°?1e","?","¹0n"], correct:0, feedback:"?? Alpha decay emits 42He."},
+  {q:"³²15P ? ³²16S + ?", options:["°?1e","42He","?","¹0n"], correct:0, feedback:"?? Beta decay emits an electron (°?1e)."},
+  {q:"Which decay decreases atomic number by 2?", options:["Alpha","Beta","Gamma","Positron"], correct:0, feedback:"?? Alpha decreases atomic number by 2."},
+  {q:"Which decay increases atomic number by 1?", options:["Alpha","Beta-minus","Gamma","None"], correct:1, feedback:"?? Beta-minus increases atomic number by 1."},
+  {q:"Mass number change in beta decay:", options:["+1","-1","0","+2"], correct:2, feedback:"?? Mass number stays the same."},
+  {q:"Gamma decay changes atomic number by:", options:["0","1","2","-1"], correct:0, feedback:"?? Gamma changes energy only."},
+
+  // HALF-LIFE (31–40)
+  {q:"Half-life means:", options:["Half the atoms destroyed","Time for half nuclei to decay","Half activity lost","Half energy emitted"], correct:1, feedback:"?? Time for half the nuclei to decay."},
+  {q:"If N0=1000, t½=5 min, after 15 min N=?", options:["250","125","500","100"], correct:1, feedback:"?? N=1000×(½)³=125."},
+  {q:"After 2 half-lives, fraction remaining:", options:["½","¼","?","¾"], correct:1, feedback:"?? (½)²=¼ remains."},
+  {q:"Activity falls 800?200 Bq in 20 s. t½=?", options:["5 s","10 s","20 s","40 s"], correct:1, feedback:"?? Two half-lives in 20 s ? 10 s each."},
+  {q:"If activity halves in 12 h, t½=", options:["6 h","12 h","24 h","3 h"], correct:1, feedback:"?? Half-life = 12 h."},
+  {q:"Sample loses 87.5% nuclei: half-lives?", options:["2","3","4","1"], correct:1, feedback:"?? 12.5% left = (½)³."},
+  {q:"If t=4 t½, fraction left=", options:["1/8","1/16","1/4","1/32"], correct:1, feedback:"?? (½)4=1/16 remains."},
+  {q:"After 5 half-lives, % remaining=", options:["6.25%","12.5%","3.125%","1.56%"], correct:2, feedback:"?? (½)5=3.125%."},
+  {q:"Activity-time graph shape:", options:["Linear","Parabolic","Exponential decay","Constant"], correct:2, feedback:"?? Exponential decay curve."},
+  {q:"Half-life depends on temperature?", options:["Yes","No","Sometimes","Only for solids"], correct:1, feedback:"?? No — it is constant for each isotope."},
+
+  // IRRADIATION & CONTAMINATION (41–50)
+  {q:"Irradiation means:", options:["Radioactive material on skin","Exposure to radiation source","Absorption of neutrons","Emission of radiation"], correct:1, feedback:"?? Exposure without contact."},
+  {q:"Contamination means:", options:["Exposure to rays","Contact with radioactive material","Heating source","Neutron emission"], correct:1, feedback:"?? Radioactive material deposited on object."},
+  {q:"Which makes an object radioactive?", options:["Irradiation","Contamination","Both","None"], correct:1, feedback:"?? Contamination makes it radioactive."},
+  {q:"Useful irradiation example:", options:["Inhaling dust","Sterilising equipment","Eating isotopes","Radiation leak"], correct:1, feedback:"?? Sterilising equipment with gamma rays."},
+  {q:"Contamination hazard example:", options:["X-ray","Dust inhaled","Paper cut","Laser light"], correct:1, feedback:"?? Inhaling radioactive dust."},
+  {q:"How to reduce irradiation?", options:["Stand closer","Increase time","Use shielding","Ignore it"], correct:2, feedback:"?? Use shielding, distance, less time."},
+  {q:"Remove contamination by:", options:["Washing","Wearing gloves","Standing back","Using lead shield"], correct:0, feedback:"?? Washing or removing clothes helps."},
+  {q:"Why internal contamination dangerous?", options:["It’s harmless","Constant exposure inside body","Quickly decays","Blocked by skin"], correct:1, feedback:"?? Emits radiation from within body."},
+  {q:"Why alpha emitters dangerous if swallowed?", options:["Low ionisation","High penetration","High ionisation inside tissue","Harmless"], correct:2, feedback:"?? Alpha causes intense local damage inside body."},
+  {q:"How radiographers protect themselves?", options:["No protection","Lead apron & distance","Touch sources","No shielding"], correct:1, feedback:"?? Use lead shielding, keep distance, limit time."},
+];
+
+const quizContainer = document.getElementById("quiz");
+quizData.forEach((item, i) => {
+  const div = document.createElement("div");
+  div.className = "question";
+  div.innerHTML = `<strong>Q${i+1}:</strong> ${item.q}
+  <div class="options"></div>
+  <div class="feedback" id="f${i}"></div>`;
+  const optDiv = div.querySelector(".options");
+  item.options.forEach((opt, j) => {
+    const btn = document.createElement("button");
+    btn.textContent = opt;
+    btn.onclick = () => {
+      const fb = document.getElementById(`f${i}`);
+      fb.style.display = "block";
+      if (j === item.correct) {
+        fb.className = "feedback correct";
+        fb.innerHTML = item.feedback;
+      } else {
+        fb.className = "feedback wrong";
+        fb.innerHTML = "?? Incorrect. " + item.feedback;
+      }
+    };
+    optDiv.appendChild(btn);
+  });
+  quizContainer.appendChild(div);
+});
+</script>
+
+</body>
+</html>
